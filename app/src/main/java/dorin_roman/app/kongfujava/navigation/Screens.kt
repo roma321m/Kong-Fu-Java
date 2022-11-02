@@ -22,8 +22,8 @@ class Screens(navController: NavController) {
 
     val userType: (UserType) -> Unit = { userType ->
         when (userType) {
-            UserType.teacher -> navController.navigate(route = TEACHER_LOGIN_SCREEN)
-            UserType.child -> navController.navigate(route = CHILD_LOGIN_SCREEN)
+            UserType.Teacher -> navController.navigate(route = TEACHER_LOGIN_SCREEN)
+            UserType.Child -> navController.navigate(route = CHILD_LOGIN_SCREEN)
         }
     }
 }

@@ -36,7 +36,7 @@ fun TempUI(
 
         Button(
             onClick = {
-                navigateToLoginScreen(UserType.teacher)
+                navigateToLoginScreen(UserType.Teacher)
             }
         ) {
             Text(text = "Go to Teacher login screen")
@@ -44,7 +44,7 @@ fun TempUI(
 
         Button(
             onClick = {
-                navigateToLoginScreen(UserType.child)
+                navigateToLoginScreen(UserType.Child)
             }
         ) {
             Text(text = "Go to Child login screen")
