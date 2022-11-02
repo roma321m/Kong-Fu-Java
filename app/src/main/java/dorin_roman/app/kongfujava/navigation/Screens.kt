@@ -10,6 +10,7 @@ class Screens(navController: NavController) {
         const val USER_TYPE_SCREEN = "user_type"
         const val CHILD_LOGIN_SCREEN = "child_login"
         const val TEACHER_LOGIN_SCREEN = "teacher_login"
+        const val MAIN_SCREEN = "main"
     }
 
     val splash: () -> Unit = {
@@ -25,5 +26,9 @@ class Screens(navController: NavController) {
             UserType.Teacher -> navController.navigate(route = TEACHER_LOGIN_SCREEN)
             UserType.Child -> navController.navigate(route = CHILD_LOGIN_SCREEN)
         }
+    }
+
+    val child: () -> Unit = {
+        navController.navigate(route = MAIN_SCREEN)
     }
 }

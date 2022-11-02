@@ -6,10 +6,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import dorin_roman.app.kongfujava.navigation.Screens.Companion.SPLASH_SCREEN
-import dorin_roman.app.kongfujava.navigation.destination.childLoginComposable
-import dorin_roman.app.kongfujava.navigation.destination.splashComposable
-import dorin_roman.app.kongfujava.navigation.destination.teacherLoginComposable
-import dorin_roman.app.kongfujava.navigation.destination.userTypeComposable
+import dorin_roman.app.kongfujava.navigation.destination.*
 
 @ExperimentalAnimationApi
 @Composable
@@ -34,7 +31,11 @@ fun SetupNavigation(
             navigateToMainScreen = screen.splash // fixme - change to main screen
         )
         childLoginComposable(
-            navigateToMainScreen = screen.splash // fixme - change to main screen
+            navigateToMainScreen = screen.child
+        )
+        mainComposable(
+            navigateToTemp1 = screen.splash, // fixme - change
+            navigateToTemp2 = screen.splash // fixme - change
         )
     }
 }
