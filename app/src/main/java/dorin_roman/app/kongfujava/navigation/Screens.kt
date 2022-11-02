@@ -31,4 +31,8 @@ class Screens(navController: NavController) {
     val child: () -> Unit = {
         navController.navigate(route = MAIN_SCREEN)
     }
+
+    val teacher: () -> Unit = {
+        navController.navigate(route = MAIN_SCREEN)
+    }
 }

@@ -28,7 +28,7 @@ fun SetupNavigation(
             navigateToLoginScreen = screen.userType
         )
         teacherLoginComposable(
-            navigateToMainScreen = screen.splash // fixme - change to main screen
+            navigateToMainScreen = screen.teacher
         )
         childLoginComposable(
             navigateToMainScreen = screen.child
