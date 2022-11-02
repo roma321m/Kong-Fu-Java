@@ -1,4 +1,4 @@
-package dorin.roman.app.kongfujava.ui.theme
+package dorin_roman.app.kongfujava.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

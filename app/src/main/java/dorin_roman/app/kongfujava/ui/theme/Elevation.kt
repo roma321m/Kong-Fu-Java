@@ -1,4 +1,4 @@
-package dorin.roman.app.kongfujava.ui.theme
+package dorin_roman.app.kongfujava.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -7,18 +7,18 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-data class Spacing(
+data class Elevation(
     val default: Dp = 0.dp,
-    val extraSmall: Dp = 4.dp,
-    val small: Dp = 6.dp,
+    val extraSmall: Dp = 2.dp,
+    val small: Dp = 4.dp,
     val medium: Dp = 8.dp,
     val large: Dp = 12.dp,
     val extraLarge: Dp = 24.dp
 )
 
-val LocalSpacing = compositionLocalOf { Spacing() }
+val LocalElevation = compositionLocalOf { Elevation() }
 
-val MaterialTheme.spacing: Spacing
+val MaterialTheme.elevation: Elevation
     @Composable
     @ReadOnlyComposable
-    get() = LocalSpacing.current
+    get() = LocalElevation.current

@@ -1,4 +1,4 @@
-package dorin.roman.app.kongfujava
+package dorin_roman.app.kongfujava
 
 import org.junit.Test
 
