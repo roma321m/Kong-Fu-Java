@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Kong Fu Java</string>
     <string name="app_logo_description">App Logo</string>
+    <string name="panda_image_8">Panda Image 8</string>
 </resources>
