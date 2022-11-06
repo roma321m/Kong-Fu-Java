@@ -3,10 +3,9 @@ package dorin_roman.app.kongfujava.ui.screens.user_type
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import dorin_roman.app.kongfujava.ui.components.FortySixtyLayout
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.util.UserType
 
@@ -14,15 +13,15 @@ import dorin_roman.app.kongfujava.util.UserType
 fun UserTypeScreen(
     navigateToLoginScreen: (UserType) -> Unit
 ) {
-    val configuration = LocalConfiguration.current
-
-    val screenHeight = configuration.screenHeightDp.dp
-    val screenWidth = configuration.screenWidthDp.dp
-
-    UserTypeScreenLayout(
-        navigateToLoginScreen = navigateToLoginScreen,
-        screenHeight = screenHeight,
-        screenWidth = screenWidth
+    FortySixtyLayout(
+        fortyLayout = {
+            UserTypeScreenContent(
+                navigateToLoginScreen = navigateToLoginScreen
+            )
+        },
+        sixtyLayout = {
+            UserTypeScreenImage()
+        }
     )
 }
 
