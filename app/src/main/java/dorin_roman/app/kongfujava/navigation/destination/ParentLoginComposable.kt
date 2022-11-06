@@ -7,14 +7,14 @@ import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import dorin_roman.app.kongfujava.navigation.Destinations.ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.navigation.Screens
-import dorin_roman.app.kongfujava.ui.screens.login.teacher.TeacherLoginScreen
+import dorin_roman.app.kongfujava.ui.screens.login.parent.ParentLoginScreen
 
 @ExperimentalAnimationApi
-fun NavGraphBuilder.teacherLoginComposable(
+fun NavGraphBuilder.parentLoginComposable(
     navigateToMainScreen: () -> Unit
 ) {
     composable(
-        route = Screens.TEACHER_LOGIN_SCREEN,
+        route = Screens.PARENT_LOGIN_SCREEN,
         enterTransition = {
             slideInHorizontally(
                 animationSpec = tween(
@@ -24,7 +24,7 @@ fun NavGraphBuilder.teacherLoginComposable(
             )
         }
     ) {
-        TeacherLoginScreen(
+        ParentLoginScreen(
             navigateToMainScreen = navigateToMainScreen
         )
     }

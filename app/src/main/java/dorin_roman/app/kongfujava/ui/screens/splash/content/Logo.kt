@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.splash
+package dorin_roman.app.kongfujava.ui.screens.splash.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.Dp
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.screens.splash.SplashScreen.Companion.LOGO_SIZE
 import dorin_roman.app.kongfujava.ui.theme.splashScreenBackground
-
 
 @Composable
 fun Logo(

@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.teacher_login
+package dorin_roman.app.kongfujava.ui.screens.login.child
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
-fun TeacherLoginScreen(
+fun ChildLoginScreen(
     navigateToMainScreen: () -> Unit
 ) {
-   TempUI(navigateToMainScreen = navigateToMainScreen)
+    TempUI(navigateToMainScreen = navigateToMainScreen)
 }
 
 @Composable
@@ -30,7 +30,7 @@ fun TempUI(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "This is a temp UI for the teacher login screen")
+        Text(text = "This is a temp UI for the child login screen")
         Button(onClick = navigateToMainScreen) {
             Text(text = "go to main")
         }

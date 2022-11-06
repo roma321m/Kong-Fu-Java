@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.user_type
+package dorin_roman.app.kongfujava.ui.screens.login.main.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -112,7 +112,7 @@ fun UserTypeScreenContentButtons(
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
         onClick = {
-            // Fixme - add navigation to parent login
+            navigateToLoginScreen(UserType.Parent)
         }
     ) {
         Text(text = "I'm a parent") // Fixme - change to string rss

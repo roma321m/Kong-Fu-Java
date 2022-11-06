@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.user_type
+package dorin_roman.app.kongfujava.ui.screens.login.main.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize

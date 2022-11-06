@@ -10,6 +10,7 @@ class Screens(navController: NavController) {
         const val USER_TYPE_SCREEN = "user_type"
         const val CHILD_LOGIN_SCREEN = "child_login"
         const val TEACHER_LOGIN_SCREEN = "teacher_login"
+        const val PARENT_LOGIN_SCREEN = "parent_login"
         const val MAIN_SCREEN = "main"
     }
 
@@ -25,6 +26,7 @@ class Screens(navController: NavController) {
         when (userType) {
             UserType.Teacher -> navController.navigate(route = TEACHER_LOGIN_SCREEN)
             UserType.Child -> navController.navigate(route = CHILD_LOGIN_SCREEN)
+            UserType.Parent -> navController.navigate(route = PARENT_LOGIN_SCREEN)
         }
     }
 

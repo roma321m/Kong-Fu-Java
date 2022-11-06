@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.user_type
+package dorin_roman.app.kongfujava.ui.screens.login.main
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import dorin_roman.app.kongfujava.ui.components.FortySixtyLayout
+import dorin_roman.app.kongfujava.ui.screens.login.main.content.UserTypeScreenContent
+import dorin_roman.app.kongfujava.ui.screens.login.main.image.UserTypeScreenImage
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.util.UserType
 

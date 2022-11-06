@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.ui.screens.splash.SplashScreen.Companion.SPLASH_SCREEN_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.ui.screens.splash.SplashScreen.Companion.SPLASH_SCREEN_TIME_MILLIS
+import dorin_roman.app.kongfujava.ui.screens.splash.content.Logo
 import kotlinx.coroutines.delay
 
 class SplashScreen {
