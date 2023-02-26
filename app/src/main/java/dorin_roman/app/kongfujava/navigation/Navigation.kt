@@ -33,6 +33,9 @@ fun SetupNavigation(
         childLoginComposable(
             navigateToMainScreen = screen.child
         )
+        parentLoginComposable(
+            navigateToMainScreen = screen.parent
+        )
         mainComposable(
             navigateToTemp1 = screen.splash, // fixme - change
             navigateToTemp2 = screen.splash // fixme - change
