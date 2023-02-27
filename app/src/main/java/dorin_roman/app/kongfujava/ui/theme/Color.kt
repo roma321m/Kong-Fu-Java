@@ -4,7 +4,8 @@ import androidx.compose.material.Colors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-val primaryColor =  Color(0xFF4FF46B)
+val purpleColor =  Color(0xff7d65f1)
+val primaryColor =  Color(0xff9ff07a)
 val primaryLightColor =  Color(0xFF8CFF9C)
 val primaryDarkColor =  Color(0xFF006D21)
 val primaryTextColor =  Color(0xFF000000)

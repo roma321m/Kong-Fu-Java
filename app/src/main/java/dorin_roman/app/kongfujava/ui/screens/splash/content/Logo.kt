@@ -44,7 +44,7 @@ fun Logo(
 @Composable
 fun getLogo(): Int {
     return if (isSystemInDarkTheme())
-        R.drawable.ic_logo // Fixme - change to the app logo (dark)
+        R.drawable.ic_logo
     else
-        R.drawable.ic_logo // Fixme - change to the app logo (light)
+        R.drawable.ic_logo
 }

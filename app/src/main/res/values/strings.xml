@@ -2,4 +2,11 @@
     <string name="app_name">Kong Fu Java</string>
     <string name="app_logo_description">App Logo</string>
     <string name="panda_image_8">Panda Image 8</string>
+    <string name="welcome">Welcome!</string>
+    <string name="subtitle_description">introduction programming games \nfor the next generation</string>
+    <string name="description">Learn to code through the power of play,\n out panda will take you on a journey and \nyou will learn java on the way!!!</string>
+    <string name="user_parent">I\'m a parent</string>
+    <string name="user_student">I\'m a student</string>
+    <string name="user_teacher">I\'m a teacher</string>
+    <string name="app_logo">app logo</string>
 </resources>
