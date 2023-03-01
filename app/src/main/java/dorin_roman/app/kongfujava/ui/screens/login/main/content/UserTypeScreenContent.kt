@@ -1,7 +1,6 @@
 package dorin_roman.app.kongfujava.ui.screens.login.main.content
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -14,13 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.toUpperCase
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.theme.purpleColor
+import dorin_roman.app.kongfujava.ui.theme.purpleColor1
 import dorin_roman.app.kongfujava.ui.theme.secondaryTextColor
 import dorin_roman.app.kongfujava.ui.theme.spacing
 import dorin_roman.app.kongfujava.util.UserType
-import java.util.*
 
 @Composable
 fun UserTypeScreenContent(navigateToLoginScreen: (UserType) -> Unit) {
@@ -95,7 +92,7 @@ fun UserTypeScreenContentTexts() {
             .fillMaxWidth()
             .padding(MaterialTheme.spacing.small),
         textAlign = TextAlign.Center,
-        text = stringResource(id = R.string.subtitle_description).uppercase(),
+        text = stringResource(id = R.string.user_type_subtitle_description).uppercase(),
         style = MaterialTheme.typography.h6
     )
 
@@ -104,7 +101,7 @@ fun UserTypeScreenContentTexts() {
             .fillMaxWidth()
             .padding(MaterialTheme.spacing.small),
         textAlign = TextAlign.Center,
-        text = stringResource(id = R.string.description),
+        text = stringResource(id = R.string.user_type_description),
         style = MaterialTheme.typography.body1
     )
 }
@@ -118,7 +115,22 @@ fun UserTypeScreenContentButtons(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor, contentColor = secondaryTextColor),
+        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor1, contentColor = secondaryTextColor),
+        onClick = {
+            navigateToLoginScreen(UserType.Child)
+        }
+    ) {
+        Icon(imageVector = Icons.Default.School,
+            contentDescription = "student")
+        Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
+        Text(text = stringResource(id = R.string.user_student))
+    }
+
+    Button(
+        modifier = Modifier
+            .fillMaxWidth(0.6f)
+            .padding(MaterialTheme.spacing.medium),
+        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToLoginScreen(UserType.Parent)
         }
@@ -133,24 +145,9 @@ fun UserTypeScreenContentButtons(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor, contentColor = secondaryTextColor),
+        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToLoginScreen(UserType.Teacher)
-        }
-    ) {
-        Icon(imageVector = Icons.Default.School,
-            contentDescription = "student")
-        Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
-        Text(text = stringResource(id = R.string.user_student)) 
-    }
-
-    Button(
-        modifier = Modifier
-            .fillMaxWidth(0.6f)
-            .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor, contentColor = secondaryTextColor),
-        onClick = {
-            navigateToLoginScreen(UserType.Child)
         }
     ) {
         Icon(imageVector = Icons.Default.EscalatorWarning,

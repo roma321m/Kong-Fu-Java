@@ -7,6 +7,7 @@ class Screens(navController: NavController) {
 
     companion object {
         const val SPLASH_SCREEN = "splash"
+        const val REGISTER_SCREEN = "register"
         const val USER_TYPE_SCREEN = "user_type"
         const val CHILD_LOGIN_SCREEN = "child_login"
         const val TEACHER_LOGIN_SCREEN = "teacher_login"
@@ -14,12 +15,17 @@ class Screens(navController: NavController) {
         const val MAIN_SCREEN = "main"
     }
 
+    //fixme - change root for working on the register screen (but roman said the splash delete anyway)
     val splash: () -> Unit = {
-        navController.navigate(route = USER_TYPE_SCREEN) {
+        navController.navigate(route = REGISTER_SCREEN) {
             popUpTo(SPLASH_SCREEN) {
                 inclusive = true
             }
         }
+    }
+
+    val register: () -> Unit = {
+        navController.navigate(route = USER_TYPE_SCREEN)
     }
 
     val userType: (UserType) -> Unit = { userType ->

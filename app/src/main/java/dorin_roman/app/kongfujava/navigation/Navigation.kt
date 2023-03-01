@@ -27,6 +27,9 @@ fun SetupNavigation(
         userTypeComposable(
             navigateToLoginScreen = screen.userType
         )
+        registerComposable(
+            navigateToUserTypeScreen = screen.register
+        )
         teacherLoginComposable(
             navigateToMainScreen = screen.teacher
         )

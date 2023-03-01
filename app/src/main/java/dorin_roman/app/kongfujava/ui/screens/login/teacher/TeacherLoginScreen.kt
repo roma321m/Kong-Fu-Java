@@ -10,13 +10,27 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.components.HorizontalFortySixtyLayout
+import dorin_roman.app.kongfujava.ui.components.SideScreenImage
+import dorin_roman.app.kongfujava.ui.screens.login.teacher.content.TeacherLoginScreenContent
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
+//FIXME need to check if the size are good
 @Composable
 fun TeacherLoginScreen(
     navigateToMainScreen: () -> Unit
 ) {
-   TempUI(navigateToMainScreen = navigateToMainScreen)
+    HorizontalFortySixtyLayout(
+        fortyLayout = {
+            TeacherLoginScreenContent(
+                navigateToMainScreen = navigateToMainScreen
+            )
+        },
+        sixtyLayout = {
+            SideScreenImage(R.drawable.ic_panda_login)
+        }
+    )
 }
 
 @Composable
