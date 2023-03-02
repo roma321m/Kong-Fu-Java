@@ -4,8 +4,8 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.*
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.screens.splash.SplashScreen.Companion.SPLASH_SCREEN_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.ui.screens.splash.SplashScreen.Companion.SPLASH_SCREEN_TIME_MILLIS
 import dorin_roman.app.kongfujava.ui.screens.splash.content.Logo
@@ -46,7 +46,7 @@ fun SplashScreen(
     Logo(offsetState = offsetState, alphaState = alphaState)
 }
 
-@Preview
+@DevicePreviews
 @Composable
 private fun SplashScreenPreview() {
     Logo(offsetState = 0.dp, alphaState = 1f)
