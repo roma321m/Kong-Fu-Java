@@ -7,7 +7,8 @@ class Screens(navController: NavController) {
 
     companion object {
         const val SPLASH_SCREEN = "splash"
-        const val REGISTER_SCREEN = "register"
+        const val TEACHER_REGISTER_SCREEN = "teacher_register"
+        const val PARENT_REGISTER_SCREEN = "parent_register"
         const val USER_TYPE_SCREEN = "user_type"
         const val CHILD_LOGIN_SCREEN = "child_login"
         const val TEACHER_LOGIN_SCREEN = "teacher_login"
@@ -15,20 +16,31 @@ class Screens(navController: NavController) {
         const val MAIN_SCREEN = "main"
     }
 
-    //fixme - change root for working on the register screen (but roman said the splash delete anyway)
-    val splash: () -> Unit = {
-        navController.navigate(route = REGISTER_SCREEN) {
+    val navigateToUserTypeScreen: () -> Unit = {
+        navController.navigate(route = USER_TYPE_SCREEN) {
             popUpTo(SPLASH_SCREEN) {
                 inclusive = true
             }
         }
     }
 
-    val register: () -> Unit = {
-        navController.navigate(route = USER_TYPE_SCREEN)
+    val navigateToTeacherLoginScreen: () -> Unit = {
+        navController.navigate(route = TEACHER_LOGIN_SCREEN)
     }
 
-    val userType: (UserType) -> Unit = { userType ->
+    val navigateToTeacherRegisterScreen: () -> Unit = {
+        navController.navigate(route = TEACHER_REGISTER_SCREEN)
+    }
+
+    val navigateToParentLoginScreen: () -> Unit = {
+        navController.navigate(route = PARENT_LOGIN_SCREEN)
+    }
+
+    val navigateToParentRegisterScreen: () -> Unit = {
+        navController.navigate(route = PARENT_REGISTER_SCREEN)
+    }
+
+    val navigateToLoginScreen: (UserType) -> Unit = { userType ->
         when (userType) {
             UserType.Teacher -> navController.navigate(route = TEACHER_LOGIN_SCREEN)
             UserType.Child -> navController.navigate(route = CHILD_LOGIN_SCREEN)
@@ -36,15 +48,7 @@ class Screens(navController: NavController) {
         }
     }
 
-    val child: () -> Unit = {
-        navController.navigate(route = MAIN_SCREEN)
-    }
-
-    val parent: () -> Unit = {
-        navController.navigate(route = MAIN_SCREEN)
-    }
-
-    val teacher: () -> Unit = {
+    val navigateToMainScreen: () -> Unit = {
         navController.navigate(route = MAIN_SCREEN)
     }
 }

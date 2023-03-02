@@ -10,6 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dorin_roman.app.kongfujava.ui.components.DevicePreviews
+import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
@@ -34,5 +36,13 @@ fun TempUI(
         Button(onClick = navigateToMainScreen) {
             Text(text = "go to main")
         }
+    }
+}
+
+@DevicePreviews
+@Composable
+fun ChildLoginScreenPreview() {
+    KongFuJavaTheme {
+        ChildLoginScreen { }
     }
 }

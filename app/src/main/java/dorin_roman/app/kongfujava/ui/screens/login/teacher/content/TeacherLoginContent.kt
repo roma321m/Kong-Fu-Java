@@ -20,7 +20,10 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
 @Composable
-fun TeacherLoginScreenContent(navigateToMainScreen: () -> Unit) {
+fun TeacherLoginScreenContent(
+    navigateToMainScreen: () -> Unit,
+    navigateToTeacherRegisterScreen: () -> Unit,
+) {
     Row(
         modifier = Modifier
             .padding(MaterialTheme.spacing.large)
@@ -61,7 +64,10 @@ fun TeacherLoginScreenContent(navigateToMainScreen: () -> Unit) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TeacherLoginScreenContentTextButton(navigateToMainScreen)
+            TeacherLoginScreenContentTextButton(
+                navigateToMainScreen = navigateToMainScreen,
+                navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen
+            )
         }
 
         Spacer(
@@ -96,7 +102,8 @@ fun TeacherLoginScreenContentTexts() {
 
 @Composable
 fun TeacherLoginScreenContentTextButton(
-    navigateToMainScreen: () -> Unit
+    navigateToMainScreen: () -> Unit,
+    navigateToTeacherRegisterScreen: () -> Unit,
 ) {
 
     Text(
@@ -138,6 +145,19 @@ fun TeacherLoginScreenContentTextButton(
         }
     ) {
         Text(text = stringResource(id = R.string.login).uppercase())
+    }
+
+    // FIXME - temp button
+    Button(
+        modifier = Modifier
+            .fillMaxWidth(0.6f)
+            .padding(MaterialTheme.spacing.medium),
+        colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
+        onClick = {
+            navigateToTeacherRegisterScreen()
+        }
+    ) {
+        Text(text = "temp - teacher register".uppercase())
     }
 
 }

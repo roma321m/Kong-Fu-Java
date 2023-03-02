@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.login.main.content
+package dorin_roman.app.kongfujava.ui.screens.login.user_type.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

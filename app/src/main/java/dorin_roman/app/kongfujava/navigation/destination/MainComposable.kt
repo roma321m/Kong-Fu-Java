@@ -10,10 +10,7 @@ import dorin_roman.app.kongfujava.navigation.Screens
 import dorin_roman.app.kongfujava.ui.screens.main.MainScreen
 
 @ExperimentalAnimationApi
-fun NavGraphBuilder.mainComposable(
-    navigateToTemp1: () -> Unit,
-    navigateToTemp2: () -> Unit
-) {
+fun NavGraphBuilder.mainComposable() {
     composable(
         route = Screens.MAIN_SCREEN,
         enterTransition = {
@@ -25,9 +22,6 @@ fun NavGraphBuilder.mainComposable(
             )
         }
     ) {
-        MainScreen(
-            navigateToTemp1 = navigateToTemp1,
-            navigateToTemp2 = navigateToTemp2
-        )
+        MainScreen()
     }
 }

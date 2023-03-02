@@ -10,7 +10,7 @@ import dorin_roman.app.kongfujava.navigation.destination.*
 
 @ExperimentalAnimationApi
 @Composable
-fun SetupNavigation(
+fun MainNavigation(
     navController: NavHostController
 ) {
     val screen = remember(navController) {
@@ -22,26 +22,28 @@ fun SetupNavigation(
         startDestination = SPLASH_SCREEN
     ) {
         splashComposable(
-            navigateToUserTypeScreen = screen.splash
+            navigateToUserTypeScreen = screen.navigateToUserTypeScreen
         )
         userTypeComposable(
-            navigateToLoginScreen = screen.userType
+            navigateToLoginScreen = screen.navigateToLoginScreen
         )
-        registerComposable(
-            navigateToUserTypeScreen = screen.register
+        teacherRegisterComposable(
+            navigateToTeacherLoginScreen = screen.navigateToTeacherLoginScreen
+        )
+        parentRegisterComposable(
+            navigateToParentLoginScreen = screen.navigateToParentLoginScreen
         )
         teacherLoginComposable(
-            navigateToMainScreen = screen.teacher
+            navigateToMainScreen = screen.navigateToMainScreen,
+            navigateToTeacherRegisterScreen = screen.navigateToTeacherRegisterScreen
         )
         childLoginComposable(
-            navigateToMainScreen = screen.child
+            navigateToMainScreen = screen.navigateToMainScreen
         )
         parentLoginComposable(
-            navigateToMainScreen = screen.parent
+            navigateToMainScreen = screen.navigateToMainScreen,
+            navigateToParentRegisterScreen = screen.navigateToParentRegisterScreen
         )
-        mainComposable(
-            navigateToTemp1 = screen.splash, // fixme - change
-            navigateToTemp2 = screen.splash // fixme - change
-        )
+        mainComposable()
     }
 }

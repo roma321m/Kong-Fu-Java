@@ -11,7 +11,8 @@ import dorin_roman.app.kongfujava.ui.screens.login.teacher.TeacherLoginScreen
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.teacherLoginComposable(
-    navigateToMainScreen: () -> Unit
+    navigateToMainScreen: () -> Unit,
+    navigateToTeacherRegisterScreen: () -> Unit,
 ) {
     composable(
         route = Screens.TEACHER_LOGIN_SCREEN,
@@ -25,7 +26,8 @@ fun NavGraphBuilder.teacherLoginComposable(
         }
     ) {
         TeacherLoginScreen(
-            navigateToMainScreen = navigateToMainScreen
+            navigateToMainScreen = navigateToMainScreen,
+            navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen
         )
     }
 }

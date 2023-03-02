@@ -12,12 +12,14 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 //FIXME need to check if the size are good
 @Composable
 fun TeacherLoginScreen(
-    navigateToMainScreen: () -> Unit
+    navigateToMainScreen: () -> Unit,
+    navigateToTeacherRegisterScreen: () -> Unit,
 ) {
     HorizontalFortySixtyLayout(
         fortyLayout = {
             TeacherLoginScreenContent(
-                navigateToMainScreen = navigateToMainScreen
+                navigateToMainScreen = navigateToMainScreen,
+                navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen
             )
         },
         sixtyLayout = {
@@ -30,6 +32,6 @@ fun TeacherLoginScreen(
 @Composable
 fun TeacherLoginScreenPreview() {
     KongFuJavaTheme {
-        TeacherLoginScreen { }
+        TeacherLoginScreen({}, {})
     }
 }

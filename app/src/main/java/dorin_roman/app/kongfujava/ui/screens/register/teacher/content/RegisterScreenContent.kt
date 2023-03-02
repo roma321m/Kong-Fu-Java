@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.login.main.content
+package dorin_roman.app.kongfujava.ui.screens.register.teacher.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -24,7 +24,7 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 
 //FIXME need to know which user in this page? (parent or teacher)
 @Composable
-fun RegisterScreenContent(navigateToUserTypeScreen: () -> Unit) {
+fun RegisterScreenContent(navigateToTeacherLoginScreen: () -> Unit) {
     Column(
         modifier = Modifier
             .padding(MaterialTheme.spacing.large)
@@ -58,7 +58,7 @@ fun RegisterScreenContent(navigateToUserTypeScreen: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             RegisterScreenContentTextFields(
-                navigateToUserTypeScreen = navigateToUserTypeScreen
+                navigateToTeacherLoginScreen = navigateToTeacherLoginScreen
             )
         }
 
@@ -105,7 +105,7 @@ fun RegisterScreenContentTexts() {
 
 @Composable
 fun RegisterScreenContentTextFields(
-    navigateToUserTypeScreen: () -> Unit
+    navigateToTeacherLoginScreen: () -> Unit
 ) {
 
     TextFieldWithIcons(label = R.string.register_email, placeholder = R.string.register_enter_email, icon = Icons.Default.Email)
@@ -123,8 +123,7 @@ fun RegisterScreenContentTextFields(
             .padding(MaterialTheme.spacing.medium),
         colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
-            // FIXME: navigate to login
-            navigateToUserTypeScreen()
+            navigateToTeacherLoginScreen()
         }
     ) {
         Text(text = stringResource(id = R.string.register).uppercase())

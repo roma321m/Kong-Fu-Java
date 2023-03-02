@@ -7,7 +7,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
-import dorin_roman.app.kongfujava.navigation.SetupNavigation
+import dorin_roman.app.kongfujava.navigation.MainNavigation
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @AndroidEntryPoint
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             KongFuJavaTheme {
                 navController = rememberAnimatedNavController()
-                SetupNavigation(
+                MainNavigation(
                     navController = navController
                 )
             }

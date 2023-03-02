@@ -11,7 +11,8 @@ import dorin_roman.app.kongfujava.ui.screens.login.parent.ParentLoginScreen
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.parentLoginComposable(
-    navigateToMainScreen: () -> Unit
+    navigateToMainScreen: () -> Unit,
+    navigateToParentRegisterScreen: () -> Unit
 ) {
     composable(
         route = Screens.PARENT_LOGIN_SCREEN,
@@ -25,7 +26,8 @@ fun NavGraphBuilder.parentLoginComposable(
         }
     ) {
         ParentLoginScreen(
-            navigateToMainScreen = navigateToMainScreen
+            navigateToMainScreen = navigateToMainScreen,
+            navigateToParentRegisterScreen = navigateToParentRegisterScreen
         )
     }
 }

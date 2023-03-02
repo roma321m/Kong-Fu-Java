@@ -10,18 +10,25 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dorin_roman.app.kongfujava.ui.components.DevicePreviews
+import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
 fun ParentLoginScreen(
-    navigateToMainScreen: () -> Unit
+    navigateToMainScreen: () -> Unit,
+    navigateToParentRegisterScreen: () -> Unit
 ) {
-    TempUI(navigateToMainScreen = navigateToMainScreen)
+    TempUI(
+        navigateToMainScreen = navigateToMainScreen,
+        navigateToParentRegisterScreen = navigateToParentRegisterScreen
+    )
 }
 
 @Composable
 fun TempUI(
-    navigateToMainScreen: () -> Unit
+    navigateToMainScreen: () -> Unit,
+    navigateToParentRegisterScreen: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -34,5 +41,16 @@ fun TempUI(
         Button(onClick = navigateToMainScreen) {
             Text(text = "go to main")
         }
+        Button(onClick = navigateToParentRegisterScreen) {
+            Text(text = "go to parent register")
+        }
+    }
+}
+
+@DevicePreviews
+@Composable
+fun ParentLoginScreenPreview() {
+    KongFuJavaTheme {
+        ParentLoginScreen({}, {})
     }
 }
