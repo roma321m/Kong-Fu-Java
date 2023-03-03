@@ -1,10 +1,9 @@
-package dorin_roman.app.kongfujava.ui.screens.login.teacher.content
+package dorin_roman.app.kongfujava.ui.screens.login.child.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,9 +21,8 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
 @Composable
-fun TeacherLoginScreenContent(
+fun ChildLoginScreenContent(
     navigateToMainScreen: () -> Unit,
-    navigateToTeacherRegisterScreen: () -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -37,10 +35,6 @@ fun TeacherLoginScreenContent(
                 .fillMaxHeight()
         )
 
-//        Box(modifier = Modifier.weight(0.2f)) {
-//            TeacherLoginScreenContentImage()
-//        }
-
         Column(
             modifier = Modifier
                 .weight(0.35f)
@@ -48,9 +42,9 @@ fun TeacherLoginScreenContent(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TeacherLoginScreenContentImage()
+            ChildLoginScreenContentImage()
 
-            TeacherLoginScreenContentTexts()
+            ChildLoginScreenContentTexts()
         }
 
         Spacer(
@@ -66,9 +60,8 @@ fun TeacherLoginScreenContent(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TeacherLoginScreenContentTextButton(
+            ChildLoginScreenContentTextButton(
                 navigateToMainScreen = navigateToMainScreen,
-                navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen
             )
         }
 
@@ -81,17 +74,17 @@ fun TeacherLoginScreenContent(
 }
 
 @Composable
-fun TeacherLoginScreenContentImage() {
+fun ChildLoginScreenContentImage() {
     Image(
         modifier = Modifier
-            .size(150.dp,150.dp),
+            .size(150.dp,150.dp) ,
         painter = painterResource(id = R.drawable.ic_logo),
         contentDescription = stringResource(id = R.string.app_logo)
     )
 }
 
 @Composable
-fun TeacherLoginScreenContentTexts() {
+fun ChildLoginScreenContentTexts() {
     Text(
         modifier = Modifier
             .fillMaxWidth()
@@ -103,9 +96,8 @@ fun TeacherLoginScreenContentTexts() {
 }
 
 @Composable
-fun TeacherLoginScreenContentTextButton(
+fun ChildLoginScreenContentTextButton(
     navigateToMainScreen: () -> Unit,
-    navigateToTeacherRegisterScreen: () -> Unit,
 ) {
 
     Text(
@@ -117,36 +109,17 @@ fun TeacherLoginScreenContentTextButton(
         style = MaterialTheme.typography.h4
     )
 
-    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var studentCode by remember { mutableStateOf(TextFieldValue("")) }
     OutlinedTextField(
-        value = email,
-        //leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "emailIcon") },
-        trailingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = null) },
-        onValueChange = {
-            email = it
-        },
-        label = { Text(text = stringResource(id = R.string.register_email)) },
-        placeholder = { Text(text = stringResource(id = R.string.register_enter_email)) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            cursorColor = purpleColor1,
-            focusedLabelColor = purpleColor1,
-            errorLabelColor = redColor1,
-            errorBorderColor = redColor1,
-            focusedBorderColor = purpleColor1,
-            unfocusedBorderColor = purpleColor1
-        )
-    )
-
-    var password by remember { mutableStateOf(TextFieldValue("")) }
-    OutlinedTextField(
-        value = password,
+        value = studentCode,
         //leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "emailIcon") },
         trailingIcon = { Icon(imageVector = Icons.Default.Visibility, contentDescription = null) },
         onValueChange = {
-            password = it
+            studentCode = it
         },
-        label = { Text(text = stringResource(id = R.string.register_password)) },
-        placeholder = { Text(text = stringResource(id = R.string.register_enter_password)) },
+        modifier = Modifier.padding(top = MaterialTheme.spacing.small),
+        label = { Text(text = stringResource(id = R.string.login_student_code)) },
+        placeholder = { Text(text = stringResource(id = R.string.login_enter_student_code)) },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             cursorColor = purpleColor1,
             focusedLabelColor = purpleColor1,
@@ -160,7 +133,7 @@ fun TeacherLoginScreenContentTextButton(
     Button(
         modifier = Modifier
             .fillMaxWidth(0.6f)
-            .padding(top = MaterialTheme.spacing.medium),
+            .padding(MaterialTheme.spacing.medium),
         colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToMainScreen()
@@ -169,15 +142,5 @@ fun TeacherLoginScreenContentTextButton(
         Text(text = stringResource(id = R.string.login).uppercase())
     }
 
-    Button(
-        modifier = Modifier
-            .fillMaxWidth(0.6f),
-        colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
-        onClick = {
-            navigateToTeacherRegisterScreen()
-        }
-    ) {
-        Text(text =stringResource(id = R.string.login_create_account).uppercase())
-    }
-
 }
+
