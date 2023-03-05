@@ -1,27 +1,32 @@
-package dorin_roman.app.kongfujava.navigation.destination
+package dorin_roman.app.kongfujava.navigation.supervisor_destination
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
-import dorin_roman.app.kongfujava.navigation.Destinations
+import dorin_roman.app.kongfujava.navigation.SUPERVISOR_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.navigation.Screens
-import dorin_roman.app.kongfujava.ui.screens.main.MainScreen
+import dorin_roman.app.kongfujava.ui.screens.progress_report.ProgressReportScreen
+
 
 @ExperimentalAnimationApi
-fun NavGraphBuilder.mainComposable() {
+fun NavGraphBuilder.progressReportComposable(
+    navigateToAddUsers: () -> Unit
+) {
     composable(
-        route = Screens.MAIN_SCREEN,
+        route = Screens.PROGRESS_REPORT_SCREEN,
         enterTransition = {
             slideInHorizontally(
                 animationSpec = tween(
-                    durationMillis = Destinations.ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
+                    durationMillis = SUPERVISOR_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
                 ),
                 initialOffsetX = { fullWidth -> -fullWidth }
             )
         }
     ) {
-        MainScreen()
+        ProgressReportScreen(
+            navigateToAddUsers = navigateToAddUsers
+        )
     }
 }

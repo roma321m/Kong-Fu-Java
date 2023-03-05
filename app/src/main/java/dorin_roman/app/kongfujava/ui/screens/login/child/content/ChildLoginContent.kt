@@ -17,11 +17,13 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.purpleColor1
 import dorin_roman.app.kongfujava.ui.theme.redColor1
 import dorin_roman.app.kongfujava.ui.theme.spacing
+import dorin_roman.app.kongfujava.view_models.MainViewModel
 
 
 @Composable
 fun ChildLoginScreenContent(
     navigateToMainScreen: () -> Unit,
+    onLoginClicked: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -61,6 +63,7 @@ fun ChildLoginScreenContent(
         ) {
             ChildLoginScreenContentTextButton(
                 navigateToMainScreen = navigateToMainScreen,
+                onLoginClicked = onLoginClicked
             )
         }
 
@@ -97,6 +100,7 @@ fun ChildLoginScreenContentTexts() {
 @Composable
 fun ChildLoginScreenContentTextButton(
     navigateToMainScreen: () -> Unit,
+    onLoginClicked: () -> Unit
 ) {
 
     Text(
@@ -134,6 +138,7 @@ fun ChildLoginScreenContentTextButton(
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
         onClick = {
+            onLoginClicked()
             navigateToMainScreen()
         }
     ) {

@@ -10,18 +10,25 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.spacing
+import dorin_roman.app.kongfujava.view_models.MainEvent
+import dorin_roman.app.kongfujava.view_models.MainViewModel
 
 @Composable
 fun ParentLoginScreen(
     navigateToMainScreen: () -> Unit,
-    navigateToParentRegisterScreen: () -> Unit
+    navigateToParentRegisterScreen: () -> Unit,
+    mainViewModel: MainViewModel
 ) {
     TempUI(
         navigateToMainScreen = navigateToMainScreen,
-        navigateToParentRegisterScreen = navigateToParentRegisterScreen
+        navigateToParentRegisterScreen = navigateToParentRegisterScreen,
+        onLoginClicked = {
+            mainViewModel.handle(MainEvent.Parent) // FIXME - temp, handle login instead of this
+        }
     )
 }
 
@@ -29,6 +36,7 @@ fun ParentLoginScreen(
 fun TempUI(
     navigateToMainScreen: () -> Unit,
     navigateToParentRegisterScreen: () -> Unit,
+    onLoginClicked: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -38,7 +46,12 @@ fun TempUI(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "This is a temp UI for the parent login screen")
-        Button(onClick = navigateToMainScreen) {
+        Button(
+            onClick = {
+                onLoginClicked()
+                navigateToMainScreen()
+            }
+        ) {
             Text(text = "go to main")
         }
         Button(onClick = navigateToParentRegisterScreen) {
@@ -51,6 +64,6 @@ fun TempUI(
 @Composable
 fun ParentLoginScreenPreview() {
     KongFuJavaTheme {
-        ParentLoginScreen({}, {})
+        ParentLoginScreen({}, {}, viewModel())
     }
 }

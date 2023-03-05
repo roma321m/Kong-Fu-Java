@@ -22,6 +22,7 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 fun TeacherLoginScreenContent(
     navigateToMainScreen: () -> Unit,
     navigateToTeacherRegisterScreen: () -> Unit,
+    onLoginClicked: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -61,7 +62,8 @@ fun TeacherLoginScreenContent(
         ) {
             TeacherLoginScreenContentTextButton(
                 navigateToMainScreen = navigateToMainScreen,
-                navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen
+                navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen,
+                onLoginClicked = onLoginClicked
             )
         }
 
@@ -99,6 +101,7 @@ fun TeacherLoginScreenContentTexts() {
 fun TeacherLoginScreenContentTextButton(
     navigateToMainScreen: () -> Unit,
     navigateToTeacherRegisterScreen: () -> Unit,
+    onLoginClicked: () -> Unit
 ) {
 
     Text(
@@ -139,6 +142,7 @@ fun TeacherLoginScreenContentTextButton(
             .fillMaxWidth(0.6f)
             .padding(top = MaterialTheme.spacing.medium),
         onClick = {
+            onLoginClicked()
             navigateToMainScreen()
         }
     ) {

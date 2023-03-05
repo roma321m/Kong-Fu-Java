@@ -1,20 +1,55 @@
 package dorin_roman.app.kongfujava.ui.screens.main
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import dorin_roman.app.kongfujava.navigation.ChildNavigation
+import dorin_roman.app.kongfujava.navigation.SupervisorNavigation
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+import dorin_roman.app.kongfujava.util.UserType
+import dorin_roman.app.kongfujava.view_models.MainViewModel
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun MainScreen(
+    mainViewModel: MainViewModel
+) {
+    val navController: NavHostController = rememberAnimatedNavController()
+
+    when(mainViewModel.type) {
+        UserType.Parent, UserType.Teacher -> {
+            SupervisorNavigation(
+                navController = navController
+            )
+        }
+        UserType.Child -> {
+            ChildNavigation(
+                navController = navController
+            )
+        }
+    }
+
+    TempUi(mainViewModel = mainViewModel)
+}
 
 @Composable
-fun MainScreen() {
-    // TODO - build 3 different navigations, on for each user
-    Text(text = "This is the main screen")
+fun TempUi(mainViewModel: MainViewModel) {
+    val text = when(mainViewModel.type) {
+        UserType.Parent -> "  (Parent)"
+        UserType.Teacher -> "  (Teacher)"
+        UserType.Child -> "  (Child)"
+    }
+    Text(text = "This is the main screen $text")
 }
 
 @DevicePreviews
 @Composable
 fun MainScreenPreview() {
     KongFuJavaTheme {
-        MainScreen()
+        MainScreen(viewModel())
     }
 }

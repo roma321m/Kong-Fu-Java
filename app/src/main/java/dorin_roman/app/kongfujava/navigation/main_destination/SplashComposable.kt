@@ -1,11 +1,11 @@
-package dorin_roman.app.kongfujava.navigation.destination
+package dorin_roman.app.kongfujava.navigation.main_destination
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideOutVertically
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
-import dorin_roman.app.kongfujava.navigation.Destinations.EXIT_NAVIGATION_ANIMATION_TIME_MILLIS
+import dorin_roman.app.kongfujava.navigation.MAIN_EXIT_NAVIGATION_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.navigation.Screens.Companion.SPLASH_SCREEN
 import dorin_roman.app.kongfujava.ui.screens.splash.SplashScreen
 
@@ -18,7 +18,7 @@ fun NavGraphBuilder.splashComposable(
         exitTransition = {
             slideOutVertically(
                 targetOffsetY = { fullHeight -> -fullHeight },
-                animationSpec = tween(EXIT_NAVIGATION_ANIMATION_TIME_MILLIS)
+                animationSpec = tween(MAIN_EXIT_NAVIGATION_ANIMATION_TIME_MILLIS)
             )
         }
     ) {

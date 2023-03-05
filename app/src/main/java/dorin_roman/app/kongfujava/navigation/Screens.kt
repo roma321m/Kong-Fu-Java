@@ -6,6 +6,7 @@ import dorin_roman.app.kongfujava.util.UserType
 class Screens(navController: NavController) {
 
     companion object {
+        // main
         const val SPLASH_SCREEN = "splash"
         const val TEACHER_REGISTER_SCREEN = "teacher_register"
         const val PARENT_REGISTER_SCREEN = "parent_register"
@@ -14,6 +15,15 @@ class Screens(navController: NavController) {
         const val TEACHER_LOGIN_SCREEN = "teacher_login"
         const val PARENT_LOGIN_SCREEN = "parent_login"
         const val MAIN_SCREEN = "main"
+
+        // supervisor
+        const val ADD_USERS_SCREEN = "add_users"
+        const val PROGRESS_REPORT_SCREEN = "progress_report"
+
+        // child
+        const val WORLDS_SCREEN = "worlds"
+        const val LEVELS_SCREEN = "levels"
+        // todo add all the questions screens
     }
 
     val navigateToUserTypeScreen: () -> Unit = {
@@ -49,6 +59,10 @@ class Screens(navController: NavController) {
     }
 
     val navigateToMainScreen: () -> Unit = {
-        navController.navigate(route = MAIN_SCREEN)
+        navController.navigate(route = MAIN_SCREEN) {
+            popUpTo(USER_TYPE_SCREEN) {
+                inclusive = true
+            }
+        }
     }
 }

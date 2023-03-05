@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.navigation.destination
+package dorin_roman.app.kongfujava.navigation.main_destination
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavGraphBuilder
