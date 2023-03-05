@@ -15,9 +15,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.theme.purpleColor1
-import dorin_roman.app.kongfujava.ui.theme.redColor1
-import dorin_roman.app.kongfujava.ui.theme.secondaryTextColor
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -36,10 +33,6 @@ fun TeacherLoginScreenContent(
                 .weight(0.05f)
                 .fillMaxHeight()
         )
-
-//        Box(modifier = Modifier.weight(0.2f)) {
-//            TeacherLoginScreenContentImage()
-//        }
 
         Column(
             modifier = Modifier
@@ -84,7 +77,7 @@ fun TeacherLoginScreenContent(
 fun TeacherLoginScreenContentImage() {
     Image(
         modifier = Modifier
-            .size(150.dp,150.dp),
+            .size(150.dp, 150.dp),
         painter = painterResource(id = R.drawable.ic_logo),
         contentDescription = stringResource(id = R.string.app_logo)
     )
@@ -127,14 +120,6 @@ fun TeacherLoginScreenContentTextButton(
         },
         label = { Text(text = stringResource(id = R.string.register_email)) },
         placeholder = { Text(text = stringResource(id = R.string.register_enter_email)) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            cursorColor = purpleColor1,
-            focusedLabelColor = purpleColor1,
-            errorLabelColor = redColor1,
-            errorBorderColor = redColor1,
-            focusedBorderColor = purpleColor1,
-            unfocusedBorderColor = purpleColor1
-        )
     )
 
     var password by remember { mutableStateOf(TextFieldValue("")) }
@@ -147,21 +132,12 @@ fun TeacherLoginScreenContentTextButton(
         },
         label = { Text(text = stringResource(id = R.string.register_password)) },
         placeholder = { Text(text = stringResource(id = R.string.register_enter_password)) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            cursorColor = purpleColor1,
-            focusedLabelColor = purpleColor1,
-            errorLabelColor = redColor1,
-            errorBorderColor = redColor1,
-            focusedBorderColor = purpleColor1,
-            unfocusedBorderColor = purpleColor1
-        )
     )
 
     Button(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(top = MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToMainScreen()
         }
@@ -172,12 +148,11 @@ fun TeacherLoginScreenContentTextButton(
     Button(
         modifier = Modifier
             .fillMaxWidth(0.6f),
-        colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToTeacherRegisterScreen()
         }
     ) {
-        Text(text =stringResource(id = R.string.login_create_account).uppercase())
+        Text(text = stringResource(id = R.string.login_create_account).uppercase())
     }
 
 }

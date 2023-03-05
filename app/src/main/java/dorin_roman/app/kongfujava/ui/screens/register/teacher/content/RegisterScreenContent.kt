@@ -17,9 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.theme.purpleColor1
-import dorin_roman.app.kongfujava.ui.theme.redColor1
-import dorin_roman.app.kongfujava.ui.theme.secondaryTextColor
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 //FIXME need to know which user in this page? (parent or teacher)
@@ -110,7 +107,11 @@ fun RegisterScreenContentTextFields(
 
     TextFieldWithIcons(label = R.string.register_email, placeholder = R.string.register_enter_email, icon = Icons.Default.Email)
 
-    TextFieldWithIcons(label = R.string.register_password, placeholder = R.string.register_enter_password, icon = Icons.Default.VisibilityOff)
+    TextFieldWithIcons(
+        label = R.string.register_password,
+        placeholder = R.string.register_enter_password,
+        icon = Icons.Default.VisibilityOff
+    )
 
     TextFieldWithIcons(label = R.string.register_class, placeholder = R.string.register_enter_class, icon = Icons.Default.LocalLibrary)
 
@@ -121,7 +122,6 @@ fun RegisterScreenContentTextFields(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToTeacherLoginScreen()
         }
@@ -143,14 +143,6 @@ fun TextFieldWithIcons(label: Int, placeholder: Int, icon: ImageVector) {
             text = it
         },
         label = { Text(text = stringResource(id = label)) },
-        placeholder = { Text(text = stringResource(id = placeholder)) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            cursorColor = purpleColor1,
-            focusedLabelColor = purpleColor1,
-            errorLabelColor = redColor1,
-            errorBorderColor = redColor1,
-            focusedBorderColor = purpleColor1,
-            unfocusedBorderColor = purpleColor1
-        )
+        placeholder = { Text(text = stringResource(id = placeholder)) }
     )
 }

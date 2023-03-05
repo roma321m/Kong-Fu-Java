@@ -13,9 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.theme.purpleColor1
-import dorin_roman.app.kongfujava.ui.theme.secondaryTextColor
 import dorin_roman.app.kongfujava.ui.theme.spacing
 import dorin_roman.app.kongfujava.util.UserType
 
@@ -115,13 +114,15 @@ fun UserTypeScreenContentButtons(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToLoginScreen(UserType.Child)
         }
     ) {
-        Icon(imageVector = Icons.Default.School,
-            contentDescription = "student")
+        Icon(
+            imageVector = Icons.Default.School,
+            contentDescription = "student",
+            modifier = Modifier.padding(start = 4.dp)
+        )
         Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
         Text(text = stringResource(id = R.string.user_student))
     }
@@ -130,13 +131,14 @@ fun UserTypeScreenContentButtons(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToLoginScreen(UserType.Parent)
         }
     ) {
-        Icon(imageVector = Icons.Default.FamilyRestroom,
-            contentDescription = "parent")
+        Icon(
+            imageVector = Icons.Default.FamilyRestroom,
+            contentDescription = "parent"
+        )
         Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
         Text(text = stringResource(id = R.string.user_parent))
     }
@@ -145,13 +147,14 @@ fun UserTypeScreenContentButtons(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors( backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToLoginScreen(UserType.Teacher)
         }
     ) {
-        Icon(imageVector = Icons.Default.EscalatorWarning,
-            contentDescription = "teacher")
+        Icon(
+            imageVector = Icons.Default.EscalatorWarning,
+            contentDescription = "teacher"
+        )
         Spacer(modifier = Modifier.size(ButtonDefaults.IconSpacing))
         Text(text = stringResource(id = R.string.user_teacher))
     }

@@ -4,26 +4,52 @@ import androidx.compose.material.Colors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-val primaryColor =  Color(0xff9ff07a)
-val primaryLightColor =  Color(0xFF8CFF9C)
-val primaryDarkColor =  Color(0xFF006D21)
-val primaryTextColor =  Color(0xFF000000)
-val secondaryColor =  Color(0xFF8E24AA)
-val secondaryLightColor =  Color(0xFFC158DC)
-val secondaryDarkColor =  Color(0xFF5C007A)
-val secondaryTextColor =  Color(0xFFFFFFFF)
+val secondaryColor = Color(0xff9ff07a)
+val secondaryLightColor = Color(0xFF8CFF9C)
+val secondaryDarkColor = Color(0xFF006D21)
+val secondaryTextColor = Color(0xFFFFFFFF)
+val primaryColor = Color(0xff7d65f1)
+val primaryLightColor = Color(0xff6955bc)
+val primaryDarkColor = Color(0xFF5C007A)
+val primaryTextColor = Color(0xFF000000)
+
+//Dark
+val primaryDark: Color = Color(0xff7d65f1)
+val primaryVariantDark: Color = Color(0xff6955bc)
+val secondaryDark: Color = Color(0xff9ff07a)
+val secondaryVariantDark: Color = Color(0xff6cb451)
+val backgroundDark: Color = Color(0xFF000000)
+val surfaceDark: Color = Color(0xFF000000)
+val onPrimaryDark: Color = Color(0xFFFFFFFF)
+val onSecondaryDark: Color = Color(0xFF000000)
+val onBackgroundDark: Color = Color(0xFFFFFFFF)
+val onSurfaceDark: Color = Color(0xFFFFFFFF)
+
+
+//Light
+val primaryLight: Color = Color(0xFFAA9CEB)
+val primaryVariantLight: Color = Color(0xff6955bc)
+val secondaryLight: Color = Color(0xff9ff07a)
+val secondaryVariantLight: Color = Color(0xff6cb451)
+val backgroundLight: Color = Color(0xFFFFFFFF)
+val surfaceLight: Color = Color(0xFFFFFFFF)
+val onPrimaryLight: Color = Color(0xFF000000)
+val onSecondaryLight: Color = Color(0xFFFFFFFF)
+val onBackgroundLight: Color = Color(0xFF000000)
+val onSurfaceLight: Color = Color(0xFF000000)
+
+
+
 
 //color palate
-val purpleColor1 =  Color(0xff7d65f1)
-val purpleColor2 =  Color(0xff6955bc)
-val purpleColor3 =  Color(0xff100e71)
-val greenColor1 =  Color(0xff9cf37c)
-val greenColor2 =  Color(0xff6d9b58)
-val greenColor3 =  Color(0xff5d9a3c)
-val greenColor4 =  Color(0xff6cb451)
-val greenColor5 =  Color(0xffccfcb4)
-val redColor1 =  Color(0xffa84552)
-
+val purpleColor1 = Color(0xFFC3B8F8)
+val purpleColor2 = Color(0xff6955bc)
+val greenColor1 = Color(0xff9cf37c)
+val greenColor2 = Color(0xff6d9b58)
+val greenColor3 = Color(0xff5d9a3c)
+val greenColor4 = Color(0xff6cb451)
+val greenColor5 = Color(0xffccfcb4)
+val redColor1 = Color(0xffa84552)
 
 
 val LightGray = Color(0xFFFCFCFC)
@@ -32,4 +58,8 @@ val DarkGray = Color(0xFF141414)
 
 val Colors.splashScreenBackground: Color
     @Composable
-    get() = if (isLight) primaryDarkColor else Color.Black
+    get() = if (isLight) secondaryLight else Color.Black
+
+val Colors.systemUi: Color
+    @Composable
+    get() = if (isLight) Color.White else Color.Black

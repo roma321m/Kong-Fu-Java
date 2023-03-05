@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kong Fu Java</string>
+    <string name="app_logo_description">App Logo</string>
+    <string name="panda_image_8">Panda Image 8</string>
+    <string name="welcome">Welcome!</string>
+    <string name="user_type_subtitle_description">introduction programming games \nfor the next generation</string>
+    <string name="user_type_description">Learn to code through the power of play,\n out panda will take you on a journey and \nyou will learn java on the way!!!</string>
+    <string name="user_parent">I\'m a parent</string>
+    <string name="user_student">I\'m a student</string>
+    <string name="user_teacher">I\'m a teacher</string>
+    <string name="app_logo">app logo</string>
+    <string name="register">register</string>
+    <string name="register_description">Kong Fu Java is a fun and educational\n game-based environment, where kids learn\n to code without any prior experience.</string>
+    <string name="register_email">Email address</string>
+    <string name="register_enter_email">Enter your e-mail</string>
+    <string name="register_password">Password</string>
+    <string name="register_enter_password">Enter your password</string>
+    <string name="register_class">Class</string>
+    <string name="register_enter_class">Enter your class</string>
+    <string name="register_education">School name</string>
+    <string name="register_enter_education">Enter your school name</string>
+    <string name="login_description">Hello, Good News!\n Mastering a new programming language doesn\'t have to be boring and exhausting.\n Connect and join your classmates to enjoy a coding adveture!.</string>
+    <string name="login">Login</string>
+    <string name="login_student_code">Student Code</string>
+    <string name="login_enter_student_code">Enter your student code</string>
+    <string name="login_create_account">Create new account</string>
+</resources>

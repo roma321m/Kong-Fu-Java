@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.purpleColor1
 import dorin_roman.app.kongfujava.ui.theme.redColor1
-import dorin_roman.app.kongfujava.ui.theme.secondaryTextColor
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -134,7 +133,6 @@ fun ChildLoginScreenContentTextButton(
         modifier = Modifier
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
-        colors = ButtonDefaults.buttonColors(backgroundColor = purpleColor1, contentColor = secondaryTextColor),
         onClick = {
             navigateToMainScreen()
         }
