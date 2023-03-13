@@ -9,13 +9,15 @@ import dorin_roman.app.kongfujava.ui.components.HorizontalFortySixtyLayout
 import dorin_roman.app.kongfujava.ui.components.SideScreenImage
 import dorin_roman.app.kongfujava.ui.screens.login.child.content.ChildLoginScreenContent
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+import dorin_roman.app.kongfujava.view_models.ChildLoginContentViewModel
 import dorin_roman.app.kongfujava.view_models.MainEvent
 import dorin_roman.app.kongfujava.view_models.MainViewModel
 
 @Composable
 fun ChildLoginScreen(
     navigateToMainScreen: () -> Unit,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    childLoginContentViewModel: ChildLoginContentViewModel
 ) {
     HorizontalFortySixtyLayout(
         fortyLayout = {
@@ -23,7 +25,8 @@ fun ChildLoginScreen(
                 navigateToMainScreen = navigateToMainScreen,
                 onLoginClicked = {
                     mainViewModel.handle(MainEvent.Child) // FIXME - temp, handle login instead of this
-                }
+                },
+                childLoginContentViewModel =  childLoginContentViewModel
             )
         },
         sixtyLayout = {
@@ -36,6 +39,6 @@ fun ChildLoginScreen(
 @Composable
 fun ChildLoginScreenPreview() {
     KongFuJavaTheme {
-        ChildLoginScreen({}, viewModel())
+        ChildLoginScreen({}, viewModel(), viewModel())
     }
 }

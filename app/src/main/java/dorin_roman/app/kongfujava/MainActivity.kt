@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dorin_roman.app.kongfujava.navigation.MainNavigation
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.systemUi
+import dorin_roman.app.kongfujava.view_models.ChildLoginContentViewModel
 import dorin_roman.app.kongfujava.view_models.MainViewModel
 
 @AndroidEntryPoint
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
     private val mainViewModel: MainViewModel by viewModels()
+    private val childLoginContentViewModel: ChildLoginContentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,8 @@ class MainActivity : ComponentActivity() {
                 navController = rememberAnimatedNavController()
                 MainNavigation(
                     navController = navController,
-                    mainViewModel = mainViewModel
+                    mainViewModel = mainViewModel,
+                    childLoginContentViewModel = childLoginContentViewModel
                 )
             }
         }

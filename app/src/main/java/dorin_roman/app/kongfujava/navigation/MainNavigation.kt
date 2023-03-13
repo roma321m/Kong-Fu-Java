@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import dorin_roman.app.kongfujava.navigation.Screens.Companion.SPLASH_SCREEN
 import dorin_roman.app.kongfujava.navigation.main_destination.*
+import dorin_roman.app.kongfujava.view_models.ChildLoginContentViewModel
 import dorin_roman.app.kongfujava.view_models.MainViewModel
 
 const val MAIN_EXIT_NAVIGATION_ANIMATION_TIME_MILLIS = 500
@@ -16,7 +17,8 @@ const val MAIN_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS = 300
 @Composable
 fun MainNavigation(
     navController: NavHostController,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    childLoginContentViewModel: ChildLoginContentViewModel
 ) {
     val screen = remember(navController) {
         Screens(navController = navController)
@@ -45,7 +47,8 @@ fun MainNavigation(
         )
         childLoginComposable(
             navigateToMainScreen = screen.navigateToMainScreen,
-            mainViewModel = mainViewModel
+            mainViewModel = mainViewModel,
+            childLoginContentViewModel = childLoginContentViewModel
         )
         parentLoginComposable(
             navigateToMainScreen = screen.navigateToMainScreen,
