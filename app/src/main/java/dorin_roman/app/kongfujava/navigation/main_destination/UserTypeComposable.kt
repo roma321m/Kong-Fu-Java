@@ -10,7 +10,7 @@ import dorin_roman.app.kongfujava.util.UserType
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.userTypeComposable(
-    navigateToLoginScreen: (UserType) -> Unit
+    navigateToLoginScreen: (usertype :UserType) -> Unit
 ) {
     composable(
         route = USER_TYPE_SCREEN

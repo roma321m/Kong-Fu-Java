@@ -10,12 +10,12 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun TeacherRegisterScreen(
-    navigateToTeacherLoginScreen: () -> Unit
+    navigateToTeacherParentLoginScreen: () -> Unit
 ) {
     VerticalFortySixtyLayout(
         fortyLayout = {
             RegisterScreenContent(
-                navigateToTeacherLoginScreen = navigateToTeacherLoginScreen
+                navigateToTeacherParentLoginScreen = navigateToTeacherParentLoginScreen
             )
         },
         sixtyLayout = {

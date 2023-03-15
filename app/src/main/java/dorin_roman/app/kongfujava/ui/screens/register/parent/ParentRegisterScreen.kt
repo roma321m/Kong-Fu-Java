@@ -6,7 +6,7 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun ParentRegisterScreen(
-    navigateToParentLoginScreen: () -> Unit
+    navigateToTeacherParentLoginScreen: () -> Unit
 ) {
     // todo
 }

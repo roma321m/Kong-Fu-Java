@@ -11,8 +11,7 @@ class GeneralScreens(navController: NavController) {
         const val PARENT_REGISTER_SCREEN = "parent_register"
         const val USER_TYPE_SCREEN = "user_type"
         const val CHILD_LOGIN_SCREEN = "child_login"
-        const val TEACHER_LOGIN_SCREEN = "teacher_login"
-        const val PARENT_LOGIN_SCREEN = "parent_login"
+        const val TEACHER_PARENT_LOGIN_SCREEN = "teacher_parent_login/{user_type}"
         const val MAIN_SCREEN = "main"
     }
 
@@ -24,16 +23,12 @@ class GeneralScreens(navController: NavController) {
         }
     }
 
-    val navigateToTeacherLoginScreen: () -> Unit = {
-        navController.navigate(route = TEACHER_LOGIN_SCREEN)
+    val navigateToTeacherParentLoginScreen: () -> Unit = {
+        navController.navigate(route = TEACHER_PARENT_LOGIN_SCREEN)
     }
 
     val navigateToTeacherRegisterScreen: () -> Unit = {
         navController.navigate(route = TEACHER_REGISTER_SCREEN)
-    }
-
-    val navigateToParentLoginScreen: () -> Unit = {
-        navController.navigate(route = PARENT_LOGIN_SCREEN)
     }
 
     val navigateToParentRegisterScreen: () -> Unit = {
@@ -42,9 +37,9 @@ class GeneralScreens(navController: NavController) {
 
     val navigateToLoginScreen: (UserType) -> Unit = { userType ->
         when (userType) {
-            UserType.Teacher -> navController.navigate(route = TEACHER_LOGIN_SCREEN)
+            UserType.Teacher -> navController.navigate(route = "teacher_parent_login/${userType.ordinal}")
             UserType.Child -> navController.navigate(route = CHILD_LOGIN_SCREEN)
-            UserType.Parent -> navController.navigate(route = PARENT_LOGIN_SCREEN)
+            UserType.Parent -> navController.navigate(route = "teacher_parent_login/${userType.ordinal}")
         }
     }
 

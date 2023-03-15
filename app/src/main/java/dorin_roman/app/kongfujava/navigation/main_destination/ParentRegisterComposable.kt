@@ -9,13 +9,13 @@ import dorin_roman.app.kongfujava.ui.screens.register.parent.ParentRegisterScree
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.parentRegisterComposable(
-    navigateToParentLoginScreen: () -> Unit
+    navigateToTeacherParentLoginScreen: () -> Unit
 ) {
     composable(
         route = PARENT_REGISTER_SCREEN
     ) {
         ParentRegisterScreen(
-            navigateToParentLoginScreen = navigateToParentLoginScreen
+            navigateToTeacherParentLoginScreen = navigateToTeacherParentLoginScreen
         )
     }
 }

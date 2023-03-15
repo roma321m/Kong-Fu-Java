@@ -21,7 +21,7 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 
 //FIXME need to know which user in this page? (parent or teacher)
 @Composable
-fun RegisterScreenContent(navigateToTeacherLoginScreen: () -> Unit) {
+fun RegisterScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
     Column(
         modifier = Modifier
             .padding(MaterialTheme.spacing.large)
@@ -55,7 +55,7 @@ fun RegisterScreenContent(navigateToTeacherLoginScreen: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             RegisterScreenContentTextFields(
-                navigateToTeacherLoginScreen = navigateToTeacherLoginScreen
+                navigateToTeacherParentLoginScreen = navigateToTeacherParentLoginScreen
             )
         }
 
@@ -102,7 +102,7 @@ fun RegisterScreenContentTexts() {
 
 @Composable
 fun RegisterScreenContentTextFields(
-    navigateToTeacherLoginScreen: () -> Unit
+    navigateToTeacherParentLoginScreen: () -> Unit
 ) {
 
     TextFieldWithIcons(label = R.string.register_email, placeholder = R.string.register_enter_email, icon = Icons.Default.Email)
@@ -123,7 +123,7 @@ fun RegisterScreenContentTextFields(
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
         onClick = {
-            navigateToTeacherLoginScreen()
+            navigateToTeacherParentLoginScreen()
         }
     ) {
         Text(text = stringResource(id = R.string.register).uppercase())

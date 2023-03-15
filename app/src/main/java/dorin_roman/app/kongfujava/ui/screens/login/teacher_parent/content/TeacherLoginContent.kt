@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.login.teacher.content
+package dorin_roman.app.kongfujava.ui.screens.login.teacher_parent.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -16,13 +16,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.spacing
+import dorin_roman.app.kongfujava.util.UserType
 
 
 @Composable
 fun TeacherLoginScreenContent(
     navigateToMainScreen: () -> Unit,
     navigateToTeacherRegisterScreen: () -> Unit,
-    onLoginClicked: () -> Unit
+    navigateToParentRegisterScreen: () -> Unit,
+    onLoginClicked: () -> Unit,
+    userType: Int
 ) {
     Row(
         modifier = Modifier
@@ -63,7 +66,9 @@ fun TeacherLoginScreenContent(
             TeacherLoginScreenContentTextButton(
                 navigateToMainScreen = navigateToMainScreen,
                 navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen,
-                onLoginClicked = onLoginClicked
+                navigateToParentRegisterScreen = navigateToParentRegisterScreen,
+                onLoginClicked = onLoginClicked,
+                userType = userType
             )
         }
 
@@ -101,7 +106,9 @@ fun TeacherLoginScreenContentTexts() {
 fun TeacherLoginScreenContentTextButton(
     navigateToMainScreen: () -> Unit,
     navigateToTeacherRegisterScreen: () -> Unit,
-    onLoginClicked: () -> Unit
+    navigateToParentRegisterScreen: () -> Unit,
+    onLoginClicked: () -> Unit,
+    userType: Int
 ) {
 
     Text(
@@ -153,7 +160,11 @@ fun TeacherLoginScreenContentTextButton(
         modifier = Modifier
             .fillMaxWidth(0.6f),
         onClick = {
-            navigateToTeacherRegisterScreen()
+            if (userType == UserType.Teacher.ordinal) {
+                navigateToTeacherRegisterScreen()
+            } else if (userType == UserType.Parent.ordinal) {
+                navigateToParentRegisterScreen()
+            }
         }
     ) {
         Text(text = stringResource(id = R.string.login_create_account).uppercase())

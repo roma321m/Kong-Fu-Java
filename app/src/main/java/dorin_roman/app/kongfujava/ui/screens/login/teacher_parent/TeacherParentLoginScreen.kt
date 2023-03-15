@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.login.teacher
+package dorin_roman.app.kongfujava.ui.screens.login.teacher_parent
 
 
 import androidx.compose.runtime.Composable
@@ -7,26 +7,30 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.HorizontalFortySixtyLayout
 import dorin_roman.app.kongfujava.ui.components.SideScreenImage
-import dorin_roman.app.kongfujava.ui.screens.login.teacher.content.TeacherLoginScreenContent
+import dorin_roman.app.kongfujava.ui.screens.login.teacher_parent.content.TeacherLoginScreenContent
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.view_models.MainEvent
 import dorin_roman.app.kongfujava.view_models.MainViewModel
 
 //FIXME need to check if the size are good
 @Composable
-fun TeacherLoginScreen(
+fun TeacherParentLoginScreen(
     navigateToMainScreen: () -> Unit,
     navigateToTeacherRegisterScreen: () -> Unit,
-    mainViewModel: MainViewModel
+    navigateToParentRegisterScreen: () -> Unit,
+    mainViewModel: MainViewModel,
+    userType: Int
 ) {
     HorizontalFortySixtyLayout(
         fortyLayout = {
             TeacherLoginScreenContent(
                 navigateToMainScreen = navigateToMainScreen,
                 navigateToTeacherRegisterScreen = navigateToTeacherRegisterScreen,
+                navigateToParentRegisterScreen = navigateToParentRegisterScreen,
                 onLoginClicked = {
                     mainViewModel.handle(MainEvent.Teacher) // FIXME - temp, handle login instead of this
-                }
+                },
+                userType = userType
             )
         },
         sixtyLayout = {
@@ -39,6 +43,6 @@ fun TeacherLoginScreen(
 @Composable
 fun TeacherLoginScreenPreview() {
     KongFuJavaTheme {
-        TeacherLoginScreen({}, {}, viewModel())
+        TeacherParentLoginScreen({}, {}, {}, viewModel(), 0)
     }
 }

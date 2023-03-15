@@ -36,25 +36,21 @@ fun MainNavigation(
             navigateToLoginScreen = screen.navigateToLoginScreen
         )
         teacherRegisterComposable(
-            navigateToTeacherLoginScreen = screen.navigateToTeacherLoginScreen
+            navigateToTeacherParentLoginScreen = screen.navigateToTeacherParentLoginScreen
         )
         parentRegisterComposable(
-            navigateToParentLoginScreen = screen.navigateToParentLoginScreen
+            navigateToTeacherParentLoginScreen = screen.navigateToTeacherParentLoginScreen
         )
-        teacherLoginComposable(
+        teacherParentLoginComposable(
             navigateToMainScreen = screen.navigateToMainScreen,
             navigateToTeacherRegisterScreen = screen.navigateToTeacherRegisterScreen,
+            navigateToParentRegisterScreen = screen.navigateToParentRegisterScreen,
             mainViewModel = mainViewModel
         )
         childLoginComposable(
             navigateToMainScreen = screen.navigateToMainScreen,
             mainViewModel = mainViewModel,
             childLoginContentViewModel = childLoginContentViewModel
-        )
-        parentLoginComposable(
-            navigateToMainScreen = screen.navigateToMainScreen,
-            navigateToParentRegisterScreen = screen.navigateToParentRegisterScreen,
-            mainViewModel = mainViewModel
         )
         mainComposable(
             mainViewModel = mainViewModel
