@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.worlds
+package dorin_roman.app.kongfujava.ui.screens.level.levels
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,18 +15,29 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 
 @Composable
-fun WorldsScreen(
-    navigateToLevel: () -> Unit,
+fun LevelsScreen(
+    navigateToTutorialLevel: () -> Unit,
+    navigateToMultiChoiceLevel: () -> Unit,
+    navigateToDragDropLevel: () -> Unit,
 ) {
     // fixme - temp
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Worlds Screen")
         Spacer(modifier = Modifier.padding(10.dp))
-        Button(onClick = navigateToLevel) {
-            Text(text = "Levels")
+        Text(text = "levels screen")
+        Spacer(modifier = Modifier.padding(10.dp))
+        Button(onClick = navigateToTutorialLevel) {
+            Text(text = "Tutorial Level")
+        }
+        Spacer(modifier = Modifier.padding(10.dp))
+        Button(onClick = navigateToMultiChoiceLevel) {
+            Text(text = "Multi Choice Level")
+        }
+        Spacer(modifier = Modifier.padding(10.dp))
+        Button(onClick = navigateToDragDropLevel) {
+            Text(text = "Drag Drop Level")
         }
     }
 }
@@ -35,6 +46,6 @@ fun WorldsScreen(
 @Composable
 fun WorldsScreenPreview() {
     KongFuJavaTheme {
-        WorldsScreen({})
+        LevelsScreen({}, {}, {})
     }
 }

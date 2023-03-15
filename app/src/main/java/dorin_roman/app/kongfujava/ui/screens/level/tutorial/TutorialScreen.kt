@@ -1,10 +1,9 @@
-package dorin_roman.app.kongfujava.ui.screens.worlds
+package dorin_roman.app.kongfujava.ui.screens.level.tutorial
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,19 +14,15 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 
 @Composable
-fun WorldsScreen(
-    navigateToLevel: () -> Unit,
-) {
+fun TutorialScreen() {
     // fixme - temp
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Worlds Screen")
         Spacer(modifier = Modifier.padding(10.dp))
-        Button(onClick = navigateToLevel) {
-            Text(text = "Levels")
-        }
+        Text(text = "Tutorial Screen")
+        Spacer(modifier = Modifier.padding(10.dp))
     }
 }
 
@@ -35,6 +30,6 @@ fun WorldsScreen(
 @Composable
 fun WorldsScreenPreview() {
     KongFuJavaTheme {
-        WorldsScreen({})
+        TutorialScreen()
     }
 }

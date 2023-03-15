@@ -5,8 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
-import dorin_roman.app.kongfujava.navigation.Screens.Companion.SPLASH_SCREEN
 import dorin_roman.app.kongfujava.navigation.main_destination.*
+import dorin_roman.app.kongfujava.navigation.screens.GeneralScreens
+import dorin_roman.app.kongfujava.navigation.screens.GeneralScreens.Companion.SPLASH_SCREEN
 import dorin_roman.app.kongfujava.view_models.ChildLoginContentViewModel
 import dorin_roman.app.kongfujava.view_models.MainViewModel
 
@@ -21,7 +22,7 @@ fun MainNavigation(
     childLoginContentViewModel: ChildLoginContentViewModel
 ) {
     val screen = remember(navController) {
-        Screens(navController = navController)
+        GeneralScreens(navController = navController)
     }
 
     AnimatedNavHost(

@@ -6,16 +6,14 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import dorin_roman.app.kongfujava.navigation.CHILD_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
-import dorin_roman.app.kongfujava.navigation.screens.ChildScreens.Companion.WORLDS_SCREEN
-import dorin_roman.app.kongfujava.ui.screens.worlds.WorldsScreen
+import dorin_roman.app.kongfujava.navigation.screens.ChildScreens.Companion.DRAG_DROP_LEVEL_SCREEN
+import dorin_roman.app.kongfujava.ui.screens.level.drag_drop.DragDropScreen
 
 
 @ExperimentalAnimationApi
-fun NavGraphBuilder.worldsComposable(
-    navigateToLevel: () -> Unit
-) {
+fun NavGraphBuilder.dragDropLevelComposable() {
     composable(
-        route = WORLDS_SCREEN,
+        route = DRAG_DROP_LEVEL_SCREEN,
         enterTransition = {
             slideInHorizontally(
                 animationSpec = tween(
@@ -25,8 +23,6 @@ fun NavGraphBuilder.worldsComposable(
             )
         }
     ) {
-        WorldsScreen(
-            navigateToLevel = navigateToLevel
-        )
+        DragDropScreen()
     }
 }
