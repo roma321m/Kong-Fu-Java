@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.screens.register.teacher.content
+package dorin_roman.app.kongfujava.ui.screens.register.parent.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,9 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
-//FIXME need to know which user in this page? (parent or teacher)
 @Composable
-fun RegisterScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
+fun RegisterParentScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
     Column(
         modifier = Modifier
             .padding(MaterialTheme.spacing.large)
@@ -34,7 +33,7 @@ fun RegisterScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
         )
 
         Box(modifier = Modifier.weight(0.2f)) {
-            RegisterScreenContentImage()
+            RegisterParentScreenContentImage()
         }
 
         Column(
@@ -44,7 +43,7 @@ fun RegisterScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RegisterScreenContentTexts()
+            RegisterParentScreenContentTexts()
         }
 
         Column(
@@ -54,7 +53,7 @@ fun RegisterScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RegisterScreenContentTextFields(
+            RegisterParentScreenContentTextFields(
                 navigateToTeacherParentLoginScreen = navigateToTeacherParentLoginScreen
             )
         }
@@ -68,7 +67,7 @@ fun RegisterScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
 }
 
 @Composable
-fun RegisterScreenContentImage() {
+fun RegisterParentScreenContentImage() {
     Image(
         modifier = Modifier
             .fillMaxSize(),
@@ -78,7 +77,7 @@ fun RegisterScreenContentImage() {
 }
 
 @Composable
-fun RegisterScreenContentTexts() {
+fun RegisterParentScreenContentTexts() {
 
     Text(
         modifier = Modifier
@@ -101,21 +100,30 @@ fun RegisterScreenContentTexts() {
 }
 
 @Composable
-fun RegisterScreenContentTextFields(
+fun RegisterParentScreenContentTextFields(
     navigateToTeacherParentLoginScreen: () -> Unit
 ) {
 
-    TextFieldWithIcons(label = R.string.register_email, placeholder = R.string.register_enter_email, icon = Icons.Default.Email)
+    ParentTextFieldWithIcons(
+        label = R.string.register_email,
+        placeholder = R.string.register_enter_email,
+        icon = Icons.Default.Email)
 
-    TextFieldWithIcons(
+    ParentTextFieldWithIcons(
         label = R.string.register_password,
         placeholder = R.string.register_enter_password,
         icon = Icons.Default.VisibilityOff
     )
 
-    TextFieldWithIcons(label = R.string.register_class, placeholder = R.string.register_enter_class, icon = Icons.Default.LocalLibrary)
+    ParentTextFieldWithIcons(
+        label = R.string.register_class,
+        placeholder = R.string.register_enter_class,
+        icon = Icons.Default.LocalLibrary)
 
-    TextFieldWithIcons(label = R.string.register_education, placeholder = R.string.register_enter_education, icon = Icons.Default.School)
+    ParentTextFieldWithIcons(
+        label = R.string.register_education,
+        placeholder = R.string.register_enter_education,
+        icon = Icons.Default.School)
 
 
     Button(
@@ -133,7 +141,7 @@ fun RegisterScreenContentTextFields(
 
 
 @Composable
-fun TextFieldWithIcons(label: Int, placeholder: Int, icon: ImageVector) {
+fun ParentTextFieldWithIcons(label: Int, placeholder: Int, icon: ImageVector) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
     OutlinedTextField(
         value = text,
