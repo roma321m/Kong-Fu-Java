@@ -115,17 +115,6 @@ fun RegisterParentScreenContentTextFields(
         icon = Icons.Default.VisibilityOff
     )
 
-    ParentTextFieldWithIcons(
-        label = R.string.register_class,
-        placeholder = R.string.register_enter_class,
-        icon = Icons.Default.LocalLibrary)
-
-    ParentTextFieldWithIcons(
-        label = R.string.register_education,
-        placeholder = R.string.register_enter_education,
-        icon = Icons.Default.School)
-
-
     Button(
         modifier = Modifier
             .fillMaxWidth(0.6f)
