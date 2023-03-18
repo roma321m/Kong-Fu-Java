@@ -23,7 +23,7 @@
     <string name="login">Login</string>
     <string name="login_student_code">Student Code</string>
     <string name="login_enter_student_code">Enter your student code</string>
-    <string name="login_create_account">Create new account</string>
+    <string name="login_create_account">Are you not registered? Create a new account</string>
     <string name="login_student_name">Student Name</string>
     <string name="login_enter_student_name">Enter Student Name</string>
     <string name="login_student_age">Student Age</string>

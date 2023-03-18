@@ -50,6 +50,7 @@ val greenColor3 = Color(0xff5d9a3c)
 val greenColor4 = Color(0xff6cb451)
 val greenColor5 = Color(0xffccfcb4)
 val redColor1 = Color(0xffa84552)
+val yellowColor = Color(0xFFFFCA2B)
 
 
 val LightGray = Color(0xFFFCFCFC)
