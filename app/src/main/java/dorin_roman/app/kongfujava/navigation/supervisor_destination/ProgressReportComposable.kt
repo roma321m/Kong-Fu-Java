@@ -7,7 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import dorin_roman.app.kongfujava.navigation.SUPERVISOR_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.navigation.screens.SupervisorScreens.Companion.PROGRESS_REPORT_SCREEN
-import dorin_roman.app.kongfujava.ui.screens.progress_report.ProgressReportScreen
+import dorin_roman.app.kongfujava.screens.progress_report.ProgressReportScreen
 
 
 @ExperimentalAnimationApi

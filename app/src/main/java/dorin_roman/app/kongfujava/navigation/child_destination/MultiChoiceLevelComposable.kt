@@ -7,7 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import dorin_roman.app.kongfujava.navigation.CHILD_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.navigation.screens.ChildScreens.Companion.MULTI_CHOICE_LEVEL_SCREEN
-import dorin_roman.app.kongfujava.ui.screens.level.multi_choice.MultiChoiceScreen
+import dorin_roman.app.kongfujava.screens.level.multi_choice.MultiChoiceScreen
 
 
 @ExperimentalAnimationApi

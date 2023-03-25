@@ -11,7 +11,7 @@ import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.navigation.MAIN_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.navigation.screens.GeneralScreens.Companion.SUPERVISOR_LOGIN_SCREEN
 import dorin_roman.app.kongfujava.navigation.screens.GeneralScreens.Companion.USER_TYPE_SCREEN
-import dorin_roman.app.kongfujava.ui.screens.login.supervisor.SupervisorLoginScreen
+import dorin_roman.app.kongfujava.screens.login.supervisor.SupervisorLoginScreen
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.supervisorLoginComposable(

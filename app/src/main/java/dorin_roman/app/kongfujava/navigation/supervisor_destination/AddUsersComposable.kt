@@ -7,7 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import dorin_roman.app.kongfujava.navigation.SUPERVISOR_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS
 import dorin_roman.app.kongfujava.navigation.screens.SupervisorScreens.Companion.ADD_USERS_SCREEN
-import dorin_roman.app.kongfujava.ui.screens.add_users.AddUsersScreen
+import dorin_roman.app.kongfujava.screens.add_users.AddUsersScreen
 
 
 @ExperimentalAnimationApi
