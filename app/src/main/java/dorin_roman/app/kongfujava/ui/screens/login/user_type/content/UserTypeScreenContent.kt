@@ -15,8 +15,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.ui.theme.spacing
-import dorin_roman.app.kongfujava.util.UserType
 
 @Composable
 fun UserTypeScreenContent(navigateToLoginScreen: (UserType) -> Unit) {

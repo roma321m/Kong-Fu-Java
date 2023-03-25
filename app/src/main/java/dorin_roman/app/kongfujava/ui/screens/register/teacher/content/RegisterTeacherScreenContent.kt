@@ -17,10 +17,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
-fun RegisterTeacherScreenContent(navigateToTeacherParentLoginScreen: () -> Unit) {
+fun RegisterTeacherScreenContent(
+    navigateToSupervisorLoginScreen: (userType: UserType) -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(MaterialTheme.spacing.large)
@@ -54,7 +57,7 @@ fun RegisterTeacherScreenContent(navigateToTeacherParentLoginScreen: () -> Unit)
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             RegisterTeacherScreenContentTextFields(
-                navigateToTeacherParentLoginScreen = navigateToTeacherParentLoginScreen
+                navigateToSupervisorLoginScreen = navigateToSupervisorLoginScreen
             )
         }
 
@@ -101,7 +104,7 @@ fun RegisterScreenContentTexts() {
 
 @Composable
 fun RegisterTeacherScreenContentTextFields(
-    navigateToTeacherParentLoginScreen: () -> Unit
+    navigateToSupervisorLoginScreen: (userType: UserType) -> Unit
 ) {
 
     TeacherTextFieldWithIcons(
@@ -131,7 +134,7 @@ fun RegisterTeacherScreenContentTextFields(
             .fillMaxWidth(0.6f)
             .padding(MaterialTheme.spacing.medium),
         onClick = {
-            navigateToTeacherParentLoginScreen()
+            navigateToSupervisorLoginScreen(UserType.Teacher)
         }
     ) {
         Text(text = stringResource(id = R.string.register).uppercase())

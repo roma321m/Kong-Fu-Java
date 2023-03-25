@@ -30,4 +30,11 @@
     <string name="next">Next</string>
     <string name="worlds_map">Worlds Map</string>
     <string name="back_button">Back Button</string>
+    <string name="verification_email_sent">We\'ve sent you a verification email, please verify</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="email_verified">Your email was verified successfully</string>
+    <string name="verify_email">Please verify your email first</string>
+    <string name="already_verified">Already Verified</string>
+    <string name="we_sent_verification_email">We have sent you an verification email, please verify</string>
+    <string name="login_successfully">Login Successfully</string>
 </resources>

@@ -1,7 +1,7 @@
 package dorin_roman.app.kongfujava.navigation.screens
 
 import androidx.navigation.NavController
-import dorin_roman.app.kongfujava.util.UserType
+import dorin_roman.app.kongfujava.data.models.UserType
 
 class GeneralScreens(navController: NavController) {
 
@@ -11,8 +11,7 @@ class GeneralScreens(navController: NavController) {
         const val PARENT_REGISTER_SCREEN = "parent_register"
         const val USER_TYPE_SCREEN = "user_type"
         const val CHILD_LOGIN_SCREEN = "child_login"
-        const val TEACHER_PARENT_LOGIN_SCREEN = "teacher_parent_login/{user_type}"
-        const val MAIN_SCREEN = "main"
+        const val SUPERVISOR_LOGIN_SCREEN = "supervisor_login/{user_type}"
     }
 
     val navigateToUserTypeScreen: () -> Unit = {
@@ -23,8 +22,8 @@ class GeneralScreens(navController: NavController) {
         }
     }
 
-    val navigateToTeacherParentLoginScreen: () -> Unit = {
-        navController.navigate(route = TEACHER_PARENT_LOGIN_SCREEN)
+    val navigateToSupervisorLoginScreen: (UserType) -> Unit = { userType ->
+        navController.navigate(route = "supervisor_login/${userType.ordinal}")
     }
 
     val navigateToTeacherRegisterScreen: () -> Unit = {
@@ -37,17 +36,10 @@ class GeneralScreens(navController: NavController) {
 
     val navigateToLoginScreen: (UserType) -> Unit = { userType ->
         when (userType) {
-            UserType.Teacher -> navController.navigate(route = "teacher_parent_login/${userType.ordinal}")
+            UserType.Teacher -> navController.navigate(route = "supervisor_login/${userType.ordinal}")
             UserType.Child -> navController.navigate(route = CHILD_LOGIN_SCREEN)
-            UserType.Parent -> navController.navigate(route = "teacher_parent_login/${userType.ordinal}")
-        }
-    }
-
-    val navigateToMainScreen: () -> Unit = {
-        navController.navigate(route = MAIN_SCREEN) {
-            popUpTo(USER_TYPE_SCREEN) {
-                inclusive = true
-            }
+            UserType.Parent -> navController.navigate(route = "supervisor_login/${userType.ordinal}")
+            UserType.None -> {}
         }
     }
 

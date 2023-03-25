@@ -8,8 +8,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import dorin_roman.app.kongfujava.navigation.main_destination.*
 import dorin_roman.app.kongfujava.navigation.screens.GeneralScreens
 import dorin_roman.app.kongfujava.navigation.screens.GeneralScreens.Companion.SPLASH_SCREEN
-import dorin_roman.app.kongfujava.view_models.ChildLoginContentViewModel
-import dorin_roman.app.kongfujava.view_models.MainViewModel
+
 
 const val MAIN_EXIT_NAVIGATION_ANIMATION_TIME_MILLIS = 500
 const val MAIN_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS = 300
@@ -17,9 +16,7 @@ const val MAIN_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS = 300
 @ExperimentalAnimationApi
 @Composable
 fun MainNavigation(
-    navController: NavHostController,
-    mainViewModel: MainViewModel,
-    childLoginContentViewModel: ChildLoginContentViewModel
+    navController: NavHostController
 ) {
     val screen = remember(navController) {
         GeneralScreens(navController = navController)
@@ -36,24 +33,15 @@ fun MainNavigation(
             navigateToLoginScreen = screen.navigateToLoginScreen
         )
         teacherRegisterComposable(
-            navigateToTeacherParentLoginScreen = screen.navigateToTeacherParentLoginScreen
+            navigateToSupervisorLoginScreen = screen.navigateToSupervisorLoginScreen
         )
         parentRegisterComposable(
-            navigateToTeacherParentLoginScreen = screen.navigateToTeacherParentLoginScreen
+            navigateToSupervisorLoginScreen = screen.navigateToSupervisorLoginScreen
         )
-        teacherParentLoginComposable(
-            navigateToMainScreen = screen.navigateToMainScreen,
+        supervisorLoginComposable(
             navigateToTeacherRegisterScreen = screen.navigateToTeacherRegisterScreen,
-            navigateToParentRegisterScreen = screen.navigateToParentRegisterScreen,
-            mainViewModel = mainViewModel
+            navigateToParentRegisterScreen = screen.navigateToParentRegisterScreen
         )
-        childLoginComposable(
-            navigateToMainScreen = screen.navigateToMainScreen,
-            mainViewModel = mainViewModel,
-            childLoginContentViewModel = childLoginContentViewModel
-        )
-        mainComposable(
-            mainViewModel = mainViewModel
-        )
+        childLoginComposable()
     }
 }

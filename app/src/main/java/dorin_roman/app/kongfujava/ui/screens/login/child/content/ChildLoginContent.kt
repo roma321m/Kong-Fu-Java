@@ -21,17 +21,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.screens.login.child.ChildLoginViewModel
 import dorin_roman.app.kongfujava.ui.theme.purpleColor1
 import dorin_roman.app.kongfujava.ui.theme.redColor1
 import dorin_roman.app.kongfujava.ui.theme.spacing
-import dorin_roman.app.kongfujava.view_models.ChildLoginContentViewModel
 
 
 @Composable
 fun ChildLoginScreenContent(
-    navigateToMainScreen: () -> Unit,
     onLoginClicked: () -> Unit,
-    childLoginContentViewModel: ChildLoginContentViewModel
+    childLoginViewModel: ChildLoginViewModel
 ) {
     Row(
         modifier = Modifier
@@ -80,17 +79,16 @@ fun ChildLoginScreenContent(
             )
 
             ChildLoginScreenStudentAge(
-                navigateToMainScreen = navigateToMainScreen,
                 onLoginClicked = onLoginClicked,
-                childLoginContentViewModel = childLoginContentViewModel
+                childLoginViewModel = childLoginViewModel
             )
 
             ChildLoginScreenStudentName(
-                childLoginContentViewModel = childLoginContentViewModel
+                childLoginViewModel = childLoginViewModel
             )
 
             ChildLoginScreenStudentCode(
-                childLoginContentViewModel = childLoginContentViewModel
+                childLoginViewModel = childLoginViewModel
             )
         }
 
@@ -126,13 +124,13 @@ fun ChildLoginScreenContentTexts() {
 
 @Composable
 fun ChildLoginScreenStudentCode(
-    childLoginContentViewModel: ChildLoginContentViewModel
+    childLoginViewModel: ChildLoginViewModel
 ) {
 
     var studentCode by remember { mutableStateOf(TextFieldValue("")) }
 
     AnimatedVisibility(
-        visible = childLoginContentViewModel.studentCodeVisible,
+        visible = childLoginViewModel.studentCodeVisible,
         exit = slideOutHorizontally(
             targetOffsetX = { it * 2 },
             animationSpec = tween(
@@ -170,7 +168,7 @@ fun ChildLoginScreenStudentCode(
                     .fillMaxWidth(0.6f)
                     .padding(MaterialTheme.spacing.medium),
                 onClick = {
-                    childLoginContentViewModel.handle(ChildLoginContentEvent.EnterStudentCode(studentCode.text))
+                    childLoginViewModel.handle(ChildLoginContentEvent.EnterStudentCode(studentCode.text))
                 }
             ) {
                 Text(text = stringResource(id = R.string.next).uppercase())
@@ -182,13 +180,13 @@ fun ChildLoginScreenStudentCode(
 
 @Composable
 fun ChildLoginScreenStudentName(
-    childLoginContentViewModel: ChildLoginContentViewModel
+    childLoginViewModel: ChildLoginViewModel
 ) {
 
     var studentName by remember { mutableStateOf(TextFieldValue("")) }
 
     AnimatedVisibility(
-        visible = childLoginContentViewModel.studentNameVisible,
+        visible = childLoginViewModel.studentNameVisible,
         exit = slideOutHorizontally(
             targetOffsetX = { it * 2 },
             animationSpec = tween(
@@ -226,7 +224,7 @@ fun ChildLoginScreenStudentName(
                     .fillMaxWidth(0.6f)
                     .padding(MaterialTheme.spacing.medium),
                 onClick = {
-                    childLoginContentViewModel.handle(ChildLoginContentEvent.EnterStudentName(studentName.text))
+                    childLoginViewModel.handle(ChildLoginContentEvent.EnterStudentName(studentName.text))
                 }
             ) {
                 Text(text = stringResource(id = R.string.next).uppercase())
@@ -239,9 +237,8 @@ fun ChildLoginScreenStudentName(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ChildLoginScreenStudentAge(
-    navigateToMainScreen: () -> Unit,
     onLoginClicked: () -> Unit,
-    childLoginContentViewModel: ChildLoginContentViewModel
+    childLoginViewModel: ChildLoginViewModel
 ) {
     val listItems = arrayOf("9", "10", "11", "12", "13", "14")
 
@@ -257,7 +254,7 @@ fun ChildLoginScreenStudentAge(
 
 
     AnimatedVisibility(
-        visible = childLoginContentViewModel.studentAgeVisible,
+        visible = childLoginViewModel.studentAgeVisible,
         exit = slideOutHorizontally(
             targetOffsetX = { it * 2 },
             animationSpec = tween(
@@ -314,9 +311,8 @@ fun ChildLoginScreenStudentAge(
                     .fillMaxWidth(0.6f)
                     .padding(MaterialTheme.spacing.medium),
                 onClick = {
-                    childLoginContentViewModel.handle(ChildLoginContentEvent.EnterStudentAge(selectedItem.toInt()))
+                    childLoginViewModel.handle(ChildLoginContentEvent.EnterStudentAge(selectedItem.toInt()))
                     onLoginClicked()
-                    navigateToMainScreen()
                 }
             ) {
                 Text(text = stringResource(id = R.string.login).uppercase())
@@ -329,6 +325,6 @@ fun ChildLoginScreenStudentAge(
 @Preview
 @Composable
 fun ChildLoginScreenContentPreview() {
-    ChildLoginScreenContent(navigateToMainScreen = {}, onLoginClicked = {}, childLoginContentViewModel = viewModel())
+    ChildLoginScreenContent(onLoginClicked = {}, childLoginViewModel = viewModel())
 }
 

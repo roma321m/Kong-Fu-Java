@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "205863141279",
+    "project_id": "kong-fu-java",
+    "storage_bucket": "kong-fu-java.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205863141279:android:d015c2cf0b1da7fe10c7aa",
+        "android_client_info": {
+          "package_name": "dorin_roman.app.kongfujava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205863141279-pkkmofp6dp25uperv82dlm8i30l7i00d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6KA5lRu8LsvgeIiOsAjL1A8U0f0CknH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205863141279-pkkmofp6dp25uperv82dlm8i30l7i00d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
