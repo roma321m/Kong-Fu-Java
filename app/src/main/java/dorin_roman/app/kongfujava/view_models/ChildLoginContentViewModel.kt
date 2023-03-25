@@ -4,10 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.ui.screens.login.child.content.ChildLoginContentEvent
 import dorin_roman.app.kongfujava.util.LoginStudentContent
 import javax.inject.Inject
 
+@HiltViewModel
 class ChildLoginContentViewModel @Inject constructor() : ViewModel() {
     var studentCode by mutableStateOf("")
         private set
@@ -37,18 +39,18 @@ class ChildLoginContentViewModel @Inject constructor() : ViewModel() {
 
     private fun enterStudentCode(code: String) {
         //TODO ADD CHECK CODE
-        studentCode = if(code.isEmpty()) {
+        studentCode = if (code.isEmpty()) {
             "Enter Code"
-        }else{
+        } else {
             setContentVisible(LoginStudentContent.CODE)
             code
         }
     }
 
     private fun enterStudentName(name: String) {
-        studentName = if(name.isEmpty()) {
+        studentName = if (name.isEmpty()) {
             "Enter Name"
-        }else{
+        } else {
             setContentVisible(LoginStudentContent.NAME)
             name
         }

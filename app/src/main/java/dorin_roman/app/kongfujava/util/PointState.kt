@@ -1,5 +1,5 @@
 package dorin_roman.app.kongfujava.util
 
-enum class LevelState {
+enum class PointState {
     LOCK, ZERO, ONE, TWO, THREE
 }

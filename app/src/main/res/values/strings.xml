@@ -28,4 +28,6 @@
     <string name="login_enter_student_name">Enter Student Name</string>
     <string name="login_student_age">Student Age</string>
     <string name="next">Next</string>
+    <string name="worlds_map">Worlds Map</string>
+    <string name="back_button">Back Button</string>
 </resources>
