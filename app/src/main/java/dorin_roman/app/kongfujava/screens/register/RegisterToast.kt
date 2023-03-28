@@ -1,11 +1,11 @@
-package dorin_roman.app.kongfujava.screens.register.parent
+package dorin_roman.app.kongfujava.screens.register
 
 import android.widget.Toast
 import androidx.annotation.StringRes
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.toast.IToast
 
-enum class ParentRegisterToast(
+enum class RegisterToast(
     @StringRes override val text: Int,
     override val duration: Int
 ) : IToast {

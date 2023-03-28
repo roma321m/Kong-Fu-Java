@@ -24,6 +24,8 @@ class SupervisorLoginViewModel @Inject constructor(
     private val toastLauncher: ToastLauncher
 ) : ViewModel() {
 
+    // TODO - add reset password option
+
     companion object {
         const val TAG = "SupervisorLoginViewModel"
     }

@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.register.parent
+package dorin_roman.app.kongfujava.screens.register.teacher
 
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -18,18 +18,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
-class ParentRegisterViewModel @Inject constructor(
+class TeacherRegisterViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val userTypeRepository: UserTypeRepository,
     private val toastLauncher: ToastLauncher
 ) : ViewModel() {
 
-    // TODO - create parent user in the real time database to save user data
+    // TODO - create teacher user in the real time database to save the class and school names
 
     companion object {
-        const val TAG = "ParentRegisterViewModel"
+        const val TAG = "TeacherRegisterViewModel"
     }
 
     init {
@@ -42,14 +41,22 @@ class ParentRegisterViewModel @Inject constructor(
     var showLoading by mutableStateOf(false)
         private set
 
+    var className by mutableStateOf("")
+        private set
+
+    var schoolName by mutableStateOf("")
+        private set
+
     private fun getAuthState() = authRepository.getAuthState(viewModelScope)
 
     private val isEmailVerified get() = authRepository.currentUser?.isEmailVerified ?: false
 
-    fun handle(event: ParentRegisterEvent) {
+    fun handle(event: TeacherRegisterEvent) {
         when (event) {
-            ParentRegisterEvent.ReloadUser -> reloadUser()
-            ParentRegisterEvent.ReloadUserResponse -> handleReloadUserResponse()
+            TeacherRegisterEvent.ReloadUser -> reloadUser()
+            TeacherRegisterEvent.ReloadUserResponse -> handleReloadUserResponse()
+            is TeacherRegisterEvent.UpdateClassText -> updateClassName(event.text)
+            is TeacherRegisterEvent.UpdateSchoolText -> updateSchoolName(event.text)
         }
     }
 
@@ -84,10 +91,20 @@ class ParentRegisterViewModel @Inject constructor(
     }
 
     private fun persistUserType() {
-        Log.d(TAG, "persistUserType - Parent")
+        Log.d(TAG, "persistUserType - Teacher")
         viewModelScope.launch(Dispatchers.IO) {
-            userTypeRepository.persistUserType(UserType.Parent)
+            userTypeRepository.persistUserType(UserType.Teacher)
         }
+    }
+
+    private fun updateClassName(text: String) {
+        Log.d(TAG, "updateClassName")
+        className = text
+    }
+
+    private fun updateSchoolName(text: String) {
+        Log.d(TAG, "updateSchoolName")
+        schoolName = text
     }
 
 }

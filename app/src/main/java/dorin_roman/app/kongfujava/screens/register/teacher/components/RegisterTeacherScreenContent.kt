@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.register.parent.components
+package dorin_roman.app.kongfujava.screens.register.teacher.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -7,13 +7,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.screens.register.RegisterViewModel
-import dorin_roman.app.kongfujava.screens.register.parent.ParentRegisterViewModel
+import dorin_roman.app.kongfujava.screens.register.teacher.TeacherRegisterViewModel
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
-fun RegisterParentScreenContent(
+fun RegisterTeacherScreenContent(
     registerViewModel: RegisterViewModel,
-    parentRegisterViewModel: ParentRegisterViewModel,
+    teacherRegisterViewModel: TeacherRegisterViewModel,
     navigateToSupervisorLoginScreen: (userType: UserType) -> Unit
 ) {
     Column(
@@ -21,10 +21,14 @@ fun RegisterParentScreenContent(
             .padding(MaterialTheme.spacing.large)
             .fillMaxHeight()
     ) {
-        Spacer(Modifier.weight(0.05f))
+        Spacer(
+            modifier = Modifier
+                .weight(0.05f)
+                .fillMaxWidth()
+        )
 
         Box(modifier = Modifier.weight(0.2f)) {
-            RegisterParentScreenContentImage()
+            RegisterTeacherScreenContentImage()
         }
 
         Column(
@@ -34,7 +38,7 @@ fun RegisterParentScreenContent(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RegisterParentScreenContentTexts()
+            RegisterScreenContentTexts()
         }
 
         Column(
@@ -44,10 +48,17 @@ fun RegisterParentScreenContent(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RegisterParentScreenContentTextFields(
+            RegisterTeacherScreenContentTextFields(
                 registerViewModel = registerViewModel,
-                parentRegisterViewModel = parentRegisterViewModel
+                teacherRegisterViewModel = teacherRegisterViewModel,
+                navigateToSupervisorLoginScreen = navigateToSupervisorLoginScreen
             )
         }
+
+        Spacer(
+            modifier = Modifier
+                .weight(0.05f)
+                .fillMaxWidth()
+        )
     }
 }
