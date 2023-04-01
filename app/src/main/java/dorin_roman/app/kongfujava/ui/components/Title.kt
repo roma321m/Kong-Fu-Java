@@ -22,7 +22,7 @@ fun Title(@StringRes id: Int, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(id = id).uppercase(),
-            style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.onBackground)
+            style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.onSecondary)
         )
         Image(
             modifier = Modifier
