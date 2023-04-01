@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState.*
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.*
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.Dispatchers

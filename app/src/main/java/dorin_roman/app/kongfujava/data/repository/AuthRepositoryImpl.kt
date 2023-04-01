@@ -2,9 +2,9 @@ package dorin_roman.app.kongfujava.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState.Failure
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState.Success
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Failure
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Success
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose

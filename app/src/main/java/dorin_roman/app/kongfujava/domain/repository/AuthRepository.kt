@@ -1,7 +1,7 @@
 package dorin_roman.app.kongfujava.domain.repository
 
 import com.google.firebase.auth.FirebaseUser
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 

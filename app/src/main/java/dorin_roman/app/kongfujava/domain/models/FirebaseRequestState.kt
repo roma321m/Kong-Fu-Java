@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.domain.model
+package dorin_roman.app.kongfujava.domain.models
 
 sealed class FirebaseRequestState<out T> {
     object Loading : FirebaseRequestState<Nothing>()

@@ -43,6 +43,10 @@ fun TeacherRegisterScreen(
     LaunchedEffect(teacherRegisterViewModel.reloadUserRequest) {
         teacherRegisterViewModel.handle(TeacherRegisterEvent.ReloadUserResponse)
     }
+
+    LaunchedEffect(teacherRegisterViewModel.saveUserRequest) {
+        teacherRegisterViewModel.handle(TeacherRegisterEvent.SaveUserToDatabaseResponse)
+    }
 }
 
 @DevicePreviews
