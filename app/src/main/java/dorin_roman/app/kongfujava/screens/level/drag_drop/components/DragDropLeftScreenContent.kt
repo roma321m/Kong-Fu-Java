@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 
 @Composable
-fun DragDropLeftScreenContent(){
-    //.padding(top = 20.dp, bottom = 20.dp, start = 50.dp, end = 50.dp)
+fun DragDropLeftScreenContent(dragDropViewModel: DragDropViewModel) {
+
     Surface {
         Column(
             modifier = Modifier
@@ -25,7 +26,7 @@ fun DragDropLeftScreenContent(){
                     .fillMaxWidth()
                     .background(MaterialTheme.colors.background)
             ) {
-                DragDropLeftTopScreenContent()
+                DragDropLeftTopScreenContent(dragDropViewModel)
             }
             Box(
                 modifier = Modifier
@@ -35,7 +36,7 @@ fun DragDropLeftScreenContent(){
                     .background(MaterialTheme.colors.background),
                 contentAlignment = Alignment.Center
             ) {
-                DragDropLeftBottomScreenContent()
+                DragDropLeftBottomScreenContent(dragDropViewModel)
             }
         }
     }

@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.data.models.PointState
+import dorin_roman.app.kongfujava.screens.level.LevelType
 import dorin_roman.app.kongfujava.screens.level.levels.LevelItemModel
 import dorin_roman.app.kongfujava.ui.components.*
 
@@ -139,29 +140,29 @@ fun LevelItemView(
 @Preview(showBackground = true)
 @Composable
 fun LevelItemViewLockPreview() {
-    LevelItemView(levelItemModel = LevelItemModel(PointState.LOCK, 1, 100))
+    LevelItemView(levelItemModel = LevelItemModel(PointState.LOCK, 1, 100, LevelType.TUTORIAL,"", listOf()))
 }
 
 @Preview(showBackground = true)
 @Composable
 fun LevelItemViewZeroPreview() {
-    LevelItemView(levelItemModel = LevelItemModel(PointState.ZERO, 1, 100))
+    LevelItemView(levelItemModel = LevelItemModel(PointState.ZERO, 1, 100, LevelType.TUTORIAL,"", listOf()))
 }
 
 @Preview(showBackground = true)
 @Composable
 fun LevelItemViewOnePreview() {
-    LevelItemView(levelItemModel = LevelItemModel(PointState.ONE, 1, 100))
+    LevelItemView(levelItemModel = LevelItemModel(PointState.ONE, 1, 100, LevelType.TUTORIAL,"", listOf()))
 }
 
 @Preview(showBackground = true)
 @Composable
 fun LevelItemViewTwoPreview() {
-    LevelItemView(levelItemModel = LevelItemModel(PointState.TWO, 1, 100))
+    LevelItemView(levelItemModel = LevelItemModel(PointState.TWO, 1, 100, LevelType.TUTORIAL,"", listOf()))
 }
 
 @Preview(showBackground = true)
 @Composable
 fun LevelItemViewThreePreview() {
-    LevelItemView(levelItemModel = LevelItemModel(PointState.THREE, 1, 100))
+    LevelItemView(levelItemModel = LevelItemModel(PointState.THREE, 1, 100, LevelType.TUTORIAL,"", listOf()))
 }

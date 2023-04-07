@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceScreenContent
 import dorin_roman.app.kongfujava.ui.components.*
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
-fun MultiChoiceScreen() {
+fun MultiChoiceScreen(
+    multiChoiceViewModel: MultiChoiceViewModel = hiltViewModel()
+) {
     Scaffold(
         topBar = {
             TopBar(onBackPressed = {}, title = R.string.multi_choice_questions)

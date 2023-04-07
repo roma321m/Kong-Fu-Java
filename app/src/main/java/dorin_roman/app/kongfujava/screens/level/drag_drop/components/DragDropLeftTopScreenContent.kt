@@ -10,10 +10,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
-fun DragDropLeftTopScreenContent() {
+fun DragDropLeftTopScreenContent(dragDropViewModel: DragDropViewModel) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()

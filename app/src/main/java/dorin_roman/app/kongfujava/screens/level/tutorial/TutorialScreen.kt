@@ -6,13 +6,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialScreenContent
 import dorin_roman.app.kongfujava.ui.components.*
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
-fun TutorialScreen() {
+fun TutorialScreen(
+    tutorialViewModel: TutorialViewModel = hiltViewModel()
+) {
     // fixme - temp
     Scaffold(
         topBar = {
