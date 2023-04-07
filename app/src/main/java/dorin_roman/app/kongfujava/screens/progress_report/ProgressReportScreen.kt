@@ -1,35 +1,62 @@
 package dorin_roman.app.kongfujava.screens.progress_report
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.unit.dp
+import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.screens.progress_report.components.content.ProgressReportContent
+import dorin_roman.app.kongfujava.screens.progress_report.components.drawer.ProgressReportDrawer
+import dorin_roman.app.kongfujava.screens.progress_report.components.drawer.ProgressReportDrawerShape
+import dorin_roman.app.kongfujava.screens.progress_report.components.top_bar.ProgressReportTopBar
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProgressReportScreen(
     navigateToAddUsers: () -> Unit,
 ) {
-    // fixme - temp
-    Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.padding(10.dp))
-        Text(text = "Progress Report Screen")
-        Spacer(modifier = Modifier.padding(10.dp))
-        Button(onClick = navigateToAddUsers) {
-            Text(text = "Add users")
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            ProgressReportTopBar(
+                title = R.string.progress_report,
+                onOpenDrawer = {
+                    coroutineScope.launch { scaffoldState.drawerState.open() }
+                },
+                onLogOutClicked = {
+                    // todo - viewModel handle
+                },
+                onRevokeAccessClicked = {
+                    // todo - viewModel handle
+                }
+            )
+        },
+        drawerContent = {
+            ProgressReportDrawer(
+                // fixme - temp list - viewModel
+                studentsModelList = listOf(
+                    StudentModel("id1", "Roman Michailov"),
+                    StudentModel("id2", "Dorin Dosman")
+                ),
+                scaffoldState = scaffoldState,
+                coroutineScope = coroutineScope
+            )
+        },
+        drawerShape = ProgressReportDrawerShape(0.dp, 0.41f),
+        drawerGesturesEnabled = true,
+        content = { paddingValues ->
+            ProgressReportContent(
+                navigateToAddUsers = navigateToAddUsers,
+                paddingValues = paddingValues
+            )
         }
-        Spacer(modifier = Modifier.padding(10.dp))
-    }
+    )
 }
 
 @DevicePreviews

@@ -9,10 +9,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
+import dorin_roman.app.kongfujava.domain.models.users.Teacher
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
+import dorin_roman.app.kongfujava.domain.repository.UsersRepository
 import dorin_roman.app.kongfujava.screens.register.RegisterToast
-import dorin_roman.app.kongfujava.screens.register.RegisterViewModel
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,11 +22,10 @@ import javax.inject.Inject
 @HiltViewModel
 class TeacherRegisterViewModel @Inject constructor(
     private val authRepository: AuthRepository,
+    private val usersRepository: UsersRepository,
     private val userTypeRepository: UserTypeRepository,
     private val toastLauncher: ToastLauncher
 ) : ViewModel() {
-
-    // TODO - create teacher user in the real time database to save the class and school names
 
     companion object {
         const val TAG = "TeacherRegisterViewModel"
@@ -35,7 +35,18 @@ class TeacherRegisterViewModel @Inject constructor(
         getAuthState()
     }
 
-    var reloadUserRequest by mutableStateOf<FirebaseRequestState<Boolean>>(FirebaseRequestState.Success(false))
+    var reloadUserRequest by mutableStateOf<FirebaseRequestState<Boolean>>(
+        FirebaseRequestState.Success(
+            false
+        )
+    )
+        private set
+
+    var saveUserRequest by mutableStateOf<FirebaseRequestState<Boolean>>(
+        FirebaseRequestState.Success(
+            false
+        )
+    )
         private set
 
     var showLoading by mutableStateOf(false)
@@ -50,11 +61,14 @@ class TeacherRegisterViewModel @Inject constructor(
     private fun getAuthState() = authRepository.getAuthState(viewModelScope)
 
     private val isEmailVerified get() = authRepository.currentUser?.isEmailVerified ?: false
+    private val userId get() = authRepository.currentUser?.uid
+    private val userEmail get() = authRepository.currentUser?.email ?: ""
 
     fun handle(event: TeacherRegisterEvent) {
         when (event) {
             TeacherRegisterEvent.ReloadUser -> reloadUser()
             TeacherRegisterEvent.ReloadUserResponse -> handleReloadUserResponse()
+            TeacherRegisterEvent.SaveUserToDatabaseResponse -> handleSaveUserToDatabaseResponse()
             is TeacherRegisterEvent.UpdateClassText -> updateClassName(event.text)
             is TeacherRegisterEvent.UpdateSchoolText -> updateSchoolName(event.text)
         }
@@ -71,11 +85,11 @@ class TeacherRegisterViewModel @Inject constructor(
         when (val reloadResponse = reloadUserRequest) {
             is FirebaseRequestState.Loading -> showLoading = true
             is FirebaseRequestState.Success -> {
+                showLoading = false
                 if (reloadResponse.data) {
-                    showLoading = false
                     if (isEmailVerified) {
                         toastLauncher.launch(RegisterToast.EmailVerified)
-                        persistUserType()
+                        saveUserToDatabase()
                     } else {
                         toastLauncher.launch(RegisterToast.VerifyYourEmail)
                     }
@@ -85,8 +99,38 @@ class TeacherRegisterViewModel @Inject constructor(
                 reloadResponse.apply {
                     showLoading = false
                     toastLauncher.launch(RegisterToast.SomethingWentWrong)
-                    Log.e(RegisterViewModel.TAG, "${e.message}")
+                    Log.e(TAG, "${e.message}")
                 }
+        }
+    }
+
+    private fun handleSaveUserToDatabaseResponse() {
+        Log.d(TAG, "handleSaveUserToDatabaseResponse")
+        when (val saveUserResponse = saveUserRequest) {
+            is FirebaseRequestState.Loading -> showLoading = true
+            is FirebaseRequestState.Success -> {
+                showLoading = false
+                if (saveUserResponse.data) {
+                    persistUserType()
+                }
+            }
+            is FirebaseRequestState.Failure ->
+                saveUserResponse.apply {
+                    showLoading = false
+                    toastLauncher.launch(RegisterToast.SomethingWentWrong)
+                    Log.e(TAG, "${e.message}")
+                }
+        }
+    }
+
+    private fun saveUserToDatabase() = viewModelScope.launch {
+        Log.d(TAG, "saveUserToDatabase")
+        userId?.let { id ->
+            saveUserRequest = FirebaseRequestState.Loading
+            saveUserRequest = usersRepository.createTeacher(
+                id = id,
+                teacher = Teacher(userEmail, className, schoolName)
+            )
         }
     }
 

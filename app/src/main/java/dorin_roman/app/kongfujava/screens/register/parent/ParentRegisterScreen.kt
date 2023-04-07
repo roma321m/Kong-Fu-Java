@@ -43,6 +43,10 @@ fun ParentRegisterScreen(
     LaunchedEffect(parentRegisterViewModel.reloadUserRequest) {
         parentRegisterViewModel.handle(ParentRegisterEvent.ReloadUserResponse)
     }
+
+    LaunchedEffect(parentRegisterViewModel.saveUserRequest) {
+        parentRegisterViewModel.handle(ParentRegisterEvent.SaveUserToDatabaseResponse)
+    }
 }
 
 @DevicePreviews

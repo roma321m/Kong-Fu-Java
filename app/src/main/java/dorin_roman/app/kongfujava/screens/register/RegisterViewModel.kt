@@ -7,9 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState.Loading
-import dorin_roman.app.kongfujava.domain.model.FirebaseRequestState.Success
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Loading
+import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Success
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.launch
