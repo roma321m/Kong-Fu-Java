@@ -1,5 +1,6 @@
 package dorin_roman.app.kongfujava.ui.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
@@ -17,10 +18,11 @@ import dorin_roman.app.kongfujava.ui.theme.yellowColor
 fun IconLevel(imageVector: ImageVector, tint: Color) {
     Icon(
         imageVector = imageVector,
-        contentDescription = "Lock",
+        contentDescription = "icon",
         tint = tint,
         modifier = Modifier
-            .size(50.dp)
+            .size(70.dp)
+            .padding(5.dp)
     )
 }
 

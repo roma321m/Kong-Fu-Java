@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.worlds.content
+package dorin_roman.app.kongfujava.screens.worlds.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -8,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -17,87 +16,125 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.PointState
-import dorin_roman.app.kongfujava.screens.worlds.WorldItemModel
+import dorin_roman.app.kongfujava.domain.models.World
 import dorin_roman.app.kongfujava.ui.components.*
 
-
 @Composable
-fun WorldsItemView(worldItemModel: WorldItemModel) {
+fun WorldsItemView(world: World, navigateToLevel: () -> Unit) {
+    val modifier = Modifier
+        .size(height = 600.dp, width = 400.dp)
+        .padding(20.dp)
+
     Card(
-        modifier = Modifier.alpha(0.6f),
+        modifier = (if (world.state == PointState.LOCK.ordinal) modifier.alpha(0.6f) else modifier.alpha(1f)),
         elevation = 4.dp,
         shape = RoundedCornerShape(size = 12.dp),
         backgroundColor = MaterialTheme.colors.primary
     ) {
-        Column(
-            modifier = Modifier.padding(all = 20.dp),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally
+        ConstraintLayout(
+            modifier = Modifier.padding(all = 20.dp)
         ) {
+            val (image, title, starts, button) = createRefs()
+
             Image(
                 modifier = Modifier
                     .clip(RoundedCornerShape(50.dp))
-                    .size(height = 100.dp, width = 200.dp),
-                painter = worldItemModel.worldPic,
-                contentDescription = "lucy pic",
+                    .size(height = 200.dp, width = 400.dp)
+                    .constrainAs(image) {
+                        linkTo(start = parent.start, end = parent.end)
+                        top.linkTo(parent.top)
+                    },
+                painter = painterResource(id = getImage(world.id)),
+                contentDescription = world.name,
                 contentScale = ContentScale.Crop
             )
-            Spacer(modifier = Modifier.height(height = 16.dp))
+
             Text(
-                text = worldItemModel.worldName,
-                style = MaterialTheme.typography.h6.copy(color = MaterialTheme.colors.onPrimary)
+                modifier = Modifier
+                    .constrainAs(title) {
+                        linkTo(start = parent.start, end = parent.end)
+                        top.linkTo(image.bottom, 16.dp)
+                    },
+                text = world.name.uppercase(),
+                style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.onPrimary)
             )
-            Row(modifier = Modifier.height(height = 30.dp)) {
+
+            Row(
+                modifier =
+                Modifier
+                    .constrainAs(starts) {
+                        linkTo(start = parent.start, end = parent.end)
+                        top.linkTo(title.bottom, 8.dp)
+                    },
+            ) {
                 //Fixme add ifElse for Lock/Open/or after points
-                when (worldItemModel.worldState) {
-                    PointState.LOCK -> {
-                        LockLevel()
+                when (world.state) {
+                    PointState.LOCK.ordinal -> {
+                        ZeroLevelWhite()
                     }
-                    PointState.ZERO -> {
+                    PointState.ZERO.ordinal -> {
                         ZeroLevelYellow()
                     }
-                    PointState.ONE -> {
+                    PointState.ONE.ordinal -> {
                         OneLevel()
                     }
-                    PointState.TWO -> {
+                    PointState.TWO.ordinal -> {
                         TwoLevel()
                     }
-                    PointState.THREE -> {
+                    PointState.THREE.ordinal -> {
                         ThreeLevel()
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(height = 16.dp))
-            IconButton(onClick = {
-                if (worldItemModel.worldState != PointState.LOCK) {
-                    //TODO onclick navigate to levels
-                }
-            }) {
+
+            IconButton(modifier = Modifier
+                .constrainAs(button) {
+                    linkTo(start = parent.start, end = parent.end)
+                    bottom.linkTo(parent.bottom, 16.dp)
+                },
+                onClick = {
+                    if (world.state != PointState.LOCK.ordinal) {
+                        navigateToLevel()
+                    }
+                }) {
                 Icon(
-                    imageVector = if (worldItemModel.worldState == PointState.LOCK) Icons.Default.Lock else Icons.Default.PlayCircle,
+                    imageVector = if (world.state == PointState.LOCK.ordinal) Icons.Default.Lock else Icons.Default.PlayCircle,
                     contentDescription = "Play",
                     tint = Color.White,
                     modifier = Modifier
-                        .size(50.dp)
+                        .size(70.dp)
                 )
             }
+
+
         }
     }
 }
+
+private fun getImage(id: Int): Int =
+    when (id) {
+        0 -> R.drawable.variables_background
+        1 -> R.drawable.if_else_backgorund
+        2 -> R.drawable.loops_backgroud
+        else -> {
+            R.drawable.variables_background
+        }
+    }
 
 
 @Preview
 @Composable
 fun WorldsItemViewPreview() {
     WorldsItemView(
-        WorldItemModel(
-            worldName = "VARIABLES WORLDS",
-            worldPic = painterResource(id = R.drawable.ic_panda_register),
-            worldScore = 0,
-            worldState = PointState.ZERO,
-            worldLevels = listOf()
-        )
+        world = World(
+            id = 0,
+            name = "VARIABLES WORLDS",
+            score = 0,
+            state = PointState.ZERO.ordinal
+        ),
+        navigateToLevel = { }
     )
 }

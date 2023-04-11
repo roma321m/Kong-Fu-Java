@@ -3,7 +3,7 @@ package dorin_roman.app.kongfujava
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dorin_roman.app.kongfujava.data.models.DateStoreRequestState
+import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +19,8 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _userType =
-        MutableStateFlow<DateStoreRequestState<UserType>>(DateStoreRequestState.Idle)
-    val userType: StateFlow<DateStoreRequestState<UserType>> = _userType
+        MutableStateFlow<RequestState<UserType>>(RequestState.Idle)
+    val userType: StateFlow<RequestState<UserType>> = _userType
 
     init {
         readUserType()
@@ -41,15 +41,15 @@ class MainViewModel @Inject constructor(
     }
 
     private fun readUserType() {
-        _userType.value = DateStoreRequestState.Loading
+        _userType.value = RequestState.Loading
         try {
             viewModelScope.launch {
                 userTypeRepository.readUserType
                     .map { UserType.valueOf(it) }
-                    .collect { _userType.value = DateStoreRequestState.Success(it) }
+                    .collect { _userType.value = RequestState.Success(it) }
             }
         } catch (exception: Exception) {
-            _userType.value = DateStoreRequestState.Error(exception)
+            _userType.value = RequestState.Error(exception)
         }
     }
 

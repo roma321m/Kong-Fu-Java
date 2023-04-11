@@ -9,7 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
-import dorin_roman.app.kongfujava.data.models.DateStoreRequestState
+import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.navigation.ChildNavigation
 import dorin_roman.app.kongfujava.navigation.MainNavigation
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
                 SystemUi()
 
                 val userType = mainViewModel.userType.collectAsState().value
-                if (userType is DateStoreRequestState.Success) {
+                if (userType is RequestState.Success) {
                     when (userType.data) {
                         UserType.None -> {
                             navController = rememberAnimatedNavController()

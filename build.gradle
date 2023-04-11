@@ -9,7 +9,7 @@ buildscript {
         hilt_navigation_compose_version = '1.0.0'
         firebase_bom_version = '31.2.3'
         accompanist_version = '0.28.0'
-        room_version = '2.5.1'
+        room_version = '2.4.3'
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
