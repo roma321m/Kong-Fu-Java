@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.progress_report.components.top_bar
+package dorin_roman.app.kongfujava.screens.supervisor.components.top_bar
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -13,7 +13,7 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.components.Title
 
 @Composable
-fun ProgressReportTopBar(
+fun SupervisorTopBar(
     modifier: Modifier = Modifier,
     title: Int,
     onOpenDrawer: () -> Unit,

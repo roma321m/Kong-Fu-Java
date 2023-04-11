@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.progress_report
+package dorin_roman.app.kongfujava.screens.supervisor
 
 data class StudentModel(
     var id: String,

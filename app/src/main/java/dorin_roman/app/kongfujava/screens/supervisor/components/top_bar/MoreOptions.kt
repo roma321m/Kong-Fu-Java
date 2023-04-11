@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.progress_report.components.top_bar
+package dorin_roman.app.kongfujava.screens.supervisor.components.top_bar
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*

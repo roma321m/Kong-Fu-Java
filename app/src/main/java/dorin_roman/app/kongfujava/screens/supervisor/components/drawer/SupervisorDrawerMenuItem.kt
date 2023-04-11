@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.progress_report.components.drawer
+package dorin_roman.app.kongfujava.screens.supervisor.components.drawer
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProgressReportDrawerMenuItem(
+fun SupervisorDrawerMenuItem(
     imageVector: ImageVector,
     text: String,
     onItemClick: () -> Unit,
@@ -25,7 +25,7 @@ fun ProgressReportDrawerMenuItem(
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth(0.4f)
+            .fillMaxWidth(0.3f)
             .padding(4.dp)
             .clickable { onItemClick() },
         backgroundColor = if (selected) {

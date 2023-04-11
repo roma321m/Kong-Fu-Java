@@ -13,7 +13,7 @@ import dorin_roman.app.kongfujava.data.models.DateStoreRequestState
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.navigation.ChildNavigation
 import dorin_roman.app.kongfujava.navigation.MainNavigation
-import dorin_roman.app.kongfujava.navigation.SupervisorNavigation
+import dorin_roman.app.kongfujava.screens.supervisor.SupervisorScreen
 import dorin_roman.app.kongfujava.ui.components.SystemUi
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
@@ -48,10 +48,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         UserType.Parent, UserType.Teacher -> {
-                            navController = rememberAnimatedNavController()
-                            SupervisorNavigation(
-                                navController = navController
-                            )
+                            SupervisorScreen()
                         }
                     }
                 }
