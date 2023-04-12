@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import dorin_roman.app.kongfujava.ui.theme.yellowColor
+import dorin_roman.app.kongfujava.ui.theme.kongFuYellow
 
 @Composable
 fun IconLevel(imageVector: ImageVector, tint: Color) {
@@ -41,28 +41,28 @@ fun ZeroLevelWhite() {
 
 @Composable
 fun ZeroLevelYellow() {
-    IconLevel(Icons.Filled.StarOutline, yellowColor)
-    IconLevel(Icons.Filled.StarOutline, yellowColor)
-    IconLevel(Icons.Filled.StarOutline, yellowColor)
+    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
+    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
+    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
 }
 
 @Composable
 fun OneLevel() {
-    IconLevel(Icons.Filled.Star, yellowColor)
-    IconLevel(Icons.Filled.StarOutline, yellowColor)
-    IconLevel(Icons.Filled.StarOutline, yellowColor)
+    IconLevel(Icons.Filled.Star, kongFuYellow)
+    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
+    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
 }
 
 @Composable
 fun TwoLevel() {
-    IconLevel(Icons.Filled.Star, yellowColor)
-    IconLevel(Icons.Filled.Star, yellowColor)
-    IconLevel(Icons.Filled.StarOutline, yellowColor)
+    IconLevel(Icons.Filled.Star, kongFuYellow)
+    IconLevel(Icons.Filled.Star, kongFuYellow)
+    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
 }
 
 @Composable
 fun ThreeLevel() {
-    IconLevel(Icons.Filled.Star, yellowColor)
-    IconLevel(Icons.Filled.Star, yellowColor)
-    IconLevel(Icons.Filled.Star, yellowColor)
+    IconLevel(Icons.Filled.Star, kongFuYellow)
+    IconLevel(Icons.Filled.Star, kongFuYellow)
+    IconLevel(Icons.Filled.Star, kongFuYellow)
 }

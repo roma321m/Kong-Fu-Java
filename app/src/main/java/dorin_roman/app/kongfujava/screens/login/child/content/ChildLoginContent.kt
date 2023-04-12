@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.login.child.ChildLoginViewModel
+import dorin_roman.app.kongfujava.ui.theme.kongFuRed
 import dorin_roman.app.kongfujava.ui.theme.purpleColor1
-import dorin_roman.app.kongfujava.ui.theme.redColor1
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -156,8 +156,8 @@ fun ChildLoginScreenStudentCode(
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     cursorColor = purpleColor1,
                     focusedLabelColor = purpleColor1,
-                    errorLabelColor = redColor1,
-                    errorBorderColor = redColor1,
+                    errorLabelColor = kongFuRed,
+                    errorBorderColor = kongFuRed,
                     focusedBorderColor = purpleColor1,
                     unfocusedBorderColor = purpleColor1
                 )
@@ -212,8 +212,8 @@ fun ChildLoginScreenStudentName(
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     cursorColor = purpleColor1,
                     focusedLabelColor = purpleColor1,
-                    errorLabelColor = redColor1,
-                    errorBorderColor = redColor1,
+                    errorLabelColor = kongFuRed,
+                    errorBorderColor = kongFuRed,
                     focusedBorderColor = purpleColor1,
                     unfocusedBorderColor = purpleColor1
                 )

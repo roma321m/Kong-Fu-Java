@@ -7,12 +7,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.RequestState
-import dorin_roman.app.kongfujava.domain.models.World
 import dorin_roman.app.kongfujava.screens.worlds.components.WorldsMapContent
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.TopBar
@@ -23,11 +21,15 @@ fun WorldsMapScreen(
     navigateToLevel: () -> Unit,
     worldsMapViewModel: WorldsMapViewModel = hiltViewModel()
 ) {
-    val worlds by worldsMapViewModel.worlds.collectAsState()
+    val worlds = worldsMapViewModel.worlds.collectAsState().value
 
     Scaffold(
         topBar = {
-            TopBar(onBackPressed = {}, title = R.string.worlds_map)
+            TopBar(
+                onBackPressed = {},
+                title = R.string.worlds_map,
+                hasBackButton = false
+            )
         },
         content = { paddingValues ->
             if (worlds is RequestState.Success) {
@@ -36,11 +38,12 @@ fun WorldsMapScreen(
                         .fillMaxSize()
                         .background(MaterialTheme.colors.secondary)
                         .padding(paddingValues),
-                    worlds = (worlds as RequestState.Success<List<World>>).data,
+                    worlds = worlds.data,
                     navigateToLevel = navigateToLevel
                 )
             }
-        })
+        }
+    )
 }
 
 

@@ -1,9 +1,13 @@
 package dorin_roman.app.kongfujava.screens.worlds.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.PlayCircle
@@ -17,20 +21,37 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.domain.models.World
-import dorin_roman.app.kongfujava.ui.components.*
+import dorin_roman.app.kongfujava.ui.components.Stars
+import dorin_roman.app.kongfujava.ui.theme.elevation
 
 @Composable
-fun WorldsItemView(world: World, navigateToLevel: () -> Unit) {
-    val modifier = Modifier
-        .size(height = 600.dp, width = 400.dp)
-        .padding(20.dp)
+fun WorldsItemView(
+    world: World,
+    navigateToLevel: () -> Unit
+) {
 
     Card(
-        modifier = (if (world.state == PointState.LOCK.ordinal) modifier.alpha(0.6f) else modifier.alpha(1f)),
-        elevation = 4.dp,
+        modifier = Modifier
+            .then(
+                if (world.state == PointState.LOCK.ordinal) {
+                    Modifier.alpha(0.6f)
+                } else {
+                    Modifier
+                }
+            )
+            .clickable {
+                if (world.state != PointState.LOCK.ordinal) {
+                    navigateToLevel()
+                }
+            }
+            .fillMaxHeight()
+            .width(500.dp)
+            .padding(20.dp),
+        elevation = MaterialTheme.elevation.medium,
         shape = RoundedCornerShape(size = 12.dp),
         backgroundColor = MaterialTheme.colors.primary
     ) {
@@ -42,10 +63,11 @@ fun WorldsItemView(world: World, navigateToLevel: () -> Unit) {
             Image(
                 modifier = Modifier
                     .clip(RoundedCornerShape(50.dp))
-                    .size(height = 200.dp, width = 400.dp)
                     .constrainAs(image) {
                         linkTo(start = parent.start, end = parent.end)
                         top.linkTo(parent.top)
+                        bottom.linkTo(title.top, 16.dp)
+                        height = Dimension.fillToConstraints
                     },
                 painter = painterResource(id = getImage(world.id)),
                 contentDescription = world.name,
@@ -56,59 +78,37 @@ fun WorldsItemView(world: World, navigateToLevel: () -> Unit) {
                 modifier = Modifier
                     .constrainAs(title) {
                         linkTo(start = parent.start, end = parent.end)
-                        top.linkTo(image.bottom, 16.dp)
+                        bottom.linkTo(starts.top)
                     },
                 text = world.name.uppercase(),
                 style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.onPrimary)
             )
 
             Row(
-                modifier =
-                Modifier
+                modifier = Modifier
                     .constrainAs(starts) {
                         linkTo(start = parent.start, end = parent.end)
-                        top.linkTo(title.bottom, 8.dp)
-                    },
+                        bottom.linkTo(button.top, 30.dp)
+                    }
             ) {
-                //Fixme add ifElse for Lock/Open/or after points
-                when (world.state) {
-                    PointState.LOCK.ordinal -> {
-                        ZeroLevelWhite()
-                    }
-                    PointState.ZERO.ordinal -> {
-                        ZeroLevelYellow()
-                    }
-                    PointState.ONE.ordinal -> {
-                        OneLevel()
-                    }
-                    PointState.TWO.ordinal -> {
-                        TwoLevel()
-                    }
-                    PointState.THREE.ordinal -> {
-                        ThreeLevel()
-                    }
-                }
+                Stars(state = PointState.values()[world.state])
             }
 
-            IconButton(modifier = Modifier
-                .constrainAs(button) {
-                    linkTo(start = parent.start, end = parent.end)
-                    bottom.linkTo(parent.bottom, 16.dp)
+            Icon(
+                modifier = Modifier
+                    .constrainAs(button) {
+                        linkTo(start = parent.start, end = parent.end)
+                        bottom.linkTo(parent.bottom)
+                    }
+                    .size(70.dp),
+                imageVector = if (world.state == PointState.LOCK.ordinal) {
+                    Icons.Default.Lock
+                } else {
+                    Icons.Default.PlayCircle
                 },
-                onClick = {
-                    if (world.state != PointState.LOCK.ordinal) {
-                        navigateToLevel()
-                    }
-                }) {
-                Icon(
-                    imageVector = if (world.state == PointState.LOCK.ordinal) Icons.Default.Lock else Icons.Default.PlayCircle,
-                    contentDescription = "Play",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .size(70.dp)
-                )
-            }
-
+                contentDescription = "Play",
+                tint = Color.White
+            )
 
         }
     }

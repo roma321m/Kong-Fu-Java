@@ -4,15 +4,6 @@ import androidx.compose.material.Colors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-val secondaryColor = Color(0xff9ff07a)
-val secondaryLightColor = Color(0xFF8CFF9C)
-val secondaryDarkColor = Color(0xFF006D21)
-val secondaryTextColor = Color(0xFFFFFFFF)
-val primaryColor = Color(0xff7d65f1)
-val primaryLightColor = Color(0xff6955bc)
-val primaryDarkColor = Color(0xFF5C007A)
-val primaryTextColor = Color(0xFF000000)
-
 //Dark
 val primaryDark: Color = Color(0xff7d65f1)
 val primaryVariantDark: Color = Color(0xff6955bc)
@@ -39,8 +30,6 @@ val onBackgroundLight: Color = Color(0xFF000000)
 val onSurfaceLight: Color = Color(0xFF000000)
 
 
-
-
 //color palate
 val purpleColor1 = Color(0xFFC3B8F8)
 val purpleColor2 = Color(0xff6955bc)
@@ -49,8 +38,8 @@ val greenColor2 = Color(0xff6d9b58)
 val greenColor3 = Color(0xff5d9a3c)
 val greenColor4 = Color(0xff6cb451)
 val greenColor5 = Color(0xffccfcb4)
-val redColor1 = Color(0xffa84552)
-val yellowColor = Color(0xFFFFCA2B)
+val kongFuRed = Color(0xffa84552)
+val kongFuYellow = Color(0xFFFFCA2B)
 
 
 val LightGray = Color(0xFFFCFCFC)
@@ -63,4 +52,4 @@ val Colors.splashScreenBackground: Color
 
 val Colors.systemUi: Color
     @Composable
-    get() = if (isLight) Color.White else Color.Black
+    get() = if (isLight) secondaryLight else Color.Black
