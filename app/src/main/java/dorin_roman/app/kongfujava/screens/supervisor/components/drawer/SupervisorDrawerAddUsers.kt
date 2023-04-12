@@ -20,7 +20,9 @@ import kotlinx.coroutines.launch
 fun SupervisorDrawerAddUsers(
     modifier: Modifier = Modifier,
     coroutineScope: CoroutineScope,
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    isAddUsers: Boolean,
+    onAddUsersSelected: (Boolean) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -29,12 +31,12 @@ fun SupervisorDrawerAddUsers(
             imageVector = Icons.Filled.Create,
             text = stringResource(R.string.add_users),
             onItemClick = {
+                onAddUsersSelected(true)
                 coroutineScope.launch {
                     scaffoldState.drawerState.close()
                 }
-                // TODO - navigate to add user screen
             },
-            selected = true // Fixme - temp - set selection base on clicks
+            selected = isAddUsers
         )
         Divider(
             modifier = Modifier

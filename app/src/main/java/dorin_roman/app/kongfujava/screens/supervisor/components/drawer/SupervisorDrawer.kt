@@ -18,9 +18,12 @@ import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun SupervisorDrawer(
-    studentsModelList: List<StudentModel>,
     coroutineScope: CoroutineScope,
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    studentsModelList: List<StudentModel>,
+    isAddUsers: Boolean,
+    onAddUsersSelected: (Boolean) -> Unit,
+    onStudentSelected: (StudentModel) -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -40,7 +43,9 @@ fun SupervisorDrawer(
                 top.linkTo(header.bottom, margin = 16.dp)
             },
             coroutineScope = coroutineScope,
-            scaffoldState = scaffoldState
+            scaffoldState = scaffoldState,
+            isAddUsers = isAddUsers,
+            onAddUsersSelected = onAddUsersSelected
         )
 
         SupervisorDrawerUsers(
@@ -51,7 +56,8 @@ fun SupervisorDrawer(
             },
             studentsModelList = studentsModelList,
             coroutineScope = coroutineScope,
-            scaffoldState = scaffoldState
+            scaffoldState = scaffoldState,
+            onStudentSelected = onStudentSelected
         )
 
         SupervisorDrawerSettings(
@@ -69,34 +75,17 @@ fun SupervisorDrawer(
 @DevicePreviews
 @Composable
 fun SupervisorDrawerPreview() {
-    val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
+    val idList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     KongFuJavaTheme {
         SupervisorDrawer(
-            studentsModelList = listOf(
-                StudentModel("id1", "test 1"),
-                StudentModel("id1", "test 2"),
-                StudentModel("id1", "test 3"),
-                StudentModel("id1", "test 4"),
-                StudentModel("id1", "test 5"),
-                StudentModel("id1", "test 6"),
-                StudentModel("id1", "test 7"),
-                StudentModel("id1", "test 8"),
-                StudentModel("id1", "test 9"),
-                StudentModel("id1", "test 10"),
-                StudentModel("id1", "test 11"),
-                StudentModel("id1", "test 12"),
-                StudentModel("id1", "test 13"),
-                StudentModel("id1", "test 14"),
-                StudentModel("id1", "test 15"),
-                StudentModel("id1", "test 16"),
-                StudentModel("id1", "test 17"),
-                StudentModel("id1", "test 18"),
-                StudentModel("id1", "test 19"),
-                StudentModel("id1", "test 20")
-            ),
-            scaffoldState = scaffoldState,
-            coroutineScope = coroutineScope,
+            scaffoldState = rememberScaffoldState(),
+            coroutineScope = rememberCoroutineScope(),
+            studentsModelList = idList.map {
+                StudentModel("id$it", "test name $it", false)
+            },
+            onAddUsersSelected = {},
+            onStudentSelected = {},
+            isAddUsers = true
         )
     }
 }

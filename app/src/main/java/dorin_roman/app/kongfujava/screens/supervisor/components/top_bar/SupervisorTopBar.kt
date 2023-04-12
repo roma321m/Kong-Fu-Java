@@ -16,9 +16,7 @@ import dorin_roman.app.kongfujava.ui.components.Title
 fun SupervisorTopBar(
     modifier: Modifier = Modifier,
     title: Int,
-    onOpenDrawer: () -> Unit,
-    onLogOutClicked: () -> Unit,
-    onRevokeAccessClicked: () -> Unit,
+    onOpenDrawer: () -> Unit
 ) {
     TopAppBar(
         modifier = modifier,
@@ -34,12 +32,6 @@ fun SupervisorTopBar(
                     contentDescription = stringResource(R.string.menu)
                 )
             }
-        },
-        actions = {
-            MoreOptions(
-                onLogOutClicked = onLogOutClicked,
-                onRevokeAccessClicked = onRevokeAccessClicked
-            )
         },
         backgroundColor = MaterialTheme.colors.secondary,
         contentColor = MaterialTheme.colors.onSecondary,

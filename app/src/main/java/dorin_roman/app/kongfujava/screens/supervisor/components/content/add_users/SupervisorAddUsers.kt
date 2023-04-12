@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.supervisor.components.content
+package dorin_roman.app.kongfujava.screens.supervisor.components.content.add_users
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun SupervisorContent(
+fun SupervisorAddUsers(
     modifier: Modifier = Modifier
 ) {
     Column(

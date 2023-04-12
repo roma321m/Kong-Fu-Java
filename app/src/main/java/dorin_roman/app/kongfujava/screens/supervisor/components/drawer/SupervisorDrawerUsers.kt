@@ -21,7 +21,8 @@ fun SupervisorDrawerUsers(
     modifier: Modifier = Modifier,
     studentsModelList: List<StudentModel>,
     coroutineScope: CoroutineScope,
-    scaffoldState: ScaffoldState
+    scaffoldState: ScaffoldState,
+    onStudentSelected: (StudentModel) -> Unit
 ) {
     val lazyListState = rememberLazyListState()
     LazyColumn(
@@ -35,11 +36,12 @@ fun SupervisorDrawerUsers(
                 imageVector = Icons.Filled.Person,
                 text = student.name,
                 onItemClick = {
+                    onStudentSelected(student)
                     coroutineScope.launch {
                         scaffoldState.drawerState.close()
                     }
-                    // TODO - show progress report for this student
-                }
+                },
+                selected = student.selected
             )
         }
     }
