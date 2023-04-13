@@ -1,7 +1,7 @@
 package dorin_roman.app.kongfujava.domain.repository
 
 import com.google.firebase.auth.FirebaseUser
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
+import dorin_roman.app.kongfujava.data.models.RequestState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 
@@ -12,22 +12,22 @@ interface AuthRepository {
     suspend fun firebaseSignUpWithEmailAndPassword(
         email: String,
         password: String
-    ): FirebaseRequestState<Boolean>
+    ): RequestState<Boolean>
 
-    suspend fun sendEmailVerification(): FirebaseRequestState<Boolean>
+    suspend fun sendEmailVerification(): RequestState<Boolean>
 
     suspend fun firebaseSignInWithEmailAndPassword(
         email: String,
         password: String
-    ): FirebaseRequestState<Boolean>
+    ): RequestState<Boolean>
 
-    suspend fun reloadFirebaseUser(): FirebaseRequestState<Boolean>
+    suspend fun reloadFirebaseUser(): RequestState<Boolean>
 
-    suspend fun sendPasswordResetEmail(email: String): FirebaseRequestState<Boolean>
+    suspend fun sendPasswordResetEmail(email: String): RequestState<Boolean>
 
     fun signOut()
 
-    suspend fun revokeAccess(): FirebaseRequestState<Boolean>
+    suspend fun revokeAccess(): RequestState<Boolean>
 
     fun getAuthState(viewModelScope: CoroutineScope): StateFlow<Boolean>
 }

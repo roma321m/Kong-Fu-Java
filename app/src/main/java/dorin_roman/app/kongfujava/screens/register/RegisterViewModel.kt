@@ -7,9 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Loading
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Success
+import dorin_roman.app.kongfujava.data.models.RequestState
+import dorin_roman.app.kongfujava.data.models.RequestState.*
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.launch
@@ -37,12 +36,10 @@ class RegisterViewModel @Inject constructor(
     var showLoading by mutableStateOf(false)
         private set
 
-    var registerRequest by mutableStateOf<FirebaseRequestState<Boolean>>(Success(false))
+    var registerRequest by mutableStateOf<RequestState<Boolean>>(Idle)
         private set
 
-    var sendEmailVerificationRequest by mutableStateOf<FirebaseRequestState<Boolean>>(
-        Success(false)
-    )
+    var sendEmailVerificationRequest by mutableStateOf<RequestState<Boolean>>(Idle)
         private set
 
     fun handle(event: RegisterEvent) {
@@ -59,6 +56,7 @@ class RegisterViewModel @Inject constructor(
     private fun handleRegisterResponse() {
         Log.d(TAG, "handleRegisterResponse")
         when (val signUpResponse = registerRequest) {
+            is Idle -> {}
             is Loading -> showLoading = true
             is Success -> {
                 showLoading = false
@@ -66,11 +64,11 @@ class RegisterViewModel @Inject constructor(
                     sendEmailVerification()
                 }
             }
-            is FirebaseRequestState.Failure ->
+            is Error ->
                 signUpResponse.apply {
                     showLoading = false
                     toastLauncher.launch(RegisterToast.SomethingWentWrong)
-                    Log.e(TAG, "${e.message}")
+                    Log.e(TAG, "${error.message}")
                 }
         }
     }
@@ -78,6 +76,7 @@ class RegisterViewModel @Inject constructor(
     private fun handleSendEmailVerifiedResponse() {
         Log.d(TAG, "handleSendEmailVerifiedResponse")
         when (val emailVerifiedResponse = sendEmailVerificationRequest) {
+            is Idle -> {}
             is Loading -> showLoading = true
             is Success -> {
                 if (emailVerifiedResponse.data) {
@@ -86,11 +85,11 @@ class RegisterViewModel @Inject constructor(
                     toastLauncher.launch(RegisterToast.VerificationEmailSent)
                 }
             }
-            is FirebaseRequestState.Failure ->
+            is Error ->
                 emailVerifiedResponse.apply {
                     showLoading = false
                     toastLauncher.launch(RegisterToast.SomethingWentWrong)
-                    Log.e(TAG, "${e.message}")
+                    Log.e(TAG, "${error.message}")
                 }
         }
     }

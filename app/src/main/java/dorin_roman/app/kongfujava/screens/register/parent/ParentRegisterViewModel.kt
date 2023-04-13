@@ -7,9 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dorin_roman.app.kongfujava.data.models.RequestState
+import dorin_roman.app.kongfujava.data.models.RequestState.*
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
 import dorin_roman.app.kongfujava.domain.models.users.Parent
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.UsersRepository
@@ -36,18 +37,10 @@ class ParentRegisterViewModel @Inject constructor(
         getAuthState()
     }
 
-    var reloadUserRequest by mutableStateOf<FirebaseRequestState<Boolean>>(
-        FirebaseRequestState.Success(
-            false
-        )
-    )
+    var reloadUserRequest by mutableStateOf<RequestState<Boolean>>(Idle)
         private set
 
-    var saveUserRequest by mutableStateOf<FirebaseRequestState<Boolean>>(
-        FirebaseRequestState.Success(
-            false
-        )
-    )
+    var saveUserRequest by mutableStateOf<RequestState<Boolean>>(Idle)
         private set
 
     var showLoading by mutableStateOf(false)
@@ -69,15 +62,16 @@ class ParentRegisterViewModel @Inject constructor(
 
     private fun reloadUser() = viewModelScope.launch {
         Log.d(TAG, "reloadUser")
-        reloadUserRequest = FirebaseRequestState.Loading
+        reloadUserRequest = Loading
         reloadUserRequest = authRepository.reloadFirebaseUser()
     }
 
     private fun handleReloadUserResponse() {
         Log.d(TAG, "handleReloadUserResponse")
         when (val reloadResponse = reloadUserRequest) {
-            is FirebaseRequestState.Loading -> showLoading = true
-            is FirebaseRequestState.Success -> {
+            is Idle -> {}
+            is Loading -> showLoading = true
+            is Success -> {
                 if (reloadResponse.data) {
                     showLoading = false
                     if (isEmailVerified) {
@@ -88,11 +82,11 @@ class ParentRegisterViewModel @Inject constructor(
                     }
                 }
             }
-            is FirebaseRequestState.Failure ->
+            is Error ->
                 reloadResponse.apply {
                     showLoading = false
                     toastLauncher.launch(RegisterToast.SomethingWentWrong)
-                    Log.e(TAG, "${e.message}")
+                    Log.e(TAG, "${error.message}")
                 }
         }
     }
@@ -100,18 +94,19 @@ class ParentRegisterViewModel @Inject constructor(
     private fun handleSaveUserToDatabaseResponse() {
         Log.d(TAG, "handleSaveUserToDatabaseResponse")
         when (val saveUserResponse = saveUserRequest) {
-            is FirebaseRequestState.Loading -> showLoading = true
-            is FirebaseRequestState.Success -> {
+            is Idle -> {}
+            is Loading -> showLoading = true
+            is Success -> {
                 showLoading = false
                 if (saveUserResponse.data) {
                     persistUserType()
                 }
             }
-            is FirebaseRequestState.Failure ->
+            is Error ->
                 saveUserResponse.apply {
                     showLoading = false
                     toastLauncher.launch(RegisterToast.SomethingWentWrong)
-                    Log.e(TAG, "${e.message}")
+                    Log.e(TAG, "${error.message}")
                 }
         }
     }
@@ -119,7 +114,7 @@ class ParentRegisterViewModel @Inject constructor(
     private fun saveUserToDatabase() = viewModelScope.launch {
         Log.d(TAG, "saveUserToDatabase")
         userId?.let { id ->
-            saveUserRequest = FirebaseRequestState.Loading
+            saveUserRequest = Loading
             saveUserRequest = usersRepository.createParent(
                 id = id,
                 parent = Parent(userEmail)

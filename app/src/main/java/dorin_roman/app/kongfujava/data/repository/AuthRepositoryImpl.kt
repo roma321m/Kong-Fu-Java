@@ -2,9 +2,9 @@ package dorin_roman.app.kongfujava.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Failure
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.Success
+import dorin_roman.app.kongfujava.data.models.RequestState
+import dorin_roman.app.kongfujava.data.models.RequestState.Error
+import dorin_roman.app.kongfujava.data.models.RequestState.Success
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
@@ -23,61 +23,61 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun firebaseSignUpWithEmailAndPassword(
         email: String, password: String
-    ): FirebaseRequestState<Boolean> {
+    ): RequestState<Boolean> {
         return try {
             auth.createUserWithEmailAndPassword(email, password).await()
             Success(true)
         } catch (e: Exception) {
-            Failure(e)
+            Error(e)
         }
     }
 
-    override suspend fun sendEmailVerification(): FirebaseRequestState<Boolean> {
+    override suspend fun sendEmailVerification(): RequestState<Boolean> {
         return try {
             auth.currentUser?.sendEmailVerification()?.await()
             Success(true)
         } catch (e: Exception) {
-            Failure(e)
+            Error(e)
         }
     }
 
     override suspend fun firebaseSignInWithEmailAndPassword(
         email: String, password: String
-    ): FirebaseRequestState<Boolean> {
+    ): RequestState<Boolean> {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()
             Success(true)
         } catch (e: Exception) {
-            Failure(e)
+            Error(e)
         }
     }
 
-    override suspend fun reloadFirebaseUser(): FirebaseRequestState<Boolean> {
+    override suspend fun reloadFirebaseUser(): RequestState<Boolean> {
         return try {
             auth.currentUser?.reload()?.await()
             Success(true)
         } catch (e: Exception) {
-            Failure(e)
+            Error(e)
         }
     }
 
-    override suspend fun sendPasswordResetEmail(email: String): FirebaseRequestState<Boolean> {
+    override suspend fun sendPasswordResetEmail(email: String): RequestState<Boolean> {
         return try {
             auth.sendPasswordResetEmail(email).await()
             Success(true)
         } catch (e: Exception) {
-            Failure(e)
+            Error(e)
         }
     }
 
     override fun signOut() = auth.signOut()
 
-    override suspend fun revokeAccess(): FirebaseRequestState<Boolean> {
+    override suspend fun revokeAccess(): RequestState<Boolean> {
         return try {
             auth.currentUser?.delete()?.await()
             Success(true)
         } catch (e: Exception) {
-            Failure(e)
+            Error(e)
         }
     }
 

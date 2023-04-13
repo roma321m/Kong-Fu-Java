@@ -7,10 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dorin_roman.app.kongfujava.data.models.RequestState
+import dorin_roman.app.kongfujava.data.models.RequestState.*
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState
-import dorin_roman.app.kongfujava.domain.models.FirebaseRequestState.*
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +42,7 @@ class SupervisorLoginViewModel @Inject constructor(
     var userType by mutableStateOf(UserType.None)
         private set
 
-    var loginRequest by mutableStateOf<FirebaseRequestState<Boolean>>(Success(false))
+    var loginRequest by mutableStateOf<RequestState<Boolean>>(Idle)
         private set
 
     fun handle(event: SupervisorLoginEvent) {
@@ -58,6 +58,7 @@ class SupervisorLoginViewModel @Inject constructor(
     private fun handleLoginResponse() {
         Log.d(TAG, "handleLoginResponse")
         when (val loginResponse = loginRequest) {
+            is Idle -> {}
             is Loading -> showLoading = true
             is Success -> {
                 showLoading = false
@@ -66,11 +67,11 @@ class SupervisorLoginViewModel @Inject constructor(
                     persistUserType()
                 }
             }
-            is Failure ->
+            is Error ->
                 loginResponse.apply {
                     showLoading = false
                     toastLauncher.launch(SupervisorLoginToast.SomethingWentWrong)
-                    Log.e(TAG, "${e.message}")
+                    Log.e(TAG, "${error.message}")
                 }
         }
     }
