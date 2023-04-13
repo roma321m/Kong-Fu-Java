@@ -23,7 +23,9 @@ fun SupervisorDrawer(
     studentsModelList: List<StudentModel>,
     isAddUsers: Boolean,
     onAddUsersSelected: (Boolean) -> Unit,
-    onStudentSelected: (StudentModel) -> Unit
+    onStudentSelected: (StudentModel) -> Unit,
+    onLogOutClicked: () -> Unit,
+    onRevokeAccessClicked: () -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -66,8 +68,8 @@ fun SupervisorDrawer(
             },
             coroutineScope = coroutineScope,
             scaffoldState = scaffoldState,
-            onLogOutClicked = {},
-            onRevokeAccessClicked = {}
+            onLogOutClicked = onLogOutClicked,
+            onRevokeAccessClicked = onRevokeAccessClicked
         )
     }
 }
@@ -85,6 +87,8 @@ fun SupervisorDrawerPreview() {
             },
             onAddUsersSelected = {},
             onStudentSelected = {},
+            onRevokeAccessClicked = {},
+            onLogOutClicked = {},
             isAddUsers = true
         )
     }

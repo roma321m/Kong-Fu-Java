@@ -123,8 +123,12 @@ class TeacherRegisterViewModel @Inject constructor(
         userId?.let { id ->
             saveUserRequest = Loading
             saveUserRequest = usersRepository.createTeacher(
-                id = id,
-                teacher = Teacher(userEmail, className, schoolName)
+                Teacher(
+                    id = id,
+                    email = userEmail,
+                    className = className,
+                    schoolName = schoolName
+                )
             )
         }
     }

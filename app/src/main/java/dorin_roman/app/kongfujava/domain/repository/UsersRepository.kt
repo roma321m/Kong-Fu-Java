@@ -8,7 +8,6 @@ import dorin_roman.app.kongfujava.domain.models.users.Teacher
 interface UsersRepository {
 
     suspend fun createTeacher(
-        id: String,
         teacher: Teacher
     ): RequestState<Boolean>
 
@@ -21,7 +20,6 @@ interface UsersRepository {
     ): RequestState<Teacher>
 
     suspend fun createParent(
-        id: String,
         parent: Parent
     ): RequestState<Boolean>
 
@@ -34,7 +32,6 @@ interface UsersRepository {
     ): RequestState<Parent>
 
     suspend fun createChild(
-        id: String,
         child: Child
     ): RequestState<Boolean>
 

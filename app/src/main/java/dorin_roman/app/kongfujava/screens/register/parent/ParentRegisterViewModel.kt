@@ -116,8 +116,10 @@ class ParentRegisterViewModel @Inject constructor(
         userId?.let { id ->
             saveUserRequest = Loading
             saveUserRequest = usersRepository.createParent(
-                id = id,
-                parent = Parent(userEmail)
+                Parent(
+                    id = id,
+                    email = userEmail
+                )
             )
         }
     }

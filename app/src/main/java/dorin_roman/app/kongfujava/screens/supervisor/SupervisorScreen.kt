@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.screens.supervisor.components.content.add_users.SupervisorAddUsers
 import dorin_roman.app.kongfujava.screens.supervisor.components.content.progress_report.SupervisorProgressReport
 import dorin_roman.app.kongfujava.screens.supervisor.components.drawer.SupervisorDrawer
@@ -21,6 +22,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SupervisorScreen(
+    userType: UserType = UserType.None,
     viewModel: SupervisorViewModel = hiltViewModel(),
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -48,6 +50,12 @@ fun SupervisorScreen(
                 },
                 onStudentSelected = { student ->
                     viewModel.handle(SupervisorEvent.SelectStudent(student))
+                },
+                onLogOutClicked = {
+                    viewModel.handle(SupervisorEvent.LogOut)
+                },
+                onRevokeAccessClicked = {
+                    viewModel.handle(SupervisorEvent.RevokeAccess)
                 }
             )
         },
@@ -68,7 +76,19 @@ fun SupervisorScreen(
     )
 
     LaunchedEffect(true) {
-        viewModel.handle(SupervisorEvent.InitSelectedStudent)
+        viewModel.handle(SupervisorEvent.InitData(userType))
+    }
+
+    LaunchedEffect(viewModel.revokeAccessRequest) {
+        viewModel.handle(SupervisorEvent.RevokeAccessResponse)
+    }
+
+    LaunchedEffect(viewModel.deleteUserRequest) {
+        viewModel.handle(SupervisorEvent.DeleteUserResponse)
+    }
+
+    LaunchedEffect(viewModel.userDataRequest) {
+        viewModel.handle(SupervisorEvent.LoadUserDataResponse)
     }
 }
 

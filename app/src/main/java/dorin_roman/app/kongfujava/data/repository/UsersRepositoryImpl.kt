@@ -30,11 +30,10 @@ class UsersRepositoryImpl @Inject constructor(
     private val childRef = database.getReference(USERS).child(CHILD)
 
     override suspend fun createTeacher(
-        id: String,
         teacher: Teacher
     ): RequestState<Boolean> {
         return try {
-            teacherRef.child(id).setValue(teacher).await()
+            teacherRef.child(teacher.id).setValue(teacher).await()
             Success(true)
         } catch (exception: Exception) {
             Error(exception)
@@ -51,9 +50,8 @@ class UsersRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getTeacher(id: String): RequestState<Teacher> {
-        // TODO - not tested yet
         return try {
-            var response: RequestState<Teacher> = Success(Teacher())
+            var response: RequestState<Teacher> = Success(Teacher(""))
             teacherRef.child(id).get()
                 .addOnSuccessListener { dataSnapshot ->
                     dataSnapshot.getValue<Teacher>()?.let { teacher ->
@@ -68,9 +66,9 @@ class UsersRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun createParent(id: String, parent: Parent): RequestState<Boolean> {
+    override suspend fun createParent(parent: Parent): RequestState<Boolean> {
         return try {
-            parentRef.child(id).setValue(parent).await()
+            parentRef.child(parent.id).setValue(parent).await()
             Success(true)
         } catch (exception: Exception) {
             Error(exception)
@@ -87,12 +85,25 @@ class UsersRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getParent(id: String): RequestState<Parent> {
-        TODO("Not yet implemented")
+        return try {
+            var response: RequestState<Parent> = Success(Parent(""))
+            parentRef.child(id).get()
+                .addOnSuccessListener { dataSnapshot ->
+                    dataSnapshot.getValue<Parent>()?.let { parent ->
+                        response = Success(parent)
+                    }
+                }.addOnFailureListener { exception ->
+                    response = Error(exception)
+                }.await()
+            response
+        } catch (exception: Exception) {
+            Error(exception)
+        }
     }
 
-    override suspend fun createChild(id: String, child: Child): RequestState<Boolean> {
+    override suspend fun createChild(child: Child): RequestState<Boolean> {
         return try {
-            childRef.child(id).setValue(child).await()
+            childRef.child(child.id).setValue(child).await()
             Success(true)
         } catch (exception: Exception) {
             Error(exception)
@@ -109,7 +120,20 @@ class UsersRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getChild(id: String): RequestState<Child> {
-        TODO("Not yet implemented")
+        return try {
+            var response: RequestState<Child> = Success(Child(""))
+            childRef.child(id).get()
+                .addOnSuccessListener { dataSnapshot ->
+                    dataSnapshot.getValue<Child>()?.let { child ->
+                        response = Success(child)
+                    }
+                }.addOnFailureListener { exception ->
+                    response = Error(exception)
+                }.await()
+            response
+        } catch (exception: Exception) {
+            Error(exception)
+        }
     }
 
 }

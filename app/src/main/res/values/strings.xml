@@ -57,4 +57,9 @@
     <string name="revoke_access">Revoke Access</string>
     <string name="progress_report">Progress Report</string>
     <string name="add_users">Add Users</string>
+    <string name="log_out_successfully">Logged Out Successfully</string>
+    <string name="users_where_deleted_successfully">Your user and all the sub-users where deleted successfully</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="revoke_access_dialog_content">This action is not reversible, your user and all accounts link to it will be deleted from our system. Are you sure you want to continue with this action?</string>
 </resources>

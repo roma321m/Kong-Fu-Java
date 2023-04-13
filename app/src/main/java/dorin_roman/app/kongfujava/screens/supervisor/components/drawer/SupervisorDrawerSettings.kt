@@ -9,11 +9,12 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Logout
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.components.DisplayAlertDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -25,6 +26,16 @@ fun SupervisorDrawerSettings(
     onLogOutClicked: () -> Unit,
     onRevokeAccessClicked: () -> Unit,
 ) {
+    var openRevokeAccessDialog by remember { mutableStateOf(false) }
+
+    DisplayAlertDialog(
+        title = stringResource(R.string.revoke_access),
+        message = stringResource(R.string.revoke_access_dialog_content),
+        openDialog = openRevokeAccessDialog,
+        closeDialog = { openRevokeAccessDialog = false },
+        onYesClicked = onRevokeAccessClicked
+    )
+
     Column(
         modifier = modifier
     ) {
@@ -53,7 +64,7 @@ fun SupervisorDrawerSettings(
                 coroutineScope.launch {
                     scaffoldState.drawerState.close()
                 }
-                onRevokeAccessClicked()
+                openRevokeAccessDialog = true
             },
             selected = false
         )
