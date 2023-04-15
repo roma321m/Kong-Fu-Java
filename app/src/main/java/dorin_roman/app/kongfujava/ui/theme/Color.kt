@@ -53,3 +53,7 @@ val Colors.splashScreenBackground: Color
 val Colors.systemUi: Color
     @Composable
     get() = if (isLight) secondaryLight else Color.Black
+
+val Colors.onTopBar: Color
+    @Composable
+    get() = Color.Black

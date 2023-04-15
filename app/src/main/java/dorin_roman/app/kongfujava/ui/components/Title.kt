@@ -12,9 +12,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.theme.onTopBar
 
 @Composable
-fun Title(@StringRes id: Int, modifier: Modifier = Modifier) {
+fun Title(
+    modifier: Modifier = Modifier,
+    @StringRes id: Int
+) {
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -22,7 +26,9 @@ fun Title(@StringRes id: Int, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(id = id).uppercase(),
-            style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.onSecondary)
+            style = MaterialTheme.typography.h4.copy(
+                color = MaterialTheme.colors.onTopBar
+            )
         )
         Image(
             modifier = Modifier

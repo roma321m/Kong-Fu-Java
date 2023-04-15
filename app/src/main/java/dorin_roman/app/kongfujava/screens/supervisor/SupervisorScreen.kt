@@ -11,11 +11,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.UserType
-import dorin_roman.app.kongfujava.screens.supervisor.components.content.add_users.SupervisorAddUsers
-import dorin_roman.app.kongfujava.screens.supervisor.components.content.progress_report.SupervisorProgressReport
+import dorin_roman.app.kongfujava.screens.supervisor.add_users.SupervisorAddUsersScreen
 import dorin_roman.app.kongfujava.screens.supervisor.components.drawer.SupervisorDrawer
 import dorin_roman.app.kongfujava.screens.supervisor.components.drawer.SupervisorDrawerShape
 import dorin_roman.app.kongfujava.screens.supervisor.components.top_bar.SupervisorTopBar
+import dorin_roman.app.kongfujava.screens.supervisor.progress_report.SupervisorProgressReportScreen
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import kotlinx.coroutines.launch
@@ -63,11 +63,11 @@ fun SupervisorScreen(
         drawerGesturesEnabled = true,
         content = { paddingValues ->
             if (viewModel.isAddUsers) {
-                SupervisorAddUsers(
+                SupervisorAddUsersScreen(
                     modifier = Modifier.padding(paddingValues)
                 )
             } else {
-                SupervisorProgressReport(
+                SupervisorProgressReportScreen(
                     modifier = Modifier.padding(paddingValues),
                     studentModel = viewModel.selectedStudent
                 )
