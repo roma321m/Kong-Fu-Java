@@ -26,9 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             KongFuJavaTheme {
                 SystemUi()
-                MainScreen(
-                    mainViewModel = mainViewModel
-                )
+                MainScreen(mainViewModel)
             }
         }
     }
