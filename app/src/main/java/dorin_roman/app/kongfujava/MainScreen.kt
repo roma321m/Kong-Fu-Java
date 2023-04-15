@@ -10,13 +10,11 @@ import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.navigation.ChildNavigation
 import dorin_roman.app.kongfujava.navigation.MainNavigation
 import dorin_roman.app.kongfujava.screens.supervisor.SupervisorScreen
-import dorin_roman.app.kongfujava.service.CodeService
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MainScreen(
-    mainViewModel: MainViewModel,
-    codeService: CodeService
+    mainViewModel: MainViewModel
 ) {
     lateinit var navController: NavHostController
     val userType = mainViewModel.userType.collectAsState().value
@@ -38,14 +36,12 @@ fun MainScreen(
             }
             UserType.Parent -> {
                 SupervisorScreen(
-                    userType = UserType.Parent,
-                    codeService = codeService
+                    userType = UserType.Parent
                 )
             }
             UserType.Teacher -> {
                 SupervisorScreen(
-                    userType = UserType.Teacher,
-                    codeService = codeService
+                    userType = UserType.Teacher
                 )
             }
         }

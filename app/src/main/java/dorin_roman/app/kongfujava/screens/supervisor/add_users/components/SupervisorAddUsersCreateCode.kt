@@ -1,7 +1,5 @@
 package dorin_roman.app.kongfujava.screens.supervisor.add_users.components
 
-import android.content.Context
-import android.content.Intent
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -13,59 +11,79 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.with
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import dorin_roman.app.kongfujava.service.CodeService
-import dorin_roman.app.kongfujava.service.CodeState
-import dorin_roman.app.kongfujava.service.CodeViewModel
 import dorin_roman.app.kongfujava.ui.theme.elevation
+
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SupervisorAddUsersCreateCode(
     modifier: Modifier = Modifier,
-    codeViewModel: CodeViewModel,
+    hasActiveCode: Boolean,
+    minutes: String,
+    seconds: String,
+    code: String,
+    onCreateCodeClicked: () -> Unit
 ) {
-    val context = LocalContext.current
-    val minutes by codeViewModel.minutes
-    val seconds by codeViewModel.seconds
-    val currentState by codeViewModel.currentState
-
     Card(
         modifier = modifier,
-        elevation = MaterialTheme.elevation.default
+        elevation = MaterialTheme.elevation.default,
+        shape = MaterialTheme.shapes.medium
     ) {
-        if (currentState != CodeState.Idle) {
-            AnimatedContent(targetState = minutes, transitionSpec = { addAnimation() }) {
+        if (hasActiveCode) {
+            Column(
+                modifier = Modifier
+                    .padding(8.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(
-                    text = minutes, style = TextStyle(
-                        fontSize = MaterialTheme.typography.h1.fontSize,
+                    text = code,
+                    style = TextStyle(
+                        fontSize = MaterialTheme.typography.h3.fontSize,
                         fontWeight = FontWeight.Bold,
-                        color = if (minutes == "00") Color.White else Color.Blue
+                        color = MaterialTheme.colors.primaryVariant
                     )
                 )
-            }
-            AnimatedContent(targetState = seconds, transitionSpec = { addAnimation() }) {
-                Text(
-                    text = seconds, style = TextStyle(
-                        fontSize = MaterialTheme.typography.h1.fontSize,
-                        fontWeight = FontWeight.Bold,
-                        color = if (seconds == "00") Color.White else Color.Blue
-                    )
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    AnimatedContent(targetState = minutes, transitionSpec = { addAnimation() }) {
+                        Text(
+                            text = minutes,
+                            style = TextStyle(
+                                fontSize = MaterialTheme.typography.h3.fontSize,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colors.primary
+                            )
+                        )
+                    }
+                    Spacer(modifier = Modifier.size(8.dp))
+                    AnimatedContent(targetState = seconds, transitionSpec = { addAnimation() }) {
+                        Text(
+                            text = seconds,
+                            style = TextStyle(
+                                fontSize = MaterialTheme.typography.h3.fontSize,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colors.primary
+                            )
+                        )
+                    }
+                }
             }
         } else {
             Column(
@@ -89,7 +107,7 @@ fun SupervisorAddUsersCreateCode(
                     modifier = Modifier
                         .padding(8.dp),
                     onClick = {
-                        triggerForegroundService(context)
+                        onCreateCodeClicked()
                     }
                 ) {
                     Text(
@@ -108,10 +126,4 @@ fun addAnimation(duration: Int = 600): ContentTransform {
     ) with slideOutVertically(animationSpec = tween(durationMillis = duration)) { height -> height } + fadeOut(
         animationSpec = tween(durationMillis = duration)
     )
-}
-
-fun triggerForegroundService(context: Context) {
-    Intent(context, CodeService::class.java).apply {
-        context.startService(this)
-    }
 }

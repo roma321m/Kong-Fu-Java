@@ -10,11 +10,9 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
-import dorin_roman.app.kongfujava.permission.NotificationPermission
 import dorin_roman.app.kongfujava.screens.supervisor.add_users.components.SupervisorAddUsersCreateCode
 import dorin_roman.app.kongfujava.screens.supervisor.add_users.components.SupervisorAddUsersImage
 import dorin_roman.app.kongfujava.screens.supervisor.add_users.components.SupervisorAddUsersInformation
-import dorin_roman.app.kongfujava.service.CodeViewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
@@ -22,11 +20,8 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 @Composable
 fun SupervisorAddUsersScreen(
     modifier: Modifier = Modifier,
-    addUsersViewModel: SupervisorAddUsersViewModel = hiltViewModel(),
-    codeViewModel: CodeViewModel = hiltViewModel(),
+    viewModel: SupervisorAddUsersViewModel = hiltViewModel()
 ) {
-
-    NotificationPermission(addUsersViewModel)
 
     ConstraintLayout(
         modifier = modifier
@@ -73,7 +68,13 @@ fun SupervisorAddUsersScreen(
                     height = Dimension.fillToConstraints
                     width = Dimension.fillToConstraints
                 },
-            codeViewModel = codeViewModel
+            hasActiveCode = viewModel.hasActiveCode,
+            minutes = viewModel.minutes,
+            seconds = viewModel.seconds,
+            code = viewModel.code,
+            onCreateCodeClicked = {
+                viewModel.handle(SupervisorAddUsersEvent.CreateCodeClicked)
+            }
         )
     }
 }
