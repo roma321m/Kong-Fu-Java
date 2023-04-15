@@ -62,4 +62,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="revoke_access_dialog_content">This action is not reversible, your user and all accounts link to it will be deleted from our system. Are you sure you want to continue with this action?</string>
+    <string name="dismiss">Dismiss</string>
 </resources>

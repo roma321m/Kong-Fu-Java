@@ -11,11 +11,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.UserType
-import dorin_roman.app.kongfujava.screens.supervisor.components.content.add_users.SupervisorAddUsers
-import dorin_roman.app.kongfujava.screens.supervisor.components.content.progress_report.SupervisorProgressReport
+import dorin_roman.app.kongfujava.screens.supervisor.add_users.SupervisorAddUsersScreen
+import dorin_roman.app.kongfujava.screens.supervisor.progress_report.SupervisorProgressReportScreen
 import dorin_roman.app.kongfujava.screens.supervisor.components.drawer.SupervisorDrawer
 import dorin_roman.app.kongfujava.screens.supervisor.components.drawer.SupervisorDrawerShape
 import dorin_roman.app.kongfujava.screens.supervisor.components.top_bar.SupervisorTopBar
+import dorin_roman.app.kongfujava.service.CodeService
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import kotlinx.coroutines.launch
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SupervisorScreen(
     userType: UserType = UserType.None,
+    codeService: CodeService,
     viewModel: SupervisorViewModel = hiltViewModel(),
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -63,11 +65,12 @@ fun SupervisorScreen(
         drawerGesturesEnabled = true,
         content = { paddingValues ->
             if (viewModel.isAddUsers) {
-                SupervisorAddUsers(
-                    modifier = Modifier.padding(paddingValues)
+                SupervisorAddUsersScreen(
+                    modifier = Modifier.padding(paddingValues),
+                    codeViewModel = codeService.codeViewModel
                 )
             } else {
-                SupervisorProgressReport(
+                SupervisorProgressReportScreen(
                     modifier = Modifier.padding(paddingValues),
                     studentModel = viewModel.selectedStudent
                 )
@@ -104,6 +107,8 @@ private fun getTitle(isAddUsers: Boolean): Int {
 @Composable
 fun SupervisorScreenPreview() {
     KongFuJavaTheme {
-        SupervisorScreen()
+        SupervisorScreen(
+            codeService = CodeService()
+        )
     }
 }

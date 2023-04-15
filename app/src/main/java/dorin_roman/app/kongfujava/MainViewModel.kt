@@ -1,5 +1,9 @@
 package dorin_roman.app.kongfujava
 
+import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,29 +22,42 @@ class MainViewModel @Inject constructor(
     private val userTypeRepository: UserTypeRepository
 ) : ViewModel() {
 
+    companion object {
+        const val TAG = "MainViewModel"
+    }
+
     private val _userType =
         MutableStateFlow<RequestState<UserType>>(RequestState.Idle)
     val userType: StateFlow<RequestState<UserType>> = _userType
 
+    var isBoundCodeService by mutableStateOf(false)
+        private set
+
     init {
+        Log.d(TAG, "init")
         readUserType()
     }
 
     fun handle(event: MainEvent) {
         when (event) {
-            MainEvent.Child -> persistUserType(UserType.Child)
-            MainEvent.Parent -> persistUserType(UserType.Parent)
-            MainEvent.Teacher -> persistUserType(UserType.Teacher)
+            MainEvent.Child -> persistUserType()
+            is MainEvent.IsBindCodeService -> updateIsBindCodeService(event.isBind)
         }
     }
 
-    private fun persistUserType(userType: UserType) {
+    private fun updateIsBindCodeService(bind: Boolean) {
+        Log.d(TAG, "updateIsBindCodeService: $bind")
+        isBoundCodeService = bind
+    }
+
+    private fun persistUserType() {
         viewModelScope.launch(Dispatchers.IO) {
-            userTypeRepository.persistUserType(userType)
+            userTypeRepository.persistUserType(UserType.Child)
         }
     }
 
     private fun readUserType() {
+        Log.d(TAG, "readUserType")
         _userType.value = RequestState.Loading
         try {
             viewModelScope.launch {

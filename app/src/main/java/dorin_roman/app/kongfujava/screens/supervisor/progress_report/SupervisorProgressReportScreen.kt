@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.supervisor.components.content.progress_report
+package dorin_roman.app.kongfujava.screens.supervisor.progress_report
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.screens.supervisor.StudentModel
+import dorin_roman.app.kongfujava.ui.components.DevicePreviews
+import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
-fun SupervisorProgressReport(
+fun SupervisorProgressReportScreen(
     modifier: Modifier = Modifier,
     studentModel: StudentModel
 ) {
@@ -38,6 +40,20 @@ fun SupervisorProgressReport(
             modifier = Modifier.padding(5.dp),
             style = MaterialTheme.typography.h5,
             text = "name: ${studentModel.name}"
+        )
+    }
+}
+
+@DevicePreviews
+@Composable
+fun SupervisorProgressReportScreenPreview() {
+    KongFuJavaTheme {
+        SupervisorProgressReportScreen(
+            studentModel = StudentModel(
+                id = "id",
+                name = "name",
+                selected = true
+            )
         )
     }
 }
