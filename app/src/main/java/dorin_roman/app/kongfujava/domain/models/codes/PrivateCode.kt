@@ -1,7 +1,9 @@
 package dorin_roman.app.kongfujava.domain.models.codes
 
 data class PrivateCode(
-    val code: String? = null,
-    val supervisorId: String? = null,
-    val childId: String? = null,
-)
+    override val code: String,
+    override val supervisorId: String,
+    val childId: String,
+) : Code {
+    constructor() : this("", "", "")
+}

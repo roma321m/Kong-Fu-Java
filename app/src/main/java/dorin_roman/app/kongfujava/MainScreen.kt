@@ -3,6 +3,7 @@ package dorin_roman.app.kongfujava
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dorin_roman.app.kongfujava.data.models.RequestState
@@ -14,7 +15,7 @@ import dorin_roman.app.kongfujava.screens.supervisor.SupervisorScreen
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MainScreen(
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel = hiltViewModel()
 ) {
     lateinit var navController: NavHostController
     val userType = mainViewModel.userType.collectAsState().value

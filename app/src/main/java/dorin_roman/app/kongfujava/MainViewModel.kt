@@ -7,7 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -30,18 +29,6 @@ class MainViewModel @Inject constructor(
     init {
         Log.d(TAG, "init")
         readUserType()
-    }
-
-    fun handle(event: MainEvent) {
-        when (event) {
-            MainEvent.Child -> persistUserType()
-        }
-    }
-
-    private fun persistUserType() {
-        viewModelScope.launch(Dispatchers.IO) {
-            userTypeRepository.persistUserType(UserType.Child)
-        }
     }
 
     private fun readUserType() {

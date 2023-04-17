@@ -13,6 +13,7 @@ import dorin_roman.app.kongfujava.data.repository.AuthRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.CodesRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.UsersRepositoryImpl
 import dorin_roman.app.kongfujava.di.provider.CodeProvider
+import dorin_roman.app.kongfujava.di.provider.IdProvider
 import dorin_roman.app.kongfujava.di.provider.KongFuDatabaseProvider
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
@@ -42,6 +43,9 @@ object DatabaseModule {
 
     @Provides
     fun provideCode(): CodeProvider = CodeProvider
+
+    @Provides
+    fun provideId(): IdProvider = IdProvider
 
     @Provides
     fun provideDataBase(

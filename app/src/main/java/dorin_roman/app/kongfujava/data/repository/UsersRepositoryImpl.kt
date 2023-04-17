@@ -51,7 +51,7 @@ class UsersRepositoryImpl @Inject constructor(
 
     override suspend fun getTeacher(id: String): RequestState<Teacher> {
         return try {
-            var response: RequestState<Teacher> = Success(Teacher(""))
+            var response: RequestState<Teacher> = Success(Teacher())
             teacherRef.child(id).get()
                 .addOnSuccessListener { dataSnapshot ->
                     dataSnapshot.getValue<Teacher>()?.let { teacher ->
@@ -86,7 +86,7 @@ class UsersRepositoryImpl @Inject constructor(
 
     override suspend fun getParent(id: String): RequestState<Parent> {
         return try {
-            var response: RequestState<Parent> = Success(Parent(""))
+            var response: RequestState<Parent> = Success(Parent())
             parentRef.child(id).get()
                 .addOnSuccessListener { dataSnapshot ->
                     dataSnapshot.getValue<Parent>()?.let { parent ->
@@ -121,7 +121,7 @@ class UsersRepositoryImpl @Inject constructor(
 
     override suspend fun getChild(id: String): RequestState<Child> {
         return try {
-            var response: RequestState<Child> = Success(Child(""))
+            var response: RequestState<Child> = Success(Child())
             childRef.child(id).get()
                 .addOnSuccessListener { dataSnapshot ->
                     dataSnapshot.getValue<Child>()?.let { child ->

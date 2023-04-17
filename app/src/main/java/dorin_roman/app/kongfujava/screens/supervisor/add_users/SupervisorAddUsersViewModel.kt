@@ -5,11 +5,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.di.provider.CodeProvider
+import dorin_roman.app.kongfujava.domain.models.codes.PublicCode
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
 import dorin_roman.app.kongfujava.util.pad
+import kotlinx.coroutines.launch
 import java.util.Timer
 import javax.inject.Inject
 import kotlin.concurrent.fixedRateTimer
@@ -45,7 +48,11 @@ class SupervisorAddUsersViewModel @Inject constructor(
     var hasActiveCode by mutableStateOf(false)
         private set
 
-    private val userId get() = authRepository.currentUser?.uid
+    private val userId: String?
+        get() = authRepository.currentUser?.uid
+
+    private val currentTime: Long
+        get() = System.currentTimeMillis()
 
     fun handle(event: SupervisorAddUsersEvent) {
         when (event) {
@@ -53,12 +60,19 @@ class SupervisorAddUsersViewModel @Inject constructor(
         }
     }
 
-    private fun createCode() {
+    private fun createCode() = viewModelScope.launch {
         Log.d(TAG, "createCode")
-        code = codeProvider.provide()
+        userId?.let { supervisorId ->
+            code = codeProvider.provide()
+            codeRepository.createPublicCode(
+                PublicCode(
+                    code = code,
+                    supervisorId = supervisorId,
+                    timeMilli = currentTime
+                )
+            )
+        }
     }
-
-    private fun getCurrentTime(): Long = System.currentTimeMillis()
 
     private fun startTimer() {
         Log.d(TAG, "startTimer")
