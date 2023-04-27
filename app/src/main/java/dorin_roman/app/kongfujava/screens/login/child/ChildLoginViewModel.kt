@@ -11,8 +11,10 @@ import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
 import dorin_roman.app.kongfujava.di.provider.IdProvider
-import dorin_roman.app.kongfujava.domain.models.codes.Code
+import dorin_roman.app.kongfujava.domain.models.codes.PublicCode
+import dorin_roman.app.kongfujava.domain.models.users.Child
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
+import dorin_roman.app.kongfujava.domain.repository.UsersRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,9 +22,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChildLoginViewModel @Inject constructor(
-    private val idProvider: IdProvider,
+    idProvider: IdProvider,
     private val codeRepository: CodeRepository,
     private val userTypeRepository: UserTypeRepository,
+    private val usersRepository: UsersRepository,
     private val toastLauncher: ToastLauncher,
 ) : ViewModel() {
 
@@ -39,7 +42,10 @@ class ChildLoginViewModel @Inject constructor(
     var studentAge by mutableStateOf("")
         private set
 
-    var codeRequest by mutableStateOf<RequestState<Code>>(RequestState.Idle)
+    var codeRequest by mutableStateOf<RequestState<PublicCode>>(RequestState.Idle)
+        private set
+
+    var saveUserRequest by mutableStateOf<RequestState<Boolean>>(RequestState.Idle)
         private set
 
     var showLoading by mutableStateOf(false)
@@ -48,13 +54,17 @@ class ChildLoginViewModel @Inject constructor(
     var stepState by mutableStateOf(ChildLoginStepState.CODE)
         private set
 
-    val childId = idProvider.provide()
+    private val currentTime: Long
+        get() = System.currentTimeMillis()
 
-    lateinit var currentCode: Code
+    private val childId = idProvider.provide()
+
+    private lateinit var supervisorId: String
 
     fun handle(event: ChildLoginEvent) {
         when (event) {
             ChildLoginEvent.CodeResponse -> handleCodeDataResponse()
+            ChildLoginEvent.SaveUserResponse -> handleSaveUserToDatabaseResponse()
             is ChildLoginEvent.OnAgeChange -> updateAge(event.age)
             is ChildLoginEvent.OnCodeChange -> updateTextCode(event.code)
             is ChildLoginEvent.OnNameChange -> updateName(event.name)
@@ -62,10 +72,14 @@ class ChildLoginViewModel @Inject constructor(
         }
     }
 
-    private fun getCodeData(code: String) = viewModelScope.launch {
-        Log.d(TAG, "getCode")
-        codeRequest = RequestState.Loading
-        codeRequest = codeRepository.getPublicCode(code)
+    private fun updateStep(newStepState: ChildLoginStepState) {
+        Log.d(TAG, "updateStep: $newStepState")
+        when (newStepState) {
+            ChildLoginStepState.CODE -> {}
+            ChildLoginStepState.NAME -> codeEntered()
+            ChildLoginStepState.AGE -> nameEntered()
+            ChildLoginStepState.FINAL -> ageEntered()
+        }
     }
 
     private fun handleCodeDataResponse() {
@@ -74,12 +88,29 @@ class ChildLoginViewModel @Inject constructor(
             is RequestState.Idle -> {}
             is RequestState.Loading -> showLoading = true
             is RequestState.Success -> {
-                showLoading = false
-                currentCode = codeResponse.data
+                checkCodeTime(codeResponse.data)
             }
+            is RequestState.Error -> codeResponse.apply {
+                resetCode(ChildToast.CodeNotValid)
+                Log.e(TAG, "${error.message}")
+            }
+        }
+    }
 
+    private fun handleSaveUserToDatabaseResponse() {
+        Log.d(TAG, "handleSaveUserToDatabaseResponse")
+        when (val saveUserResponse = saveUserRequest) {
+            is RequestState.Idle -> {}
+            is RequestState.Loading -> showLoading = true
+            is RequestState.Success -> {
+                showLoading = false
+                if (saveUserResponse.data) {
+                    persistUserType()
+                    // Fixme - need to create the link in db. supervisor id and child id.
+                }
+            }
             is RequestState.Error ->
-                codeResponse.apply {
+                saveUserResponse.apply {
                     showLoading = false
                     toastLauncher.launch(ChildToast.SomethingWentWrong)
                     Log.e(TAG, "${error.message}")
@@ -94,26 +125,75 @@ class ChildLoginViewModel @Inject constructor(
         }
     }
 
-    private fun updateStep(newStepState: ChildLoginStepState) {
-        Log.d(TAG, "updateStep: $newStepState")
-        stepState = newStepState
-        showLoading = stepState == ChildLoginStepState.FINAL // fixme - temp
-        if (showLoading)
-            persistUserType() // fixme temp
+    private fun saveUserToDatabase() = viewModelScope.launch {
+        Log.d(TAG, "saveUserToDatabase")
+        saveUserRequest = RequestState.Loading
+        saveUserRequest = usersRepository.createChild(
+            Child(
+                id = childId,
+                name = studentName,
+                age = studentAge.toInt(),
+            )
+        )
+    }
+
+    private fun ageEntered() {
+        Log.d(TAG, "ageEntered: $studentAge")
+        if (studentAge.isBlank()) {
+            toastLauncher.launch(ChildToast.FillYourAge)
+            studentAge = ""
+        } else {
+            stepState = ChildLoginStepState.FINAL
+            saveUserToDatabase()
+        }
+    }
+
+    private fun nameEntered() {
+        Log.d(TAG, "nameEntered: $studentName")
+        if (studentName.length < 2) {
+            toastLauncher.launch(ChildToast.FillYourName)
+            studentName = ""
+        } else {
+            stepState = ChildLoginStepState.AGE
+        }
+    }
+
+    private fun checkCodeTime(code: PublicCode) {
+        Log.d(TAG, "checkCodeTime: $code")
+        showLoading = false
+        if (code.timeMilli + 300_000 > currentTime) {
+            supervisorId = code.supervisorId
+            stepState = ChildLoginStepState.NAME
+        } else {
+            resetCode(ChildToast.CodeExpired)
+        }
+    }
+
+    private fun codeEntered() = viewModelScope.launch {
+        Log.d(TAG, "codeEntered: $studentCode")
+        codeRequest = RequestState.Loading
+        codeRequest = codeRepository.getPublicCode(studentCode)
+    }
+
+    private fun resetCode(toast: ChildToast) {
+        Log.d(TAG, "resetCode: $toast")
+        toastLauncher.launch(toast)
+        showLoading = false
+        studentCode = ""
     }
 
     private fun updateName(name: String) {
-        Log.d(TAG, "updateName")
+        Log.d(TAG, "updateName: $name")
         studentName = name
     }
 
     private fun updateTextCode(code: String) {
-        Log.d(TAG, "updateTextCode")
+        Log.d(TAG, "updateTextCode: $code")
         studentCode = code
     }
 
     private fun updateAge(age: String) {
-        Log.d(TAG, "updateAge")
+        Log.d(TAG, "updateAge: $age")
         studentAge = age
     }
 

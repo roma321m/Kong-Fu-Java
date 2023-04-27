@@ -63,4 +63,8 @@
     <string name="no">No</string>
     <string name="revoke_access_dialog_content">This action is not reversible, your user and all accounts link to it will be deleted from our system. Are you sure you want to continue with this action?</string>
     <string name="dismiss">Dismiss</string>
+    <string name="code_not_valid">Code Not Valid</string>
+    <string name="code_expired">Code Expired</string>
+    <string name="you_need_to_fill_in_your_name">You need to fill in your name</string>
+    <string name="you_need_to_select_your_age">You need to select your age</string>
 </resources>

@@ -1,6 +1,7 @@
 package dorin_roman.app.kongfujava.screens.login.child
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.login.child.components.ChildLoginContentTopEnd
@@ -53,6 +54,14 @@ fun ChildLoginScreen(
             SideScreenImage(R.drawable.ic_panda_login)
         }
     )
+
+    LaunchedEffect(viewModel.codeRequest) {
+        viewModel.handle(ChildLoginEvent.CodeResponse)
+    }
+
+    LaunchedEffect(viewModel.saveUserRequest) {
+        viewModel.handle(ChildLoginEvent.SaveUserResponse)
+    }
 }
 
 @DevicePreviews
