@@ -45,6 +45,10 @@ fun SupervisorScreen(
                 coroutineScope = coroutineScope,
                 studentsModelList = viewModel.studentsModelList,
                 isAddUsers = viewModel.isAddUsers,
+                refreshing = viewModel.isrefreshing,
+                onRefresh = {
+                    viewModel.handle(SupervisorEvent.RefreshChildrenList)
+                },
                 onAddUsersSelected = { selected ->
                     viewModel.handle(SupervisorEvent.AddUsersSelected(selected))
                 },
@@ -77,18 +81,6 @@ fun SupervisorScreen(
 
     LaunchedEffect(true) {
         viewModel.handle(SupervisorEvent.InitData(userType))
-    }
-
-    LaunchedEffect(viewModel.revokeAccessRequest) {
-        viewModel.handle(SupervisorEvent.RevokeAccessResponse)
-    }
-
-    LaunchedEffect(viewModel.deleteUserRequest) {
-        viewModel.handle(SupervisorEvent.DeleteUserResponse)
-    }
-
-    LaunchedEffect(viewModel.userDataRequest) {
-        viewModel.handle(SupervisorEvent.LoadUserDataResponse)
     }
 }
 

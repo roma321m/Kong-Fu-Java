@@ -11,12 +11,14 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dorin_roman.app.kongfujava.data.repository.AuthRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.CodesRepositoryImpl
+import dorin_roman.app.kongfujava.data.repository.LinkedAccountsRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.UsersRepositoryImpl
 import dorin_roman.app.kongfujava.di.provider.CodeProvider
 import dorin_roman.app.kongfujava.di.provider.IdProvider
 import dorin_roman.app.kongfujava.di.provider.KongFuDatabaseProvider
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
+import dorin_roman.app.kongfujava.domain.repository.LinkedAccountsRepository
 import dorin_roman.app.kongfujava.domain.repository.UsersRepository
 import dorin_roman.app.kongfujava.domain.source.KongFuDataBase
 import dorin_roman.app.kongfujava.domain.source.WorldDao
@@ -38,6 +40,11 @@ object DatabaseModule {
 
     @Provides
     fun provideCodesRepository(): CodeRepository = CodesRepositoryImpl(
+        database = FirebaseDatabase.getInstance()
+    )
+
+    @Provides
+    fun provideLinkedAccountsRepository(): LinkedAccountsRepository = LinkedAccountsRepositoryImpl(
         database = FirebaseDatabase.getInstance()
     )
 

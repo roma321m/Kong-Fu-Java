@@ -8,7 +8,5 @@ sealed class SupervisorEvent {
     class InitData(val userType: UserType) : SupervisorEvent()
     object LogOut : SupervisorEvent()
     object RevokeAccess : SupervisorEvent()
-    object RevokeAccessResponse : SupervisorEvent()
-    object DeleteUserResponse : SupervisorEvent()
-    object LoadUserDataResponse : SupervisorEvent()
+    object RefreshChildrenList : SupervisorEvent()
 }
