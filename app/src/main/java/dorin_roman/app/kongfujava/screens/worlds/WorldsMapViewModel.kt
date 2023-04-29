@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.domain.models.World
-import dorin_roman.app.kongfujava.domain.repository.WorldRepository
+import dorin_roman.app.kongfujava.data.repository.WorldRepository
 import dorin_roman.app.kongfujava.screens.worlds.components.WorldsEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

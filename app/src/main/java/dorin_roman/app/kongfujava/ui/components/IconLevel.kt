@@ -9,60 +9,180 @@ import androidx.compose.material.icons.filled.StarOutline
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.ui.theme.kongFuYellow
 
 @Composable
-fun IconLevel(imageVector: ImageVector, tint: Color) {
+fun IconLevel(imageVector: ImageVector, tint: Color, modifier: Modifier) {
     Icon(
         imageVector = imageVector,
         contentDescription = "icon",
         tint = tint,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun LockLevel(type: String) {
+    val size = if (type == "World") 70.dp else 30.dp
+    IconLevel(
+        imageVector = Icons.Outlined.Lock,
+        tint = Color.White,
         modifier = Modifier
-            .size(70.dp)
+            .alpha(0f)
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Outlined.Lock,
+        tint = Color.White,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Outlined.Lock,
+        tint = Color.White,
+        modifier = Modifier
+            .size(size)
+            .alpha(0f)
             .padding(5.dp)
     )
 }
 
-//Fixme colors
 @Composable
-fun LockLevel() {
-    IconLevel(Icons.Outlined.Lock, Color.White)
+fun ZeroLevelWhite(type: String) {
+    val size = if (type == "World") 70.dp else 30.dp
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = Color.White,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = Color.White,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = Color.White,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
 }
 
 @Composable
-fun ZeroLevelWhite() {
-    IconLevel(Icons.Filled.StarOutline, Color.White)
-    IconLevel(Icons.Filled.StarOutline, Color.White)
-    IconLevel(Icons.Filled.StarOutline, Color.White)
+fun ZeroLevelYellow(type: String) {
+    val size = if (type == "World") 70.dp else 30.dp
+
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
 }
 
 @Composable
-fun ZeroLevelYellow() {
-    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
-    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
-    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
+fun OneLevel(type: String) {
+    val size = if (type == "World") 70.dp else 30.dp
+
+    IconLevel(
+        imageVector = Icons.Filled.Star,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
 }
 
 @Composable
-fun OneLevel() {
-    IconLevel(Icons.Filled.Star, kongFuYellow)
-    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
-    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
+fun TwoLevel(type: String) {
+    val size = if (type == "World") 70.dp else 30.dp
+
+    IconLevel(
+        imageVector = Icons.Filled.Star,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.Star,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.StarOutline,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
 }
 
 @Composable
-fun TwoLevel() {
-    IconLevel(Icons.Filled.Star, kongFuYellow)
-    IconLevel(Icons.Filled.Star, kongFuYellow)
-    IconLevel(Icons.Filled.StarOutline, kongFuYellow)
-}
+fun ThreeLevel(type: String) {
+    val size = if (type == "World") 70.dp else 30.dp
 
-@Composable
-fun ThreeLevel() {
-    IconLevel(Icons.Filled.Star, kongFuYellow)
-    IconLevel(Icons.Filled.Star, kongFuYellow)
-    IconLevel(Icons.Filled.Star, kongFuYellow)
+    IconLevel(
+        imageVector = Icons.Filled.Star,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.Star,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
+    IconLevel(
+        imageVector = Icons.Filled.Star,
+        tint = kongFuYellow,
+        modifier = Modifier
+            .size(size)
+            .padding(5.dp)
+    )
 }

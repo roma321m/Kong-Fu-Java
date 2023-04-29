@@ -18,7 +18,7 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun WorldsMapScreen(
-    navigateToLevel: () -> Unit,
+    navigateToMapLevels: (id: Int) -> Unit,
     worldsMapViewModel: WorldsMapViewModel = hiltViewModel()
 ) {
     val worlds = worldsMapViewModel.worlds.collectAsState().value
@@ -39,7 +39,8 @@ fun WorldsMapScreen(
                         .background(MaterialTheme.colors.secondary)
                         .padding(paddingValues),
                     worlds = worlds.data,
-                    navigateToLevel = navigateToLevel
+                    navigateToMapLevels = navigateToMapLevels
+
                 )
             }
         }

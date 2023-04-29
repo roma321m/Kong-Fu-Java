@@ -2,24 +2,33 @@ package dorin_roman.app.kongfujava.ui.components
 
 import androidx.compose.runtime.Composable
 import dorin_roman.app.kongfujava.data.models.PointState
+import dorin_roman.app.kongfujava.screens.worlds.components.WORLD_TYPE
 
 @Composable
-fun Stars(state: PointState) {
+fun Stars(state: PointState, type: String) {
     when (state) {
         PointState.LOCK -> {
-            ZeroLevelWhite()
+            if (type == WORLD_TYPE) {
+                ZeroLevelWhite(type)
+            } else {
+                LockLevel(type)
+            }
         }
+
         PointState.ZERO -> {
-            ZeroLevelYellow()
+            ZeroLevelYellow(type)
         }
+
         PointState.ONE -> {
-            OneLevel()
+            OneLevel(type)
         }
+
         PointState.TWO -> {
-            TwoLevel()
+            TwoLevel(type)
         }
+
         PointState.THREE -> {
-            ThreeLevel()
+            ThreeLevel(type)
         }
     }
 }

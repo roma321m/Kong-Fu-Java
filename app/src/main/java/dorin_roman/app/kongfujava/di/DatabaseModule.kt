@@ -19,6 +19,7 @@ import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
 import dorin_roman.app.kongfujava.domain.repository.UsersRepository
 import dorin_roman.app.kongfujava.domain.source.KongFuDataBase
+import dorin_roman.app.kongfujava.domain.source.LevelDao
 import dorin_roman.app.kongfujava.domain.source.WorldDao
 
 
@@ -56,5 +57,10 @@ object DatabaseModule {
     fun provideWorldDao(
         dataBase: KongFuDataBase
     ): WorldDao = dataBase.worldDao()
+
+    @Provides
+    fun provideLevelDao(
+        dataBase: KongFuDataBase
+    ): LevelDao = dataBase.levelDao()
 
 }

@@ -11,7 +11,7 @@ import dorin_roman.app.kongfujava.screens.worlds.WorldsMapScreen
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.worldsComposable(
-    navigateToLevel: () -> Unit
+    navigateToMapLevels: (id: Int) -> Unit
 ) {
     composable(
         route = WORLDS_SCREEN,
@@ -25,7 +25,7 @@ fun NavGraphBuilder.worldsComposable(
         }
     ) {
         WorldsMapScreen(
-            navigateToLevel = navigateToLevel
+            navigateToMapLevels = navigateToMapLevels
         )
     }
 }

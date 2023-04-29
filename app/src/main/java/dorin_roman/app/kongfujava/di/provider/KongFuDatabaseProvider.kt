@@ -14,7 +14,7 @@ object KongFuDatabaseProvider {
             KongFuDataBase::class.java,
             DATABASE_NAME
         )
-            .createFromAsset("database/world.db")
+            .createFromAsset("database/kong_fu.db")
             .build()
     }
 }

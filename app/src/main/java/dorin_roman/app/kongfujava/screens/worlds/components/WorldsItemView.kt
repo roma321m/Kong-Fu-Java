@@ -28,10 +28,12 @@ import dorin_roman.app.kongfujava.domain.models.World
 import dorin_roman.app.kongfujava.ui.components.Stars
 import dorin_roman.app.kongfujava.ui.theme.elevation
 
+const val WORLD_TYPE ="World"
+
 @Composable
 fun WorldsItemView(
     world: World,
-    navigateToLevel: () -> Unit
+    navigateToMapLevels: (id: Int) -> Unit
 ) {
 
     Card(
@@ -45,14 +47,14 @@ fun WorldsItemView(
             )
             .clickable {
                 if (world.state != PointState.LOCK.ordinal) {
-                    navigateToLevel()
+                    navigateToMapLevels(world.id)
                 }
             }
             .fillMaxHeight()
             .width(500.dp)
             .padding(20.dp),
         elevation = MaterialTheme.elevation.medium,
-        shape = RoundedCornerShape(size = 12.dp),
+        shape = RoundedCornerShape(size = 40.dp),
         backgroundColor = MaterialTheme.colors.primary
     ) {
         ConstraintLayout(
@@ -62,7 +64,7 @@ fun WorldsItemView(
 
             Image(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(50.dp))
+                    .clip(RoundedCornerShape(size = 40.dp))
                     .constrainAs(image) {
                         linkTo(start = parent.start, end = parent.end)
                         top.linkTo(parent.top)
@@ -91,7 +93,7 @@ fun WorldsItemView(
                         bottom.linkTo(button.top, 30.dp)
                     }
             ) {
-                Stars(state = PointState.values()[world.state])
+                Stars(state = PointState.values()[world.state], type = WORLD_TYPE)
             }
 
             Icon(
@@ -118,7 +120,9 @@ private fun getImage(id: Int): Int =
     when (id) {
         0 -> R.drawable.variables_background
         1 -> R.drawable.if_else_backgorund
-        2 -> R.drawable.loops_backgroud
+        2 -> R.drawable.loops_background
+        3 -> R.drawable.arrays_background
+        4 -> R.drawable.strings_background
         else -> {
             R.drawable.variables_background
         }
@@ -135,6 +139,6 @@ fun WorldsItemViewPreview() {
             score = 0,
             state = PointState.ZERO.ordinal
         ),
-        navigateToLevel = { }
+        navigateToMapLevels = { }
     )
 }

@@ -14,7 +14,7 @@ import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 fun WorldsMapContent(
     modifier: Modifier = Modifier,
     worlds: List<World>,
-    navigateToLevel: () -> Unit
+    navigateToMapLevels: (id: Int) -> Unit
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -30,7 +30,7 @@ fun WorldsMapContent(
             userScrollEnabled = true,
         ) {
             items(worlds) {
-                WorldsItemView(world = it, navigateToLevel = navigateToLevel)
+                WorldsItemView(world = it, navigateToMapLevels = navigateToMapLevels)
             }
         }
     }
@@ -47,6 +47,6 @@ fun WorldsMapContentPreview() {
             World(0, "test", 0, 0),
             World(0, "test", 0, 0)
         ),
-        navigateToLevel = {}
+        navigateToMapLevels = {}
     )
 }

@@ -9,7 +9,6 @@ import dorin_roman.app.kongfujava.navigation.child_destination.*
 import dorin_roman.app.kongfujava.navigation.screens.ChildScreens
 import dorin_roman.app.kongfujava.navigation.screens.ChildScreens.Companion.WORLDS_SCREEN
 
-const val CHILD_EXIT_NAVIGATION_ANIMATION_TIME_MILLIS = 500
 const val CHILD_ENTER_NAVIGATION_ANIMATION_TIME_MILLIS = 300
 
 @ExperimentalAnimationApi
@@ -26,7 +25,7 @@ fun ChildNavigation(
         startDestination = WORLDS_SCREEN
     ) {
         worldsComposable(
-            navigateToLevel = screen.navigateToLevelsScreen
+            navigateToMapLevels = screen.navigateToMapLevelsScreen
         )
         levelsComposable(
             navigateToTutorialLevel = screen.navigateToTutorialLevelScreen,
