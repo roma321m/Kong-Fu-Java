@@ -18,13 +18,14 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SupervisorDrawerMenuItem(
+    modifier: Modifier = Modifier,
     imageVector: ImageVector,
     text: String,
     onItemClick: () -> Unit,
     selected: Boolean = false
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(0.3f)
             .padding(4.dp)
             .clickable { onItemClick() },

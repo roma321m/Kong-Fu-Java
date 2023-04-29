@@ -22,6 +22,8 @@ fun SupervisorDrawer(
     scaffoldState: ScaffoldState,
     studentsModelList: List<StudentModel>,
     isAddUsers: Boolean,
+    refreshing: Boolean,
+    onRefresh: () -> Unit,
     onAddUsersSelected: (Boolean) -> Unit,
     onStudentSelected: (StudentModel) -> Unit,
     onLogOutClicked: () -> Unit,
@@ -59,7 +61,9 @@ fun SupervisorDrawer(
             studentsModelList = studentsModelList,
             coroutineScope = coroutineScope,
             scaffoldState = scaffoldState,
-            onStudentSelected = onStudentSelected
+            onStudentSelected = onStudentSelected,
+            refreshing = refreshing,
+            onRefresh = onRefresh
         )
 
         SupervisorDrawerSettings(
@@ -83,13 +87,15 @@ fun SupervisorDrawerPreview() {
             scaffoldState = rememberScaffoldState(),
             coroutineScope = rememberCoroutineScope(),
             studentsModelList = idList.map {
-                StudentModel("id$it", "test name $it", false)
+                StudentModel("id$it", "test name $it", 10, "ABCDEF",false)
             },
             onAddUsersSelected = {},
             onStudentSelected = {},
             onRevokeAccessClicked = {},
             onLogOutClicked = {},
-            isAddUsers = true
+            isAddUsers = true,
+            refreshing = false,
+            onRefresh = {},
         )
     }
 }

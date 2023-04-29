@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.screens.supervisor.StudentModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
@@ -18,8 +20,13 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 @Composable
 fun SupervisorProgressReportScreen(
     modifier: Modifier = Modifier,
-    studentModel: StudentModel
+    studentModel: StudentModel,
+    viewModel: SupervisorProgressReportViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(studentModel) {
+        viewModel.handle(SupervisorProgressReportEvent.UpdateSelectedStudent(studentModel))
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -34,12 +41,22 @@ fun SupervisorProgressReportScreen(
         Text(
             modifier = Modifier.padding(5.dp),
             style = MaterialTheme.typography.h5,
-            text = "id: ${studentModel.id}"
+            text = "id: ${viewModel.selectedStudent.id}"
         )
         Text(
             modifier = Modifier.padding(5.dp),
             style = MaterialTheme.typography.h5,
-            text = "name: ${studentModel.name}"
+            text = "name: ${viewModel.selectedStudent.name}"
+        )
+        Text(
+            modifier = Modifier.padding(5.dp),
+            style = MaterialTheme.typography.h5,
+            text = "age: ${viewModel.selectedStudent.age}"
+        )
+        Text(
+            modifier = Modifier.padding(5.dp),
+            style = MaterialTheme.typography.h5,
+            text = "Private Code: ${viewModel.selectedStudent.privateCode}"
         )
     }
 }
@@ -52,6 +69,8 @@ fun SupervisorProgressReportScreenPreview() {
             studentModel = StudentModel(
                 id = "id",
                 name = "name",
+                age = 10,
+                privateCode = "ABCDEF",
                 selected = true
             )
         )

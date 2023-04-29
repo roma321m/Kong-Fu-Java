@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.kongFuRed
 import dorin_roman.app.kongfujava.ui.theme.purpleColor1
@@ -53,7 +55,7 @@ fun ChildLoginCodeStep(
                     .fillMaxWidth(0.5f),
                 value = textCode,
                 onValueChange = { newTextCode ->
-                    onTextCodeChange(newTextCode)
+                    onTextCodeChange(newTextCode.uppercase())
                 },
                 trailingIcon = {
                     Icon(
@@ -64,6 +66,9 @@ fun ChildLoginCodeStep(
                 label = {
                     Text(stringResource(R.string.login_student_code))
                 },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Characters
+                ),
                 placeholder = {
                     Text(stringResource(R.string.login_enter_student_code))
                 },

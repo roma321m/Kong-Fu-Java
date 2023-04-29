@@ -68,4 +68,5 @@
     <string name="you_need_to_fill_in_your_name">You need to fill in your name</string>
     <string name="you_need_to_select_your_age">You need to select your age</string>
     <string name="levels_map">Levels Map</string>
+    <string name="no_users_found_pull_down_to_refresh">No Users Found, Pull Down To Refresh</string>
 </resources>

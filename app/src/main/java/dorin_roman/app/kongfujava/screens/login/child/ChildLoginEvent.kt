@@ -5,6 +5,4 @@ sealed class ChildLoginEvent {
     class OnNameChange(val name: String) : ChildLoginEvent()
     class OnAgeChange(val age: String) : ChildLoginEvent()
     class OnNextClick(val step: ChildLoginStepState) : ChildLoginEvent()
-    object CodeResponse : ChildLoginEvent()
-    object SaveUserResponse : ChildLoginEvent()
 }
