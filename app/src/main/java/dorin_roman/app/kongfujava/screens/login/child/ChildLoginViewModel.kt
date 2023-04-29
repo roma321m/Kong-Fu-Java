@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.models.UserType
+import dorin_roman.app.kongfujava.data.repository.ChildIdRepository
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
 import dorin_roman.app.kongfujava.di.provider.CodeProvider
 import dorin_roman.app.kongfujava.di.provider.IdProvider
@@ -29,6 +30,7 @@ import javax.inject.Inject
 class ChildLoginViewModel @Inject constructor(
     idProvider: IdProvider,
     codeProvider: CodeProvider,
+    private val childIdRepository: ChildIdRepository,
     private val codeRepository: CodeRepository,
     private val userTypeRepository: UserTypeRepository,
     private val usersRepository: UsersRepository,
@@ -123,7 +125,7 @@ class ChildLoginViewModel @Inject constructor(
 
     private fun login(childId: String) {
         Log.d(TAG, "login: $childId")
-        // TODO - save child id to data store preference
+        persistChildId(childId)
         persistUserType()
     }
 
@@ -162,7 +164,7 @@ class ChildLoginViewModel @Inject constructor(
         ).also { response ->
             if (response is RequestState.Success) {
                 if (response.data) {
-                    // TODO - save child id to data store preference
+                    persistChildId(childId)
                     persistUserType()
                 }
             } else if (response is RequestState.Error) {
@@ -175,9 +177,16 @@ class ChildLoginViewModel @Inject constructor(
     }
 
     private fun persistUserType() {
-        Log.d(TAG, "persistUserType - Teacher")
+        Log.d(TAG, "persistUserType")
         viewModelScope.launch(Dispatchers.IO) {
             userTypeRepository.persistUserType(UserType.Child)
+        }
+    }
+
+    private fun persistChildId(id: String) {
+        Log.d(TAG, "persistChildId")
+        viewModelScope.launch(Dispatchers.IO) {
+            childIdRepository.persistChildId(id)
         }
     }
 

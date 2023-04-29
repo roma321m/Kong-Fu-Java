@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.RequestState
+import dorin_roman.app.kongfujava.screens.worlds.components.WorldsEvent
 import dorin_roman.app.kongfujava.screens.worlds.components.WorldsMapContent
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.TopBar
+import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
@@ -28,7 +29,10 @@ fun WorldsMapScreen(
             TopBar(
                 onBackPressed = {},
                 title = R.string.worlds_map,
-                hasBackButton = false
+                hasBackButton = false,
+                onLogOutClicked = {
+                    worldsMapViewModel.handle(WorldsEvent.LogOut)
+                }
             )
         },
         content = { paddingValues ->
@@ -40,7 +44,6 @@ fun WorldsMapScreen(
                         .padding(paddingValues),
                     worlds = worlds.data,
                     navigateToMapLevels = navigateToMapLevels
-
                 )
             }
         }

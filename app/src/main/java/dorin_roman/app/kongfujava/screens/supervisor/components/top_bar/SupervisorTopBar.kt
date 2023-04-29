@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.components.Title
+import dorin_roman.app.kongfujava.ui.components.topbar.Title
 
 @Composable
 fun SupervisorTopBar(

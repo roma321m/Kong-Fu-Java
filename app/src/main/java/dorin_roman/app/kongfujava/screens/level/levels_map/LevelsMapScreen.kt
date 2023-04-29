@@ -13,7 +13,7 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsMapContent
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.TopBar
+import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable

@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components
+package dorin_roman.app.kongfujava.ui.components.topbar
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image

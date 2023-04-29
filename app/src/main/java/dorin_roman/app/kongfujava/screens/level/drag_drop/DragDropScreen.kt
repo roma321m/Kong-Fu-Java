@@ -12,7 +12,7 @@ import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropLef
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropRightScreenContent
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DraggableScreen
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.TopBar
+import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.components.VerticalFortySixtyLayout
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
