@@ -87,7 +87,7 @@ fun SupervisorDrawerPreview() {
             scaffoldState = rememberScaffoldState(),
             coroutineScope = rememberCoroutineScope(),
             studentsModelList = idList.map {
-                StudentModel("id$it", "test name $it", 10,false)
+                StudentModel("id$it", "test name $it", 10, "ABCDEF",false)
             },
             onAddUsersSelected = {},
             onStudentSelected = {},

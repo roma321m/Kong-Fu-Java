@@ -77,7 +77,7 @@ class SupervisorAddUsersViewModel @Inject constructor(
     private fun startTimer() {
         Log.d(TAG, "startTimer")
         hasActiveCode = true
-        createCode() // fixme - temp
+        createCode()
         timer = fixedRateTimer(initialDelay = 1000L, period = 1000L) {
             duration = duration.minus(1.seconds)
             if (duration == ZERO) {

@@ -114,6 +114,7 @@ class SupervisorViewModel @Inject constructor(
                                 id = response.data.id,
                                 name = response.data.name ?: "",
                                 age = response.data.age ?: 0,
+                                privateCode = response.data.privateCode,
                                 selected = false
                             )
                         )
@@ -266,6 +267,7 @@ class SupervisorViewModel @Inject constructor(
                     id = it.id,
                     name = it.name,
                     age = it.age,
+                    privateCode = it.privateCode,
                     selected = it == student
                 )
             }
@@ -276,11 +278,7 @@ class SupervisorViewModel @Inject constructor(
     private fun updatedIsAddUsers(selected: Boolean) {
         Log.d(TAG, "updatedIsAddUsers")
         isAddUsers = selected
-        selectedStudent = StudentModel(
-            id = "",
-            name = "",
-            selected = false
-        )
+        selectedStudent = StudentModel()
         if (selected) {
             studentsModelList.forEach {
                 it.selected = false
