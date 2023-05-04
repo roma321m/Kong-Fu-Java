@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components
+package dorin_roman.app.kongfujava.ui.components.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,52 +17,50 @@ import androidx.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun CustomLayoutOne(
-    topStartLayout: @Composable () -> Unit,
-    topEndLayout: @Composable () -> Unit,
-    bottomLayout: @Composable () -> Unit,
-    bottomWeight: Float = 0.6f,
-    topWeight: Float = 0.4f,
-    topStartWeight: Float = 0.5f,
-    topEndWeight: Float = 0.5f,
+fun CustomLayout3(
+    startLayout: @Composable () -> Unit,
+    endTopLayout: @Composable () -> Unit,
+    endBottomLayout: @Composable () -> Unit,
+    startWeight: Float = 0.6f,
+    endWeight: Float = 0.4f,
+    endTopWeight: Float = 0.5f,
+    endBottomWeight: Float = 0.5f,
 ) {
     Surface {
-        Column(
+        Row(
             modifier = Modifier.fillMaxSize()
         ) {
-            Row(
+            Box(
                 modifier = Modifier
-                    .weight(topWeight)
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colors.background),
+                    .weight(startWeight)
+                    .fillMaxHeight(),
+                contentAlignment = Alignment.Center,
+                content = {
+                    startLayout()
+                }
+            )
+            Column(
+                modifier = Modifier
+                    .weight(endWeight)
+                    .fillMaxHeight(),
             ) {
                 Box(
                     modifier = Modifier
-                        .weight(topStartWeight)
-                        .fillMaxHeight(),
+                        .weight(endTopWeight)
+                        .fillMaxWidth(),
                     content = {
-                        topStartLayout()
+                        endTopLayout()
                     }
                 )
                 Box(
                     modifier = Modifier
-                        .weight(topEndWeight)
-                        .fillMaxHeight(),
+                        .weight(endBottomWeight)
+                        .fillMaxWidth(),
                     content = {
-                        topEndLayout()
+                        endBottomLayout()
                     }
                 )
             }
-            Box(
-                modifier = Modifier
-                    .weight(bottomWeight)
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colors.primary),
-                contentAlignment = Alignment.Center,
-                content = {
-                    bottomLayout()
-                }
-            )
         }
     }
 }
@@ -74,23 +71,23 @@ fun CustomLayoutOne(
     showBackground = true,
 )
 @Composable
-fun CustomLayoutOnePreview() {
-    CustomLayoutOne(
-        topStartLayout = {
+fun CustomLayout3Preview() {
+    CustomLayout3(
+        startLayout = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Blue)
             )
         },
-        topEndLayout = {
+        endTopLayout = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Red)
             )
         },
-        bottomLayout = {
+        endBottomLayout = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

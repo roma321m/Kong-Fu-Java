@@ -7,9 +7,9 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.screens.login.supervisor.components.SupervisorLoginContentTopEnd
 import dorin_roman.app.kongfujava.screens.login.supervisor.components.SupervisorLoginContentTopStart
-import dorin_roman.app.kongfujava.ui.components.CustomLayoutOne
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.SideScreenImage
+import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout1
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 
@@ -20,7 +20,7 @@ fun SupervisorLoginScreen(
     navigateToParentRegisterScreen: () -> Unit,
     userType: UserType
 ) {
-    CustomLayoutOne(
+    CustomLayout1(
         topStartLayout = {
             SupervisorLoginContentTopStart()
         },

@@ -6,15 +6,15 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.login.child.components.ChildLoginContentTopEnd
 import dorin_roman.app.kongfujava.screens.login.child.components.ChildLoginTopLeft
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.CustomLayoutOne
 import dorin_roman.app.kongfujava.ui.components.SideScreenImage
+import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout1
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun ChildLoginScreen(
     viewModel: ChildLoginViewModel = hiltViewModel(),
 ) {
-    CustomLayoutOne(
+    CustomLayout1(
         topStartLayout = {
             ChildLoginTopLeft()
         },
