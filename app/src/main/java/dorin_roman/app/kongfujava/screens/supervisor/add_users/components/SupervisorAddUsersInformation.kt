@@ -1,53 +1,59 @@
 package dorin_roman.app.kongfujava.screens.supervisor.add_users.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.Card
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import dorin_roman.app.kongfujava.ui.theme.elevation
+import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
 @Composable
 fun SupervisorAddUsersInformation(
     modifier: Modifier = Modifier
 ) {
-    Card(
+    Column(
         modifier = modifier,
-        elevation = MaterialTheme.elevation.default
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
+        Image(
             modifier = Modifier
-                .width(400.dp),
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+                .padding(
+                    top = MaterialTheme.spacing.extraLarge,
+                    bottom = MaterialTheme.spacing.large,
+                    start = MaterialTheme.spacing.large,
+                    end = MaterialTheme.spacing.large
+                )
+                .sizeIn(maxHeight = 150.dp),
+            painter = painterResource(id = R.drawable.ic_logo),
+            contentDescription = stringResource(id = R.string.app_logo),
+            contentScale = ContentScale.Fit
+        )
 
-            Text(
-                modifier = Modifier
-                    .padding(8.dp),
-                text = "Create New Code",
-                style = MaterialTheme.typography.h5
-            )
+        Text(
+            text = stringResource(R.string.create_new_code),
+            style = MaterialTheme.typography.h5,
+            textAlign = TextAlign.Center
+        )
 
-            Spacer(modifier = Modifier.size(8.dp))
-
-            Text(
-                modifier = Modifier
-                    .padding(8.dp),
-                text = "By creating a code you can link new users to your account.\nYour user will control those accounts login info and you will get the progress reports for those users",
-                style = MaterialTheme.typography.subtitle1
-            )
-
-            Spacer(modifier = Modifier.size(8.dp))
-        }
+        Text(
+            modifier = Modifier
+                .padding(MaterialTheme.spacing.large),
+            text = stringResource(R.string.add_users_info_body),
+            style = MaterialTheme.typography.h6,
+            textAlign = TextAlign.Center
+        )
     }
 }

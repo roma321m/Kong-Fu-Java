@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.screens.supervisor.StudentModel
-import dorin_roman.app.kongfujava.ui.scrollbar.simpleVerticalScrollbar
+import dorin_roman.app.kongfujava.ui.components.scrollbar.simpleVerticalScrollbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

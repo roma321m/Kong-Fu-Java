@@ -18,15 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CustomLayout1(
-    topStartLayout: @Composable () -> Unit,
-    topEndLayout: @Composable () -> Unit,
-    bottomLayout: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    topStartContent: @Composable () -> Unit,
+    topEndContent: @Composable () -> Unit,
+    bottomContent: @Composable () -> Unit,
     bottomWeight: Float = 0.6f,
     topWeight: Float = 0.4f,
     topStartWeight: Float = 0.5f,
     topEndWeight: Float = 0.5f,
 ) {
-    Surface {
+    Surface(modifier) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -40,7 +41,7 @@ fun CustomLayout1(
                         .weight(topStartWeight)
                         .fillMaxHeight(),
                     content = {
-                        topStartLayout()
+                        topStartContent()
                     }
                 )
                 Box(
@@ -48,7 +49,7 @@ fun CustomLayout1(
                         .weight(topEndWeight)
                         .fillMaxHeight(),
                     content = {
-                        topEndLayout()
+                        topEndContent()
                     }
                 )
             }
@@ -58,7 +59,7 @@ fun CustomLayout1(
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center,
                 content = {
-                    bottomLayout()
+                    bottomContent()
                 }
             )
         }
@@ -73,21 +74,21 @@ fun CustomLayout1(
 @Composable
 fun CustomLayout1Preview() {
     CustomLayout1(
-        topStartLayout = {
+        topStartContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Blue)
             )
         },
-        topEndLayout = {
+        topEndContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Red)
             )
         },
-        bottomLayout = {
+        bottomContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

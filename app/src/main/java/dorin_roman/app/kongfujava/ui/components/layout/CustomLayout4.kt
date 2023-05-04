@@ -17,10 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CustomLayout4(
-    startTopLayout: @Composable () -> Unit,
-    startBottomLayout: @Composable () -> Unit,
-    endTopLayout: @Composable () -> Unit,
-    endBottomLayout: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    startTopContent: @Composable () -> Unit,
+    startBottomContent: @Composable () -> Unit,
+    endTopContent: @Composable () -> Unit,
+    endBottomContent: @Composable () -> Unit,
     startWeight: Float = 0.5f,
     endWeight: Float = 0.5f,
     startTopWeight: Float = 0.5f,
@@ -28,7 +29,7 @@ fun CustomLayout4(
     endTopWeight: Float = 0.5f,
     endBottomWeight: Float = 0.5f,
 ) {
-    Surface {
+    Surface(modifier) {
         Row(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -42,7 +43,7 @@ fun CustomLayout4(
                         .weight(startTopWeight)
                         .fillMaxWidth(),
                     content = {
-                        startTopLayout()
+                        startTopContent()
                     }
                 )
                 Box(
@@ -50,7 +51,7 @@ fun CustomLayout4(
                         .weight(startBottomWeight)
                         .fillMaxWidth(),
                     content = {
-                        startBottomLayout()
+                        startBottomContent()
                     }
                 )
             }
@@ -64,7 +65,7 @@ fun CustomLayout4(
                         .weight(endTopWeight)
                         .fillMaxWidth(),
                     content = {
-                        endTopLayout()
+                        endTopContent()
                     }
                 )
                 Box(
@@ -72,7 +73,7 @@ fun CustomLayout4(
                         .weight(endBottomWeight)
                         .fillMaxWidth(),
                     content = {
-                        endBottomLayout()
+                        endBottomContent()
                     }
                 )
             }
@@ -88,28 +89,28 @@ fun CustomLayout4(
 @Composable
 fun CustomLayout4Preview() {
     CustomLayout4(
-        startTopLayout = {
+        startTopContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Blue)
             )
         },
-        startBottomLayout = {
+        startBottomContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Red)
             )
         },
-        endTopLayout = {
+        endTopContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Yellow)
             )
         },
-        endBottomLayout = {
+        endBottomContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

@@ -13,7 +13,7 @@ fun SupervisorAddUsersImage(
 ) {
     Image(
         modifier = modifier,
-        painter = painterResource(id = R.drawable.ic_panda_ninja),
+        painter = painterResource(id = R.drawable.img_panda_add_users),
         contentScale = ContentScale.FillBounds,
         contentDescription = null
     )

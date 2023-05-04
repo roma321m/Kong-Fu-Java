@@ -70,4 +70,9 @@
     <string name="levels_map">Levels Map</string>
     <string name="no_users_found_pull_down_to_refresh">No Users Found, Pull Down To Refresh</string>
     <string name="logout">LogOut</string>
+    <string name="create_new_code">Create New Code</string>
+    <string name="add_users_info_body">By creating a code you can link new users to your account.\nYour user will control those accounts login info and you will get the progress reports for those users</string>
+    <string name="code_will_be_valid_for_5_minutes_only">Code will be valid for 5 minutes only</string>
+    <string name="you_can_generate_as_many_codes_as_you_need">You can generate as many codes as you need</string>
+    <string name="generate_code">Generate Code</string>
 </resources>

@@ -18,15 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CustomLayout2(
-    startTopLayout: @Composable () -> Unit,
-    startBottomLayout: @Composable () -> Unit,
-    endLayout: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    startTopContent: @Composable () -> Unit,
+    startBottomContent: @Composable () -> Unit,
+    endContent: @Composable () -> Unit,
     startWeight: Float = 0.4f,
     endWeight: Float = 0.6f,
     startTopWeight: Float = 0.5f,
     startBottomWeight: Float = 0.5f,
 ) {
-    Surface {
+    Surface(modifier) {
         Row(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -40,7 +41,7 @@ fun CustomLayout2(
                         .weight(startTopWeight)
                         .fillMaxWidth(),
                     content = {
-                        startTopLayout()
+                        startTopContent()
                     }
                 )
                 Box(
@@ -48,7 +49,7 @@ fun CustomLayout2(
                         .weight(startBottomWeight)
                         .fillMaxWidth(),
                     content = {
-                        startBottomLayout()
+                        startBottomContent()
                     }
                 )
             }
@@ -58,7 +59,7 @@ fun CustomLayout2(
                     .fillMaxHeight(),
                 contentAlignment = Alignment.Center,
                 content = {
-                    endLayout()
+                    endContent()
                 }
             )
         }
@@ -73,21 +74,21 @@ fun CustomLayout2(
 @Composable
 fun CustomLayout2Preview() {
     CustomLayout2(
-        startTopLayout = {
+        startTopContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Blue)
             )
         },
-        startBottomLayout = {
+        startBottomContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Red)
             )
         },
-        endLayout = {
+        endContent = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

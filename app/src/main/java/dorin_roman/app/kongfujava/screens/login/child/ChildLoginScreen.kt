@@ -15,10 +15,10 @@ fun ChildLoginScreen(
     viewModel: ChildLoginViewModel = hiltViewModel(),
 ) {
     CustomLayout1(
-        topStartLayout = {
+        topStartContent = {
             ChildLoginTopLeft()
         },
-        topEndLayout = {
+        topEndContent = {
             ChildLoginContentTopEnd(
                 showLoading = {
                     false // fixme show loading on firebase calls
@@ -49,7 +49,7 @@ fun ChildLoginScreen(
                 }
             )
         },
-        bottomLayout = {
+        bottomContent = {
             SideScreenImage(R.drawable.ic_panda_login)
         }
     )

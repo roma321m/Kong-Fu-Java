@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.scrollbar
+package dorin_roman.app.kongfujava.ui.components.scrollbar
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween

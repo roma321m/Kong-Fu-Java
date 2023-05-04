@@ -21,10 +21,10 @@ fun SupervisorLoginScreen(
     userType: UserType
 ) {
     CustomLayout1(
-        topStartLayout = {
+        topStartContent = {
             SupervisorLoginContentTopStart()
         },
-        topEndLayout = {
+        topEndContent = {
             SupervisorLoginContentTopEnd(
                 showLoading = viewModel.showLoading,
                 email = viewModel.email,
@@ -47,7 +47,7 @@ fun SupervisorLoginScreen(
                 },
             )
         },
-        bottomLayout = {
+        bottomContent = {
             SideScreenImage(R.drawable.ic_panda_login)
         },
     )
