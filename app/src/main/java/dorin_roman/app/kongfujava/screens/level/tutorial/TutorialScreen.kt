@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialScreenContent
 import dorin_roman.app.kongfujava.ui.components.*
+import dorin_roman.app.kongfujava.ui.components.media.VideoView
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
@@ -35,7 +36,9 @@ fun TutorialScreen(
                     TutorialScreenContent()
                 },
                 sixtyLayout = {
-                    SideScreenImage(R.drawable.ic_panda_question)
+                    VideoView(
+                        url = "https://raw.githubusercontent.com/roma321m/testing/main/level1.mp4" // fixme - temp
+                    )
                 }
             )
         }

@@ -1,6 +1,9 @@
 package dorin_roman.app.kongfujava.di
 
+import android.app.Application
 import android.content.Context
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
@@ -54,6 +57,12 @@ object DatabaseModule {
 
     @Provides
     fun provideId(): IdProvider = IdProvider
+
+    @Provides
+    fun provideVideoPlayer(app: Application) : Player {
+        return ExoPlayer.Builder(app)
+            .build()
+    }
 
     @Provides
     fun provideDataBase(
