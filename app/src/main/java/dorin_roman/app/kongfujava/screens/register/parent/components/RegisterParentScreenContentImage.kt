@@ -13,7 +13,7 @@ fun RegisterParentScreenContentImage() {
     Image(
         modifier = Modifier
             .fillMaxSize(),
-        painter = painterResource(id = R.drawable.ic_logo),
+        painter = painterResource(id = R.drawable.img_logo_white_round),
         contentDescription = stringResource(id = R.string.app_logo)
     )
 }

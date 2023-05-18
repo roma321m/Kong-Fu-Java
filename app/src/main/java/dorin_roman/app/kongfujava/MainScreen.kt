@@ -15,20 +15,22 @@ import dorin_roman.app.kongfujava.screens.supervisor.SupervisorScreen
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MainScreen(
+    onDataLoaded: () -> Unit,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     lateinit var navController: NavHostController
     val userType = mainViewModel.userType.collectAsState().value
 
     if (userType is RequestState.Success) {
+        onDataLoaded() // Can use this to while loading user data as well.
         when (userType.data) {
             UserType.None -> {
                 navController = rememberAnimatedNavController()
-                // FIXME - remove splash screen from main nav
                 MainNavigation(
                     navController = navController
                 )
             }
+
             UserType.Child -> {
                 navController = rememberAnimatedNavController()
                 ChildNavigation(

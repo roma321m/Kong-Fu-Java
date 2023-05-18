@@ -31,7 +31,7 @@ fun ChildLoginTopLeft() {
         Image(
             modifier = Modifier
                 .size(150.dp, 150.dp),
-            painter = painterResource(id = R.drawable.ic_logo),
+            painter = painterResource(id = R.drawable.img_logo_white_round),
             contentDescription = stringResource(id = R.string.app_logo)
         )
 

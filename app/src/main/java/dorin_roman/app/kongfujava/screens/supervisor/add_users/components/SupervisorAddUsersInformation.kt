@@ -37,7 +37,7 @@ fun SupervisorAddUsersInformation(
                     end = MaterialTheme.spacing.large
                 )
                 .sizeIn(maxHeight = 150.dp),
-            painter = painterResource(id = R.drawable.ic_logo),
+            painter = painterResource(id = R.drawable.img_logo_white_round),
             contentDescription = stringResource(id = R.string.app_logo),
             contentScale = ContentScale.Fit
         )
