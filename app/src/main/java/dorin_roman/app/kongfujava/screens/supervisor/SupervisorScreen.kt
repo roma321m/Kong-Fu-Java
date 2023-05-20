@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.UserType
@@ -63,7 +62,7 @@ fun SupervisorScreen(
                 }
             )
         },
-        drawerShape = SupervisorDrawerShape(0.dp, 0.31f),
+        drawerShape = SupervisorDrawerShape(0.31f),
         drawerGesturesEnabled = true,
         content = { paddingValues ->
             if (viewModel.isAddUsers) {

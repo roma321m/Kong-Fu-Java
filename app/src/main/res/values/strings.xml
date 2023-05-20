@@ -75,4 +75,13 @@
     <string name="code_will_be_valid_for_5_minutes_only">Code will be valid for 5 minutes only</string>
     <string name="you_can_generate_as_many_codes_as_you_need">You can generate as many codes as you need</string>
     <string name="generate_code">Generate Code</string>
+    <string name="user_info">User Info</string>
+    <string name="last_7_days_of_activity">Last 7 Days Of Activity</string>
+    <string name="levels">Levels</string>
+    <string name="overall_statistics">Overall Statistics</string>
+    <string name="activity">Activity</string>
+    <string name="statistics">Statistics</string>
+    <string name="helps">Helps</string>
+    <string name="attempts">Attempts</string>
+    <string name="mistakes">Mistakes</string>
 </resources>
