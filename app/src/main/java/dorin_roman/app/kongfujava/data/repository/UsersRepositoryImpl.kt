@@ -40,6 +40,15 @@ class UsersRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateTeacherImage(id: String, imageUrl: String): RequestState<Boolean> {
+        return try {
+            teacherRef.child(id).child("imageUrl").setValue(imageUrl).await()
+            Success(true)
+        } catch (exception: Exception) {
+            Error(exception)
+        }
+    }
+
     override suspend fun deleteTeacher(id: String): RequestState<Boolean> {
         return try {
             teacherRef.child(id).removeValue().await()
@@ -69,6 +78,15 @@ class UsersRepositoryImpl @Inject constructor(
     override suspend fun createParent(parent: Parent): RequestState<Boolean> {
         return try {
             parentRef.child(parent.id).setValue(parent).await()
+            Success(true)
+        } catch (exception: Exception) {
+            Error(exception)
+        }
+    }
+
+    override suspend fun updateParentImage(id: String, imageUrl: String): RequestState<Boolean> {
+        return try {
+            parentRef.child(id).child("imageUrl").setValue(imageUrl).await()
             Success(true)
         } catch (exception: Exception) {
             Error(exception)

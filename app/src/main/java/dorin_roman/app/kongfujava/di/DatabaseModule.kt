@@ -2,8 +2,9 @@ package dorin_roman.app.kongfujava.di
 
 import android.content.Context
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,6 +13,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dorin_roman.app.kongfujava.data.repository.AuthRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.CodesRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.LinkedAccountsRepositoryImpl
+import dorin_roman.app.kongfujava.data.repository.ProfileImageRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.UsersRepositoryImpl
 import dorin_roman.app.kongfujava.di.provider.CodeProvider
 import dorin_roman.app.kongfujava.di.provider.IdProvider
@@ -19,6 +21,7 @@ import dorin_roman.app.kongfujava.di.provider.KongFuDatabaseProvider
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
 import dorin_roman.app.kongfujava.domain.repository.LinkedAccountsRepository
+import dorin_roman.app.kongfujava.domain.repository.ProfileImageRepository
 import dorin_roman.app.kongfujava.domain.repository.UsersRepository
 import dorin_roman.app.kongfujava.domain.source.KongFuDataBase
 import dorin_roman.app.kongfujava.domain.source.LevelDao
@@ -35,18 +38,23 @@ object DatabaseModule {
     )
 
     @Provides
+    fun provideProfileImageRepository(): ProfileImageRepository = ProfileImageRepositoryImpl(
+        storage = Firebase.storage
+    )
+
+    @Provides
     fun provideUsersRepository(): UsersRepository = UsersRepositoryImpl(
-        database = FirebaseDatabase.getInstance()
+        database = Firebase.database
     )
 
     @Provides
     fun provideCodesRepository(): CodeRepository = CodesRepositoryImpl(
-        database = FirebaseDatabase.getInstance()
+        database = Firebase.database
     )
 
     @Provides
     fun provideLinkedAccountsRepository(): LinkedAccountsRepository = LinkedAccountsRepositoryImpl(
-        database = FirebaseDatabase.getInstance()
+        database = Firebase.database
     )
 
     @Provides

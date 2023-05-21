@@ -11,6 +11,11 @@ interface UsersRepository {
         teacher: Teacher
     ): RequestState<Boolean>
 
+    suspend fun updateTeacherImage(
+        id: String,
+        imageUrl: String
+    ): RequestState<Boolean>
+
     suspend fun deleteTeacher(
         id: String
     ): RequestState<Boolean>
@@ -21,6 +26,11 @@ interface UsersRepository {
 
     suspend fun createParent(
         parent: Parent
+    ): RequestState<Boolean>
+
+    suspend fun updateParentImage(
+        id: String,
+        imageUrl: String
     ): RequestState<Boolean>
 
     suspend fun deleteParent(

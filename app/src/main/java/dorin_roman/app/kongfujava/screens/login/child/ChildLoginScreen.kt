@@ -32,9 +32,15 @@ fun ChildLoginScreen(
                 ageVisibility = {
                     viewModel.stepState == ChildLoginStepState.AGE
                 },
+                imageVisibility = {
+                    viewModel.stepState == ChildLoginStepState.IMAGE
+                },
                 textCode = viewModel.studentCode,
                 name = viewModel.studentName,
                 age = viewModel.studentAge,
+                onImageChange = { image ->
+                    viewModel.handle(ChildLoginEvent.OnImageChange(image))
+                },
                 onTextCodeChange = { newTextCode ->
                     viewModel.handle(ChildLoginEvent.OnCodeChange(newTextCode))
                 },

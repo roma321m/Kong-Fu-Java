@@ -9,10 +9,6 @@ enum class ChildToast(
     @StringRes override val text: Int,
     override val duration: Int
 ) : IToast {
-    LogOut(
-        text = R.string.log_out_successfully,
-        duration = Toast.LENGTH_LONG
-    ),
     SomethingWentWrong(
         text = R.string.something_went_wrong,
         duration = Toast.LENGTH_LONG
@@ -31,6 +27,10 @@ enum class ChildToast(
     ),
     FillYourAge(
         text = R.string.you_need_to_select_your_age,
+        duration = Toast.LENGTH_SHORT
+    ),
+    AddAnImage(
+        text = R.string.you_need_to_add_an_image,
         duration = Toast.LENGTH_SHORT
     )
 }

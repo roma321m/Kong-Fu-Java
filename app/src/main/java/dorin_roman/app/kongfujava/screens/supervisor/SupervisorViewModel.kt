@@ -1,5 +1,6 @@
 package dorin_roman.app.kongfujava.screens.supervisor
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,13 +9,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
-import dorin_roman.app.kongfujava.data.models.RequestState.*
+import dorin_roman.app.kongfujava.data.models.RequestState.Error
+import dorin_roman.app.kongfujava.data.models.RequestState.Idle
+import dorin_roman.app.kongfujava.data.models.RequestState.Loading
+import dorin_roman.app.kongfujava.data.models.RequestState.Success
 import dorin_roman.app.kongfujava.data.models.UserType
-import dorin_roman.app.kongfujava.data.models.UserType.*
+import dorin_roman.app.kongfujava.data.models.UserType.None
+import dorin_roman.app.kongfujava.data.models.UserType.Parent
+import dorin_roman.app.kongfujava.data.models.UserType.Teacher
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
 import dorin_roman.app.kongfujava.domain.models.users.User
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.LinkedAccountsRepository
+import dorin_roman.app.kongfujava.domain.repository.ProfileImageRepository
 import dorin_roman.app.kongfujava.domain.repository.UsersRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +31,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SupervisorViewModel @Inject constructor(
     private val authRepository: AuthRepository,
+    private val profileImageRepository: ProfileImageRepository,
     private val usersRepository: UsersRepository,
     private val userTypeRepository: UserTypeRepository,
     private val linkedAccountsRepository: LinkedAccountsRepository,
@@ -41,6 +49,9 @@ class SupervisorViewModel @Inject constructor(
         private set
 
     var studentsModelList by mutableStateOf(listOf<StudentModel>())
+        private set
+
+    var supervisorModel by mutableStateOf(SupervisorModel())
         private set
 
     var selectedStudent by mutableStateOf(StudentModel())
@@ -69,6 +80,7 @@ class SupervisorViewModel @Inject constructor(
             is SupervisorEvent.AddUsersSelected -> updatedIsAddUsers(event.selected)
             is SupervisorEvent.SelectStudent -> selectStudent(event.student)
             is SupervisorEvent.InitData -> initData(event.userType)
+            is SupervisorEvent.ImageSelected -> uploadImage(event.image)
             SupervisorEvent.LogOut -> logOut()
             SupervisorEvent.RevokeAccess -> revokeAccess()
             SupervisorEvent.RefreshChildrenList -> {
@@ -102,6 +114,70 @@ class SupervisorViewModel @Inject constructor(
             }
     }
 
+    private fun uploadImage(image: Uri) = viewModelScope.launch {
+        Log.d(TAG, "uploadImage")
+        profileImageRepository.addImageToCouldStorage(
+            uid = userId,
+            imageUri = image
+        ).also { response ->
+            if (response is Success) {
+                updateUser(response.data)
+            } else if (response is Error) {
+                response.apply {
+                    toastLauncher.launch(SupervisorToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
+    private fun updateUser(url: String) {
+        Log.d(TAG, "updateUser")
+        if (userType == Teacher) {
+            updateTeacherUser(url)
+        } else if (userType == Parent) {
+            updateParentUser(url)
+        }
+    }
+
+    private fun updateParentUser(url: String) = viewModelScope.launch {
+        Log.d(TAG, "updateParentUser")
+        usersRepository.updateParentImage(
+            userId,
+            url
+        ).also { response ->
+            if (response is Success) {
+                if (response.data) {
+                    getParentData()
+                }
+            } else if (response is Error) {
+                response.apply {
+                    toastLauncher.launch(SupervisorToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
+    private fun updateTeacherUser(url: String) = viewModelScope.launch {
+        Log.d(TAG, "updateTeacherUser")
+        usersRepository.updateTeacherImage(
+            userId,
+            url
+        ).also { response ->
+            if (response is Success) {
+                if (response.data) {
+                    getTeacherData()
+                }
+            } else if (response is Error) {
+                response.apply {
+                    toastLauncher.launch(SupervisorToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
     private fun loadChildrenData() = viewModelScope.launch {
         Log.d(TAG, "loadChildrenData")
         val newList: MutableList<StudentModel> = mutableListOf()
@@ -114,6 +190,7 @@ class SupervisorViewModel @Inject constructor(
                                 id = response.data.id,
                                 name = response.data.name ?: "",
                                 age = response.data.age ?: 0,
+                                imageUrl = response.data.imageUrl,
                                 privateCode = response.data.privateCode,
                                 selected = false
                             )
@@ -210,6 +287,13 @@ class SupervisorViewModel @Inject constructor(
             .also { response ->
                 if (response is Success) {
                     currentUser = response.data
+                    supervisorModel = SupervisorModel(
+                        id = response.data.id,
+                        email = response.data.email ?: "",
+                        imageUrl = response.data.imageUrl,
+                        className = response.data.className ?: "",
+                        schoolName = response.data.schoolName ?: "",
+                    )
                 } else if (response is Error) {
                     response.apply {
                         toastLauncher.launch(SupervisorToast.SomethingWentWrong)
@@ -226,6 +310,11 @@ class SupervisorViewModel @Inject constructor(
             .also { response ->
                 if (response is Success) {
                     currentUser = response.data
+                    supervisorModel = SupervisorModel(
+                        id = response.data.id,
+                        email = response.data.email ?: "",
+                        imageUrl = response.data.imageUrl
+                    )
                 } else if (response is Error) {
                     response.apply {
                         toastLauncher.launch(SupervisorToast.SomethingWentWrong)
@@ -267,6 +356,7 @@ class SupervisorViewModel @Inject constructor(
                     id = it.id,
                     name = it.name,
                     age = it.age,
+                    imageUrl = it.imageUrl,
                     privateCode = it.privateCode,
                     selected = it == student
                 )

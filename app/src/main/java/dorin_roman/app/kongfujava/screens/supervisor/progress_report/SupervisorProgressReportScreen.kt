@@ -25,7 +25,9 @@ fun SupervisorProgressReportScreen(
         modifier = modifier,
         startTopContent = {
             SupervisorProgressReportUserInfo(
-                studentModel = viewModel.selectedStudent
+                studentModel = viewModel.selectedStudent,
+                world = "Variables", // fixme - firebase
+                level = 5 // fixme - firebase
             )
         },
         endTopContent = {

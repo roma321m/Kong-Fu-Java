@@ -84,4 +84,7 @@
     <string name="helps">Helps</string>
     <string name="attempts">Attempts</string>
     <string name="mistakes">Mistakes</string>
+    <string name="you_need_to_add_an_image">You need to add an image</string>
+    <string name="picture">Picture</string>
+    <string name="add_a_picture">Add a Picture</string>
 </resources>

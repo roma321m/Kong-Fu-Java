@@ -1,6 +1,7 @@
 package dorin_roman.app.kongfujava.screens.supervisor.components.drawer
 
 
+import android.net.Uri
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ScaffoldState
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import dorin_roman.app.kongfujava.screens.supervisor.StudentModel
+import dorin_roman.app.kongfujava.screens.supervisor.SupervisorModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import kotlinx.coroutines.CoroutineScope
@@ -20,10 +22,12 @@ import kotlinx.coroutines.CoroutineScope
 fun SupervisorDrawer(
     coroutineScope: CoroutineScope,
     scaffoldState: ScaffoldState,
+    supervisorModel: SupervisorModel,
     studentsModelList: List<StudentModel>,
     isAddUsers: Boolean,
     refreshing: Boolean,
     onRefresh: () -> Unit,
+    onImageSelected: (Uri) -> Unit,
     onAddUsersSelected: (Boolean) -> Unit,
     onStudentSelected: (StudentModel) -> Unit,
     onLogOutClicked: () -> Unit,
@@ -37,6 +41,13 @@ fun SupervisorDrawer(
         val (header, addUsers, users, settings) = createRefs()
 
         SupervisorDrawerHeader(
+            imageUrl = supervisorModel.imageUrl.ifBlank {
+                "https://firebasestorage.googleapis.com/v0/b/kong-fu-java.appspot.com/o/images%2Fno-profile-picture.jpg?alt=media&token=a8888095-d35f-45b5-ae1a-c560f1c64ec2"
+            },
+            email = supervisorModel.email,
+            className = supervisorModel.className,
+            schoolName = supervisorModel.schoolName,
+            onImageSelected = onImageSelected,
             modifier = Modifier.constrainAs(header) {
                 top.linkTo(parent.top, margin = 16.dp)
             }
@@ -86,9 +97,11 @@ fun SupervisorDrawerPreview() {
         SupervisorDrawer(
             scaffoldState = rememberScaffoldState(),
             coroutineScope = rememberCoroutineScope(),
+            supervisorModel = SupervisorModel(),
             studentsModelList = idList.map {
-                StudentModel("id$it", "test name $it", 10, "ABCDEF",false)
+                StudentModel("id$it", "test name $it", 10, "url", "ABCDEF", false)
             },
+            onImageSelected = {},
             onAddUsersSelected = {},
             onStudentSelected = {},
             onRevokeAccessClicked = {},

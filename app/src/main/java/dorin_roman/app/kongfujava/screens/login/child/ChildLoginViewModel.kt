@@ -1,5 +1,6 @@
 package dorin_roman.app.kongfujava.screens.login.child
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +21,7 @@ import dorin_roman.app.kongfujava.domain.models.codes.PublicCode
 import dorin_roman.app.kongfujava.domain.models.users.Child
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
 import dorin_roman.app.kongfujava.domain.repository.LinkedAccountsRepository
+import dorin_roman.app.kongfujava.domain.repository.ProfileImageRepository
 import dorin_roman.app.kongfujava.domain.repository.UsersRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +33,7 @@ class ChildLoginViewModel @Inject constructor(
     idProvider: IdProvider,
     codeProvider: CodeProvider,
     private val childIdRepository: ChildIdRepository,
+    private val profileImageRepository: ProfileImageRepository,
     private val codeRepository: CodeRepository,
     private val userTypeRepository: UserTypeRepository,
     private val usersRepository: UsersRepository,
@@ -56,6 +59,10 @@ class ChildLoginViewModel @Inject constructor(
 
     private val privateCode = codeProvider.provide()
 
+    private var studentImage: Uri by mutableStateOf(Uri.EMPTY)
+
+    private var imageUrl: String = ""
+
     private var codeRequest by mutableStateOf<RequestState<Code>>(RequestState.Idle)
 
     private var saveUserRequest by mutableStateOf<RequestState<Boolean>>(RequestState.Idle)
@@ -74,6 +81,7 @@ class ChildLoginViewModel @Inject constructor(
             is ChildLoginEvent.OnAgeChange -> updateAge(event.age)
             is ChildLoginEvent.OnCodeChange -> updateTextCode(event.code)
             is ChildLoginEvent.OnNameChange -> updateName(event.name)
+            is ChildLoginEvent.OnImageChange -> updateImage(event.imageUri)
             is ChildLoginEvent.OnNextClick -> updateStep(event.step)
         }
     }
@@ -84,7 +92,8 @@ class ChildLoginViewModel @Inject constructor(
             ChildLoginStepState.CODE -> {}
             ChildLoginStepState.NAME -> codeEntered()
             ChildLoginStepState.AGE -> nameEntered()
-            ChildLoginStepState.FINAL -> ageEntered()
+            ChildLoginStepState.IMAGE -> ageEntered()
+            ChildLoginStepState.FINAL -> imageEntered()
         }
     }
 
@@ -135,6 +144,7 @@ class ChildLoginViewModel @Inject constructor(
         saveUserRequest = usersRepository.createChild(
             Child(
                 id = childId,
+                imageUrl = imageUrl,
                 privateCode = privateCode,
                 name = studentName,
                 age = studentAge.toInt(),
@@ -190,6 +200,24 @@ class ChildLoginViewModel @Inject constructor(
         }
     }
 
+    private fun createImage() = viewModelScope.launch {
+        Log.d(TAG, "createImage")
+        profileImageRepository.addImageToCouldStorage(
+            uid = childId,
+            imageUri = studentImage
+        ).also { response ->
+            if (response is RequestState.Success) {
+                imageUrl = response.data
+                createPrivateCode()
+            } else if (response is RequestState.Error) {
+                response.apply {
+                    toastLauncher.launch(ChildToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
     private fun createPrivateCode() = viewModelScope.launch {
         Log.d(TAG, "createPrivateCode")
         codeRepository.createPrivateCode(
@@ -216,8 +244,16 @@ class ChildLoginViewModel @Inject constructor(
             toastLauncher.launch(ChildToast.FillYourAge)
             studentAge = ""
         } else {
+            stepState = ChildLoginStepState.IMAGE
+        }
+    }
+
+    private fun imageEntered() {
+        if (studentImage == Uri.EMPTY) {
+            toastLauncher.launch(ChildToast.AddAnImage)
+        } else {
             stepState = ChildLoginStepState.FINAL
-            createPrivateCode()
+            createImage()
         }
     }
 
@@ -250,6 +286,11 @@ class ChildLoginViewModel @Inject constructor(
     private fun updateName(name: String) {
         Log.d(TAG, "updateName: $name")
         studentName = name
+    }
+
+    private fun updateImage(imageUri: Uri) {
+        Log.d(TAG, "updateImage: $imageUri")
+        studentImage = imageUri
     }
 
     private fun updateTextCode(code: String) {

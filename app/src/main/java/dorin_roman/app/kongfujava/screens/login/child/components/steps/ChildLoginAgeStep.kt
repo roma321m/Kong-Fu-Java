@@ -110,7 +110,7 @@ fun ChildLoginAgeStep(
                     onNextClicked()
                 }
             ) {
-                Text(stringResource(R.string.login))
+                Text(stringResource(R.string.next))
             }
         }
     }

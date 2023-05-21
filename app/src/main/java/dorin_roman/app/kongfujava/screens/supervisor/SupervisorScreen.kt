@@ -42,9 +42,13 @@ fun SupervisorScreen(
             SupervisorDrawer(
                 scaffoldState = scaffoldState,
                 coroutineScope = coroutineScope,
+                supervisorModel = viewModel.supervisorModel,
                 studentsModelList = viewModel.studentsModelList,
                 isAddUsers = viewModel.isAddUsers,
                 refreshing = viewModel.isrefreshing,
+                onImageSelected = { uri ->
+                    viewModel.handle(SupervisorEvent.ImageSelected(uri))
+                },
                 onRefresh = {
                     viewModel.handle(SupervisorEvent.RefreshChildrenList)
                 },
