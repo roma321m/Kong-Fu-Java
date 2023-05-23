@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import dorin_roman.app.kongfujava.ui.components.layout.LeftToRightLayout
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -47,30 +48,32 @@ fun SupervisorAddUsersActiveCode(
                 color = MaterialTheme.colors.primaryVariant
             )
         )
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            AnimatedContent(targetState = minutes, transitionSpec = { addAnimation() }) {
-                Text(
-                    text = minutes,
-                    style = TextStyle(
-                        fontSize = MaterialTheme.typography.h3.fontSize,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colors.primary
+        LeftToRightLayout {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                AnimatedContent(targetState = minutes, transitionSpec = { addAnimation() }) {
+                    Text(
+                        text = minutes,
+                        style = TextStyle(
+                            fontSize = MaterialTheme.typography.h3.fontSize,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colors.primary
+                        )
                     )
-                )
-            }
-            Spacer(modifier = Modifier.size(8.dp))
-            AnimatedContent(targetState = seconds, transitionSpec = { addAnimation() }) {
-                Text(
-                    text = seconds,
-                    style = TextStyle(
-                        fontSize = MaterialTheme.typography.h3.fontSize,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colors.primary
+                }
+                Spacer(modifier = Modifier.size(8.dp))
+                AnimatedContent(targetState = seconds, transitionSpec = { addAnimation() }) {
+                    Text(
+                        text = seconds,
+                        style = TextStyle(
+                            fontSize = MaterialTheme.typography.h3.fontSize,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colors.primary
+                        )
                     )
-                )
+                }
             }
         }
     }

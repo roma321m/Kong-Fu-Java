@@ -1,58 +1,65 @@
 package dorin_roman.app.kongfujava.screens.register.teacher
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.screens.register.RegisterEvent
 import dorin_roman.app.kongfujava.screens.register.RegisterViewModel
-import dorin_roman.app.kongfujava.screens.register.teacher.components.RegisterTeacherScreenContent
+import dorin_roman.app.kongfujava.screens.register.teacher.components.TeacherRegisterDescription
+import dorin_roman.app.kongfujava.screens.register.teacher.components.TeacherRegisterTextFields
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.SideScreenImage
-import dorin_roman.app.kongfujava.ui.components.VerticalFortySixtyLayout
+import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+
 
 @Composable
 fun TeacherRegisterScreen(
     registerViewModel: RegisterViewModel = hiltViewModel(),
-    teacherRegisterViewModel: TeacherRegisterViewModel = hiltViewModel(),
-    navigateToSupervisorLoginScreen: (userType: UserType) -> Unit
+    teacherRegisterViewModel: TeacherRegisterViewModel = hiltViewModel()
 ) {
-    VerticalFortySixtyLayout(
-        fortyLayout = {
-            RegisterTeacherScreenContent(
-                registerViewModel = registerViewModel,
-                teacherRegisterViewModel = teacherRegisterViewModel,
-                navigateToSupervisorLoginScreen = navigateToSupervisorLoginScreen
+    CustomLayout2(
+        startTopContent = {
+            TeacherRegisterDescription()
+        },
+        startBottomContent = {
+            TeacherRegisterTextFields(
+                verifyStep = registerViewModel.verifyStep,
+                showLoading = registerViewModel.showLoading || teacherRegisterViewModel.showLoading,
+                onReloadClicked = {
+                    teacherRegisterViewModel.handle(TeacherRegisterEvent.ReloadUser)
+                },
+                email = registerViewModel.email,
+                onEmailChange = {
+                    registerViewModel.handle(RegisterEvent.UpdateEmailText(it))
+                },
+                password = registerViewModel.password,
+                onPasswordChange = {
+                    registerViewModel.handle(RegisterEvent.UpdatePasswordText(it))
+                },
+                className = teacherRegisterViewModel.className,
+                onClassNameChange = {
+                    teacherRegisterViewModel.handle(TeacherRegisterEvent.UpdateClassText(it))
+                },
+                schoolName = teacherRegisterViewModel.schoolName,
+                onSchoolNameChange = {
+                    teacherRegisterViewModel.handle(TeacherRegisterEvent.UpdateSchoolText(it))
+                },
+                onRegisterClicked = {
+                    registerViewModel.handle(RegisterEvent.Register)
+                }
             )
         },
-        sixtyLayout = {
+        endContent = {
             SideScreenImage(R.drawable.ic_panda_register)
         }
     )
-
-    LaunchedEffect(registerViewModel.registerRequest) {
-        registerViewModel.handle(RegisterEvent.RegisterResponse)
-    }
-
-    LaunchedEffect(registerViewModel.sendEmailVerificationRequest) {
-        registerViewModel.handle(RegisterEvent.SendEmailVerificationResponse)
-    }
-
-    LaunchedEffect(teacherRegisterViewModel.reloadUserRequest) {
-        teacherRegisterViewModel.handle(TeacherRegisterEvent.ReloadUserResponse)
-    }
-
-    LaunchedEffect(teacherRegisterViewModel.saveUserRequest) {
-        teacherRegisterViewModel.handle(TeacherRegisterEvent.SaveUserToDatabaseResponse)
-    }
 }
 
 @DevicePreviews
 @Composable
 fun TeacherRegisterScreenPreview() {
     KongFuJavaTheme {
-        TeacherRegisterScreen {}
+        TeacherRegisterScreen()
     }
 }

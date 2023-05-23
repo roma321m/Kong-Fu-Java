@@ -8,7 +8,11 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,8 +35,8 @@ fun PasswordField(
         onValueChange = { newValue ->
             onPasswordValueChange(newValue)
         },
-        label = { Text(text = stringResource(id = R.string.register_password)) },
-        placeholder = { Text(text = stringResource(id = R.string.register_enter_password)) },
+        label = { Text(text = stringResource(id = R.string.text_filed_password)) },
+        placeholder = { Text(text = stringResource(id = R.string.text_filed_enter_password)) },
         singleLine = true,
         visualTransformation = if (passwordIsVisible) {
             VisualTransformation.None

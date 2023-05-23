@@ -1,6 +1,10 @@
 package dorin_roman.app.kongfujava.ui.components
 
-import androidx.compose.material.*
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,7 +41,7 @@ fun DisplayAlertDialog(
                         closeDialog()
                     }
                 ) {
-                    Text(text = stringResource(R.string.yes))
+                    Text(text = stringResource(R.string.alert_dialog_yes))
                 }
             },
             dismissButton = {
@@ -46,7 +50,7 @@ fun DisplayAlertDialog(
                         closeDialog()
                     }
                 ) {
-                    Text(text = stringResource(R.string.no))
+                    Text(text = stringResource(R.string.alert_dialog_no))
                 }
             },
             onDismissRequest = { closeDialog() }

@@ -58,7 +58,7 @@ fun ChildLoginContentTopEnd(
                 .padding(MaterialTheme.spacing.large)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
-            text = stringResource(id = R.string.login),
+            text = stringResource(id = R.string.child_login_title),
             style = MaterialTheme.typography.h4,
         )
 

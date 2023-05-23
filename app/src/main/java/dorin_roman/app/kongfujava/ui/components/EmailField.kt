@@ -22,8 +22,8 @@ fun EmailField(
         onValueChange = { newValue ->
             onEmailValueChange(newValue)
         },
-        label = { Text(text = stringResource(id = R.string.register_email)) },
-        placeholder = { Text(text = stringResource(id = R.string.register_enter_email)) },
+        label = { Text(text = stringResource(id = R.string.text_filed_email)) },
+        placeholder = { Text(text = stringResource(id = R.string.text_filed_enter_email)) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email

@@ -1,28 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kong Fu Java</string>
-    <string name="app_logo_description">App Logo</string>
-    <string name="panda_image_8">Panda Image 8</string>
-    <string name="welcome">Welcome!</string>
-    <string name="user_type_subtitle_description">introduction programming games \nfor the next generation</string>
-    <string name="user_type_description">Learn to code through the power of play,\n out panda will take you on a journey and \nyou will learn java on the way!!!</string>
-    <string name="user_parent">I\'m a parent</string>
-    <string name="user_student">I\'m a student</string>
-    <string name="user_teacher">I\'m a teacher</string>
-    <string name="app_logo">app logo</string>
-    <string name="register">register</string>
-    <string name="register_description">Kong Fu Java is a fun and educational\n game-based environment, where kids learn\n to code without any prior experience.</string>
-    <string name="register_email">Email address</string>
-    <string name="register_enter_email">Enter your e-mail</string>
-    <string name="register_password">Password</string>
-    <string name="register_enter_password">Enter your password</string>
-    <string name="register_class">Class</string>
-    <string name="register_enter_class">Enter your class</string>
-    <string name="register_education">School name</string>
-    <string name="register_enter_education">Enter your school name</string>
-    <string name="login_description">Hello, Good News!\n Mastering a new programming language doesn\'t have to be boring and exhausting.\n Connect and join your classmates to enjoy a coding adveture!.</string>
-    <string name="login">Login</string>
-    <string name="login_student_code">Student Code</string>
-    <string name="login_enter_student_code">Enter your student code</string>
-    <string name="login_create_account">Are you not registered? Create a new account</string>
+    <string name="app_name">קונג-פו-גוואה</string>
+    <!-- User Type -->
+    <string name="user_type_title">ברוכים הבאים!</string>
+    <string name="user_type_subtitle">מבוא לתכנות לדור הבא</string>
+    <string name="user_type_description">למדו לקודד בצורה מהנה, הפנדה שלנו תיקח אתכם למסע שבו תלמדו את שפת התכנות Java</string>
+    <string name="user_type_im_parent">התחברות הורה</string>
+    <string name="user_type_im_student">התחברות תלמיד</string>
+    <string name="user_type_im_teacher">התחברות מורה</string>
+    <string name="user_type_student">תלמיד</string>
+    <string name="user_type_parent">הורה</string>
+    <string name="user_type_teacher">מורה</string>
+    <!-- Child Login -->
+    <string name="child_login_picture">תמונה</string>
+    <string name="child_login_add_a_picture">הוסף תמונה</string>
+    <string name="child_login_name">שם</string>
+    <string name="child_login_enter_name">הכנס שם</string>
+    <string name="child_login_age">גיל</string>
+    <string name="child_login_next">הבא</string>
+    <string name="child_login_description">שלום, חדשות טובות!\n למידת שפת תכנות חדשה לא חייבת להיות מייגעת ומתישה.\n התחברו והצטרפו לחברי הכיתה שלכם כדי ליהנות מהרפתקת קידוד!</string>
+    <string name="child_login_title">התחברות</string>
+    <string name="child_login_code">קוד התחברות</string>
+    <string name="child_login_enter_code">הכנס קוד התחברות</string>
+    <string name="child_login_something_went_wrong">משהו השתבש, נסה שוב</string>
+    <string name="child_login_add_image">הוסף תמונה ונסה שוב</string>
+    <string name="child_login_code_expired">קוד לא תקף</string>
+    <string name="child_login_fill_name">הוסף את שמך ונסה שוב</string>
+    <string name="child_login_select_age">סמן את גילך ונסה שוב</string>
+    <!-- Supervisor Login -->
+    <string name="supervisor_login_description">supervisor login description</string>
+    <string name="supervisor_login_title">התחברות</string>
+    <string name="supervisor_login_create_account">צור חשבון חדש</string>
+    <string name="supervisor_login_successfully">התחברת בהצלחה</string>
+    <string name="supervisor_login_something_went_wrong">משהו השתבש, נסה שוב</string>
+    <!-- Email Text Filed -->
+    <string name="text_filed_email">כתובת אמייל</string>
+    <string name="text_filed_enter_email">הכנס כתובת אימייל</string>
+    <!-- Password Text Filed -->
+    <string name="text_filed_password">סיסמא</string>
+    <string name="text_filed_enter_password">הכנס סיסמא</string>
+    <!-- Supervisor Register -->
+    <string name="register_something_went_wrong">משהו השתבש, נסה שוב</string>
+    <string name="register_title">הירשם</string>
+    <string name="register_description">Kong Fu Java היא סביבה מהנה וחינוכית מבוססת משחקים, בה ילדים לומדים לקודד ללא כל ניסיון קודם</string>
+    <string name="register_email_verified">האימייל אומת בהצלחה</string>
+    <string name="register_verify_email">אנא אמת את האימייל תחילה</string>
+    <string name="register_already_verified">מאומת</string>
+    <string name="register_verification_email">שלחנו לך אימייל אימות, אנא אמת</string>
+    <!-- Teacher Register -->
+    <string name="teacher_register_class">כיתה</string>
+    <string name="teacher_register_enter_class">הכנס כיתה</string>
+    <string name="teacher_register_education">מוסד לימודים</string>
+    <string name="teacher_register_enter_education">הכנס מוסד לימודים</string>
+    <!-- Supervisor -->
+    <string name="supervisor_menu">תַפרִיט</string>
+    <string name="supervisor_log_out">להתנתק</string>
+    <string name="supervisor_revoke_access">למחוק את החשבון</string>
+    <string name="supervisor_add_users">הוספת משתמשים</string>
+    <string name="supervisor_log_out_successfully">התנתק בהצלחה</string>
+    <string name="supervisor_users_deleted_successfully">המשתמש שלך וכל משתמשי המשנה נמחקו בהצלחה</string>
+    <string name="supervisor_revoke_access_dialog_content">פעולה זו אינה הפיכה, המשתמש שלך וכל החשבונות המקושרים אליו יימחקו מהמערכת שלנו. האם אתה בטוח שברצונך להמשיך בפעולה זו?</string>
+    <string name="supervisor_no_users_found">לא נמצאו משתמשים, משוך למטה כדי לרענן</string>
+    <string name="supervisor_something_went_wrong">משהו השתבש, נסה שוב</string>
+    <string name="supervisor_default_user_image"><![CDATA[https://firebasestorage.googleapis.com/v0/b/kong-fu-java.appspot.com/o/images%2Fno-profile-picture.jpg?alt=media&token=a8888095-d35f-45b5-ae1a-c560f1c64ec2]]></string>
+    <!-- Supervisor Add Users -->
+    <string name="add_users_create_new_code">צור קוד חדש</string>
+    <string name="add_users_info_body">על ידי יצירת קוד תוכל לקשר משתמשים חדשים לחשבון שלך. המשתמש שלך ישלוט בפרטי ההתחברות של חשבונות אלה ותקבל את דוחות ההתקדמות עבור אותם משתמשים</string>
+    <string name="add_users_valid_5_minutes">הקוד יהיה תקף ל-5 דקות בלבד</string>
+    <string name="add_users_generate_codes">אין הגבלה לכמות הקודים שאפשר ליצור</string>
+    <string name="add_users_generate_code">צור קוד</string>
+    <!-- Supervisor Progress Report -->
+    <string name="progress_report_level">שלב</string>
+    <string name="progress_report_title">דוח התקדמות</string>
+    <string name="progress_report_user_info">מידע משתמש</string>
+    <string name="progress_report_overall_statistics">נתונים כללים</string>
+    <string name="progress_report_activity">פעילות</string>
+    <string name="progress_report_statistics">סטטיסטיקה</string>
+    <string name="progress_report_helps">עזרות</string>
+    <string name="progress_report_attempts">ניסיונות</string>
+    <string name="progress_report_mistakes">טעויות</string>
+    <string name="progress_report_no_available_data">אין מידע זמין</string>
+    <string name="progress_report_stars">כוכבים</string>
+    <string name="progress_report_time">זמן</string>
+    <string name="progress_report_name">שם:</string>
+    <string name="progress_report_age">גיל:</string>
+    <string name="progress_report_code">קוד:</string>
+    <string name="progress_report_current_world">עולם נוכחי:</string>
+    <string name="progress_report_current_level">שלב נוכחי:</string>
+    <!-- Alert Dialog -->
+    <string name="alert_dialog_yes">כן</string>
+    <string name="alert_dialog_no">לא</string>
 </resources>

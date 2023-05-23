@@ -86,12 +86,12 @@ fun SupervisorProgressReportUserLevelsInfo(
                             style = MaterialTheme.typography.h5,
                             text = if (currentLevel.id != -1) {
                                 "${currentLevel.world} " +
-                                        stringResource(R.string.level) +
+                                        stringResource(R.string.progress_report_level) +
                                         " ${currentLevel.number} "
                             } else {
-                                stringResource(R.string.level) + " "
+                                stringResource(R.string.progress_report_level) + " "
                             } +
-                                    stringResource(R.string.statistics),
+                                    stringResource(R.string.progress_report_statistics),
                             textAlign = TextAlign.Center
                         )
 
@@ -115,7 +115,7 @@ fun SupervisorProgressReportUserLevelsInfo(
                                         expanded = false
                                     }
                                 ) {
-                                    Text(text = "${level.world} " + stringResource(R.string.level) + " ${level.number}")
+                                    Text(text = "${level.world} " + stringResource(R.string.progress_report_level) + " ${level.number}")
                                 }
                             }
                         }
@@ -130,7 +130,7 @@ fun SupervisorProgressReportUserLevelsInfo(
                                 modifier = Modifier
                                     .padding(bottom = MaterialTheme.spacing.large),
                                 style = MaterialTheme.typography.h5,
-                                text = stringResource(R.string.no_available_data),
+                                text = stringResource(R.string.progress_report_no_available_data),
                                 textAlign = TextAlign.Center,
                             )
                         }
@@ -152,10 +152,22 @@ fun SupervisorProgressReportUserLevelsInfo(
 
                         BarGraph(
                             data = mapOf(
-                                Pair(stringResource(R.string.helps), currentLevel.helps),
-                                Pair(stringResource(R.string.attempts), currentLevel.attempts),
-                                Pair(stringResource(R.string.mistakes), currentLevel.mistakes),
-                                Pair(stringResource(R.string.time), currentLevel.timeInMinutes),
+                                Pair(
+                                    stringResource(R.string.progress_report_helps),
+                                    currentLevel.helps
+                                ),
+                                Pair(
+                                    stringResource(R.string.progress_report_attempts),
+                                    currentLevel.attempts
+                                ),
+                                Pair(
+                                    stringResource(R.string.progress_report_mistakes),
+                                    currentLevel.mistakes
+                                ),
+                                Pair(
+                                    stringResource(R.string.progress_report_time),
+                                    currentLevel.timeInMinutes
+                                ),
                             ),
                             barColor = MaterialTheme.colors.primary
                         )

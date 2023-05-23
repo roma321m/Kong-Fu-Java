@@ -10,7 +10,7 @@ enum class ChildToast(
     override val duration: Int
 ) : IToast {
     SomethingWentWrong(
-        text = R.string.something_went_wrong,
+        text = R.string.child_login_something_went_wrong,
         duration = Toast.LENGTH_LONG
     ),
     CodeNotValid(
@@ -18,19 +18,19 @@ enum class ChildToast(
         duration = Toast.LENGTH_SHORT
     ),
     CodeExpired(
-        text = R.string.code_expired,
+        text = R.string.child_login_code_expired,
         duration = Toast.LENGTH_SHORT
     ),
     FillYourName(
-        text = R.string.you_need_to_fill_in_your_name,
+        text = R.string.child_login_fill_name,
         duration = Toast.LENGTH_SHORT
     ),
     FillYourAge(
-        text = R.string.you_need_to_select_your_age,
+        text = R.string.child_login_select_age,
         duration = Toast.LENGTH_SHORT
     ),
     AddAnImage(
-        text = R.string.you_need_to_add_an_image,
+        text = R.string.child_login_add_image,
         duration = Toast.LENGTH_SHORT
     )
 }

@@ -64,7 +64,7 @@ fun ChildLoginImageStep(
                     .clickable {
                         galleryLauncher.launch("image/*")
                     },
-                value = stringResource(R.string.picture),
+                value = stringResource(R.string.child_login_picture),
                 enabled = false,
                 onValueChange = {},
                 trailingIcon = {
@@ -74,10 +74,10 @@ fun ChildLoginImageStep(
                     )
                 },
                 label = {
-                    Text(stringResource(R.string.add_a_picture))
+                    Text(stringResource(R.string.child_login_add_a_picture))
                 },
                 placeholder = {
-                    Text(stringResource(R.string.add_a_picture))
+                    Text(stringResource(R.string.child_login_add_a_picture))
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     cursorColor = purpleColor1,
@@ -97,7 +97,7 @@ fun ChildLoginImageStep(
                     onNextClicked()
                 }
             ) {
-                Text(stringResource(R.string.login))
+                Text(stringResource(R.string.child_login_title))
             }
         }
     }

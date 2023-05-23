@@ -10,19 +10,19 @@ enum class RegisterToast(
     override val duration: Int
 ) : IToast {
     VerificationEmailSent(
-        text = R.string.verification_email_sent,
+        text = R.string.register_verification_email,
         duration = Toast.LENGTH_LONG
     ),
     EmailVerified(
-        text = R.string.email_verified,
+        text = R.string.register_email_verified,
         duration = Toast.LENGTH_LONG
     ),
     VerifyYourEmail(
-        text = R.string.verify_email,
+        text = R.string.register_verify_email,
         duration = Toast.LENGTH_LONG
     ),
     SomethingWentWrong(
-        text = R.string.something_went_wrong,
+        text = R.string.register_something_went_wrong,
         duration = Toast.LENGTH_LONG
     )
 }

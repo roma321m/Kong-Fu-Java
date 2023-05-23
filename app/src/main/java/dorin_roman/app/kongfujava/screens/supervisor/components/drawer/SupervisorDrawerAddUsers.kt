@@ -29,7 +29,7 @@ fun SupervisorDrawerAddUsers(
     ) {
         SupervisorDrawerMenuItem(
             imageVector = Icons.Filled.Create,
-            text = stringResource(R.string.add_users),
+            text = stringResource(R.string.supervisor_add_users),
             onItemClick = {
                 onAddUsersSelected(true)
                 coroutineScope.launch {

@@ -11,15 +11,15 @@ enum class SupervisorToast(
     override val duration: Int
 ) : IToast {
     LogOut(
-        text = R.string.log_out_successfully,
+        text = R.string.supervisor_log_out_successfully,
         duration = Toast.LENGTH_LONG
     ),
     RevokeAccess(
-        text = R.string.users_where_deleted_successfully,
+        text = R.string.supervisor_users_deleted_successfully,
         duration = Toast.LENGTH_LONG
     ),
     SomethingWentWrong(
-        text = R.string.something_went_wrong,
+        text = R.string.supervisor_something_went_wrong,
         duration = Toast.LENGTH_LONG
     )
 }

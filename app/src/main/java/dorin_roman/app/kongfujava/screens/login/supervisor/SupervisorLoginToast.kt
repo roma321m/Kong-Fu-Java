@@ -11,11 +11,11 @@ enum class SupervisorLoginToast(
     override val duration: Int
 ) : IToast {
     LoginSuccessfully(
-        text = R.string.login_successfully,
+        text = R.string.supervisor_login_successfully,
         duration = Toast.LENGTH_LONG
     ),
     SomethingWentWrong(
-        text = R.string.something_went_wrong,
+        text = R.string.supervisor_login_something_went_wrong,
         duration = Toast.LENGTH_LONG
     )
 }

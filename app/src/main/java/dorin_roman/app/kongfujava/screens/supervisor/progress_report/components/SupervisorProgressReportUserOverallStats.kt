@@ -29,6 +29,7 @@ import dorin_roman.app.kongfujava.ui.components.graphs.PieGraph
 import dorin_roman.app.kongfujava.ui.theme.elevation
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
+
 @Composable
 fun SupervisorProgressReportUserOverallStats(
     items: List<Int>,
@@ -69,7 +70,7 @@ fun SupervisorProgressReportUserOverallStats(
                             .fillMaxWidth()
                             .padding(MaterialTheme.spacing.large),
                         style = MaterialTheme.typography.h5,
-                        text = stringResource(R.string.overall_statistics),
+                        text = stringResource(R.string.progress_report_overall_statistics),
                         textAlign = TextAlign.Center
                     )
 
@@ -82,7 +83,7 @@ fun SupervisorProgressReportUserOverallStats(
                                 modifier = Modifier
                                     .padding(bottom = MaterialTheme.spacing.large),
                                 style = MaterialTheme.typography.h5,
-                                text = stringResource(R.string.no_available_data),
+                                text = stringResource(R.string.progress_report_no_available_data),
                                 textAlign = TextAlign.Center,
                             )
                         }

@@ -64,7 +64,11 @@ class SupervisorProgressReportViewModel @Inject constructor(
         private set
 
     val items = arrayListOf(
-        R.string.stars, R.string.time, R.string.helps, R.string.attempts, R.string.mistakes
+        R.string.progress_report_stars,
+        R.string.progress_report_time,
+        R.string.progress_report_helps,
+        R.string.progress_report_attempts,
+        R.string.progress_report_mistakes
     )
 
     private var starsMap = emptyMap<String, Int>()

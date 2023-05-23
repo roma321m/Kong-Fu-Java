@@ -27,7 +27,7 @@ fun SupervisorAddUsersNoActiveCode(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.medium),
-            text = stringResource(R.string.code_will_be_valid_for_5_minutes_only),
+            text = stringResource(R.string.add_users_valid_5_minutes),
             style = MaterialTheme.typography.h6,
             textAlign = TextAlign.Center
         )
@@ -35,7 +35,7 @@ fun SupervisorAddUsersNoActiveCode(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.medium),
-            text = stringResource(R.string.you_can_generate_as_many_codes_as_you_need),
+            text = stringResource(R.string.add_users_generate_codes),
             style = MaterialTheme.typography.h6,
             textAlign = TextAlign.Center
         )
@@ -48,7 +48,7 @@ fun SupervisorAddUsersNoActiveCode(
             }
         ) {
             Text(
-                text = stringResource(R.string.generate_code),
+                text = stringResource(R.string.add_users_generate_code),
                 style = MaterialTheme.typography.h6
             )
         }

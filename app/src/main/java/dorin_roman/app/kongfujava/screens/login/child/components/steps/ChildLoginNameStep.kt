@@ -62,10 +62,10 @@ fun ChildLoginNameStep(
                     )
                 },
                 label = {
-                    Text(stringResource(R.string.login_student_name))
+                    Text(stringResource(R.string.child_login_name))
                 },
                 placeholder = {
-                    Text(stringResource(R.string.login_enter_student_name))
+                    Text(stringResource(R.string.child_login_enter_name))
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     cursorColor = purpleColor1,
@@ -85,7 +85,7 @@ fun ChildLoginNameStep(
                     onNextClicked()
                 }
             ) {
-                Text(stringResource(R.string.next))
+                Text(stringResource(R.string.child_login_next))
             }
         }
     }

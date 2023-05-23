@@ -49,7 +49,7 @@ fun ChildLoginFinalStep(
                         .padding(MaterialTheme.spacing.medium),
                     onClick = {}
                 ) {
-                    Text(stringResource(R.string.next))
+                    Text(stringResource(R.string.child_login_next))
                 }
             }
         }

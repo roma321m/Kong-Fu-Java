@@ -29,7 +29,7 @@ fun SupervisorTopBar(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Menu,
-                    contentDescription = stringResource(R.string.menu)
+                    contentDescription = stringResource(R.string.supervisor_menu)
                 )
             }
         },

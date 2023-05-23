@@ -53,7 +53,7 @@ fun SupervisorProgressReportUserActivity(
                             .fillMaxWidth()
                             .padding(MaterialTheme.spacing.large),
                         style = MaterialTheme.typography.h5,
-                        text = stringResource(R.string.activity),
+                        text = stringResource(R.string.progress_report_activity),
                         textAlign = TextAlign.Center
                     )
 
@@ -66,7 +66,7 @@ fun SupervisorProgressReportUserActivity(
                                 modifier = Modifier
                                     .padding(bottom = MaterialTheme.spacing.large),
                                 style = MaterialTheme.typography.h5,
-                                text = stringResource(R.string.no_available_data),
+                                text = stringResource(R.string.progress_report_no_available_data),
                                 textAlign = TextAlign.Center,
                             )
                         }

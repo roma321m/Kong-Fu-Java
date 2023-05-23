@@ -23,6 +23,7 @@ import dorin_roman.app.kongfujava.ui.components.image.RoundedImage
 import dorin_roman.app.kongfujava.ui.theme.elevation
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
+
 @Composable
 fun SupervisorProgressReportUserInfo(
     studentModel: StudentModel,
@@ -62,7 +63,7 @@ fun SupervisorProgressReportUserInfo(
                             .fillMaxWidth()
                             .padding(MaterialTheme.spacing.large),
                         style = MaterialTheme.typography.h5,
-                        text = stringResource(R.string.user_info),
+                        text = stringResource(R.string.progress_report_user_info),
                         textAlign = TextAlign.Center
                     )
                     Row(
@@ -85,7 +86,7 @@ fun SupervisorProgressReportUserInfo(
                                 textAlign = TextAlign.Start,
                                 maxLines = 1,
                                 style = MaterialTheme.typography.h6,
-                                text = "Name: ${studentModel.name}"
+                                text = stringResource(R.string.progress_report_name) + " ${studentModel.name}"
                             )
                             Text(
                                 modifier = Modifier
@@ -94,7 +95,7 @@ fun SupervisorProgressReportUserInfo(
                                 textAlign = TextAlign.Start,
                                 maxLines = 1,
                                 style = MaterialTheme.typography.h6,
-                                text = "Age: ${studentModel.age}"
+                                text = stringResource(R.string.progress_report_age) + " ${studentModel.age}"
                             )
                             Text(
                                 modifier = Modifier
@@ -103,7 +104,7 @@ fun SupervisorProgressReportUserInfo(
                                 textAlign = TextAlign.Start,
                                 maxLines = 1,
                                 style = MaterialTheme.typography.h6,
-                                text = "Code: ${studentModel.privateCode}"
+                                text = stringResource(R.string.progress_report_code) + " ${studentModel.privateCode}"
                             )
                             if (world.isNotBlank()) {
                                 Text(
@@ -113,7 +114,7 @@ fun SupervisorProgressReportUserInfo(
                                     textAlign = TextAlign.Start,
                                     maxLines = 1,
                                     style = MaterialTheme.typography.h6,
-                                    text = "Current World: $world"
+                                    text = stringResource(R.string.progress_report_current_world) + " $world"
                                 )
                             }
                             if (level != 0) {
@@ -124,7 +125,7 @@ fun SupervisorProgressReportUserInfo(
                                     textAlign = TextAlign.Start,
                                     maxLines = 1,
                                     style = MaterialTheme.typography.h6,
-                                    text = "Current Level: $level"
+                                    text = stringResource(R.string.progress_report_current_level) + " $level"
                                 )
                             }
                         }
@@ -134,7 +135,7 @@ fun SupervisorProgressReportUserInfo(
                                 .padding(MaterialTheme.spacing.extraLarge)
                                 .fillMaxSize(),
                             imageUrl = studentModel.imageUrl.ifBlank {
-                                "https://firebasestorage.googleapis.com/v0/b/kong-fu-java.appspot.com/o/images%2Fno-profile-picture.jpg?alt=media&token=a8888095-d35f-45b5-ae1a-c560f1c64ec2"
+                                stringResource(R.string.supervisor_default_user_image)
                             },
                             onClick = { }
                         )

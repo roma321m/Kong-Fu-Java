@@ -9,9 +9,11 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.supervisor.StudentModel
 import dorin_roman.app.kongfujava.screens.supervisor.SupervisorModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
@@ -42,7 +44,7 @@ fun SupervisorDrawer(
 
         SupervisorDrawerHeader(
             imageUrl = supervisorModel.imageUrl.ifBlank {
-                "https://firebasestorage.googleapis.com/v0/b/kong-fu-java.appspot.com/o/images%2Fno-profile-picture.jpg?alt=media&token=a8888095-d35f-45b5-ae1a-c560f1c64ec2"
+                stringResource(R.string.supervisor_default_user_image)
             },
             email = supervisorModel.email,
             className = supervisorModel.className,

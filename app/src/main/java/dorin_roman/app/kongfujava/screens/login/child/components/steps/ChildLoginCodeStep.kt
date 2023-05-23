@@ -64,13 +64,13 @@ fun ChildLoginCodeStep(
                     )
                 },
                 label = {
-                    Text(stringResource(R.string.login_student_code))
+                    Text(stringResource(R.string.child_login_code))
                 },
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Characters
                 ),
                 placeholder = {
-                    Text(stringResource(R.string.login_enter_student_code))
+                    Text(stringResource(R.string.child_login_enter_code))
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     cursorColor = purpleColor1,
@@ -90,7 +90,7 @@ fun ChildLoginCodeStep(
                     onNextClicked()
                 }
             ) {
-                Text(stringResource(R.string.next))
+                Text(stringResource(R.string.child_login_next))
             }
         }
     }

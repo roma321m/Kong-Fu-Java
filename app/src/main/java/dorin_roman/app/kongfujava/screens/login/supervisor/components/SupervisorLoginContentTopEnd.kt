@@ -44,7 +44,7 @@ fun SupervisorLoginContentTopEnd(
                 .fillMaxWidth()
                 .padding(MaterialTheme.spacing.small),
             textAlign = TextAlign.Center,
-            text = stringResource(id = R.string.login),
+            text = stringResource(R.string.supervisor_login_title),
             style = MaterialTheme.typography.h4
         )
 
@@ -74,14 +74,14 @@ fun SupervisorLoginContentTopEnd(
                 onLoginClicked()
             }
         ) {
-            Text(text = stringResource(id = R.string.login))
+            Text(text = stringResource(id = R.string.supervisor_login_title))
         }
 
         ClickableText(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.medium)
                 .fillMaxWidth(0.5f),
-            text = AnnotatedString(stringResource(id = R.string.login_create_account)),
+            text = AnnotatedString(stringResource(id = R.string.supervisor_login_create_account)),
             style = TextStyle(
                 color = MaterialTheme.colors.onBackground,
                 textAlign = TextAlign.End

@@ -9,7 +9,11 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.Logout
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -29,8 +33,8 @@ fun SupervisorDrawerSettings(
     var openRevokeAccessDialog by remember { mutableStateOf(false) }
 
     DisplayAlertDialog(
-        title = stringResource(R.string.revoke_access),
-        message = stringResource(R.string.revoke_access_dialog_content),
+        title = stringResource(R.string.supervisor_revoke_access),
+        message = stringResource(R.string.supervisor_revoke_access_dialog_content),
         openDialog = openRevokeAccessDialog,
         closeDialog = { openRevokeAccessDialog = false },
         onYesClicked = onRevokeAccessClicked
@@ -48,7 +52,7 @@ fun SupervisorDrawerSettings(
         )
         SupervisorDrawerMenuItem(
             imageVector = Icons.Filled.Logout,
-            text = stringResource(R.string.log_out),
+            text = stringResource(R.string.supervisor_log_out),
             onItemClick = {
                 coroutineScope.launch {
                     scaffoldState.drawerState.close()
@@ -59,7 +63,7 @@ fun SupervisorDrawerSettings(
         )
         SupervisorDrawerMenuItem(
             imageVector = Icons.Filled.DeleteForever,
-            text = stringResource(R.string.revoke_access),
+            text = stringResource(R.string.supervisor_revoke_access),
             onItemClick = {
                 coroutineScope.launch {
                     scaffoldState.drawerState.close()

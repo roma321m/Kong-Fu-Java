@@ -73,10 +73,10 @@ fun ChildLoginAgeStep(
                     onValueChange = {},
                     readOnly = true,
                     label = {
-                        Text(stringResource(R.string.login_student_age))
+                        Text(stringResource(R.string.child_login_age))
                     },
                     placeholder = {
-                        Text(stringResource(R.string.login_student_age))
+                        Text(stringResource(R.string.child_login_age))
                     },
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
@@ -110,7 +110,7 @@ fun ChildLoginAgeStep(
                     onNextClicked()
                 }
             ) {
-                Text(stringResource(R.string.next))
+                Text(stringResource(R.string.child_login_next))
             }
         }
     }

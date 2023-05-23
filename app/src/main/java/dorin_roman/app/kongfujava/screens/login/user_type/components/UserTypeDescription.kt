@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.login.supervisor.components
+package dorin_roman.app.kongfujava.screens.login.user_type.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,33 +14,50 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
 @Composable
-fun SupervisorLoginContentTopStart() {
+fun UserTypeDescription() {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(MaterialTheme.spacing.large),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .padding(MaterialTheme.spacing.large)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         Image(
-            modifier = Modifier
-                .size(150.dp, 150.dp),
+            modifier = Modifier.fillMaxWidth(0.3f),
             painter = painterResource(id = R.drawable.img_logo_white_round),
             contentDescription = null
         )
 
         Text(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(0.7f)
                 .padding(MaterialTheme.spacing.small),
             textAlign = TextAlign.Center,
-            text = stringResource(R.string.supervisor_login_description),
+            text = stringResource(id = R.string.user_type_title),
+            style = MaterialTheme.typography.h4
+        )
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .padding(MaterialTheme.spacing.small),
+            textAlign = TextAlign.Center,
+            text = stringResource(id = R.string.user_type_subtitle),
+            style = MaterialTheme.typography.h6
+        )
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .padding(MaterialTheme.spacing.small),
+            textAlign = TextAlign.Center,
+            text = stringResource(id = R.string.user_type_description),
             style = MaterialTheme.typography.body1
         )
     }

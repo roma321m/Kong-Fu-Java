@@ -8,7 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
-import dorin_roman.app.kongfujava.data.models.RequestState.*
+import dorin_roman.app.kongfujava.data.models.RequestState.Error
+import dorin_roman.app.kongfujava.data.models.RequestState.Idle
+import dorin_roman.app.kongfujava.data.models.RequestState.Loading
+import dorin_roman.app.kongfujava.data.models.RequestState.Success
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.launch
@@ -48,63 +51,50 @@ class RegisterViewModel @Inject constructor(
             RegisterEvent.SendEmailVerification -> sendEmailVerification()
             is RegisterEvent.UpdateEmailText -> updateEmail(event.text)
             is RegisterEvent.UpdatePasswordText -> updatePassword(event.text)
-            RegisterEvent.RegisterResponse -> handleRegisterResponse()
-            RegisterEvent.SendEmailVerificationResponse -> handleSendEmailVerifiedResponse()
-        }
-    }
-
-    private fun handleRegisterResponse() {
-        Log.d(TAG, "handleRegisterResponse")
-        when (val signUpResponse = registerRequest) {
-            is Idle -> {}
-            is Loading -> showLoading = true
-            is Success -> {
-                showLoading = false
-                if (signUpResponse.data) {
-                    sendEmailVerification()
-                }
-            }
-            is Error ->
-                signUpResponse.apply {
-                    showLoading = false
-                    toastLauncher.launch(RegisterToast.SomethingWentWrong)
-                    Log.e(TAG, "${error.message}")
-                }
-        }
-    }
-
-    private fun handleSendEmailVerifiedResponse() {
-        Log.d(TAG, "handleSendEmailVerifiedResponse")
-        when (val emailVerifiedResponse = sendEmailVerificationRequest) {
-            is Idle -> {}
-            is Loading -> showLoading = true
-            is Success -> {
-                if (emailVerifiedResponse.data) {
-                    showLoading = false
-                    verifyStep = true
-                    toastLauncher.launch(RegisterToast.VerificationEmailSent)
-                }
-            }
-            is Error ->
-                emailVerifiedResponse.apply {
-                    showLoading = false
-                    toastLauncher.launch(RegisterToast.SomethingWentWrong)
-                    Log.e(TAG, "${error.message}")
-                }
         }
     }
 
     private fun sendEmailVerification() = viewModelScope.launch {
         Log.d(TAG, "sendEmailVerification")
         sendEmailVerificationRequest = Loading
+        showLoading = true
         sendEmailVerificationRequest = authRepository.sendEmailVerification()
+            .also { response ->
+                showLoading = false
+                if (response is Success) {
+                    if (response.data) {
+                        verifyStep = true
+                        toastLauncher.launch(RegisterToast.VerificationEmailSent)
+                    }
+                } else if (response is Error) {
+                    response.apply {
+                        toastLauncher.launch(RegisterToast.SomethingWentWrong)
+                        Log.e(TAG, "${error.message}")
+                    }
+                }
+            }
     }
 
     private fun signUpWithEmailAndPassword() = viewModelScope.launch {
         Log.d(TAG, "signUpWithEmailAndPassword")
         registerRequest = Loading
-        registerRequest =
-            authRepository.firebaseSignUpWithEmailAndPassword(email, password)
+        showLoading = true
+        registerRequest = authRepository.firebaseSignUpWithEmailAndPassword(
+            email = email,
+            password = password
+        ).also { response ->
+            showLoading = false
+            if (response is Success) {
+                if (response.data) {
+                    sendEmailVerification()
+                }
+            } else if (response is Error) {
+                response.apply {
+                    toastLauncher.launch(RegisterToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
     }
 
     private fun updateEmail(text: String) {

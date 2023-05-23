@@ -23,7 +23,7 @@ fun SupervisorDrawerMenuEmptyItem() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.no_users_found_pull_down_to_refresh)
+            text = stringResource(R.string.supervisor_no_users_found)
         )
     }
 }

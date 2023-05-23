@@ -89,9 +89,9 @@ fun SupervisorScreen(
 
 private fun getTitle(isAddUsers: Boolean): Int {
     return if (isAddUsers) {
-        R.string.add_users
+        R.string.supervisor_add_users
     } else {
-        R.string.progress_report
+        R.string.progress_report_title
     }
 }
 

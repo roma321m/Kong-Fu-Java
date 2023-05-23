@@ -32,12 +32,8 @@ fun MainNavigation(
         userTypeComposable(
             navigateToLoginScreen = screen.navigateToLoginScreen
         )
-        teacherRegisterComposable(
-            navigateToSupervisorLoginScreen = screen.navigateToSupervisorLoginScreen
-        )
-        parentRegisterComposable(
-            navigateToSupervisorLoginScreen = screen.navigateToSupervisorLoginScreen
-        )
+        teacherRegisterComposable()
+        parentRegisterComposable()
         supervisorLoginComposable(
             navigateToTeacherRegisterScreen = screen.navigateToTeacherRegisterScreen,
             navigateToParentRegisterScreen = screen.navigateToParentRegisterScreen
