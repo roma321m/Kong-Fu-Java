@@ -1,7 +1,9 @@
-package dorin_roman.app.kongfujava.screens.supervisor.progress_report.components
+package dorin_roman.app.kongfujava.screens.supervisor.progress_report
 
 data class LevelStatsModel(
-    val number: Int,
+    val id: Int = -1,
+    val world: String = "",
+    val number: Int = 0,
     val stars: Int = 0,
     val timeInMinutes: Int = 0,
     val helps: Int = 0,

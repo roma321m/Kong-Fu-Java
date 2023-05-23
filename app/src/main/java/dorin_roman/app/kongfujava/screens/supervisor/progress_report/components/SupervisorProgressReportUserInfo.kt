@@ -27,7 +27,8 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 fun SupervisorProgressReportUserInfo(
     studentModel: StudentModel,
     world: String,
-    level: Int
+    level: Int,
+    isLoading: Boolean = false,
 ) {
     Box(
         modifier = Modifier
@@ -47,88 +48,97 @@ fun SupervisorProgressReportUserInfo(
             shape = MaterialTheme.shapes.small,
             elevation = MaterialTheme.elevation.small
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.Start,
-            ) {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(MaterialTheme.spacing.large),
-                    style = MaterialTheme.typography.h5,
-                    text = stringResource(R.string.user_info),
-                    textAlign = TextAlign.Center
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(MaterialTheme.spacing.medium)
+            if (isLoading) {
+                SupervisorProgressReportUserInfoShimmer()
+            } else {
+
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.Start,
                 ) {
-                    Column(
+                    Text(
                         modifier = Modifier
-                            .padding(start = MaterialTheme.spacing.large)
-                            .fillMaxHeight()
-                            .fillMaxWidth(0.5f),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
+                            .fillMaxWidth()
+                            .padding(MaterialTheme.spacing.large),
+                        style = MaterialTheme.typography.h5,
+                        text = stringResource(R.string.user_info),
+                        textAlign = TextAlign.Center
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(MaterialTheme.spacing.medium)
                     ) {
-                        Text(
+                        Column(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(MaterialTheme.spacing.medium),
-                            textAlign = TextAlign.Start,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.h6,
-                            text = "Name: ${studentModel.name}"
-                        )
-                        Text(
+                                .padding(start = MaterialTheme.spacing.large)
+                                .fillMaxHeight()
+                                .fillMaxWidth(0.5f),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(MaterialTheme.spacing.medium),
+                                textAlign = TextAlign.Start,
+                                maxLines = 1,
+                                style = MaterialTheme.typography.h6,
+                                text = "Name: ${studentModel.name}"
+                            )
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(MaterialTheme.spacing.medium),
+                                textAlign = TextAlign.Start,
+                                maxLines = 1,
+                                style = MaterialTheme.typography.h6,
+                                text = "Age: ${studentModel.age}"
+                            )
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(MaterialTheme.spacing.medium),
+                                textAlign = TextAlign.Start,
+                                maxLines = 1,
+                                style = MaterialTheme.typography.h6,
+                                text = "Code: ${studentModel.privateCode}"
+                            )
+                            if (world.isNotBlank()) {
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(MaterialTheme.spacing.medium),
+                                    textAlign = TextAlign.Start,
+                                    maxLines = 1,
+                                    style = MaterialTheme.typography.h6,
+                                    text = "Current World: $world"
+                                )
+                            }
+                            if (level != 0) {
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(MaterialTheme.spacing.medium),
+                                    textAlign = TextAlign.Start,
+                                    maxLines = 1,
+                                    style = MaterialTheme.typography.h6,
+                                    text = "Current Level: $level"
+                                )
+                            }
+                        }
+                        RoundedImage(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(MaterialTheme.spacing.medium),
-                            textAlign = TextAlign.Start,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.h6,
-                            text = "Age: ${studentModel.age}"
-                        )
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(MaterialTheme.spacing.medium),
-                            textAlign = TextAlign.Start,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.h6,
-                            text = "Code: ${studentModel.privateCode}"
-                        )
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(MaterialTheme.spacing.medium),
-                            textAlign = TextAlign.Start,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.h6,
-                            text = "Current World: $world"
-                        )
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(MaterialTheme.spacing.medium),
-                            textAlign = TextAlign.Start,
-                            maxLines = 1,
-                            style = MaterialTheme.typography.h6,
-                            text = "Current Level: $level"
+                                .padding(MaterialTheme.spacing.extraLarge)
+                                .padding(MaterialTheme.spacing.extraLarge)
+                                .fillMaxSize(),
+                            imageUrl = studentModel.imageUrl.ifBlank {
+                                "https://firebasestorage.googleapis.com/v0/b/kong-fu-java.appspot.com/o/images%2Fno-profile-picture.jpg?alt=media&token=a8888095-d35f-45b5-ae1a-c560f1c64ec2"
+                            },
+                            onClick = { }
                         )
                     }
-                    RoundedImage(
-                        modifier = Modifier
-                            .padding(MaterialTheme.spacing.extraLarge)
-                            .padding(MaterialTheme.spacing.extraLarge)
-                            .fillMaxSize(),
-                        imageUrl = studentModel.imageUrl.ifBlank {
-                            "https://firebasestorage.googleapis.com/v0/b/kong-fu-java.appspot.com/o/images%2Fno-profile-picture.jpg?alt=media&token=a8888095-d35f-45b5-ae1a-c560f1c64ec2"
-                        },
-                        onClick = { }
-                    )
                 }
             }
         }

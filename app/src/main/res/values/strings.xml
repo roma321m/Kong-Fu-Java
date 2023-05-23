@@ -87,4 +87,9 @@
     <string name="you_need_to_add_an_image">You need to add an image</string>
     <string name="picture">Picture</string>
     <string name="add_a_picture">Add a Picture</string>
+    <string name="no_available_data">No Available Data</string>
+    <string name="stars_">"Stars: "</string>
+    <string name="stars">"Stars"</string>
+    <string name="invested_time">"Invested Time: "</string>
+    <string name="time">Time</string>
 </resources>

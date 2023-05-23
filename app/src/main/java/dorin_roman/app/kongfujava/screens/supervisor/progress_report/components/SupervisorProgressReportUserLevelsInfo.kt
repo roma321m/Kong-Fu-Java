@@ -26,19 +26,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.screens.supervisor.progress_report.LevelStatsModel
+import dorin_roman.app.kongfujava.ui.components.OneLevel
+import dorin_roman.app.kongfujava.ui.components.ThreeLevel
+import dorin_roman.app.kongfujava.ui.components.TwoLevel
+import dorin_roman.app.kongfujava.ui.components.ZeroLevelYellow
 import dorin_roman.app.kongfujava.ui.components.graphs.BarGraph
-import dorin_roman.app.kongfujava.ui.components.graphs.BarType
 import dorin_roman.app.kongfujava.ui.theme.elevation
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SupervisorProgressReportLevelsInfo(
+fun SupervisorProgressReportUserLevelsInfo(
     currentLevel: LevelStatsModel,
-    levels: Array<Int>,
-    onLevelChange: (String) -> Unit
+    levels: Array<LevelStatsModel>,
+    onLevelChange: (Int) -> Unit,
+    isLoading: Boolean = false,
 ) {
     Box(
         modifier = Modifier
@@ -58,87 +62,105 @@ fun SupervisorProgressReportLevelsInfo(
             shape = MaterialTheme.shapes.small,
             elevation = MaterialTheme.elevation.small
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                var expanded by remember {
-                    mutableStateOf(false)
-                }
+            if (isLoading) {
+                SupervisorProgressReportUserLevelsInfoShimmer()
+            } else {
 
-                ExposedDropdownMenuBox(
-                    expanded = expanded,
-                    onExpandedChange = {
-                        expanded = !expanded
-                    }
+                Column(
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(MaterialTheme.spacing.large),
-                        style = MaterialTheme.typography.h5,
-                        text = stringResource(R.string.level) +
-                                " ${currentLevel.number} " +
-                                stringResource(R.string.statistics),
-                        textAlign = TextAlign.Center
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .padding(MaterialTheme.spacing.large)
-                    ) {
-                        ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = expanded
-                        )
+                    var expanded by remember {
+                        mutableStateOf(false)
                     }
 
-                    ExposedDropdownMenu(
+                    ExposedDropdownMenuBox(
                         expanded = expanded,
-                        onDismissRequest = { expanded = false }
+                        onExpandedChange = {
+                            expanded = !expanded
+                        }
                     ) {
-                        levels.forEach { level ->
-                            DropdownMenuItem(
-                                onClick = {
-                                    onLevelChange(level.toString())
-                                    expanded = false
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(MaterialTheme.spacing.large),
+                            style = MaterialTheme.typography.h5,
+                            text = if (currentLevel.id != -1) {
+                                "${currentLevel.world} " +
+                                        stringResource(R.string.level) +
+                                        " ${currentLevel.number} "
+                            } else {
+                                stringResource(R.string.level) + " "
+                            } +
+                                    stringResource(R.string.statistics),
+                            textAlign = TextAlign.Center
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .padding(MaterialTheme.spacing.large)
+                        ) {
+                            ExposedDropdownMenuDefaults.TrailingIcon(
+                                expanded = expanded
+                            )
+                        }
+
+                        ExposedDropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false }
+                        ) {
+                            levels.forEach { level ->
+                                DropdownMenuItem(
+                                    onClick = {
+                                        onLevelChange(level.id)
+                                        expanded = false
+                                    }
+                                ) {
+                                    Text(text = "${level.world} " + stringResource(R.string.level) + " ${level.number}")
                                 }
-                            ) {
-                                Text(text = stringResource(R.string.level) + " $level")
                             }
                         }
                     }
+
+                    if (currentLevel.id == -1) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(bottom = MaterialTheme.spacing.large),
+                                style = MaterialTheme.typography.h5,
+                                text = stringResource(R.string.no_available_data),
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    } else {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.Top,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            when (currentLevel.stars) {
+                                1 -> OneLevel("")
+                                2 -> TwoLevel("")
+                                3 -> ThreeLevel("")
+                                else -> ZeroLevelYellow("")
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.size(MaterialTheme.spacing.large))
+
+                        BarGraph(
+                            data = mapOf(
+                                Pair(stringResource(R.string.helps), currentLevel.helps),
+                                Pair(stringResource(R.string.attempts), currentLevel.attempts),
+                                Pair(stringResource(R.string.mistakes), currentLevel.mistakes),
+                                Pair(stringResource(R.string.time), currentLevel.timeInMinutes),
+                            ),
+                            barColor = MaterialTheme.colors.primary
+                        )
+                    }
                 }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Text( //fixme - change to stars
-                        maxLines = 1,
-                        style = MaterialTheme.typography.h6,
-                        text = "Stars: " + currentLevel.stars
-                    )
-                    Text(
-                        maxLines = 1,
-                        style = MaterialTheme.typography.h6,
-                        text = "Invested Time: " + currentLevel.timeInMinutes
-                    )
-                }
-
-                Spacer(modifier = Modifier.size(MaterialTheme.spacing.large))
-
-                BarGraph(
-                    data = listOf(
-                        Pair(currentLevel.helps, stringResource(R.string.helps)),
-                        Pair(currentLevel.attempts, stringResource(R.string.attempts)),
-                        Pair(currentLevel.mistakes, stringResource(R.string.mistakes)),
-                    ),
-                    roundType = BarType.TOP_CURVED,
-                    barWidth = 20.dp,
-                    barColor = MaterialTheme.colors.primary,
-                    barArrangement = Arrangement.SpaceEvenly
-                )
             }
         }
     }

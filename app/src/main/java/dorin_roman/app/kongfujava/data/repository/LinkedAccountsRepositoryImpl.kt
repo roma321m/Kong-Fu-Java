@@ -1,5 +1,6 @@
 package dorin_roman.app.kongfujava.data.repository
 
+import android.util.Log
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.getValue
 import dorin_roman.app.kongfujava.data.models.RequestState
@@ -14,12 +15,14 @@ class LinkedAccountsRepositoryImpl @Inject constructor(
 ) : LinkedAccountsRepository {
 
     companion object {
+        private const val TAG = "LinkedAccountsRepositoryImpl"
         private const val LINKED_ACCOUNTS = "Linked Accounts"
     }
 
     private val linkedAccountsRef = database.getReference(LINKED_ACCOUNTS)
 
     override suspend fun addChild(linkedAccounts: LinkedAccounts): RequestState<Boolean> {
+        Log.d(TAG, "addChild: linkedAccounts:$linkedAccounts")
         return try {
             linkedAccountsRef.child(linkedAccounts.supervisorId).child(linkedAccounts.childrenId).setValue(true).await()
             RequestState.Success(true)
@@ -29,6 +32,7 @@ class LinkedAccountsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getLinkedAccounts(supervisorId: String): RequestState<List<String>> {
+        Log.d(TAG, "getLinkedAccounts: supervisorId:$supervisorId")
         return try {
             var response: RequestState<MutableList<String>> = RequestState.Success(mutableListOf())
             linkedAccountsRef.child(supervisorId).get()

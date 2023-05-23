@@ -11,6 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dorin_roman.app.kongfujava.data.repository.AuthRepositoryImpl
+import dorin_roman.app.kongfujava.data.repository.ChildStatsRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.CodesRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.LinkedAccountsRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.ProfileImageRepositoryImpl
@@ -19,6 +20,7 @@ import dorin_roman.app.kongfujava.di.provider.CodeProvider
 import dorin_roman.app.kongfujava.di.provider.IdProvider
 import dorin_roman.app.kongfujava.di.provider.KongFuDatabaseProvider
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
+import dorin_roman.app.kongfujava.domain.repository.ChildStatsRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
 import dorin_roman.app.kongfujava.domain.repository.LinkedAccountsRepository
 import dorin_roman.app.kongfujava.domain.repository.ProfileImageRepository
@@ -44,6 +46,11 @@ object DatabaseModule {
 
     @Provides
     fun provideUsersRepository(): UsersRepository = UsersRepositoryImpl(
+        database = Firebase.database
+    )
+
+    @Provides
+    fun provideChildStatsRepository(): ChildStatsRepository = ChildStatsRepositoryImpl(
         database = Firebase.database
     )
 
