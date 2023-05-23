@@ -47,7 +47,7 @@ fun DragDropRightScreenContent(dragDropViewModel: DragDropViewModel) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(dragDropViewModel.drop) { it ->
-                    DropItem<AnswerItem>(modifier = Modifier.wrapContentSize()) { isInBound, answerItem ->
+                    DropItem<String>(modifier = Modifier.wrapContentSize()) { isInBound, answerItem ->
                         if (answerItem != null) {
                             LaunchedEffect(key1 = answerItem) {
                                 dragDropViewModel.checkAnswer(answerItem)
@@ -55,7 +55,7 @@ fun DragDropRightScreenContent(dragDropViewModel: DragDropViewModel) {
                         }
                         if (isInBound) {
                             if (answerItem != null) {
-                                it.answer = answerItem.answer
+                               // it = answerItem
                             }
                             DropAnswerItemCard(MaterialTheme.colors.primary, it)
                         } else {

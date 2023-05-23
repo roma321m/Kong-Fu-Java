@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DropAnswerItemCard(backgroundColor: Color, answerItem: AnswerItem) {
+fun DropAnswerItemCard(backgroundColor: Color, answerItem: String) {
     Card(
         elevation = 10.dp,
         backgroundColor = backgroundColor,
@@ -29,7 +29,7 @@ fun DropAnswerItemCard(backgroundColor: Color, answerItem: AnswerItem) {
             modifier = Modifier.padding(10.dp)
         ) {
             Text(
-                text = answerItem.answer,
+                text = answerItem,
                 style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onPrimary)
             )
         }

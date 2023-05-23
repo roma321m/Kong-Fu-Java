@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dorin_roman.app.kongfujava.LevelLogic
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LevelsMapViewModel @Inject constructor(
-    private val levelRepository: LevelRepository
+    private val levelRepository: LevelRepository,
 ) : ViewModel() {
     companion object {
         const val TAG = "LevelsViewModel"
@@ -26,10 +27,9 @@ class LevelsMapViewModel @Inject constructor(
     var levelsModels = mutableStateListOf<LevelItemModel>()
         private set
 
-    private var currentWorld: Int = -1
+    private var currentWorldId: Int = -1
 
     private val levels = MutableStateFlow<RequestState<List<Level>>>(RequestState.Idle)
-
 
     fun handle(event: LevelsEvent) {
         when (event) {
@@ -41,8 +41,8 @@ class LevelsMapViewModel @Inject constructor(
     }
 
     private fun initLevels(worldId: Int) {
-        currentWorld = worldId
-        getAllLevels()
+            currentWorldId = worldId
+            getAllLevels()
     }
 
     private fun updateWorldState(state: PointState) {
@@ -62,7 +62,7 @@ class LevelsMapViewModel @Inject constructor(
         levels.value = RequestState.Loading
         try {
             viewModelScope.launch {
-                levelRepository.getAllLevels(currentWorld).collect { levels ->
+                levelRepository.getAllLevels(currentWorldId).collect { levels ->
                     this@LevelsMapViewModel.levels.value = RequestState.Success(levels)
                     buildLevelsItemModels(levels)
                 }
@@ -88,23 +88,11 @@ class LevelsMapViewModel @Inject constructor(
     }
 
     private fun getLevelState(state: Int): PointState {
-        when (state) {
-            PointState.LOCK.ordinal -> return PointState.LOCK
-            PointState.ZERO.ordinal -> return PointState.ZERO
-            PointState.ONE.ordinal -> return PointState.ONE
-            PointState.TWO.ordinal -> return PointState.TWO
-            PointState.THREE.ordinal -> return PointState.THREE
-        }
-        return PointState.LOCK
+        return LevelLogic.getLevelState(state)
     }
 
     private fun getLevelType(type: Int): LevelType {
-        when (type) {
-            LevelType.TUTORIAL.ordinal -> return LevelType.TUTORIAL
-            LevelType.MULTI.ordinal -> return LevelType.MULTI
-            LevelType.DRAG_DROP.ordinal -> return LevelType.DRAG_DROP
-        }
-        return LevelType.TUTORIAL
+        return LevelLogic.getLevelType(type)
     }
 
 }

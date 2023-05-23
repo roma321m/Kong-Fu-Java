@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun DragAnswerItemCard(answer: AnswerItem) {
+fun DragAnswerItemCard(answer: String) {
         Card(
             elevation = 10.dp,
             backgroundColor = MaterialTheme.colors.primary,
@@ -27,7 +27,7 @@ fun DragAnswerItemCard(answer: AnswerItem) {
                 modifier = Modifier.padding(10.dp)
             ) {
                 Text(
-                    text = answer.answer,
+                    text = answer,
                     style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onPrimary)
                 )
             }

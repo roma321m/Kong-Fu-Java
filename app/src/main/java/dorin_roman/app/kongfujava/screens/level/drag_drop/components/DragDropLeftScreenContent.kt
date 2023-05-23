@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 
 @Composable
-fun DragDropLeftScreenContent(dragDropViewModel: DragDropViewModel) {
+fun DragDropLeftScreenContent(navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit, dragDropViewModel: DragDropViewModel) {
 
     Surface {
         Column(

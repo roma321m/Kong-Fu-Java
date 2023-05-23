@@ -32,8 +32,8 @@ fun ChildNavigation(
             navigateToMultiChoiceLevel = screen.navigateToMultiChoiceLevelScreen,
             navigateToDragDropLevel = screen.navigateToDragDropLevelScreen,
         )
-        multiChoiceLevelComposable()
-        tutorialLevelComposable()
-        dragDropLevelComposable()
+        multiChoiceLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevel)
+        tutorialLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevel)
+        dragDropLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevel)
     }
 }

@@ -1,5 +1,6 @@
 package dorin_roman.app.kongfujava.screens.level.levels_map
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,22 +11,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsMapContent
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
+import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsMapContent
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
+
 @Composable
 fun LevelsMapScreen(
     levelsMapViewModel: LevelsMapViewModel = hiltViewModel(),
-    navigateToTutorialLevel: () -> Unit,
-    navigateToMultiChoiceLevel: () -> Unit,
-    navigateToDragDropLevel: () -> Unit,
+    navigateToTutorialLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
+    navigateToMultiChoiceLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
+    navigateToDragDropLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
     worldId: Int,
 ) {
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(key1 = levelsMapViewModel.levelsModels) {
         levelsMapViewModel.handle(LevelsEvent.InitLevels(worldId))
     }
 
@@ -46,7 +48,8 @@ fun LevelsMapScreen(
                 levels = levelsMapViewModel.levelsModels,
                 navigateToTutorialLevel,
                 navigateToMultiChoiceLevel,
-                navigateToDragDropLevel
+                navigateToDragDropLevel,
+                worldId
             )
         }
     )
@@ -57,6 +60,12 @@ fun LevelsMapScreen(
 @Composable
 fun LevelsScreenPreview() {
     KongFuJavaTheme {
-        LevelsMapScreen(hiltViewModel(), {}, {}, {}, 0)
+        LevelsMapScreen(
+            hiltViewModel(),
+            { levelId, levelNumber, worldId -> },
+            { levelId, levelNumber, worldId -> },
+            { levelId, levelNumber, worldId -> },
+            0
+        )
     }
 }

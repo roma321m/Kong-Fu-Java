@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropLeftScreenContent
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropRightScreenContent
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DraggableScreen
@@ -18,8 +21,16 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun DragDropScreen(
-    dragDropViewModel: DragDropViewModel = hiltViewModel()
+    dragDropViewModel: DragDropViewModel = hiltViewModel(),
+    navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
+    levelId: Int,
+    levelNumber: Int,
+    worldId: Int
 ) {
+
+    LaunchedEffect(key1 = true) {
+        dragDropViewModel.handle(LevelEvent.InitLevel(levelId))
+    }
 
     DraggableScreen(
         modifier = Modifier
@@ -41,7 +52,7 @@ fun DragDropScreen(
             ) {
                 VerticalFortySixtyLayout(
                     fortyLayout = {
-                        DragDropLeftScreenContent(dragDropViewModel)
+                        DragDropLeftScreenContent(navigateToMapLevelsScreenFromLevel,dragDropViewModel)
                     },
                     sixtyLayout = {
                         DragDropRightScreenContent(dragDropViewModel)
@@ -57,6 +68,12 @@ fun DragDropScreen(
 @Composable
 fun WorldsScreenPreview() {
     KongFuJavaTheme {
-        DragDropScreen()
+        DragDropScreen(
+            dragDropViewModel = viewModel(),
+            navigateToMapLevelsScreenFromLevel = {  },
+            levelId = 0,
+            levelNumber = 0,
+            worldId = 0
+        )
     }
 }

@@ -10,12 +10,17 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.HelpersButtons
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
-fun MultiChoiceScreenContent() {
+fun MultiChoiceScreenContent(
+    navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
+    levelNumber: Int,
+    title: String,
+    questionTitle: String,
+    questionAnswers: List<String>
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -25,22 +30,23 @@ fun MultiChoiceScreenContent() {
 
         Text(
             modifier = Modifier
-                .constrainAs(lesson) {
+                .constrainAs(level) {
                     start.linkTo(parent.start, 10.dp)
                     top.linkTo(parent.top, 10.dp)
+
                 },
-            text = stringResource(id = R.string.lesson).uppercase(),
-            style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.onBackground)
+            text = "${stringResource(id = R.string.level).uppercase()} $levelNumber",
+            style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onBackground)
         )
 
         Text(
             modifier = Modifier
-                .constrainAs(level) {
+                .constrainAs(lesson) {
                     start.linkTo(parent.start, 10.dp)
-                    top.linkTo(lesson.bottom)
+                    top.linkTo(level.bottom)
                 },
-            text = stringResource(id = R.string.level).uppercase(),
-            style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onBackground)
+            text = title,
+            style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.onBackground)
         )
 
         Text(
@@ -48,8 +54,9 @@ fun MultiChoiceScreenContent() {
                 .constrainAs(question) {
                     linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
                     top.linkTo(level.bottom, 20.dp)
-                        }.padding(10.dp),
-            text = stringResource(id = R.string.question1).uppercase(),
+                }
+                .padding(10.dp),
+            text = questionTitle,
             style = MaterialTheme.typography.h6.copy(color = MaterialTheme.colors.onBackground)
         )
 
@@ -57,14 +64,7 @@ fun MultiChoiceScreenContent() {
             .constrainAs(answers) {
                 linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
                 top.linkTo(question.bottom, 20.dp)
-            })
-
-        HelpersButtons(modifier = Modifier
-            .constrainAs(helpers) {
-                end.linkTo(parent.end, 10.dp)
-                bottom.linkTo(parent.bottom, 10.dp)
-            })
-
+            }, questionAnswers)
     }
 }
 
@@ -73,6 +73,6 @@ fun MultiChoiceScreenContent() {
 @Composable
 fun WorldsScreenPreview() {
     KongFuJavaTheme {
-        MultiChoiceScreenContent()
+        MultiChoiceScreenContent({ }, 0, "title", "question title", emptyList())
     }
 }

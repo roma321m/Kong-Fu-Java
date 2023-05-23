@@ -1,5 +1,6 @@
 package dorin_roman.app.kongfujava.screens.level.drag_drop.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun DragDropLeftBottomScreenContent(dragDropViewModel: DragDropViewModel) {
 

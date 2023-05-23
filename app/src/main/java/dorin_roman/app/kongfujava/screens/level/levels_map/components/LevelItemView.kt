@@ -22,13 +22,15 @@ import dorin_roman.app.kongfujava.screens.level.LevelType
 import dorin_roman.app.kongfujava.screens.level.levels_map.LevelItemModel
 import dorin_roman.app.kongfujava.ui.components.*
 
-const val LEVEL_TYPE ="Level"
+const val LEVEL_TYPE = "Level"
 
 @Composable
 fun LevelItemView(
     modifier: Modifier = Modifier,
     levelItemModel: LevelItemModel,
-    navigateToLevel: () -> Unit
+    navigateToLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
+    finishLevel: () -> Unit,
+    worldId: Int
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -44,7 +46,7 @@ fun LevelItemView(
             )
             .clickable {
                 if (levelItemModel.levelState != PointState.LOCK) {
-                    navigateToLevel()
+                    navigateToLevel(levelItemModel.levelId, levelItemModel.levelNumber, worldId)
                 }
             }
     ) {
@@ -85,29 +87,54 @@ fun LevelItemView(
 @Preview
 @Composable
 fun LevelItemViewLockPreview() {
-    LevelItemView(levelItemModel = LevelItemModel(0, PointState.LOCK, 1, 100, LevelType.TUTORIAL), navigateToLevel = {})
+    LevelItemView(
+        levelItemModel = LevelItemModel(0, PointState.LOCK, 1, 100, LevelType.TUTORIAL),
+        navigateToLevel = { levelId, levelNumber , worldId -> },
+        finishLevel = {},
+        worldId = 0
+    )
 }
 
 @Preview
 @Composable
 fun LevelItemViewZeroPreview() {
-    LevelItemView(levelItemModel = LevelItemModel(1, PointState.ZERO, 1, 100, LevelType.TUTORIAL), navigateToLevel = {})
+    LevelItemView(
+        levelItemModel = LevelItemModel(1, PointState.ZERO, 1, 100, LevelType.TUTORIAL),
+        navigateToLevel = { levelId, levelNumber , worldId-> },
+        finishLevel = {},
+        worldId = 0
+    )
 }
 
 @Preview
 @Composable
 fun LevelItemViewOnePreview() {
-    LevelItemView(levelItemModel = LevelItemModel(0, PointState.ONE, 1, 100, LevelType.TUTORIAL), navigateToLevel = {})
+    LevelItemView(
+        levelItemModel = LevelItemModel(0, PointState.ONE, 1, 100, LevelType.TUTORIAL),
+        navigateToLevel = { levelId, levelNumber , worldId -> },
+        finishLevel = {},
+        worldId = 0
+    )
 }
 
 @Preview
 @Composable
 fun LevelItemViewTwoPreview() {
-    LevelItemView(levelItemModel = LevelItemModel(0, PointState.TWO, 1, 100, LevelType.TUTORIAL), navigateToLevel = {})
+    LevelItemView(
+        levelItemModel = LevelItemModel(0, PointState.TWO, 1, 100, LevelType.TUTORIAL),
+        navigateToLevel = { levelId, levelNumber , worldId -> },
+        finishLevel = {},
+        worldId = 0
+    )
 }
 
 @Preview
 @Composable
 fun LevelItemViewThreePreview() {
-    LevelItemView(levelItemModel = LevelItemModel(0, PointState.THREE, 1, 100, LevelType.TUTORIAL), navigateToLevel = {})
+    LevelItemView(
+        levelItemModel = LevelItemModel(0, PointState.THREE, 1, 100, LevelType.TUTORIAL),
+        navigateToLevel = { levelId, levelNumber , worldId -> },
+        finishLevel = {},
+        worldId = 0
+    )
 }

@@ -16,6 +16,10 @@ class LevelRepository @Inject constructor(
         return levelDao.getAllLevels(worldId)
     }
 
+    fun getLevel(levelId: Int):Flow<Level>{
+        return levelDao.getLevel(levelId)
+    }
+
     fun getAnswer(levelId: Int): Flow<Answer> {
         return levelDao.getAnswer(levelId)
     }
@@ -23,5 +27,6 @@ class LevelRepository @Inject constructor(
     fun getQuestion(id: Int): Flow<Question> {
         return levelDao.getQuestion(id)
     }
+
 
 }

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MultiChoiceAnswers(modifier : Modifier){
+fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>){
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
@@ -21,25 +21,25 @@ fun MultiChoiceAnswers(modifier : Modifier){
         Button(
             modifier = Modifier.fillMaxWidth().padding(10.dp),
             onClick = { }) {
-            Text(text = "Answer 1")
+            Text(text = questionAnswers.get(0))
         }
 
         Button(
             modifier = Modifier.fillMaxWidth().padding(10.dp),
             onClick = { }) {
-            Text(text = "Answer 2")
+            Text(text = questionAnswers.get(1))
         }
 
         Button(
             modifier = Modifier.fillMaxWidth().padding(10.dp),
             onClick = { }) {
-            Text(text = "Answer 3")
+            Text(text = questionAnswers.get(2))
         }
 
         Button(
             modifier = Modifier.fillMaxWidth().padding(10.dp),
             onClick = { }) {
-            Text(text = "Answer 4")
+            Text(text = questionAnswers.get(3))
         }
 
     }
