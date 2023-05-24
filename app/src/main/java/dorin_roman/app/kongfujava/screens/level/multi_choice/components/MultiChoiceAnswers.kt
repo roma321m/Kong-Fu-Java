@@ -10,11 +10,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>, shownHints: List<String>) {
+fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>, shownHints: List<String>, checkAnswer: (String) -> Unit) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
@@ -30,7 +29,7 @@ fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>, shownH
             } else {
                 ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
             },
-            onClick = { }
+            onClick = { checkAnswer(questionAnswers[0]) }
         ) {
             Text(text = questionAnswers[0])
         }
@@ -39,12 +38,14 @@ fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>, shownH
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            colors = if (shownHints.contains(questionAnswers[0])) {
+            colors = if (shownHints.contains(questionAnswers[1])) {
                 ButtonDefaults.buttonColors(MaterialTheme.colors.error)
             } else {
                 ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
             },
-            onClick = { }) {
+            onClick = {
+                checkAnswer(questionAnswers[1])
+            }) {
             Text(text = questionAnswers[1])
         }
 
@@ -52,12 +53,14 @@ fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>, shownH
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            colors = if (shownHints.contains(questionAnswers[0])) {
+            colors = if (shownHints.contains(questionAnswers[2])) {
                 ButtonDefaults.buttonColors(MaterialTheme.colors.error)
             } else {
                 ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
             },
-            onClick = { }) {
+            onClick = {
+                checkAnswer(questionAnswers[2])
+            }) {
             Text(text = questionAnswers[2])
         }
 
@@ -65,12 +68,14 @@ fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>, shownH
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            colors = if (shownHints.contains(questionAnswers[0])) {
+            colors = if (shownHints.contains(questionAnswers[3])) {
                 ButtonDefaults.buttonColors(MaterialTheme.colors.error)
             } else {
                 ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
             },
-            onClick = {}) {
+            onClick = {
+                checkAnswer(questionAnswers[3])
+            }) {
             Text(text = questionAnswers[3])
         }
 

@@ -25,6 +25,7 @@ fun MultiChoiceScreenContent(
     shownHints: List<String>,
     finishLevel: () -> Unit,
     handleHint: () -> Unit,
+    checkAnswer: (String) -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -61,8 +62,8 @@ fun MultiChoiceScreenContent(
                     top.linkTo(lesson.bottom, 20.dp)
                 }
                 .padding(10.dp),
-            text = questionTitle,
-            style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onBackground)
+            text = questionTitle.uppercase(),
+            style = MaterialTheme.typography.h6.copy(color = MaterialTheme.colors.onBackground)
         )
 
         if (questionAnswers.isNotEmpty()) {
@@ -71,7 +72,7 @@ fun MultiChoiceScreenContent(
                     .constrainAs(answers) {
                         linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
                         top.linkTo(question.bottom, 20.dp)
-                    }, questionAnswers, shownHints
+                    }, questionAnswers, shownHints,checkAnswer
             )
         }
 
@@ -107,7 +108,8 @@ fun WorldsScreenPreview() {
             0,
             emptyList(),
             {},
-            {}
+            {},
+            { }
         )
     }
 }

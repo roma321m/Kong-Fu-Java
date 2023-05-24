@@ -26,14 +26,14 @@ object LevelLogic {
     }
 
     fun getScore(hint: Int, mistake: Int): Int {
-        return 6 - hint - mistake
+        return 3 - hint - mistake
     }
 
     fun getState(score: Int): PointState {
         return when (score) {
-            5, 6 -> getLevelState(PointState.THREE.ordinal)
-            3, 4 -> getLevelState(PointState.TWO.ordinal)
-            1, 2 -> getLevelState(PointState.ONE.ordinal)
+            3 -> getLevelState(PointState.THREE.ordinal)
+            2 -> getLevelState(PointState.TWO.ordinal)
+            1 -> getLevelState(PointState.ONE.ordinal)
             0 -> getLevelState(PointState.ZERO.ordinal)
             else -> {
                 getLevelState(PointState.ZERO.ordinal)

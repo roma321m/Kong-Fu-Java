@@ -50,18 +50,19 @@ fun MultiChoiceScreen(
             VerticalFortySixtyLayout(
                 fortyLayout = {
                     MultiChoiceScreenContent(
-                        navigateToMapLevelsScreenFromLevel,
-                        levelNumber,
-                        levelViewModel.title,
-                        levelViewModel.questionTitle,
-                        multiChoiceViewModel.answers,
-                        worldId,
-                        multiChoiceViewModel.shownHints,
-                        { levelViewModel.handle(LevelEvent.FinishLevel) },
-                        {
+                        navigateToMapLevelsScreenFromLevel = navigateToMapLevelsScreenFromLevel,
+                        levelNumber = levelNumber,
+                        title = levelViewModel.title,
+                        questionTitle = levelViewModel.questionTitle,
+                        questionAnswers = multiChoiceViewModel.answers,
+                        worldId = worldId,
+                        shownHints = multiChoiceViewModel.shownHints,
+                        finishLevel = { levelViewModel.handle(LevelEvent.FinishLevel) },
+                        handleHint = {
                             levelViewModel.handle(LevelEvent.UpdateLevelHint)
                             multiChoiceViewModel.handle(MultiEvent.GetHint)
                         },
+                        checkAnswer = { multiChoiceViewModel.handle(MultiEvent.CheckAnswer("")) }
                     )
                 },
                 sixtyLayout = {

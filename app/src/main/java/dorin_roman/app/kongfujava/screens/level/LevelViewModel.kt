@@ -134,7 +134,7 @@ class LevelViewModel @Inject constructor(
         score = if (type != LevelType.TUTORIAL) {
             LevelLogic.getScore(hint, mistakes)
         } else {
-            6
+            3
         }
         levelRepository.updateScore(currentLevelId, score)
     }

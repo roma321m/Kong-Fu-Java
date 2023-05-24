@@ -6,4 +6,5 @@ sealed class MultiEvent {
     class InitAnswers(val levelId: Int) : MultiEvent()
 
     object GetHint : MultiEvent()
+    class CheckAnswer(val answer: String) : MultiEvent()
 }

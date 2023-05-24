@@ -10,8 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.levels.Answer
-import dorin_roman.app.kongfujava.domain.models.levels.Question
-import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.levels_map.LevelsMapViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -27,8 +25,6 @@ class DragDropViewModel @Inject constructor(
     }
 
     private var currentLevel: Int = -1
-
-    private val question = MutableStateFlow<RequestState<Question>>(RequestState.Idle)
 
     private val answer = MutableStateFlow<RequestState<Answer>>(RequestState.Idle)
 
@@ -71,35 +67,20 @@ class DragDropViewModel @Inject constructor(
         )
     }
 
-    fun handle(event: LevelEvent) {
+    fun handle(event: DragDropEvent) {
         when (event) {
-            is LevelEvent.InitLevel -> initLevels(event.levelId)
+            is DragDropEvent.InitAnswers -> initAnswers(event.levelId)
             else -> {}
         }
     }
 
-    private fun initLevels(levelId: Int) {
+    private fun initAnswers(levelId: Int) {
         currentLevel = levelId
-        getQuestion()
-        getAnswer()
+        loadAnswer()
     }
 
-    private fun getQuestion() {
-        Log.d(LevelsMapViewModel.TAG, "getQuestion")
-        question.value = RequestState.Loading
-        try {
-            viewModelScope.launch {
-                levelRepository.getQuestion(currentLevel).collect { question ->
-                    this@DragDropViewModel.question.value = RequestState.Success(question)
-                }
-            }
-        } catch (e: Exception) {
-            question.value = RequestState.Error(e)
-        }
-    }
-
-    private fun getAnswer() {
-        Log.d(LevelsMapViewModel.TAG, "getAnswer")
+    private fun loadAnswer() {
+        Log.d(LevelsMapViewModel.TAG, "loadAnswer")
         answer.value = RequestState.Loading
         try {
             viewModelScope.launch {

@@ -30,12 +30,13 @@ class MultiChoiceViewModel @Inject constructor(
     var answers by mutableStateOf(listOf<String>())
         private set
 
+    var right by mutableStateOf("")
+        private set
+
     var shownHints by mutableStateOf(listOf<String>())
         private set
 
     var hints by mutableStateOf(listOf<String>())
-        private set
-    var hintCount by mutableStateOf(0)
         private set
 
     var hint by mutableStateOf("")
@@ -46,12 +47,12 @@ class MultiChoiceViewModel @Inject constructor(
         when (event) {
             is MultiEvent.InitAnswers -> initAnswers(event.levelId)
             is MultiEvent.GetHint -> { getHint() }
+            is MultiEvent.CheckAnswer -> { checkAnswer(event.answer) }
         }
     }
 
     private fun initAnswers(levelId: Int) {
         currentLevelId = levelId
-        hintCount = 0
         loadAnswers()
     }
 
@@ -68,7 +69,7 @@ class MultiChoiceViewModel @Inject constructor(
                 qAnswers.add(answer.answer4)
                 qAnswers.add(answer.right)
                 answers = qAnswers
-
+                right = answer.right
                 buildHints()
             }
         } catch (e: Exception) {
@@ -79,7 +80,7 @@ class MultiChoiceViewModel @Inject constructor(
     private fun buildHints() {
         val qHints = mutableListOf<String>()
         for (i in 0..3){
-            if(answers[i] != answers[answers.size-1]){
+            if(answers[i] != right){
                 qHints.add(answers[i])
             }
         }
@@ -92,5 +93,12 @@ class MultiChoiceViewModel @Inject constructor(
         shownHints.toMutableList().add(hint)
     }
 
+    private fun checkAnswer(answer: String) {
+        if(answer == right){
+
+        }else{
+
+        }
+    }
 
 }

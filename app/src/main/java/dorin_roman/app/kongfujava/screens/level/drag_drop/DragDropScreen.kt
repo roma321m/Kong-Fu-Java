@@ -31,8 +31,8 @@ fun DragDropScreen(
 ) {
 
     LaunchedEffect(key1 = true) {
-        //dragDropViewModel.handle(LevelEvent.InitLevel(levelId, worldId))
         levelViewModel.handle(LevelEvent.InitLevel(levelId, worldId))
+        dragDropViewModel.handle(DragDropEvent.InitAnswers(levelId))
     }
 
     DraggableScreen(
