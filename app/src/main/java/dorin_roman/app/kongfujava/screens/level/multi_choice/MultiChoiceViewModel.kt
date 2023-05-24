@@ -6,11 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dorin_roman.app.kongfujava.LevelLogic
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
-import dorin_roman.app.kongfujava.domain.models.Answer
-import dorin_roman.app.kongfujava.domain.models.Question
+import dorin_roman.app.kongfujava.domain.models.levels.Answer
+import dorin_roman.app.kongfujava.domain.models.levels.Question
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.levels_map.LevelsMapViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

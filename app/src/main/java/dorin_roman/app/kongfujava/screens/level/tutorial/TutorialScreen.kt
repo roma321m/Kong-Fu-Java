@@ -1,10 +1,7 @@
 package dorin_roman.app.kongfujava.screens.level.tutorial
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,12 +11,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.LevelViewModel
-import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialScreenContent
+import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialBody
+import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialEmptyVideo
+import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialTitle
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.VerticalFortySixtyLayout
-import dorin_roman.app.kongfujava.ui.components.image.SideScreenImage
+import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
+import dorin_roman.app.kongfujava.ui.components.video.VideoView
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+
 
 @Composable
 fun TutorialScreen(
@@ -31,43 +31,53 @@ fun TutorialScreen(
     worldId: Int
 ) {
 
-    LaunchedEffect(key1 = levelViewModel.question) {
+    LaunchedEffect(key1 = true) {
         levelViewModel.handle(LevelEvent.InitLevel(levelId))
+        tutorialViewModel.handle(TutorialEvent.InitLevel(levelId))
     }
 
-    // fixme - temp
     Scaffold(
         topBar = {
-            TopBar(onBackPressed = {}, title = R.string.tutorial_questions)
-        }
-    ) { padding ->
-
-        Column(
-            modifier = Modifier
-                .wrapContentSize()
-                .background(MaterialTheme.colors.secondary)
-                .padding(padding)
-        ) {
-            VerticalFortySixtyLayout(
-                fortyLayout = {
-                    TutorialScreenContent(
-                        navigateToMapLevelsScreenFromLevel,
-                        levelViewModel.title.value,
-                        levelViewModel.questionTitle.value,
-                        levelNumber,
-                        levelId,
-                        worldId,
-                        { levelViewModel.handle(LevelEvent.UpdateLevelScore(levelId, worldId, levelViewModel.score)) },
-                        { levelViewModel.handle(LevelEvent.UpdateLevelState(levelId, worldId, levelViewModel.state)) },
-                        { levelViewModel.handle(LevelEvent.UpdateLevelHint(levelId, worldId, levelViewModel.hint)) }
+            TopBar(
+                onBackPressed = {
+                    // Fixme
+                },
+                title = R.string.tutorial_questions
+            )
+        },
+        content = { padding ->
+            CustomLayout2(
+                modifier = Modifier.padding(padding),
+                startTopWeight = 0.2f,
+                startBottomWeight = 0.8f,
+                startTopContent = {
+                    TutorialTitle(
+                        levelNumber = levelNumber,
+                        title = levelViewModel.title.value
                     )
                 },
-                sixtyLayout = {
-                    SideScreenImage(R.drawable.ic_panda_question)
+                startBottomContent = {
+                    TutorialBody(
+                        onNextClick = {
+                            levelViewModel.handle(LevelEvent.FinishLevel)
+                            navigateToMapLevelsScreenFromLevel(worldId)
+                        },
+                        text = levelViewModel.questionTitle.value
+                    )
+                },
+                endContent = {
+                    if (tutorialViewModel.videoUrl.isNotBlank()) {
+                        VideoView(
+                            modifier = Modifier.fillMaxSize(),
+                            url = tutorialViewModel.videoUrl
+                        )
+                    } else {
+                        TutorialEmptyVideo()
+                    }
                 }
             )
         }
-    }
+    )
 }
 
 @DevicePreviews

@@ -42,11 +42,6 @@ import androidx.media3.ui.PlayerView
 import dorin_roman.app.kongfujava.R
 import kotlinx.coroutines.delay
 
-// FIXME - remove - example how to use, link for temp level 1 video
-//VideoView(
-//    modifier = Modifier.fillMaxSize(),
-//    url = "https://github.com/roma321m/Kong-Fu-Java-Videos/raw/main/level1.mp4"
-//)
 
 @Composable
 fun VideoView(

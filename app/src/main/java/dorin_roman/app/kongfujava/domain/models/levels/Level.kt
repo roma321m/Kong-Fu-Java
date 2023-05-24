@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.domain.models
+package dorin_roman.app.kongfujava.domain.models.levels
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

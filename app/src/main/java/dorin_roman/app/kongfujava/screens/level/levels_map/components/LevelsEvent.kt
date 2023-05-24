@@ -1,7 +1,7 @@
 package dorin_roman.app.kongfujava.screens.level.levels_map.components
 
 import dorin_roman.app.kongfujava.data.models.PointState
-import dorin_roman.app.kongfujava.domain.models.Level
+import dorin_roman.app.kongfujava.domain.models.levels.Level
 
 sealed class LevelsEvent {
     class UpdateLevel(val level: Level) : LevelsEvent()

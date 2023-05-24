@@ -2,9 +2,10 @@ package dorin_roman.app.kongfujava.domain.source
 
 import androidx.room.Dao
 import androidx.room.Query
-import dorin_roman.app.kongfujava.domain.models.Answer
-import dorin_roman.app.kongfujava.domain.models.Level
-import dorin_roman.app.kongfujava.domain.models.Question
+import dorin_roman.app.kongfujava.domain.models.levels.Answer
+import dorin_roman.app.kongfujava.domain.models.levels.Level
+import dorin_roman.app.kongfujava.domain.models.levels.Question
+import dorin_roman.app.kongfujava.domain.models.levels.Tutorial
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -13,6 +14,7 @@ interface LevelDao {
         const val DATABASE_LEVEL_TABLE = "level"
         const val DATABASE_QUESTION_TABLE = "question"
         const val DATABASE_ANSWER_TABLE = "answer"
+        const val DATABASE_TUTORIAL_TABLE = "tutorial"
     }
 
     @Query("SELECT * FROM level WHERE worldId=:worldId")
@@ -34,6 +36,11 @@ interface LevelDao {
     fun getAnswer(
         levelId: Int
     ): Flow<Answer>
+
+    @Query("SELECT * FROM tutorial WHERE levelId=:levelId")
+    fun getTutorial(
+        levelId: Int
+    ): Flow<Tutorial>
 
 //    @Query("SELECT * FROM level WHERE id=:id")
 //    @Update

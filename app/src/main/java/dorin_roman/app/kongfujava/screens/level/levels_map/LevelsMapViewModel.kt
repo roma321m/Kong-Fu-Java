@@ -11,7 +11,7 @@ import dorin_roman.app.kongfujava.LevelLogic
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
-import dorin_roman.app.kongfujava.domain.models.Level
+import dorin_roman.app.kongfujava.domain.models.levels.Level
 import dorin_roman.app.kongfujava.screens.level.LevelType
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
 import kotlinx.coroutines.Dispatchers

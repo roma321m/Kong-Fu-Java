@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.domain.models
+package dorin_roman.app.kongfujava.domain.models.levels
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,5 +13,5 @@ data class Answer(
     var answer2: String,
     var answer3: String,
     var answer4: String,
-    var right: Int,
+    var right: String,
 )
