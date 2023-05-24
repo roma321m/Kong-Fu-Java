@@ -16,7 +16,6 @@ val onSecondaryDark: Color = Color(0xFF000000)
 val onBackgroundDark: Color = Color(0xFFFFFFFF)
 val onSurfaceDark: Color = Color(0xFFFFFFFF)
 
-
 //Light
 val primaryLight: Color = Color(0xFFAA9CEB)
 val primaryVariantLight: Color = Color(0xff6955bc)
@@ -46,9 +45,21 @@ val LightGray = Color(0xFFFCFCFC)
 val MediumGray = Color(0xFF9C9C9C)
 val DarkGray = Color(0xFF141414)
 
-val Colors.splashScreenBackground: Color
+val Colors.Star: Color
     @Composable
-    get() = if (isLight) secondaryLight else Color.Black
+    get() = Color(0xFFFFCA2B)
+
+val Colors.TextFieldCursor: Color
+    @Composable
+    get() = Color(0xFFC3B8F8)
+
+val Colors.Error: Color
+    @Composable
+    get() = Color(0xffa84552)
+
+val Colors.LevelItemText: Color
+    @Composable
+    get() = Color.White
 
 val Colors.systemUi: Color
     @Composable

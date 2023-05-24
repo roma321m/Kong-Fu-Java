@@ -14,7 +14,7 @@ enum class ChildToast(
         duration = Toast.LENGTH_LONG
     ),
     CodeNotValid(
-        text = R.string.code_not_valid,
+        text = R.string.child_login_code_not_valid,
         duration = Toast.LENGTH_SHORT
     ),
     CodeExpired(

@@ -2,7 +2,11 @@ package dorin_roman.app.kongfujava.screens.worlds.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -42,18 +46,15 @@ fun WorldsItemView(
                 if (world.state == PointState.LOCK.ordinal) {
                     Modifier.alpha(0.6f)
                 } else {
-                    Modifier
+                    Modifier.clickable {
+                        navigateToMapLevels(world.id)
+                    }
                 }
             )
-            .clickable {
-                if (world.state != PointState.LOCK.ordinal) {
-                    navigateToMapLevels(world.id)
-                }
-            }
             .fillMaxHeight()
             .width(500.dp)
             .padding(20.dp),
-        elevation = MaterialTheme.elevation.medium,
+        elevation = MaterialTheme.elevation.small,
         shape = RoundedCornerShape(size = 40.dp),
         backgroundColor = MaterialTheme.colors.primary
     ) {

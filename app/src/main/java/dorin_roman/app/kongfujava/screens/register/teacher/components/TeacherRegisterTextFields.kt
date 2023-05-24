@@ -19,9 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.components.EmailField
-import dorin_roman.app.kongfujava.ui.components.PasswordField
-import dorin_roman.app.kongfujava.ui.components.TextFieldWithIcons
+import dorin_roman.app.kongfujava.ui.components.text_fields.EmailTextField
+import dorin_roman.app.kongfujava.ui.components.text_fields.IconTextField
+import dorin_roman.app.kongfujava.ui.components.text_fields.PasswordTextField
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -64,7 +64,7 @@ fun TeacherRegisterTextFields(
                 Text(text = stringResource(R.string.register_already_verified))
             }
         } else {
-            EmailField(
+            EmailTextField(
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
                     .padding(MaterialTheme.spacing.medium),
@@ -74,7 +74,7 @@ fun TeacherRegisterTextFields(
                 }
             )
 
-            PasswordField(
+            PasswordTextField(
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
                     .padding(MaterialTheme.spacing.medium),
@@ -84,7 +84,7 @@ fun TeacherRegisterTextFields(
                 }
             )
 
-            TextFieldWithIcons(
+            IconTextField(
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
                     .padding(MaterialTheme.spacing.medium),
@@ -97,7 +97,7 @@ fun TeacherRegisterTextFields(
                 }
             )
 
-            TextFieldWithIcons(
+            IconTextField(
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
                     .padding(MaterialTheme.spacing.medium),

@@ -23,11 +23,12 @@ import javax.inject.Inject
 class LevelsMapViewModel @Inject constructor(
     private val levelRepository: LevelRepository,
 ) : ViewModel() {
+
     companion object {
         const val TAG = "LevelsViewModel"
     }
 
-    var levelsModels by mutableStateOf<List<LevelItemModel>>(emptyList())
+    var levelsModels by mutableStateOf(listOf<LevelItemModel>())
         private set
 
     private var currentWorldId: Int = -1
@@ -44,6 +45,7 @@ class LevelsMapViewModel @Inject constructor(
     }
 
     private fun initLevels(worldId: Int) {
+        Log.d(TAG, "initLevels")
         currentWorldId = worldId
         getAllLevels()
     }
@@ -70,12 +72,14 @@ class LevelsMapViewModel @Inject constructor(
                     buildLevelsItemModels(levels)
                 }
             } catch (e: Exception) {
+                Log.e(TAG, "${e.message}")
                 levels.value = RequestState.Error(e)
             }
         }
     }
 
     private fun buildLevelsItemModels(levels: List<Level>) {
+        Log.d(TAG, "buildLevelsItemModels ${levels.size}")
         val levelItemModels = mutableListOf<LevelItemModel>()
         levels.forEach { level ->
             levelItemModels.add(
@@ -87,10 +91,8 @@ class LevelsMapViewModel @Inject constructor(
                     levelScore = level.score,
                 )
             )
-        }.also {
-            levelsModels = levelItemModels
         }
-       // Log.d("dorin", levelsModels[1].toString())
+        levelsModels = levelItemModels
     }
 
     private fun getLevelState(state: Int): PointState {

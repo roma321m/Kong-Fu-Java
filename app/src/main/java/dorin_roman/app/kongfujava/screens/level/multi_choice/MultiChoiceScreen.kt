@@ -1,8 +1,11 @@
 package dorin_roman.app.kongfujava.screens.level.multi_choice
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -12,7 +15,9 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceScreenContent
-import dorin_roman.app.kongfujava.ui.components.*
+import dorin_roman.app.kongfujava.ui.components.DevicePreviews
+import dorin_roman.app.kongfujava.ui.components.VerticalFortySixtyLayout
+import dorin_roman.app.kongfujava.ui.components.image.SideScreenImage
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 

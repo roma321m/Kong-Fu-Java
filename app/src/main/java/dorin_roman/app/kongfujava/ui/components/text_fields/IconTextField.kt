@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components
+package dorin_roman.app.kongfujava.ui.components.text_fields
 
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun TextFieldWithIcons(
+fun IconTextField(
     modifier: Modifier = Modifier,
     label: Int,
     placeholder: Int,

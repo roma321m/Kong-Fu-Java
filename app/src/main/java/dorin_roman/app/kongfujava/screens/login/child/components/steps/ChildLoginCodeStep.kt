@@ -23,8 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.theme.kongFuRed
-import dorin_roman.app.kongfujava.ui.theme.purpleColor1
+import dorin_roman.app.kongfujava.ui.theme.Error
+import dorin_roman.app.kongfujava.ui.theme.TextFieldCursor
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -73,12 +73,12 @@ fun ChildLoginCodeStep(
                     Text(stringResource(R.string.child_login_enter_code))
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    cursorColor = purpleColor1,
-                    focusedLabelColor = purpleColor1,
-                    errorLabelColor = kongFuRed,
-                    errorBorderColor = kongFuRed,
-                    focusedBorderColor = purpleColor1,
-                    unfocusedBorderColor = purpleColor1
+                    cursorColor = MaterialTheme.colors.TextFieldCursor,
+                    focusedLabelColor = MaterialTheme.colors.TextFieldCursor,
+                    errorLabelColor = MaterialTheme.colors.Error,
+                    errorBorderColor = MaterialTheme.colors.Error,
+                    focusedBorderColor = MaterialTheme.colors.TextFieldCursor,
+                    unfocusedBorderColor = MaterialTheme.colors.TextFieldCursor
                 )
             )
 

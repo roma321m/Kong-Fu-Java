@@ -18,8 +18,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.components.EmailField
-import dorin_roman.app.kongfujava.ui.components.PasswordField
+import dorin_roman.app.kongfujava.ui.components.text_fields.EmailTextField
+import dorin_roman.app.kongfujava.ui.components.text_fields.PasswordTextField
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
@@ -48,7 +48,7 @@ fun SupervisorLoginContentTopEnd(
             style = MaterialTheme.typography.h4
         )
 
-        EmailField(
+        EmailTextField(
             modifier = Modifier
                 .fillMaxWidth(0.5f),
             email = email,
@@ -57,7 +57,7 @@ fun SupervisorLoginContentTopEnd(
             }
         )
 
-        PasswordField(
+        PasswordTextField(
             modifier = Modifier
                 .fillMaxWidth(0.5f),
             password = password,

@@ -8,13 +8,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
-import javax.annotation.Untainted
 
 @Composable
 fun LevelButtons(modifier: Modifier, onClickHint: () -> Unit, OnClickNext: () -> Unit) {

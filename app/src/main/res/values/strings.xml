@@ -26,6 +26,7 @@
     <string name="child_login_code_expired">Code Expired</string>
     <string name="child_login_fill_name">You need to fill in your name</string>
     <string name="child_login_select_age">You need to select your age</string>
+    <string name="child_login_code_not_valid">Code Not Valid</string>
     <!-- Supervisor Login -->
     <string name="supervisor_login_description">supervisor login description</string>
     <string name="supervisor_login_title">Login</string>
@@ -94,27 +95,6 @@
     <string name="video_player_replay">Replay</string>
     <string name="video_player_play">Play</string>
     <!-- TODO -->
-    <string name="app_logo_description">App Logo</string>
-    <string name="panda_image_8">Panda Image 8</string>
-    <string name="app_logo">app logo</string>
-    <string name="register">register</string>
-    <string name="register_description">Kong Fu Java is a fun and educational\n game-based environment, where kids learn\n to code without any prior experience.</string>
-    <string name="register_email">Email address</string>
-    <string name="register_enter_email">Enter your e-mail</string>
-    <string name="register_password">Password</string>
-    <string name="register_enter_password">Enter your password</string>
-    <string name="register_class">Class</string>
-    <string name="register_enter_class">Enter your class</string>
-    <string name="register_education">School name</string>
-    <string name="register_enter_education">Enter your school name</string>
-    <string name="login_description">Hello, Good News!\n Mastering a new programming language doesn\'t have to be boring and exhausting.\n Connect and join your classmates to enjoy a coding adveture!.</string>
-    <string name="login">Login</string>
-    <string name="login_student_code">Student Code</string>
-    <string name="login_enter_student_code">Enter your student code</string>
-    <string name="login_create_account">Create a new account</string>
-    <string name="login_student_name">Student Name</string>
-    <string name="login_enter_student_name">Enter Student Name</string>
-    <string name="login_student_age">Student Age</string>
     <string name="worlds_map">Worlds Map</string>
     <string name="back_button">Back Button</string>
     <string name="lesson">Lesson</string>
@@ -132,7 +112,6 @@
     <string name="drag_drop_questions">Drag Drop Questions</string>
     <string name="more_actions">More Actions</string>
     <string name="dismiss">Dismiss</string>
-    <string name="code_not_valid">Code Not Valid</string>
     <string name="levels_map">Levels Map</string>
     <string name="logout">LogOut</string>
     <string name="level">level</string>

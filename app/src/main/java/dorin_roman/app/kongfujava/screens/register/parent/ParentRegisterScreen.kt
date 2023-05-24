@@ -8,7 +8,7 @@ import dorin_roman.app.kongfujava.screens.register.RegisterViewModel
 import dorin_roman.app.kongfujava.screens.register.parent.components.ParentRegisterDescription
 import dorin_roman.app.kongfujava.screens.register.parent.components.ParentRegisterTextFields
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.SideScreenImage
+import dorin_roman.app.kongfujava.ui.components.image.SideScreenImage
 import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 

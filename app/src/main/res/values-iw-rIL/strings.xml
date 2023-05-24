@@ -27,6 +27,7 @@
     <string name="child_login_code_expired">קוד לא תקף</string>
     <string name="child_login_fill_name">הוסף את שמך ונסה שוב</string>
     <string name="child_login_select_age">סמן את גילך ונסה שוב</string>
+    <string name="child_login_code_not_valid">קוד לא תקף</string>
     <!-- Supervisor Login -->
     <string name="supervisor_login_description">supervisor login description</string>
     <string name="supervisor_login_title">התחברות</string>

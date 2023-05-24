@@ -10,13 +10,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.data.models.PointState
-import dorin_roman.app.kongfujava.screens.level.LevelType
+import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelItemView
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsMapContent
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
 @Composable
@@ -45,12 +45,23 @@ fun LevelsMapScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colors.secondary)
-                    .padding(paddingValues),
+                    .padding(paddingValues)
+                    .padding(MaterialTheme.spacing.medium)
+                    .fillMaxSize(),
                 levels = levelsMapViewModel.levelsModels,
-                navigateToTutorialLevel,
-                navigateToMultiChoiceLevel,
-                navigateToDragDropLevel,
-                worldId
+                navigateToTutorialLevel = navigateToTutorialLevel,
+                navigateToMultiChoiceLevel = navigateToMultiChoiceLevel,
+                navigateToDragDropLevel = navigateToDragDropLevel,
+                itemContent = { item, nav ->
+                    LevelItemView(
+                        modifier = Modifier
+                            .padding(MaterialTheme.spacing.medium)
+                            .fillMaxSize(),
+                        levelItemModel = item,
+                        navigateToLevel = nav,
+                        worldId = worldId,
+                    )
+                }
             )
         }
     )

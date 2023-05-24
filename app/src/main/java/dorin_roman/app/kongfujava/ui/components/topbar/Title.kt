@@ -2,7 +2,11 @@ package dorin_roman.app.kongfujava.ui.components.topbar
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +39,7 @@ fun Title(
                 .padding(5.dp)
                 .size(80.dp, 80.dp),
             painter = painterResource(id = R.drawable.ic_panda_ninja),
-            contentDescription = stringResource(id = R.string.app_logo)
+            contentDescription = null
         )
     }
 }

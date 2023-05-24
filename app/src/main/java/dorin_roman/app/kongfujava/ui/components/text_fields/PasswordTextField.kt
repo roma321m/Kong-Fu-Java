@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components
+package dorin_roman.app.kongfujava.ui.components.text_fields
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dorin_roman.app.kongfujava.R
 
 @Composable
-fun PasswordField(
+fun PasswordTextField(
     modifier: Modifier = Modifier,
     password: String,
     onPasswordValueChange: (newValue: String) -> Unit
@@ -69,7 +69,7 @@ fun PasswordField(
 @Preview
 @Composable
 fun PreviewPasswordField() {
-    PasswordField(
+    PasswordTextField(
         password = "abcd",
         onPasswordValueChange = {}
     )

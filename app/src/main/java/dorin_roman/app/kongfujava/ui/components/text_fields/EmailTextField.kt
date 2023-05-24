@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components
+package dorin_roman.app.kongfujava.ui.components.text_fields
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dorin_roman.app.kongfujava.R
 
 @Composable
-fun EmailField(
+fun EmailTextField(
     modifier: Modifier = Modifier,
     email: String,
     onEmailValueChange: (newValue: String) -> Unit
@@ -34,7 +34,7 @@ fun EmailField(
 @Preview
 @Composable
 fun PreviewEmailField() {
-    EmailField(
+    EmailTextField(
         email = "test@gmail.com",
         onEmailValueChange = {}
     )

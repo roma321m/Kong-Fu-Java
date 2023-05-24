@@ -6,7 +6,7 @@ import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.screens.login.user_type.components.UserTypeButtons
 import dorin_roman.app.kongfujava.screens.login.user_type.components.UserTypeDescription
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.SideScreenImage
+import dorin_roman.app.kongfujava.ui.components.image.SideScreenImage
 import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
