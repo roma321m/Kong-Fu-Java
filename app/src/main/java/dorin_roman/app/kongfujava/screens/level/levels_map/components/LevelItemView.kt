@@ -29,7 +29,6 @@ fun LevelItemView(
     modifier: Modifier = Modifier,
     levelItemModel: LevelItemModel,
     navigateToLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
-    finishLevel: () -> Unit,
     worldId: Int
 ) {
     ConstraintLayout(
@@ -90,7 +89,6 @@ fun LevelItemViewLockPreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.LOCK, 1, 100, LevelType.TUTORIAL),
         navigateToLevel = { levelId, levelNumber , worldId -> },
-        finishLevel = {},
         worldId = 0
     )
 }
@@ -101,7 +99,6 @@ fun LevelItemViewZeroPreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(1, PointState.ZERO, 1, 100, LevelType.TUTORIAL),
         navigateToLevel = { levelId, levelNumber , worldId-> },
-        finishLevel = {},
         worldId = 0
     )
 }
@@ -112,7 +109,6 @@ fun LevelItemViewOnePreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.ONE, 1, 100, LevelType.TUTORIAL),
         navigateToLevel = { levelId, levelNumber , worldId -> },
-        finishLevel = {},
         worldId = 0
     )
 }
@@ -123,7 +119,6 @@ fun LevelItemViewTwoPreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.TWO, 1, 100, LevelType.TUTORIAL),
         navigateToLevel = { levelId, levelNumber , worldId -> },
-        finishLevel = {},
         worldId = 0
     )
 }
@@ -134,7 +129,6 @@ fun LevelItemViewThreePreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.THREE, 1, 100, LevelType.TUTORIAL),
         navigateToLevel = { levelId, levelNumber , worldId -> },
-        finishLevel = {},
         worldId = 0
     )
 }

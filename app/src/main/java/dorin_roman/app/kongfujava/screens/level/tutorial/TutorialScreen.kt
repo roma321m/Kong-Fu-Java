@@ -11,6 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
+import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialScreenContent
 import dorin_roman.app.kongfujava.ui.components.*
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
@@ -18,6 +19,7 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun TutorialScreen(
+    levelViewModel: LevelViewModel = hiltViewModel(),
     tutorialViewModel: TutorialViewModel = hiltViewModel(),
     navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
     levelId: Int,
@@ -25,8 +27,8 @@ fun TutorialScreen(
     worldId: Int
 ) {
 
-    LaunchedEffect(key1 = tutorialViewModel.question) {
-        tutorialViewModel.handle(LevelEvent.InitLevel(levelId))
+    LaunchedEffect(key1 = levelViewModel.question) {
+        levelViewModel.handle(LevelEvent.InitLevel(levelId))
     }
 
     // fixme - temp
@@ -46,13 +48,14 @@ fun TutorialScreen(
                 fortyLayout = {
                     TutorialScreenContent(
                         navigateToMapLevelsScreenFromLevel,
-                        tutorialViewModel.title.value,
-                        tutorialViewModel.questionTitle.value,
+                        levelViewModel.title.value,
+                        levelViewModel.questionTitle.value,
                         levelNumber,
                         levelId,
                         worldId,
-                        tutorialViewModel.handle(LevelEvent.UpdateLevelScore(levelId, worldId, tutorialViewModel.score)),
-                        tutorialViewModel.handle(LevelEvent.UpdateLevelState(levelId, worldId, tutorialViewModel.state))
+                        { levelViewModel.handle(LevelEvent.UpdateLevelScore(levelId, worldId, levelViewModel.score)) },
+                        { levelViewModel.handle(LevelEvent.UpdateLevelState(levelId, worldId, levelViewModel.state)) },
+                        { levelViewModel.handle(LevelEvent.UpdateLevelHint(levelId, worldId, levelViewModel.hint)) }
                     )
                 },
                 sixtyLayout = {

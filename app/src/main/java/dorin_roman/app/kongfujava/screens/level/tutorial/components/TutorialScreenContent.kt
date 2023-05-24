@@ -3,7 +3,6 @@ package dorin_roman.app.kongfujava.screens.level.tutorial.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.components.LevelButtons
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
@@ -22,8 +22,9 @@ fun TutorialScreenContent(
     levelNumber: Int,
     levelId: Int,
     worldId: Int,
-    handleScore: Unit,
-    handleState: Unit
+    handleScore: () -> Unit,
+    handleState: () -> Unit,
+    handleHint: () -> Unit,
 ) {
 
     ConstraintLayout(
@@ -65,18 +66,35 @@ fun TutorialScreenContent(
             style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onBackground)
         )
 
-        Button(modifier = Modifier
+
+        LevelButtons(modifier = Modifier
             .constrainAs(next) {
                 bottom.linkTo(parent.bottom, 20.dp)
                 end.linkTo(parent.end, 20.dp)
             }
             .padding(10.dp),
-            onClick = {
-                handleScore
+            onClickHint = {
+                handleHint()
+            },
+            OnClickNext = {
+                handleScore()
+                handleState()
                 navigateToMapLevelsScreenFromLevel(worldId)
-            }) {
-            Text(text = "Next")
-        }
+            })
+
+//        Button(modifier = Modifier
+//            .constrainAs(next) {
+//                bottom.linkTo(parent.bottom, 20.dp)
+//                end.linkTo(parent.end, 20.dp)
+//            }
+//            .padding(10.dp),
+//            onClick = {
+//                handleScore
+//                handleState
+//                navigateToMapLevelsScreenFromLevel(worldId)
+//            }) {
+//            Text(text = "Next")
+//        }
 
 
     }

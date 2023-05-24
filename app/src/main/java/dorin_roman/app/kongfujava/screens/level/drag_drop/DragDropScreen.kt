@@ -11,6 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
+import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropLeftScreenContent
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropRightScreenContent
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DraggableScreen
@@ -21,6 +22,7 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun DragDropScreen(
+    levelViewModel: LevelViewModel = hiltViewModel(),
     dragDropViewModel: DragDropViewModel = hiltViewModel(),
     navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
     levelId: Int,

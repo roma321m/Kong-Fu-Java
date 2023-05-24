@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
+import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceScreenContent
 import dorin_roman.app.kongfujava.ui.components.*
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
@@ -17,6 +18,7 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun MultiChoiceScreen(
+    levelViewModel: LevelViewModel = hiltViewModel(),
     multiChoiceViewModel: MultiChoiceViewModel = hiltViewModel(),
     navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
     levelId: Int,

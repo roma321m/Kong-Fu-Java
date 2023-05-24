@@ -44,8 +44,7 @@ class MultiChoiceViewModel @Inject constructor(
     fun handle(event: LevelEvent) {
         when (event) {
             is LevelEvent.InitLevel -> initLevels(event.levelId)
-            is LevelEvent.UpdateLevelScore -> {}
-            is LevelEvent.UpdateLevelState -> {}
+            else -> {}
         }
     }
 

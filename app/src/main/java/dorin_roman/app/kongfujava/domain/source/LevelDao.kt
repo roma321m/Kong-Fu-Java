@@ -2,7 +2,6 @@ package dorin_roman.app.kongfujava.domain.source
 
 import androidx.room.Dao
 import androidx.room.Query
-import androidx.room.Update
 import dorin_roman.app.kongfujava.domain.models.Answer
 import dorin_roman.app.kongfujava.domain.models.Level
 import dorin_roman.app.kongfujava.domain.models.Question
@@ -41,4 +40,10 @@ interface LevelDao {
 //    fun updateLevel(
 //        level : Level
 //    )
+
+    @Query("UPDATE level SET score = :score WHERE id =:id")
+    fun updateScore(id: Int, score: Int)
+
+    @Query("UPDATE level SET state = :state WHERE id =:id")
+    fun updateState(id: Int, state: Int)
 }

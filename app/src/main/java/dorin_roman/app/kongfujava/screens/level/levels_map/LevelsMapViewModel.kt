@@ -1,7 +1,9 @@
 package dorin_roman.app.kongfujava.screens.level.levels_map
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,6 +14,7 @@ import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.Level
 import dorin_roman.app.kongfujava.screens.level.LevelType
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,7 +27,7 @@ class LevelsMapViewModel @Inject constructor(
         const val TAG = "LevelsViewModel"
     }
 
-    var levelsModels = mutableStateListOf<LevelItemModel>()
+    var levelsModels by mutableStateOf<List<LevelItemModel>>(emptyList())
         private set
 
     private var currentWorldId: Int = -1
@@ -41,8 +44,8 @@ class LevelsMapViewModel @Inject constructor(
     }
 
     private fun initLevels(worldId: Int) {
-            currentWorldId = worldId
-            getAllLevels()
+        currentWorldId = worldId
+        getAllLevels()
     }
 
     private fun updateWorldState(state: PointState) {
@@ -60,22 +63,22 @@ class LevelsMapViewModel @Inject constructor(
     private fun getAllLevels() {
         Log.d(TAG, "getAllLevels")
         levels.value = RequestState.Loading
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
                 levelRepository.getAllLevels(currentWorldId).collect { levels ->
                     this@LevelsMapViewModel.levels.value = RequestState.Success(levels)
                     buildLevelsItemModels(levels)
                 }
+            } catch (e: Exception) {
+                levels.value = RequestState.Error(e)
             }
-        } catch (e: Exception) {
-            levels.value = RequestState.Error(e)
         }
     }
 
     private fun buildLevelsItemModels(levels: List<Level>) {
-
+        val levelItemModels = mutableListOf<LevelItemModel>()
         levels.forEach { level ->
-            levelsModels.add(
+            levelItemModels.add(
                 LevelItemModel(
                     levelId = level.id,
                     levelState = getLevelState(level.state),
@@ -84,7 +87,10 @@ class LevelsMapViewModel @Inject constructor(
                     levelScore = level.score,
                 )
             )
+        }.also {
+            levelsModels = levelItemModels
         }
+       // Log.d("dorin", levelsModels[1].toString())
     }
 
     private fun getLevelState(state: Int): PointState {

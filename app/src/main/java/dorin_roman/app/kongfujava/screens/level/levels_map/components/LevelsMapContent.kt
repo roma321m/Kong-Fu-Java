@@ -39,10 +39,6 @@ fun LevelsMapContent(
                     LevelType.TUTORIAL -> navigateToTutorialLevel
                     LevelType.MULTI -> navigateToMultiChoiceLevel
                     LevelType.DRAG_DROP -> navigateToDragDropLevel
-                },
-                finishLevel = {
-                    level.levelState = PointState.ONE
-                    levels[levels.indexOf(level)+1].levelState= PointState.ZERO
                 }
             )
         }

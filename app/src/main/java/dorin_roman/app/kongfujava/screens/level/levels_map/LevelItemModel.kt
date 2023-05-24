@@ -8,5 +8,5 @@ data class LevelItemModel(
     var levelState: PointState = PointState.LOCK,
     var levelNumber: Int,
     var levelScore: Int,
-    var levelType: LevelType,
+    var levelType: LevelType
 )

@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
-import dorin_roman.app.kongfujava.ui.components.HelpersButtons
+import dorin_roman.app.kongfujava.ui.components.LevelButtons
 
 @Composable
 fun DragDropRightScreenContent(dragDropViewModel: DragDropViewModel) {
@@ -55,22 +55,22 @@ fun DragDropRightScreenContent(dragDropViewModel: DragDropViewModel) {
                         }
                         if (isInBound) {
                             if (answerItem != null) {
-                               // it = answerItem
+                                // it = answerItem
                             }
                             DropAnswerItemCard(MaterialTheme.colors.primary, it)
                         } else {
-                            DropAnswerItemCard( MaterialTheme.colors.background, it)
+                            DropAnswerItemCard(MaterialTheme.colors.background, it)
                         }
                     }
                 }
             }
 
 
-            HelpersButtons(modifier = Modifier
+            LevelButtons(modifier = Modifier
                 .constrainAs(helpers) {
                     end.linkTo(parent.end, 10.dp)
                     bottom.linkTo(parent.bottom, 10.dp)
-                })
+                }, {}, {})
         }
     }
 }

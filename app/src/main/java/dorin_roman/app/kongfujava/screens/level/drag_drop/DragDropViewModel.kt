@@ -58,10 +58,10 @@ class DragDropViewModel @Inject constructor(
 //        )
 
         drag = listOf(
-           "A",
-           "B",
-           "C",
-           "D"
+            "A",
+            "B",
+            "C",
+            "D"
         )
 
         drop = listOf(
@@ -75,8 +75,7 @@ class DragDropViewModel @Inject constructor(
     fun handle(event: LevelEvent) {
         when (event) {
             is LevelEvent.InitLevel -> initLevels(event.levelId)
-            is LevelEvent.UpdateLevelScore -> {}
-            is LevelEvent.UpdateLevelState -> {}
+            else -> {}
         }
     }
 
@@ -124,15 +123,15 @@ class DragDropViewModel @Inject constructor(
         )
     }
 
-    fun startDragging(){
+    fun startDragging() {
         isCurrentlyDragging = true
     }
 
-    fun stopDragging(){
+    fun stopDragging() {
         isCurrentlyDragging = false
     }
 
-    fun checkAnswer(answer: String?){
+    fun checkAnswer(answer: String?) {
         Log.d(TAG, "checkAnswer")
     }
 }
