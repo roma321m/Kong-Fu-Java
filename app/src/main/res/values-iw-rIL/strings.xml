@@ -90,4 +90,8 @@
     <!-- Alert Dialog -->
     <string name="alert_dialog_yes">כן</string>
     <string name="alert_dialog_no">לא</string>
+    <!-- Video Player -->
+    <string name="video_player_pause">הַפסָקָ</string>
+    <string name="video_player_replay">נגן מחדש</string>
+    <string name="video_player_play">נגן</string>
 </resources>

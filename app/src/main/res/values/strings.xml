@@ -89,6 +89,10 @@
     <!-- Alert Dialog -->
     <string name="alert_dialog_yes">Yes</string>
     <string name="alert_dialog_no">No</string>
+    <!-- Video Player -->
+    <string name="video_player_pause">Pause</string>
+    <string name="video_player_replay">Replay</string>
+    <string name="video_player_play">Play</string>
     <!-- TODO -->
     <string name="app_logo_description">App Logo</string>
     <string name="panda_image_8">Panda Image 8</string>
