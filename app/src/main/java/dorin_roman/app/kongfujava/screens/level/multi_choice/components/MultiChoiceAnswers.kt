@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>){
+fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>, shownHints: List<String>) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
@@ -19,27 +22,56 @@ fun MultiChoiceAnswers(modifier: Modifier, questionAnswers: List<String>){
     {
 
         Button(
-            modifier = Modifier.fillMaxWidth().padding(10.dp),
-            onClick = { }) {
-            Text(text = questionAnswers.get(0))
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            colors = if (shownHints.contains(questionAnswers[0])) {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.error)
+            } else {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
+            },
+            onClick = { }
+        ) {
+            Text(text = questionAnswers[0])
         }
 
         Button(
-            modifier = Modifier.fillMaxWidth().padding(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            colors = if (shownHints.contains(questionAnswers[0])) {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.error)
+            } else {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
+            },
             onClick = { }) {
-            Text(text = questionAnswers.get(1))
+            Text(text = questionAnswers[1])
         }
 
         Button(
-            modifier = Modifier.fillMaxWidth().padding(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            colors = if (shownHints.contains(questionAnswers[0])) {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.error)
+            } else {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
+            },
             onClick = { }) {
-            Text(text = questionAnswers.get(2))
+            Text(text = questionAnswers[2])
         }
 
         Button(
-            modifier = Modifier.fillMaxWidth().padding(10.dp),
-            onClick = { }) {
-            Text(text = questionAnswers.get(3))
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            colors = if (shownHints.contains(questionAnswers[0])) {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.error)
+            } else {
+                ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
+            },
+            onClick = {}) {
+            Text(text = questionAnswers[3])
         }
 
     }

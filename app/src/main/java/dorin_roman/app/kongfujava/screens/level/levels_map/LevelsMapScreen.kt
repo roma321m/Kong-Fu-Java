@@ -43,7 +43,6 @@ fun LevelsMapScreen(
         content = { paddingValues ->
             LevelsMapContent(
                 modifier = Modifier
-                    .fillMaxSize()
                     .background(MaterialTheme.colors.secondary)
                     .padding(paddingValues)
                     .padding(MaterialTheme.spacing.medium)

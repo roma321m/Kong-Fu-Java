@@ -23,17 +23,17 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun TutorialScreen(
-    levelViewModel: LevelViewModel = hiltViewModel(),
-    tutorialViewModel: TutorialViewModel = hiltViewModel(),
     navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
     levelId: Int,
     levelNumber: Int,
-    worldId: Int
+    worldId: Int,
+    levelViewModel: LevelViewModel = hiltViewModel(),
+    tutorialViewModel: TutorialViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
-        levelViewModel.handle(LevelEvent.InitLevel(levelId))
-        tutorialViewModel.handle(TutorialEvent.InitLevel(levelId))
+        levelViewModel.handle(LevelEvent.InitLevel(levelId, worldId))
+        tutorialViewModel.handle(TutorialEvent.InitTutorial(levelId))
     }
 
     Scaffold(
@@ -53,7 +53,7 @@ fun TutorialScreen(
                 startTopContent = {
                     TutorialTitle(
                         levelNumber = levelNumber,
-                        title = levelViewModel.title.value
+                        title = levelViewModel.title
                     )
                 },
                 startBottomContent = {
@@ -62,7 +62,7 @@ fun TutorialScreen(
                             levelViewModel.handle(LevelEvent.FinishLevel)
                             navigateToMapLevelsScreenFromLevel(worldId)
                         },
-                        text = levelViewModel.questionTitle.value
+                        text = levelViewModel.questionTitle
                     )
                 },
                 endContent = {

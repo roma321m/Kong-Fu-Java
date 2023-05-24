@@ -31,8 +31,9 @@ fun MultiChoiceScreen(
     worldId: Int
 ) {
 
-    LaunchedEffect(key1 = multiChoiceViewModel.question, key2 = multiChoiceViewModel.answer) {
-        multiChoiceViewModel.handle(LevelEvent.InitLevel(levelId))
+    LaunchedEffect(key1 = true) {
+        levelViewModel.handle(LevelEvent.InitLevel(levelId, worldId))
+        multiChoiceViewModel.handle(MultiEvent.InitAnswers(levelId))
     }
 
     Scaffold(
@@ -48,7 +49,20 @@ fun MultiChoiceScreen(
         ) {
             VerticalFortySixtyLayout(
                 fortyLayout = {
-                    MultiChoiceScreenContent(navigateToMapLevelsScreenFromLevel,levelNumber,multiChoiceViewModel.title.value, multiChoiceViewModel.questionTitle.value, multiChoiceViewModel.answers)
+                    MultiChoiceScreenContent(
+                        navigateToMapLevelsScreenFromLevel,
+                        levelNumber,
+                        levelViewModel.title,
+                        levelViewModel.questionTitle,
+                        multiChoiceViewModel.answers,
+                        worldId,
+                        multiChoiceViewModel.shownHints,
+                        { levelViewModel.handle(LevelEvent.FinishLevel) },
+                        {
+                            levelViewModel.handle(LevelEvent.UpdateLevelHint)
+                            multiChoiceViewModel.handle(MultiEvent.GetHint)
+                        },
+                    )
                 },
                 sixtyLayout = {
                     SideScreenImage(R.drawable.ic_panda_question)

@@ -33,18 +33,18 @@ class TutorialViewModel @Inject constructor(
 
     fun handle(event: TutorialEvent) {
         when (event) {
-            is TutorialEvent.InitLevel -> initLevelId(event.levelId)
+            is TutorialEvent.InitTutorial -> initTutorial(event.levelId)
         }
     }
 
-    private fun initLevelId(levelId: Int) {
-        Log.d(TAG, "initLevelId: $levelId")
+    private fun initTutorial(levelId: Int) {
+        Log.d(TAG, "initTutorial: $levelId")
         currentLevelId = levelId
-        getVideoUrl()
+        loadVideoUrl()
     }
 
-    private fun getVideoUrl() = viewModelScope.launch {
-        Log.d(TAG, "getVideoUrl")
+    private fun loadVideoUrl() = viewModelScope.launch {
+        Log.d(TAG, "loadVideoUrl")
         tutorial.value = RequestState.Loading
         try {
             levelRepository.getTutorial(currentLevelId).collect { tutorial ->

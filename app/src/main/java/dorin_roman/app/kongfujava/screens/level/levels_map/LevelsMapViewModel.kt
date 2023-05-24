@@ -47,7 +47,7 @@ class LevelsMapViewModel @Inject constructor(
     private fun initLevels(worldId: Int) {
         Log.d(TAG, "initLevels")
         currentWorldId = worldId
-        getAllLevels()
+        loadAllLevels()
     }
 
     private fun updateWorldState(state: PointState) {
@@ -62,21 +62,20 @@ class LevelsMapViewModel @Inject constructor(
         //TODO
     }
 
-    private fun getAllLevels() {
-        Log.d(TAG, "getAllLevels")
+    private fun loadAllLevels() = viewModelScope.launch(Dispatchers.IO) {
+        Log.d(TAG, "loadAllLevels")
         levels.value = RequestState.Loading
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                levelRepository.getAllLevels(currentWorldId).collect { levels ->
-                    this@LevelsMapViewModel.levels.value = RequestState.Success(levels)
-                    buildLevelsItemModels(levels)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "${e.message}")
-                levels.value = RequestState.Error(e)
+        try {
+            levelRepository.getAllLevels(currentWorldId).collect { levels ->
+                this@LevelsMapViewModel.levels.value = RequestState.Success(levels)
+                buildLevelsItemModels(levels)
             }
+        } catch (e: Exception) {
+            Log.e(TAG, "${e.message}")
+            levels.value = RequestState.Error(e)
         }
     }
+
 
     private fun buildLevelsItemModels(levels: List<Level>) {
         Log.d(TAG, "buildLevelsItemModels ${levels.size}")

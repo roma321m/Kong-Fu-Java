@@ -1,7 +1,9 @@
 package dorin_roman.app.kongfujava.screens.level
 
 import android.util.Log
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,32 +27,35 @@ class LevelViewModel @Inject constructor(
         const val TAG = "LevelViewModel"
     }
 
+    var title by mutableStateOf("")
+        private set
+
+    var questionTitle by mutableStateOf("")
+        private set
+
+    var score by mutableStateOf(0)
+        private set
+
+    var state by mutableStateOf(PointState.LOCK)
+        private set
+
+    var type by mutableStateOf(LevelType.TUTORIAL)
+        private set
+
+    var hint by mutableStateOf(0)
+        private set
+
+    var mistakes by mutableStateOf(0)
+        private set
+
+    private var currentWorldId: Int = -1
+
     private var currentLevelId: Int = -1
 
     private val currentLevel = MutableStateFlow<RequestState<Level>>(RequestState.Idle)
 
-    val question = MutableStateFlow<RequestState<Question>>(RequestState.Idle)
+    private val question = MutableStateFlow<RequestState<Question>>(RequestState.Idle)
 
-    var title = mutableStateOf("")
-        private set
-
-    var questionTitle = mutableStateOf("")
-        private set
-
-    var score = mutableStateOf(0)
-        private set
-
-    var state = mutableStateOf(PointState.LOCK)
-        private set
-
-    var type = mutableStateOf(LevelType.TUTORIAL)
-        private set
-
-    var hint = mutableStateOf(0)
-        private set
-
-    var mistakes = mutableStateOf(0)
-        private set
 
     fun handle(event: LevelEvent) {
         when (event) {
@@ -59,7 +64,8 @@ class LevelViewModel @Inject constructor(
                 updateState()
             }
 
-            is LevelEvent.InitLevel -> initLevels(event.levelId)
+            is LevelEvent.InitLevel -> initLevels(event.levelId, event.worldId)
+
             is LevelEvent.UpdateLevelScore -> {
                 updateScore()
             }
@@ -75,83 +81,89 @@ class LevelViewModel @Inject constructor(
             is LevelEvent.UpdateLevelHint -> {
                 updateHint()
             }
+
+            else -> {}
         }
     }
 
-    private fun initLevels(levelId: Int) {
+    private fun initLevels(levelId: Int, worldId: Int) {
         Log.d(TAG, "initLevels")
         currentLevelId = levelId
-        getQuestion()
-        getLevel()
+        currentWorldId = worldId
+        hint = 0
+        mistakes = 0
+        loadQuestion()
+        loadLevel()
     }
 
-    private fun getQuestion() {
-        Log.d(TAG, "getQuestion")
+    private fun loadQuestion() = viewModelScope.launch {
+        Log.d(TAG, "loadQuestion")
         question.value = RequestState.Loading
-        viewModelScope.launch {
-            try {
-                levelRepository.getQuestion(currentLevelId).collect { question ->
-                    this@LevelViewModel.question.value = RequestState.Success(question)
-                    title.value = question.title
-                    questionTitle.value = question.question
-                }
-            } catch (e: Exception) {
-                question.value = RequestState.Error(e)
+        try {
+            levelRepository.getQuestion(currentLevelId).collect { question ->
+                this@LevelViewModel.question.value = RequestState.Success(question)
+                title = question.title
+                questionTitle = question.question
             }
+        } catch (e: Exception) {
+            question.value = RequestState.Error(e)
+            Log.e(TAG, "${e.message}")
         }
     }
 
-    private fun getLevel() {
-        Log.d(TAG, "getLevel")
+
+    private fun loadLevel() = viewModelScope.launch {
+        Log.d(TAG, "loadLevel")
         currentLevel.value = RequestState.Loading
-        viewModelScope.launch {
-            try {
-                levelRepository.getLevel(currentLevelId).collect { level ->
-                    this@LevelViewModel.currentLevel.value = RequestState.Success(level)
-                    score.value = level.score
-                    type.value = LevelLogic.getLevelType(level.type)
-                    state.value = LevelLogic.getLevelState(level.state)
-                }
-            } catch (e: Exception) {
-                question.value = RequestState.Error(e)
+        try {
+            levelRepository.getLevel(currentLevelId).collect { level ->
+                this@LevelViewModel.currentLevel.value = RequestState.Success(level)
+                score = level.score
+                type = LevelLogic.getLevelType(level.type)
+                state = LevelLogic.getLevelState(level.state)
             }
+        } catch (e: Exception) {
+            question.value = RequestState.Error(e)
+            Log.e(TAG, "${e.message}")
         }
     }
 
-    private fun updateScore() {
+
+    private fun updateScore() = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateScore")
-        if (type.value.ordinal != 0) {
-            score.value = LevelLogic.getScore(hint.value, mistakes.value)
+        score = if (type != LevelType.TUTORIAL) {
+            LevelLogic.getScore(hint, mistakes)
         } else {
-            score.value = 6
+            6
         }
-        viewModelScope.launch(Dispatchers.IO) {
-            levelRepository.updateScore(currentLevelId, score.value)
-        }
+        levelRepository.updateScore(currentLevelId, score)
     }
 
-    private fun updateState() {
+    private fun updateState() = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateState")
-        LevelLogic.getState(score.value)
-        viewModelScope.launch(Dispatchers.IO) {
-            levelRepository.updateState(currentLevelId, state.value.ordinal)
-            levelRepository.updateState(currentLevelId + 1, PointState.ZERO.ordinal)
-        }
+        state = LevelLogic.getState(score)
+        levelRepository.updateState(currentLevelId, state.ordinal)
+        //fixme when last level need to open new world
+        levelRepository.updateState(currentLevelId + 1, PointState.ZERO.ordinal)
     }
 
     private fun updateHint() {
-        Log.d(TAG, "updateHint ${hint.value}")
-        if (hint.value == 3)
+        Log.d(TAG, "updateHint $hint")
+        if (hint == 3)
             return
 
-        hint.value += 1
+        hint += 1
     }
 
     private fun updateMistakes() {
-        Log.d(TAG, "updateMistake ${mistakes.value}")
-        if (mistakes.value < 3) {
-            mistakes.value += 1
+        Log.d(TAG, "updateMistake $mistakes")
+        if (mistakes < 3) {
+            mistakes += 1
         }
+    }
+
+    private fun updateStatistics() {
+
     }
 
 }

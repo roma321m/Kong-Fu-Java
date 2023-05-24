@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
+import dorin_roman.app.kongfujava.ui.components.LevelButtons
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
@@ -19,14 +20,18 @@ fun MultiChoiceScreenContent(
     levelNumber: Int,
     title: String,
     questionTitle: String,
-    questionAnswers: List<String>
+    questionAnswers: List<String>,
+    worldId: Int,
+    shownHints: List<String>,
+    finishLevel: () -> Unit,
+    handleHint: () -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
             .padding(MaterialTheme.spacing.extraLarge)
     ) {
-        val (lesson, level, question, answers, helpers) = createRefs()
+        val (level, lesson, question, answers, buttons) = createRefs()
 
         Text(
             modifier = Modifier
@@ -53,18 +58,38 @@ fun MultiChoiceScreenContent(
             modifier = Modifier
                 .constrainAs(question) {
                     linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
-                    top.linkTo(level.bottom, 20.dp)
+                    top.linkTo(lesson.bottom, 20.dp)
                 }
                 .padding(10.dp),
             text = questionTitle,
-            style = MaterialTheme.typography.h6.copy(color = MaterialTheme.colors.onBackground)
+            style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onBackground)
         )
 
-        MultiChoiceAnswers(modifier = Modifier
-            .constrainAs(answers) {
-                linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
-                top.linkTo(question.bottom, 20.dp)
-            }, questionAnswers)
+        if (questionAnswers.isNotEmpty()) {
+            MultiChoiceAnswers(
+                modifier = Modifier
+                    .constrainAs(answers) {
+                        linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
+                        top.linkTo(question.bottom, 20.dp)
+                    }, questionAnswers, shownHints
+            )
+        }
+
+        LevelButtons(modifier = Modifier
+            .constrainAs(buttons) {
+                bottom.linkTo(parent.bottom, 20.dp)
+                end.linkTo(parent.end, 20.dp)
+            }
+            .padding(10.dp),
+            onClickHint = {
+                //fixme
+                handleHint()
+            },
+            OnClickNext = {
+                //fixme
+                finishLevel()
+                navigateToMapLevelsScreenFromLevel(worldId)
+            })
     }
 }
 
@@ -73,6 +98,16 @@ fun MultiChoiceScreenContent(
 @Composable
 fun WorldsScreenPreview() {
     KongFuJavaTheme {
-        MultiChoiceScreenContent({ }, 0, "title", "question title", emptyList())
+        MultiChoiceScreenContent(
+            { },
+            0,
+            "title",
+            "question title",
+            emptyList(),
+            0,
+            emptyList(),
+            {},
+            {}
+        )
     }
 }
