@@ -90,6 +90,15 @@
     <!-- Alert Dialog -->
     <string name="alert_dialog_yes">Yes</string>
     <string name="alert_dialog_no">No</string>
+    <string name="alert_dialog_next">Next</string>
+    <string name="alert_dialog_level">Level</string>
+    <string name="alert_dialog_complete">Complete</string>
+    <string name="alert_dialog_not_complete">Not Complete</string>
+    <string name="alert_dialog_score">Your Score</string>
+    <string name="alert_dialog_exit">Are you sure you want to exit?</string>
+    <string name="alert_dialog_save">Note that data will not be saved for this level</string>
+
+
     <!-- Video Player -->
     <string name="video_player_pause">Pause</string>
     <string name="video_player_replay">Replay</string>
@@ -115,4 +124,5 @@
     <string name="levels_map">Levels Map</string>
     <string name="logout">LogOut</string>
     <string name="level">level</string>
+
 </resources>

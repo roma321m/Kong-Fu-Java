@@ -31,9 +31,10 @@ fun ChildNavigation(
             navigateToTutorialLevel = screen.navigateToTutorialLevelScreen,
             navigateToMultiChoiceLevel = screen.navigateToMultiChoiceLevelScreen,
             navigateToDragDropLevel = screen.navigateToDragDropLevelScreen,
+            navigateToWorldMapFromMapLevelsScreen = screen.navigateToWorldMapFromMapLevelsScreen
         )
-        multiChoiceLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevel)
-        tutorialLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevel)
-        dragDropLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevel)
+        multiChoiceLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevelScreen)
+        tutorialLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevelScreen)
+        dragDropLevelComposable(navigateToMapLevelsScreenFromLevel = screen.navigateToMapLevelsScreenFromLevelScreen)
     }
 }

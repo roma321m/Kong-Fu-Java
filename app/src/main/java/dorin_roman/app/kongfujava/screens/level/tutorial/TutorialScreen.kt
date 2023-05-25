@@ -40,7 +40,8 @@ fun TutorialScreen(
         topBar = {
             TopBar(
                 onBackPressed = {
-                    // Fixme
+                    //fixme
+                    navigateToMapLevelsScreenFromLevel(worldId)
                 },
                 title = R.string.tutorial_questions
             )

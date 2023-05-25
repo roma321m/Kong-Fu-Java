@@ -17,7 +17,9 @@ import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 import dorin_roman.app.kongfujava.ui.components.LevelButtons
 
 @Composable
-fun DragDropRightScreenContent(dragDropViewModel: DragDropViewModel) {
+fun DragDropRightScreenContent(
+    dragDropViewModel: DragDropViewModel
+) {
 
 
     Surface(
@@ -70,7 +72,8 @@ fun DragDropRightScreenContent(dragDropViewModel: DragDropViewModel) {
                 .constrainAs(helpers) {
                     end.linkTo(parent.end, 10.dp)
                     bottom.linkTo(parent.bottom, 10.dp)
-                }, {}, {})
+                }, {}, {}, 0
+            )
         }
     }
 }

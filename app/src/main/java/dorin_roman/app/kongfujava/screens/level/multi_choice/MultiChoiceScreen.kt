@@ -36,9 +36,15 @@ fun MultiChoiceScreen(
         multiChoiceViewModel.handle(MultiEvent.InitAnswers(levelId))
     }
 
+
     Scaffold(
         topBar = {
-            TopBar(onBackPressed = {}, title = R.string.multi_choice_questions)
+            TopBar(
+                onBackPressed = {
+                    levelViewModel.handle(LevelEvent.HandleExit)
+                },
+                title = R.string.multi_choice_questions
+            )
         }
     ) { padding ->
         Column(
@@ -56,14 +62,19 @@ fun MultiChoiceScreen(
                         questionTitle = levelViewModel.questionTitle,
                         questionAnswers = multiChoiceViewModel.answers,
                         worldId = worldId,
+                        levelState = levelViewModel.state,
+                        isFinish = levelViewModel.isFinish,
+                        isExit = levelViewModel.isExit,
+                        isRight = multiChoiceViewModel.isRight,
                         shownHints = multiChoiceViewModel.shownHints,
+                        hintsCount = levelViewModel.hint,
                         finishLevel = { levelViewModel.handle(LevelEvent.FinishLevel) },
                         handleHint = {
-                            levelViewModel.handle(LevelEvent.UpdateLevelHint)
                             multiChoiceViewModel.handle(MultiEvent.GetHint)
+                            levelViewModel.handle(LevelEvent.UpdateLevelHint)
                         },
-                        checkAnswer = { multiChoiceViewModel.handle(MultiEvent.CheckAnswer("")) }
-                    )
+                        checkAnswer = { multiChoiceViewModel.handle(MultiEvent.CheckAnswer("")) },
+                        handleExit = { levelViewModel.handle(LevelEvent.HandleExit) })
                 },
                 sixtyLayout = {
                     SideScreenImage(R.drawable.ic_panda_question)

@@ -15,6 +15,7 @@ import dorin_roman.app.kongfujava.screens.level.levels_map.LevelsMapScreen
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.levelsComposable(
+    navigateToWorldMapFromMapLevelsScreen: () -> Unit,
     navigateToTutorialLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
     navigateToMultiChoiceLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
     navigateToDragDropLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
@@ -40,7 +41,8 @@ fun NavGraphBuilder.levelsComposable(
             worldId = worldId,
             navigateToTutorialLevel = navigateToTutorialLevel,
             navigateToMultiChoiceLevel = navigateToMultiChoiceLevel,
-            navigateToDragDropLevel = navigateToDragDropLevel
+            navigateToDragDropLevel = navigateToDragDropLevel,
+            navigateToWorldMapFromMapLevelsScreen = navigateToWorldMapFromMapLevelsScreen
         )
     }
 }

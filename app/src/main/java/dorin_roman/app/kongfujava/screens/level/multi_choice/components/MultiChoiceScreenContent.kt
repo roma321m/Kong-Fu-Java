@@ -9,8 +9,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.LevelButtons
+import dorin_roman.app.kongfujava.ui.components.popup.AlertLevelPopUp
+import dorin_roman.app.kongfujava.ui.components.popup.FinishLevelPopUp
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
@@ -22,11 +25,18 @@ fun MultiChoiceScreenContent(
     questionTitle: String,
     questionAnswers: List<String>,
     worldId: Int,
+    levelState: PointState,
+    isFinish: Boolean,
+    isExit: Boolean,
+    isRight: Boolean?,
     shownHints: List<String>,
+    hintsCount: Int,
     finishLevel: () -> Unit,
     handleHint: () -> Unit,
     checkAnswer: (String) -> Unit,
+    handleExit: () -> Unit,
 ) {
+
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -72,7 +82,7 @@ fun MultiChoiceScreenContent(
                     .constrainAs(answers) {
                         linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
                         top.linkTo(question.bottom, 20.dp)
-                    }, questionAnswers, shownHints,checkAnswer
+                    }, questionAnswers, shownHints, checkAnswer, finishLevel, isRight
             )
         }
 
@@ -83,14 +93,34 @@ fun MultiChoiceScreenContent(
             }
             .padding(10.dp),
             onClickHint = {
-                //fixme
                 handleHint()
             },
             OnClickNext = {
-                //fixme
-                finishLevel()
-                navigateToMapLevelsScreenFromLevel(worldId)
-            })
+                handleExit()
+            }, hintsCount = hintsCount)
+
+        if (isFinish) {
+            FinishLevelPopUp(
+                onDismiss = {
+                    finishLevel()
+                    navigateToMapLevelsScreenFromLevel(worldId)
+                },
+                levelNumber = levelNumber,
+                levelState = levelState
+            )
+        }
+
+        if (isExit) {
+            AlertLevelPopUp(
+                levelNumber = levelNumber,
+                onDismiss = {
+                    handleExit()
+                },
+                onClick = {
+                    navigateToMapLevelsScreenFromLevel(worldId)
+                })
+        }
+
     }
 }
 
@@ -100,16 +130,22 @@ fun MultiChoiceScreenContent(
 fun WorldsScreenPreview() {
     KongFuJavaTheme {
         MultiChoiceScreenContent(
-            { },
-            0,
-            "title",
-            "question title",
-            emptyList(),
-            0,
-            emptyList(),
-            {},
-            {},
-            { }
+            navigateToMapLevelsScreenFromLevel = { },
+            levelNumber = 0,
+            title = "title",
+            questionTitle = "question title",
+            questionAnswers = emptyList(),
+            worldId = 0,
+            levelState = PointState.THREE,
+            isFinish = false,
+            isExit = false,
+            shownHints = emptyList(),
+            hintsCount = 0,
+            finishLevel = {},
+            handleHint = {},
+            checkAnswer = {},
+            handleExit = {},
+            isRight = false,
         )
     }
 }

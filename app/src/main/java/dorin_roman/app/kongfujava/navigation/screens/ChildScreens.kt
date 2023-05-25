@@ -1,6 +1,5 @@
 package dorin_roman.app.kongfujava.navigation.screens
 
-import android.util.Log
 import androidx.navigation.NavController
 
 class ChildScreens(navController: NavController) {
@@ -19,8 +18,16 @@ class ChildScreens(navController: NavController) {
         navController.navigate(route = "levels/$it")
     }
 
-    val navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit = {
+    val navigateToMapLevelsScreenFromLevelScreen: (worldId: Int) -> Unit = {
         navController.navigate(route = "levels/$it") {
+            popUpTo(WORLDS_SCREEN) {
+                inclusive = true
+            }
+        }
+    }
+
+    val navigateToWorldMapFromMapLevelsScreen: () -> Unit = {
+        navController.navigate(route = "worlds") {
             popUpTo(WORLDS_SCREEN) {
                 inclusive = true
             }

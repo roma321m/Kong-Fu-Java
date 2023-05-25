@@ -21,11 +21,12 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
 fun LevelsMapScreen(
-    levelsMapViewModel: LevelsMapViewModel = hiltViewModel(),
     navigateToTutorialLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
     navigateToMultiChoiceLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
     navigateToDragDropLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
     worldId: Int,
+    navigateToWorldMapFromMapLevelsScreen: () -> Unit,
+    levelsMapViewModel: LevelsMapViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -35,9 +36,10 @@ fun LevelsMapScreen(
     Scaffold(
         topBar = {
             TopBar(
-                onBackPressed = {},
+                onBackPressed = {
+                    navigateToWorldMapFromMapLevelsScreen()
+                },
                 title = R.string.levels_map,
-                hasBackButton = false
             )
         },
         content = { paddingValues ->
@@ -72,11 +74,12 @@ fun LevelsMapScreen(
 fun LevelsScreenPreview() {
     KongFuJavaTheme {
         LevelsMapScreen(
-            hiltViewModel(),
-            { levelId, levelNumber, worldId -> },
-            { levelId, levelNumber, worldId -> },
-            { levelId, levelNumber, worldId -> },
-            0
+            navigateToTutorialLevel = { levelId, levelNumber, worldId -> },
+            navigateToMultiChoiceLevel = { levelId, levelNumber, worldId -> },
+            navigateToDragDropLevel = { levelId, levelNumber, worldId -> },
+            worldId = 0,
+            navigateToWorldMapFromMapLevelsScreen = {},
+            levelsMapViewModel = hiltViewModel()
         )
     }
 }

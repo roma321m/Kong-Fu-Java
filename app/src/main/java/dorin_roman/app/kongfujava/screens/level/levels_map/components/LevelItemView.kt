@@ -72,7 +72,7 @@ fun LevelItemView(
                 modifier = Modifier.padding(MaterialTheme.spacing.medium),
             ) {
                 Stars(
-                    state = PointState.values()[levelItemModel.levelState.ordinal],
+                    state = levelItemModel.levelState,
                     type = LEVEL_TYPE
                 )
             }

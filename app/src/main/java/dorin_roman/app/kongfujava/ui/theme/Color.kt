@@ -53,6 +53,10 @@ val Colors.TextFieldCursor: Color
     @Composable
     get() = Color(0xFFC3B8F8)
 
+val Colors.MediumGray: Color
+    @Composable
+    get() = Color(0xFF9C9C9C)
+
 val Colors.Error: Color
     @Composable
     get() = Color(0xffa84552)

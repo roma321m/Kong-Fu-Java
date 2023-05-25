@@ -33,14 +33,16 @@ class MultiChoiceViewModel @Inject constructor(
     var right by mutableStateOf("")
         private set
 
-    var shownHints by mutableStateOf(listOf<String>())
+    var isRight by mutableStateOf<Boolean?>(null)
+        private set
+
+    var shownHints by mutableStateOf(emptyList<String>())
         private set
 
     var hints by mutableStateOf(listOf<String>())
         private set
 
-    var hint by mutableStateOf("")
-        private set
+    private var hint by mutableStateOf("")
 
     fun handle(event: MultiEvent) {
         //fixme
@@ -53,6 +55,9 @@ class MultiChoiceViewModel @Inject constructor(
 
     private fun initAnswers(levelId: Int) {
         currentLevelId = levelId
+        shownHints = emptyList()
+        hint = ""
+        isRight = null
         loadAnswers()
     }
 
@@ -67,8 +72,7 @@ class MultiChoiceViewModel @Inject constructor(
                 qAnswers.add(answer.answer2)
                 qAnswers.add(answer.answer3)
                 qAnswers.add(answer.answer4)
-                qAnswers.add(answer.right)
-                answers = qAnswers
+                answers = qAnswers.shuffled()
                 right = answer.right
                 buildHints()
             }
@@ -78,6 +82,7 @@ class MultiChoiceViewModel @Inject constructor(
     }
 
     private fun buildHints() {
+        Log.d(TAG, "buildHints")
         val qHints = mutableListOf<String>()
         for (i in 0..3){
             if(answers[i] != right){
@@ -88,17 +93,17 @@ class MultiChoiceViewModel @Inject constructor(
     }
 
     private fun getHint() {
+        Log.d(TAG, "getHint")
         hint = hints.random()
-        hints.toMutableList().remove(hint)
-        shownHints.toMutableList().add(hint)
+        val qHints = shownHints.toMutableList()
+        qHints.add(hint)
+        hints = hints.filter { it != hint }
+        shownHints = qHints
+        Log.d(TAG, "shownHints ${shownHints.size}")
     }
 
     private fun checkAnswer(answer: String) {
-        if(answer == right){
-
-        }else{
-
-        }
+        isRight = answer == right
     }
 
 }

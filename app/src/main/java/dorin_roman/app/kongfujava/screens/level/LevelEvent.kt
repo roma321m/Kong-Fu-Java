@@ -7,4 +7,5 @@ sealed class LevelEvent {
     object UpdateLevelHint : LevelEvent()
     object UpdateLevelMistakes : LevelEvent()
     object FinishLevel : LevelEvent()
+    object HandleExit : LevelEvent()
 }

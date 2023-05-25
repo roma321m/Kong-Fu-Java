@@ -91,6 +91,15 @@
     <!-- Alert Dialog -->
     <string name="alert_dialog_yes">כן</string>
     <string name="alert_dialog_no">לא</string>
+    <string name="alert_dialog_next">הבא</string>
+    <string name="alert_dialog_level">השלב</string>
+    <string name="alert_dialog_complete">הושלם</string>
+    <string name="alert_dialog_not_complete">לא הושלם</string>
+    <string name="alert_dialog_score">הניקוד שלך</string>
+    <string name="alert_dialog_exit">אתה בטוח שאתה רוצה לצאת?</string>
+    <string name="alert_dialog_save">שים לב שהנתונים לא ישמרו עבור שלב זה</string>
+
+
     <!-- Video Player -->
     <string name="video_player_pause">הַפסָקָ</string>
     <string name="video_player_replay">נגן מחדש</string>

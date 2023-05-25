@@ -17,11 +17,13 @@ import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
 
 @Composable
-fun LevelButtons(modifier: Modifier, onClickHint: () -> Unit, OnClickNext: () -> Unit) {
+fun LevelButtons(modifier: Modifier, onClickHint: () -> Unit, OnClickNext: () -> Unit, hintsCount: Int) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        if(hintsCount < 3 ){
+
         Icon(
             imageVector = Icons.Default.Lightbulb,
             contentDescription = stringResource(id = R.string.hint),
@@ -31,8 +33,8 @@ fun LevelButtons(modifier: Modifier, onClickHint: () -> Unit, OnClickNext: () ->
                 .size(40.dp)
                 .clickable {
                     onClickHint()
-                }
-        )
+                })
+        }
 
         Icon(
             imageVector = Icons.Default.SkipNext,

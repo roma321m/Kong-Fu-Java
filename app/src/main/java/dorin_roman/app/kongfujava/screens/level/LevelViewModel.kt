@@ -48,6 +48,12 @@ class LevelViewModel @Inject constructor(
     var mistakes by mutableStateOf(0)
         private set
 
+    var isFinish by mutableStateOf(false)
+        private set
+
+    var isExit by mutableStateOf(false)
+        private set
+
     private var currentWorldId: Int = -1
 
     private var currentLevelId: Int = -1
@@ -60,8 +66,7 @@ class LevelViewModel @Inject constructor(
     fun handle(event: LevelEvent) {
         when (event) {
             LevelEvent.FinishLevel -> {
-                updateScore()
-                updateState()
+                finishLevel()
             }
 
             is LevelEvent.InitLevel -> initLevels(event.levelId, event.worldId)
@@ -82,12 +87,17 @@ class LevelViewModel @Inject constructor(
                 updateHint()
             }
 
-            else -> {}
+            is LevelEvent.HandleExit -> {
+                isExit = !isExit
+            }
+
         }
     }
 
     private fun initLevels(levelId: Int, worldId: Int) {
         Log.d(TAG, "initLevels")
+        isFinish = false
+        isExit = false
         currentLevelId = levelId
         currentWorldId = worldId
         hint = 0
@@ -148,11 +158,12 @@ class LevelViewModel @Inject constructor(
     }
 
     private fun updateHint() {
-        Log.d(TAG, "updateHint $hint")
+        Log.d(TAG, "updateHint")
         if (hint == 3)
             return
 
         hint += 1
+        Log.d(TAG, "HintCount: $hint")
     }
 
     private fun updateMistakes() {
@@ -160,6 +171,13 @@ class LevelViewModel @Inject constructor(
         if (mistakes < 3) {
             mistakes += 1
         }
+        Log.d(TAG, "MistakeCount: $mistakes")
+    }
+
+    private fun finishLevel() {
+        isFinish = true
+        updateScore()
+        updateState()
     }
 
     private fun updateStatistics() {
