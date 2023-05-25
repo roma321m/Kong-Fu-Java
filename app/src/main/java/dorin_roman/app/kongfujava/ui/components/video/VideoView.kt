@@ -40,6 +40,7 @@ import androidx.media3.common.Player
 import androidx.media3.common.Player.STATE_ENDED
 import androidx.media3.ui.PlayerView
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.theme.videoIcon
 import kotlinx.coroutines.delay
 
 
@@ -193,6 +194,7 @@ private fun PlayerControls(
                 ) {
                     Icon(
                         modifier = Modifier.fillMaxSize(),
+                        tint = MaterialTheme.colors.videoIcon,
                         imageVector = when {
                             isVideoPlaying -> Icons.Default.Pause
                             playerState == STATE_ENDED -> Icons.Default.Replay

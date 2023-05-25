@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.runtime.Composable
@@ -16,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.components.TextJavaStyle
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -31,9 +31,10 @@ fun TutorialBody(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
-        Text(
+        TextJavaStyle(
             modifier = Modifier
-                .padding(horizontal = MaterialTheme.spacing.large),
+                .padding(start = MaterialTheme.spacing.large)
+                .fillMaxSize(0.9f),
             text = text,
             style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onBackground)
         )

@@ -28,30 +28,33 @@ val onSecondaryLight: Color = Color(0xFFFFFFFF)
 val onBackgroundLight: Color = Color(0xFF000000)
 val onSurfaceLight: Color = Color(0xFF000000)
 
+val Colors.textYellow: Color
+    @Composable
+    get() = if (isLight) Color(0xFF009595) else Color(0xFFFEEA3B)
 
-//color palate
-val purpleColor1 = Color(0xFFC3B8F8)
-val purpleColor2 = Color(0xff6955bc)
-val greenColor1 = Color(0xff9cf37c)
-val greenColor2 = Color(0xff6d9b58)
-val greenColor3 = Color(0xff5d9a3c)
-val greenColor4 = Color(0xff6cb451)
-val greenColor5 = Color(0xffccfcb4)
-val kongFuRed = Color(0xffa84552)
-val kongFuYellow = Color(0xFFFFCA2B)
+val Colors.textOrange: Color
+    @Composable
+    get() = if (isLight) Color(0xFFD46F1A) else Color(0xFFCB7832)
 
+val Colors.textPurple: Color
+    @Composable
+    get() = if (isLight) Color(0xFF980F88) else Color(0xFF9B6FB2)
 
-val LightGray = Color(0xFFFCFCFC)
-val MediumGray = Color(0xFF9C9C9C)
-val DarkGray = Color(0xFF141414)
+val Colors.textBlue: Color
+    @Composable
+    get() = if (isLight) Color(0xFF185CEF) else Color(0xFF5995B9)
+
+val Colors.textGray: Color
+    @Composable
+    get() = if (isLight) Color(0xFF6C7279) else Color(0xFF6C7279)
 
 val Colors.Star: Color
     @Composable
-    get() = Color(0xFFFFCA2B)
+    get() = if (isLight) Color(0xFFFFCA2B) else Color(0xFFFFCA2B)
 
 val Colors.TextFieldCursor: Color
     @Composable
-    get() = Color(0xFFC3B8F8)
+    get() = if (isLight) Color(0xFFC3B8F8) else Color(0xFFC3B8F8)
 
 val Colors.MediumGray: Color
     @Composable
@@ -59,11 +62,15 @@ val Colors.MediumGray: Color
 
 val Colors.Error: Color
     @Composable
-    get() = Color(0xffa84552)
+    get() = if (isLight) Color(0xFFA84552) else Color(0xFFA84552)
 
 val Colors.LevelItemText: Color
     @Composable
-    get() = Color.White
+    get() = if (isLight) Color.White else Color.White
+
+val Colors.videoIcon: Color
+    @Composable
+    get() = if (isLight) Color.LightGray else Color.LightGray
 
 val Colors.systemUi: Color
     @Composable
@@ -71,4 +78,4 @@ val Colors.systemUi: Color
 
 val Colors.onTopBar: Color
     @Composable
-    get() = Color.Black
+    get() = if (isLight) Color.Black else Color.Black

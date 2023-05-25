@@ -74,12 +74,11 @@ fun LevelsMapScreen(
 fun LevelsScreenPreview() {
     KongFuJavaTheme {
         LevelsMapScreen(
-            navigateToTutorialLevel = { levelId, levelNumber, worldId -> },
-            navigateToMultiChoiceLevel = { levelId, levelNumber, worldId -> },
-            navigateToDragDropLevel = { levelId, levelNumber, worldId -> },
+            navigateToTutorialLevel = { _, _, _ -> },
+            navigateToMultiChoiceLevel = { _, _, _ -> },
+            navigateToDragDropLevel = { _, _, _ -> },
             worldId = 0,
-            navigateToWorldMapFromMapLevelsScreen = {},
-            levelsMapViewModel = hiltViewModel()
+            navigateToWorldMapFromMapLevelsScreen = {}
         )
     }
 }

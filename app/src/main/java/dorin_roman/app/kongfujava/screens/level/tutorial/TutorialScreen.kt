@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.LevelViewModel
@@ -40,7 +39,6 @@ fun TutorialScreen(
         topBar = {
             TopBar(
                 onBackPressed = {
-                    //fixme
                     navigateToMapLevelsScreenFromLevel(worldId)
                 },
                 title = R.string.tutorial_questions
@@ -86,7 +84,6 @@ fun TutorialScreen(
 fun WorldsScreenPreview() {
     KongFuJavaTheme {
         TutorialScreen(
-            tutorialViewModel = viewModel(),
             navigateToMapLevelsScreenFromLevel = {},
             levelId = 0,
             levelNumber = 0,
