@@ -22,12 +22,12 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun DragDropScreen(
-    levelViewModel: LevelViewModel = hiltViewModel(),
-    dragDropViewModel: DragDropViewModel = hiltViewModel(),
     navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
     levelId: Int,
     levelNumber: Int,
-    worldId: Int
+    worldId: Int,
+    levelViewModel: LevelViewModel = hiltViewModel(),
+    dragDropViewModel: DragDropViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -43,7 +43,12 @@ fun DragDropScreen(
         //fixme - temp
         Scaffold(
             topBar = {
-                TopBar(onBackPressed = {}, title = R.string.drag_drop_questions)
+                TopBar(
+                    onBackPressed = {
+                        levelViewModel.handle(LevelEvent.HandleExit)
+                    },
+                    title = R.string.drag_drop_questions
+                )
             }
         ) { padding ->
 
@@ -55,10 +60,37 @@ fun DragDropScreen(
             ) {
                 VerticalFortySixtyLayout(
                     fortyLayout = {
-                        DragDropLeftScreenContent(navigateToMapLevelsScreenFromLevel,dragDropViewModel)
+                        DragDropLeftScreenContent(
+                            levelNumber = levelNumber,
+                            title = levelViewModel.title,
+                            questionTitle = levelViewModel.questionTitle,
+                            dragAnswers = dragDropViewModel.drag,
+                            isRight = dragDropViewModel.isRight,
+                            shownHints = dragDropViewModel.shownHints,
+                            handleMistakes = { levelViewModel.handle(LevelEvent.UpdateLevelMistakes) },
+                            //fixme make event
+                            startDragging = { dragDropViewModel.startDragging() },
+                            stopDragging = { dragDropViewModel.stopDragging() }
+                        )
                     },
                     sixtyLayout = {
-                        DragDropRightScreenContent(dragDropViewModel)
+                        DragDropRightScreenContent(
+                            dragDropViewModel,
+                            navigateToMapLevelsScreenFromLevel = navigateToMapLevelsScreenFromLevel,
+                            worldId = worldId,
+                            levelNumber = levelNumber,
+                            levelState = levelViewModel.state,
+                            handleHint = {
+                                dragDropViewModel.handle(DragDropEvent.GetHint)
+                                levelViewModel.handle(LevelEvent.UpdateLevelHint)
+                            },
+                            hintsCount = levelViewModel.hint,
+                            shownHints = dragDropViewModel.shownHints,
+                            finishLevel = { levelViewModel.handle(LevelEvent.FinishLevel) },
+                            isFinish = levelViewModel.isFinish,
+                            handleExit = { levelViewModel.handle(LevelEvent.HandleExit) },
+                            isExit = levelViewModel.isExit,
+                            )
                     }
                 )
             }
@@ -73,7 +105,7 @@ fun WorldsScreenPreview() {
     KongFuJavaTheme {
         DragDropScreen(
             dragDropViewModel = viewModel(),
-            navigateToMapLevelsScreenFromLevel = {  },
+            navigateToMapLevelsScreenFromLevel = { },
             levelId = 0,
             levelNumber = 0,
             worldId = 0

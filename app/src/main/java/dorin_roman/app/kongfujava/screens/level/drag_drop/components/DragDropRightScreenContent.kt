@@ -13,15 +13,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 import dorin_roman.app.kongfujava.ui.components.LevelButtons
+import dorin_roman.app.kongfujava.ui.components.popup.AlertLevelPopUp
+import dorin_roman.app.kongfujava.ui.components.popup.FinishLevelPopUp
 
 @Composable
 fun DragDropRightScreenContent(
-    dragDropViewModel: DragDropViewModel
+    dragDropViewModel: DragDropViewModel,
+    navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
+    worldId: Int,
+    levelNumber: Int,
+    levelState: PointState,
+    handleHint: () -> Unit,
+    hintsCount: Int,
+    shownHints: List<String>,
+    finishLevel: () -> Unit,
+    isFinish: Boolean,
+    handleExit: () -> Unit,
+    isExit: Boolean
 ) {
-
-
     Surface(
         modifier = Modifier
             .background(MaterialTheme.colors.secondary)
@@ -32,7 +44,7 @@ fun DragDropRightScreenContent(
                 .fillMaxSize()
                 .background(MaterialTheme.colors.background)
         ) {
-            val (lesson, level, question, answers, helpers) = createRefs()
+            val (lesson, level, question, answers, buttons) = createRefs()
             val screenWidth = LocalConfiguration.current.screenHeightDp
 
             LazyColumn(
@@ -41,7 +53,7 @@ fun DragDropRightScreenContent(
                         start.linkTo(parent.start, 10.dp)
                         end.linkTo(parent.end, 10.dp)
                         top.linkTo(parent.top, 10.dp)
-                        bottom.linkTo(helpers.top, 10.dp)
+                        bottom.linkTo(buttons.top, 10.dp)
                     }
                     .fillMaxSize()
                     .padding(vertical = 10.dp),
@@ -69,11 +81,42 @@ fun DragDropRightScreenContent(
 
 
             LevelButtons(modifier = Modifier
-                .constrainAs(helpers) {
-                    end.linkTo(parent.end, 10.dp)
-                    bottom.linkTo(parent.bottom, 10.dp)
-                }, {}, {}, 0
+                .constrainAs(buttons) {
+                    bottom.linkTo(parent.bottom, 20.dp)
+                    end.linkTo(parent.end, 20.dp)
+                }
+                .padding(10.dp),
+                onClickHint = {
+                   handleHint()
+                },
+                OnClickNext = {
+                    handleExit()
+                },
+                hintsCount = hintsCount
             )
+
+            if (isFinish) {
+                FinishLevelPopUp(
+                    onDismiss = {
+                        finishLevel()
+                        navigateToMapLevelsScreenFromLevel(worldId)
+                    },
+                    levelNumber = levelNumber,
+                    levelState = levelState
+                )
+            }
+
+            if (isExit) {
+                AlertLevelPopUp(
+                    levelNumber = levelNumber,
+                    onDismiss = {
+                        handleExit()
+                    },
+                    onClick = {
+                        navigateToMapLevelsScreenFromLevel(worldId)
+                    })
+            }
+
         }
     }
 }

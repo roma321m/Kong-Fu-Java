@@ -23,12 +23,12 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
 @Composable
 fun MultiChoiceScreen(
-    levelViewModel: LevelViewModel = hiltViewModel(),
-    multiChoiceViewModel: MultiChoiceViewModel = hiltViewModel(),
     navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit,
     levelId: Int,
     levelNumber: Int,
-    worldId: Int
+    worldId: Int,
+    levelViewModel: LevelViewModel = hiltViewModel(),
+    multiChoiceViewModel: MultiChoiceViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -73,7 +73,11 @@ fun MultiChoiceScreen(
                             multiChoiceViewModel.handle(MultiEvent.GetHint)
                             levelViewModel.handle(LevelEvent.UpdateLevelHint)
                         },
-                        checkAnswer = { multiChoiceViewModel.handle(MultiEvent.CheckAnswer("")) },
+                        handleMistakes = { levelViewModel.handle(LevelEvent.UpdateLevelMistakes) },
+                        buttonsColors = multiChoiceViewModel.buttonColors,
+                        checkAnswer = { answer ->
+                            multiChoiceViewModel.handle(MultiEvent.CheckAnswer(answer))
+                        },
                         handleExit = { levelViewModel.handle(LevelEvent.HandleExit) })
                 },
                 sixtyLayout = {

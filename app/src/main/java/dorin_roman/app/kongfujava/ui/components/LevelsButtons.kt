@@ -22,18 +22,18 @@ fun LevelButtons(modifier: Modifier, onClickHint: () -> Unit, OnClickNext: () ->
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        if(hintsCount < 3 ){
-
-        Icon(
-            imageVector = Icons.Default.Lightbulb,
-            contentDescription = stringResource(id = R.string.hint),
-            tint = MaterialTheme.colors.primary,
-            modifier = Modifier
-                .padding(10.dp)
-                .size(40.dp)
-                .clickable {
-                    onClickHint()
-                })
+        if (hintsCount < 3) {
+            Icon(
+                imageVector = Icons.Default.Lightbulb,
+                contentDescription = stringResource(id = R.string.hint),
+                tint = MaterialTheme.colors.primary,
+                modifier = Modifier
+                    .padding(10.dp)
+                    .size(40.dp)
+                    .clickable {
+                        onClickHint()
+                    }
+            )
         }
 
         Icon(

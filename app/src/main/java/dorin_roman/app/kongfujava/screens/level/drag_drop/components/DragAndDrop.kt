@@ -13,7 +13,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
-import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 
 internal val LocalDragTargetInfo = compositionLocalOf { DragTargetInfo() }
 
@@ -21,8 +20,9 @@ internal val LocalDragTargetInfo = compositionLocalOf { DragTargetInfo() }
 fun <T> DragItem(
     modifier: Modifier = Modifier,
     dataToDrop: T,
-    viewModel : DragDropViewModel,
-    content: @Composable (() -> Unit)
+    startDragging: () -> Unit,
+    stopDragging: () -> Unit,
+    content: @Composable () -> Unit,
 ) {
     var currentPosition by remember { mutableStateOf(Offset.Zero) }
     val currentState = LocalDragTargetInfo.current
@@ -35,7 +35,7 @@ fun <T> DragItem(
             .pointerInput(Unit) {
                 detectDragGesturesAfterLongPress(
                     onDragStart = {
-                        viewModel.startDragging()
+                        startDragging()
                         currentState.dataToDrop = dataToDrop
                         currentState.isDragging = true
                         currentState.dragPosition = currentPosition + it
@@ -46,12 +46,12 @@ fun <T> DragItem(
                         currentState.dragOffset += Offset(dragAmount.x, dragAmount.y)
                     },
                     onDragEnd = {
-                        viewModel.stopDragging()
+                        stopDragging()
                         currentState.dragOffset = Offset.Zero
                         currentState.isDragging = false
                     },
                     onDragCancel = {
-                        viewModel.stopDragging()
+                        stopDragging()
                         currentState.dragOffset = Offset.Zero
                         currentState.isDragging = false
                     }

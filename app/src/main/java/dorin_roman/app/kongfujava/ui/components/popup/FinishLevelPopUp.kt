@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -40,6 +41,7 @@ fun FinishLevelPopUp(onDismiss: () -> Unit, levelNumber: Int, levelState: PointS
     ) {
         Surface(
             modifier = Modifier
+                .clip(RoundedCornerShape(40.dp))
                 .fillMaxWidth(),
             elevation = 4.dp
         ) {

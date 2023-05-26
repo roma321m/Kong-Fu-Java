@@ -28,13 +28,15 @@ fun MultiChoiceScreenContent(
     levelState: PointState,
     isFinish: Boolean,
     isExit: Boolean,
-    isRight: Boolean?,
+    isRight: Boolean,
     shownHints: List<String>,
     hintsCount: Int,
     finishLevel: () -> Unit,
     handleHint: () -> Unit,
+    handleMistakes: () -> Unit,
     checkAnswer: (String) -> Unit,
     handleExit: () -> Unit,
+    buttonsColors: List<ColorState>
 ) {
 
     ConstraintLayout(
@@ -82,7 +84,7 @@ fun MultiChoiceScreenContent(
                     .constrainAs(answers) {
                         linkTo(start = parent.start, startMargin = 10.dp, end = parent.end, endMargin = 10.dp)
                         top.linkTo(question.bottom, 20.dp)
-                    }, questionAnswers, shownHints, checkAnswer, finishLevel, isRight
+                    }, questionAnswers, shownHints, checkAnswer, finishLevel, isRight, handleMistakes, buttonsColors
             )
         }
 
@@ -139,13 +141,15 @@ fun WorldsScreenPreview() {
             levelState = PointState.THREE,
             isFinish = false,
             isExit = false,
+            isRight = false,
             shownHints = emptyList(),
             hintsCount = 0,
             finishLevel = {},
             handleHint = {},
+            handleMistakes = {},
             checkAnswer = {},
             handleExit = {},
-            isRight = false,
+            buttonsColors = emptyList(),
         )
     }
 }

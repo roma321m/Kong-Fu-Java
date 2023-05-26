@@ -37,35 +37,11 @@ class DragDropViewModel @Inject constructor(
     var drop by mutableStateOf(emptyList<String>())
         private set
 
-    init {
-//        drag = listOf(
-//            AnswerItem("A"),
-//            AnswerItem("B"),
-//            AnswerItem("C"),
-//            AnswerItem("D")
-//        )
-//
-//        drop = listOf(
-//            AnswerItem(""),
-//            AnswerItem(""),
-//            AnswerItem(""),
-//            AnswerItem("")
-//        )
+    var isRight by mutableStateOf(false)
+        private set
 
-        drag = listOf(
-            "A",
-            "B",
-            "C",
-            "D"
-        )
-
-        drop = listOf(
-            "",
-            "",
-            "",
-            "",
-        )
-    }
+    var shownHints by mutableStateOf(emptyList<String>())
+        private set
 
     fun handle(event: DragDropEvent) {
         when (event) {
@@ -87,11 +63,21 @@ class DragDropViewModel @Inject constructor(
                 levelRepository.getAnswer(currentLevel).collect { answer ->
                     this@DragDropViewModel.answer.value = RequestState.Success(answer)
                     getDrag(answer)
+                    getDrop()
                 }
             }
         } catch (e: Exception) {
             answer.value = RequestState.Error(e)
         }
+    }
+
+    private fun getDrop() {
+        drop = listOf(
+            "1",
+            "2",
+            "3",
+            "4"
+        )
     }
 
     private fun getDrag(answer: Answer) {

@@ -8,30 +8,31 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun DragDropLeftBottomScreenContent(dragDropViewModel: DragDropViewModel) {
+fun DragDropLeftBottomScreenContent(dragAnswers: List<String>, startDragging: () -> Unit, stopDragging: () -> Unit) {
 
     val gridState = rememberLazyGridState()
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalArrangement = Arrangement.Center,
-            state = gridState,
-            userScrollEnabled = false,
-        ) {
-            items(dragDropViewModel.drag) { answerItem->
-                DragItem(
-                    dataToDrop = answerItem,
-                    viewModel = dragDropViewModel
-                ) {
-                    DragAnswerItemCard(answer = answerItem)
-                }
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.Center,
+        state = gridState,
+        userScrollEnabled = false,
+    ) {
+        items(dragAnswers) { answerItem ->
+            DragItem(
+                dataToDrop = answerItem,
+                startDragging = startDragging,
+                stopDragging = stopDragging
+            ) {
+                DragAnswerItemCard(answer = answerItem)
             }
         }
+    }
 
 }
+

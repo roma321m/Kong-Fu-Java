@@ -64,6 +64,10 @@ val Colors.Error: Color
     @Composable
     get() = if (isLight) Color(0xFFA84552) else Color(0xFFA84552)
 
+val Colors.Right: Color
+    @Composable
+    get() = Color(0xff6cb451)
+
 val Colors.LevelItemText: Color
     @Composable
     get() = if (isLight) Color.White else Color.White
@@ -71,6 +75,8 @@ val Colors.LevelItemText: Color
 val Colors.videoIcon: Color
     @Composable
     get() = if (isLight) Color.LightGray else Color.LightGray
+
+
 
 val Colors.systemUi: Color
     @Composable

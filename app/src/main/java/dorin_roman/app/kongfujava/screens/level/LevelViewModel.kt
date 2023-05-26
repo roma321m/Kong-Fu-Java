@@ -181,7 +181,54 @@ class LevelViewModel @Inject constructor(
     }
 
     private fun updateStatistics() {
-
+        //todo
+        // fixme - remove
+//        fun addActiveTime() = viewModelScope.launch {
+//            Log.d(TAG, "addActiveTime")
+//            childStatsRepository.addActiveTime(
+//                childId = selectedStudent.id,
+//                activeTime = ActiveTime(
+//                    fromInMilli = currentTime,
+//                    toInMilli = currentTime + 120_000,
+//                )
+//            ).also { response ->
+//                if (response is RequestState.Success) {
+//                    // added
+//                } else if (response is RequestState.Error) {
+//                    response.apply {
+//                        toastLauncher.launch(SupervisorToast.SomethingWentWrong)
+//                        Log.e(TAG, "${error.message}")
+//                    }
+//                }
+//            }
+//        }
+//
+//        // fixme - remove
+//        fun addLevelStats() = viewModelScope.launch {
+//            Log.d(TAG, "addLevelStats")
+//            childStatsRepository.addLevelStats(
+//                childId = selectedStudent.id,
+//                levelStats = LevelStats(
+//                    id = 2,
+//                    world = "Variables",
+//                    number = 1,
+//                    stars = 2,
+//                    timeInMinutes = 5,
+//                    help = 0,
+//                    attempts = 1,
+//                    mistakes = 0
+//                )
+//            ).also { response ->
+//                if (response is RequestState.Success) {
+//                    // added
+//                } else if (response is RequestState.Error) {
+//                    response.apply {
+//                        toastLauncher.launch(SupervisorToast.SomethingWentWrong)
+//                        Log.e(TAG, "${error.message}")
+//                    }
+//                }
+//            }
+//        }
     }
 
 }

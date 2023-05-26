@@ -10,6 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.levels.Answer
+import dorin_roman.app.kongfujava.screens.level.multi_choice.components.ColorState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,26 +32,34 @@ class MultiChoiceViewModel @Inject constructor(
     var answers by mutableStateOf(listOf<String>())
         private set
 
-    var right by mutableStateOf("")
+    var buttonColors by mutableStateOf(listOf(ColorState.REGULAR, ColorState.REGULAR, ColorState.REGULAR, ColorState.REGULAR))
         private set
 
-    var isRight by mutableStateOf<Boolean?>(null)
+    var isRight by mutableStateOf(false)
         private set
 
     var shownHints by mutableStateOf(emptyList<String>())
         private set
 
-    var hints by mutableStateOf(listOf<String>())
-        private set
+
+    private var hints by mutableStateOf(listOf<String>())
+
+    private var right by mutableStateOf("")
 
     private var hint by mutableStateOf("")
+
 
     fun handle(event: MultiEvent) {
         //fixme
         when (event) {
             is MultiEvent.InitAnswers -> initAnswers(event.levelId)
-            is MultiEvent.GetHint -> { getHint() }
-            is MultiEvent.CheckAnswer -> { checkAnswer(event.answer) }
+            is MultiEvent.GetHint -> {
+                getHint()
+            }
+
+            is MultiEvent.CheckAnswer -> {
+                checkAnswer(event.answer)
+            }
         }
     }
 
@@ -57,7 +67,7 @@ class MultiChoiceViewModel @Inject constructor(
         currentLevelId = levelId
         shownHints = emptyList()
         hint = ""
-        isRight = null
+        isRight = false
         loadAnswers()
     }
 
@@ -84,26 +94,50 @@ class MultiChoiceViewModel @Inject constructor(
     private fun buildHints() {
         Log.d(TAG, "buildHints")
         val qHints = mutableListOf<String>()
-        for (i in 0..3){
-            if(answers[i] != right){
+        for (i in 0..3) {
+            if (answers[i] != right) {
                 qHints.add(answers[i])
             }
         }
-       hints = qHints
+        hints = qHints
     }
 
     private fun getHint() {
         Log.d(TAG, "getHint")
-        hint = hints.random()
         val qHints = shownHints.toMutableList()
+        val qButtonColors = buttonColors.toMutableList()
+
+        hint = hints.random()
         qHints.add(hint)
-        hints = hints.filter { it != hint }
         shownHints = qHints
+
+        qButtonColors[hints.indexOf(hint)] = ColorState.HINT
+        buttonColors = qButtonColors
+
+        hints = hints.filter { it != hint }
         Log.d(TAG, "shownHints ${shownHints.size}")
     }
 
     private fun checkAnswer(answer: String) {
         isRight = answer == right
+        val qButtonColors = buttonColors.toMutableList()
+
+        Log.d("dorin", isRight.toString())
+        Log.d("dorin", answer)
+        Log.d("dorin", answers[0])
+        Log.d("dorin", answers[1])
+        Log.d("dorin", answers[2])
+        Log.d("dorin", answers[3])
+        Log.d("dorin", answers.indexOf(answer).toString())
+        if (isRight) {
+            qButtonColors[answers.indexOf(answer)] = ColorState.RIGHT
+        } else {
+            qButtonColors[answers.indexOf(answer)] = ColorState.MISTAKE
+        }
+        buttonColors = qButtonColors
+        viewModelScope.launch {
+            delay(1000)
+        }
     }
 
 }

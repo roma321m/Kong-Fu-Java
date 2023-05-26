@@ -8,10 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dorin_roman.app.kongfujava.screens.level.drag_drop.DragDropViewModel
+import dorin_roman.app.kongfujava.data.models.PointState
 
 @Composable
-fun DragDropLeftScreenContent(navigateToMapLevelsScreenFromLevel: (worldId: Int) -> Unit, dragDropViewModel: DragDropViewModel) {
+fun DragDropLeftScreenContent(
+    levelNumber: Int,
+    title: String,
+    questionTitle: String,
+    dragAnswers: List<String>,
+    isRight: Boolean,
+    shownHints: List<String>,
+    handleMistakes: () -> Unit,
+    startDragging: () -> Unit,
+    stopDragging: () -> Unit
+) {
 
     Surface {
         Column(
@@ -26,7 +36,7 @@ fun DragDropLeftScreenContent(navigateToMapLevelsScreenFromLevel: (worldId: Int)
                     .fillMaxWidth()
                     .background(MaterialTheme.colors.background)
             ) {
-                DragDropLeftTopScreenContent(dragDropViewModel)
+                DragDropLeftTopScreenContent(title, questionTitle, levelNumber)
             }
             Box(
                 modifier = Modifier
@@ -36,7 +46,7 @@ fun DragDropLeftScreenContent(navigateToMapLevelsScreenFromLevel: (worldId: Int)
                     .background(MaterialTheme.colors.background),
                 contentAlignment = Alignment.Center
             ) {
-                DragDropLeftBottomScreenContent(dragDropViewModel)
+                DragDropLeftBottomScreenContent(dragAnswers, startDragging, stopDragging)
             }
         }
     }
