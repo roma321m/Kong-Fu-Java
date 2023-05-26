@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.PointState
-import dorin_roman.app.kongfujava.ui.theme.MediumGray
+import dorin_roman.app.kongfujava.ui.theme.mediumGray
 
 @Composable
 fun AlertLevelPopUp(levelNumber: Int, onDismiss: () -> Unit, onClick: () -> Unit) {
@@ -98,8 +98,8 @@ fun AlertLevelPopUp(levelNumber: Int, onDismiss: () -> Unit, onClick: () -> Unit
                 Button(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding( start = 36.dp, end = 36.dp, bottom = 8.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.MediumGray),
+                        .padding(start = 36.dp, end = 36.dp, bottom = 8.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.mediumGray),
                     onClick = {
                         onDismiss()
                     }) {

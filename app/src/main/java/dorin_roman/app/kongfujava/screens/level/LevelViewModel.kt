@@ -42,10 +42,10 @@ class LevelViewModel @Inject constructor(
     var type by mutableStateOf(LevelType.TUTORIAL)
         private set
 
-    var hint by mutableStateOf(0)
+    var hintCount by mutableStateOf(0)
         private set
 
-    var mistakes by mutableStateOf(0)
+    var mistakesCount by mutableStateOf(0)
         private set
 
     var isFinish by mutableStateOf(false)
@@ -100,8 +100,8 @@ class LevelViewModel @Inject constructor(
         isExit = false
         currentLevelId = levelId
         currentWorldId = worldId
-        hint = 0
-        mistakes = 0
+        hintCount = 0
+        mistakesCount = 0
         loadQuestion()
         loadLevel()
     }
@@ -133,7 +133,7 @@ class LevelViewModel @Inject constructor(
                 state = LevelLogic.getLevelState(level.state)
             }
         } catch (e: Exception) {
-            question.value = RequestState.Error(e)
+            currentLevel.value = RequestState.Error(e)
             Log.e(TAG, "${e.message}")
         }
     }
@@ -142,7 +142,7 @@ class LevelViewModel @Inject constructor(
     private fun updateScore() = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateScore")
         score = if (type != LevelType.TUTORIAL) {
-            LevelLogic.getScore(hint, mistakes)
+            LevelLogic.getScore(hintCount, mistakesCount)
         } else {
             3
         }
@@ -159,19 +159,19 @@ class LevelViewModel @Inject constructor(
 
     private fun updateHint() {
         Log.d(TAG, "updateHint")
-        if (hint == 3)
+        if (hintCount == 3)
             return
 
-        hint += 1
-        Log.d(TAG, "HintCount: $hint")
+        hintCount += 1
+        Log.d(TAG, "HintCount: $hintCount")
     }
 
     private fun updateMistakes() {
-        Log.d(TAG, "updateMistake $mistakes")
-        if (mistakes < 3) {
-            mistakes += 1
+        Log.d(TAG, "updateMistake $mistakesCount")
+        if (mistakesCount < 3) {
+            mistakesCount += 1
         }
-        Log.d(TAG, "MistakeCount: $mistakes")
+        Log.d(TAG, "MistakeCount: $mistakesCount")
     }
 
     private fun finishLevel() {

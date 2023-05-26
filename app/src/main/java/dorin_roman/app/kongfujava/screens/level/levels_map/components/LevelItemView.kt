@@ -24,7 +24,7 @@ import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.screens.level.LevelType
 import dorin_roman.app.kongfujava.screens.level.levels_map.LevelItemModel
 import dorin_roman.app.kongfujava.ui.components.Stars
-import dorin_roman.app.kongfujava.ui.theme.LevelItemText
+import dorin_roman.app.kongfujava.ui.theme.levelItemText
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 const val LEVEL_TYPE = "Level"
@@ -60,7 +60,7 @@ fun LevelItemView(
             Text(
                 text = levelItemModel.levelNumber.toString(),
                 style = MaterialTheme.typography.h4.copy(
-                    color = MaterialTheme.colors.LevelItemText,
+                    color = MaterialTheme.colors.levelItemText,
                     fontWeight = FontWeight.SemiBold,
                     lineHeight = 12.sp,
                     letterSpacing = 0.25.sp,

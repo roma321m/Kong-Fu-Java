@@ -14,7 +14,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import dorin_roman.app.kongfujava.ui.theme.Star
+import dorin_roman.app.kongfujava.ui.theme.star
 
 @Composable
 fun IconLevel(imageVector: ImageVector, tint: Color, modifier: Modifier) {
@@ -86,21 +86,21 @@ fun ZeroLevelYellow(type: String) {
 
     IconLevel(
         imageVector = Icons.Filled.StarOutline,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.StarOutline,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.StarOutline,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
@@ -113,21 +113,21 @@ fun OneLevel(type: String) {
 
     IconLevel(
         imageVector = Icons.Filled.Star,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.StarOutline,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.StarOutline,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
@@ -140,21 +140,21 @@ fun TwoLevel(type: String) {
 
     IconLevel(
         imageVector = Icons.Filled.Star,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.Star,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.StarOutline,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
@@ -167,21 +167,21 @@ fun ThreeLevel(type: String) {
 
     IconLevel(
         imageVector = Icons.Filled.Star,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.Star,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)
     )
     IconLevel(
         imageVector = Icons.Filled.Star,
-        tint = MaterialTheme.colors.Star,
+        tint = MaterialTheme.colors.star,
         modifier = Modifier
             .size(size)
             .padding(5.dp)

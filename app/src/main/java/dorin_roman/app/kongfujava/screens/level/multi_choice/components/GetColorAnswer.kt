@@ -4,18 +4,18 @@ import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import dorin_roman.app.kongfujava.ui.theme.Error
-import dorin_roman.app.kongfujava.ui.theme.Right
+import dorin_roman.app.kongfujava.ui.theme.kongFuError
+import dorin_roman.app.kongfujava.ui.theme.right
 
 @Composable
-fun GetColorMultiChoiceAnswers(color: ColorState): ButtonColors {
+fun getColorMultiChoiceAnswers(color: ColorState): ButtonColors {
     return when (color) {
         ColorState.RIGHT -> {
-            ButtonDefaults.buttonColors(MaterialTheme.colors.Right)
+            ButtonDefaults.buttonColors(MaterialTheme.colors.right)
         }
 
         ColorState.HINT, ColorState.MISTAKE -> {
-            ButtonDefaults.buttonColors(MaterialTheme.colors.Error)
+            ButtonDefaults.buttonColors(MaterialTheme.colors.kongFuError)
         }
 
         ColorState.REGULAR -> {

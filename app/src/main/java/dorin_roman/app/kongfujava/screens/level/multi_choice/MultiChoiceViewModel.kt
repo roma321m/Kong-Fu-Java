@@ -122,13 +122,6 @@ class MultiChoiceViewModel @Inject constructor(
         isRight = answer == right
         val qButtonColors = buttonColors.toMutableList()
 
-        Log.d("dorin", isRight.toString())
-        Log.d("dorin", answer)
-        Log.d("dorin", answers[0])
-        Log.d("dorin", answers[1])
-        Log.d("dorin", answers[2])
-        Log.d("dorin", answers[3])
-        Log.d("dorin", answers.indexOf(answer).toString())
         if (isRight) {
             qButtonColors[answers.indexOf(answer)] = ColorState.RIGHT
         } else {

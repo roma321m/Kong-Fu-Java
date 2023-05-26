@@ -48,35 +48,33 @@ val Colors.textGray: Color
     @Composable
     get() = if (isLight) Color(0xFF6C7279) else Color(0xFF6C7279)
 
-val Colors.Star: Color
+val Colors.star: Color
     @Composable
     get() = if (isLight) Color(0xFFFFCA2B) else Color(0xFFFFCA2B)
 
-val Colors.TextFieldCursor: Color
+val Colors.textFieldCursor: Color
     @Composable
     get() = if (isLight) Color(0xFFC3B8F8) else Color(0xFFC3B8F8)
 
-val Colors.MediumGray: Color
+val Colors.mediumGray: Color
     @Composable
-    get() = Color(0xFF9C9C9C)
+    get() = if (isLight) Color(0xFF9C9C9C) else Color(0xFF9C9C9C)
 
-val Colors.Error: Color
+val Colors.kongFuError: Color
     @Composable
     get() = if (isLight) Color(0xFFA84552) else Color(0xFFA84552)
 
-val Colors.Right: Color
+val Colors.right: Color
     @Composable
-    get() = Color(0xff6cb451)
+    get() = if (isLight) Color(0xff6cb451) else Color(0xff6cb451)
 
-val Colors.LevelItemText: Color
+val Colors.levelItemText: Color
     @Composable
     get() = if (isLight) Color.White else Color.White
 
 val Colors.videoIcon: Color
     @Composable
     get() = if (isLight) Color.LightGray else Color.LightGray
-
-
 
 val Colors.systemUi: Color
     @Composable

@@ -1,10 +1,7 @@
 package dorin_roman.app.kongfujava.screens.level.multi_choice
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,12 +11,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.LevelViewModel
-import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceScreenContent
+import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceContent
+import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceTitle
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.VerticalFortySixtyLayout
 import dorin_roman.app.kongfujava.ui.components.image.SideScreenImage
+import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+
 
 @Composable
 fun MultiChoiceScreen(
@@ -47,44 +46,56 @@ fun MultiChoiceScreen(
             )
         }
     ) { padding ->
-        Column(
+        CustomLayout2(
             modifier = Modifier
-                .wrapContentSize()
-                .background(MaterialTheme.colors.secondary)
-                .padding(padding)
-        ) {
-            VerticalFortySixtyLayout(
-                fortyLayout = {
-                    MultiChoiceScreenContent(
-                        navigateToMapLevelsScreenFromLevel = navigateToMapLevelsScreenFromLevel,
-                        levelNumber = levelNumber,
-                        title = levelViewModel.title,
-                        questionTitle = levelViewModel.questionTitle,
-                        questionAnswers = multiChoiceViewModel.answers,
-                        worldId = worldId,
-                        levelState = levelViewModel.state,
-                        isFinish = levelViewModel.isFinish,
-                        isExit = levelViewModel.isExit,
-                        isRight = multiChoiceViewModel.isRight,
-                        shownHints = multiChoiceViewModel.shownHints,
-                        hintsCount = levelViewModel.hint,
-                        finishLevel = { levelViewModel.handle(LevelEvent.FinishLevel) },
-                        handleHint = {
-                            multiChoiceViewModel.handle(MultiEvent.GetHint)
-                            levelViewModel.handle(LevelEvent.UpdateLevelHint)
-                        },
-                        handleMistakes = { levelViewModel.handle(LevelEvent.UpdateLevelMistakes) },
-                        buttonsColors = multiChoiceViewModel.buttonColors,
-                        checkAnswer = { answer ->
-                            multiChoiceViewModel.handle(MultiEvent.CheckAnswer(answer))
-                        },
-                        handleExit = { levelViewModel.handle(LevelEvent.HandleExit) })
-                },
-                sixtyLayout = {
-                    SideScreenImage(R.drawable.ic_panda_question)
-                }
-            )
-        }
+                .fillMaxSize()
+                .padding(padding),
+            startTopWeight = 0.3f,
+            startBottomWeight = 0.7f,
+            startWeight = 0.5f,
+            endWeight = 0.5f,
+            startTopContent = {
+                MultiChoiceTitle(
+                    levelNumber = levelNumber,
+                    title = levelViewModel.title,
+                    questionTitle = levelViewModel.questionTitle,
+                )
+            },
+            startBottomContent = {
+                MultiChoiceContent(
+                    navigateToMapLevelsScreenFromLevel = navigateToMapLevelsScreenFromLevel,
+                    levelNumber = levelNumber,
+                    questionAnswers = multiChoiceViewModel.answers,
+                    worldId = worldId,
+                    levelState = levelViewModel.state,
+                    isFinish = levelViewModel.isFinish,
+                    isExit = levelViewModel.isExit,
+                    isRight = multiChoiceViewModel.isRight,
+                    hintsCount = levelViewModel.hintCount,
+                    finishLevel = {
+                        levelViewModel.handle(LevelEvent.FinishLevel)
+                    },
+                    handleHint = {
+                        multiChoiceViewModel.handle(MultiEvent.GetHint)
+                        levelViewModel.handle(LevelEvent.UpdateLevelHint)
+                    },
+                    mistakesCount = levelViewModel.mistakesCount,
+                    handleMistakes = {
+                        levelViewModel.handle(LevelEvent.UpdateLevelMistakes)
+                    },
+                    buttonsColors = multiChoiceViewModel.buttonColors,
+                    checkAnswer = { answer ->
+                        multiChoiceViewModel.handle(MultiEvent.CheckAnswer(answer))
+                    },
+                    handleExit = {
+                        levelViewModel.handle(LevelEvent.HandleExit)
+                    }
+                )
+            },
+            endContent = {
+                SideScreenImage(R.drawable.ic_panda_question)
+            }
+        )
     }
 }
 

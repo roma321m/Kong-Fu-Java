@@ -25,9 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.theme.Error
-import dorin_roman.app.kongfujava.ui.theme.TextFieldCursor
+import dorin_roman.app.kongfujava.ui.theme.kongFuError
 import dorin_roman.app.kongfujava.ui.theme.spacing
+import dorin_roman.app.kongfujava.ui.theme.textFieldCursor
 
 
 @Composable
@@ -80,12 +80,12 @@ fun ChildLoginImageStep(
                     Text(stringResource(R.string.child_login_add_a_picture))
                 },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    cursorColor = MaterialTheme.colors.TextFieldCursor,
-                    focusedLabelColor = MaterialTheme.colors.TextFieldCursor,
-                    errorLabelColor = MaterialTheme.colors.Error,
-                    errorBorderColor = MaterialTheme.colors.Error,
-                    focusedBorderColor = MaterialTheme.colors.TextFieldCursor,
-                    unfocusedBorderColor = MaterialTheme.colors.TextFieldCursor
+                    cursorColor = MaterialTheme.colors.textFieldCursor,
+                    focusedLabelColor = MaterialTheme.colors.textFieldCursor,
+                    errorLabelColor = MaterialTheme.colors.kongFuError,
+                    errorBorderColor = MaterialTheme.colors.kongFuError,
+                    focusedBorderColor = MaterialTheme.colors.textFieldCursor,
+                    unfocusedBorderColor = MaterialTheme.colors.textFieldCursor
                 )
             )
 
