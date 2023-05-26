@@ -36,6 +36,12 @@ fun MultiChoiceScreen(
     }
 
 
+    LaunchedEffect(key1 = multiChoiceViewModel.isRight) {
+      if(multiChoiceViewModel.isRight){
+          levelViewModel.handle(LevelEvent.UpdateLevelScore(multiChoiceViewModel.hintCount, multiChoiceViewModel.mistakesCount))
+      }
+    }
+
     Scaffold(
         topBar = {
             TopBar(
@@ -70,19 +76,9 @@ fun MultiChoiceScreen(
                     levelState = levelViewModel.state,
                     isFinish = multiChoiceViewModel.isFinish,
                     isExit = levelViewModel.isExit,
-                    isRight = multiChoiceViewModel.isRight,
                     hintsCount = multiChoiceViewModel.hintCount,
-                    finishLevel = {
-                        levelViewModel.handle(LevelEvent.UpdateLevelScore(multiChoiceViewModel.hintCount, multiChoiceViewModel.mistakesCount))
-                        multiChoiceViewModel.handle(MultiEvent.FinishLevel)
-                    },
                     handleHint = {
                         multiChoiceViewModel.handle(MultiEvent.GetHint)
-                        multiChoiceViewModel.handle(MultiEvent.UpdateLevelHint)
-                    },
-                    mistakesCount = multiChoiceViewModel.mistakesCount,
-                    handleMistakes = {
-                        multiChoiceViewModel.handle(MultiEvent.UpdateLevelMistakes)
                     },
                     buttonsColors = multiChoiceViewModel.buttonColors,
                     checkAnswer = { answer ->

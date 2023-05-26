@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.levels.Answer
-import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.ColorState
 import kotlinx.coroutines.delay
@@ -40,9 +39,6 @@ class MultiChoiceViewModel @Inject constructor(
     var isRight by mutableStateOf(false)
         private set
 
-    var shownHints by mutableStateOf(emptyList<String>())
-        private set
-
     var hintCount by mutableStateOf(0)
         private set
 
@@ -58,34 +54,16 @@ class MultiChoiceViewModel @Inject constructor(
 
     private var hint by mutableStateOf("")
 
-
-
-
     fun handle(event: MultiEvent) {
-        //fixme
         when (event) {
             is MultiEvent.InitAnswers -> initAnswers(event.levelId)
-            is MultiEvent.GetHint -> {
-                getHint()
-            }
-            is MultiEvent.CheckAnswer -> {
-                checkAnswer(event.answer)
-            }
-            is MultiEvent.UpdateLevelMistakes -> {
-                updateMistakes()
-            }
-            is MultiEvent.UpdateLevelHint -> {
-                updateHint()
-            }
-            MultiEvent.FinishLevel -> {
-                finishLevel()
-            }
+            is MultiEvent.GetHint -> getHint()
+            is MultiEvent.CheckAnswer -> checkAnswer(event.answer)
         }
     }
 
     private fun initAnswers(levelId: Int) {
         currentLevelId = levelId
-        shownHints = emptyList()
         hint = ""
         isRight = false
         loadAnswers()
@@ -114,9 +92,9 @@ class MultiChoiceViewModel @Inject constructor(
     private fun buildHints() {
         Log.d(TAG, "buildHints")
         val qHints = mutableListOf<String>()
-        for (i in 0..3) {
-            if (answers[i] != right) {
-                qHints.add(answers[i])
+        answers.forEach {
+            if (it != right) {
+                qHints.add(it)
             }
         }
         hints = qHints
@@ -124,35 +102,17 @@ class MultiChoiceViewModel @Inject constructor(
 
     private fun getHint() {
         Log.d(TAG, "getHint")
-        val qHints = shownHints.toMutableList()
-        val qButtonColors = buttonColors.toMutableList()
-
         hint = hints.random()
-        qHints.add(hint)
-        shownHints = qHints
 
-        qButtonColors[hints.indexOf(hint)] = ColorState.HINT
+        val qButtonColors = buttonColors.toMutableList()
+        qButtonColors[answers.indexOf(hint)] = ColorState.HINT
         buttonColors = qButtonColors
 
         hints = hints.filter { it != hint }
-        Log.d(TAG, "shownHints ${shownHints.size}")
-    }
-
-    private fun updateHint() {
-        Log.d(LevelViewModel.TAG, "updateHint")
         if (hintCount == 3)
             return
 
         hintCount += 1
-        Log.d(LevelViewModel.TAG, "HintCount: $hintCount")
-    }
-
-    private fun updateMistakes() {
-        Log.d(LevelViewModel.TAG, "updateMistake $mistakesCount")
-        if (mistakesCount < 3) {
-            mistakesCount += 1
-        }
-        Log.d(LevelViewModel.TAG, "MistakeCount: $mistakesCount")
     }
 
     private fun checkAnswer(answer: String) {
@@ -168,12 +128,19 @@ class MultiChoiceViewModel @Inject constructor(
         viewModelScope.launch {
             delay(1000)
         }
+        updateMistakes(answer)
     }
 
-    private fun finishLevel() {
-        isFinish = true
-       // updateScore()
-       // updateState()
+    private fun updateMistakes(answer: String) {
+        Log.d(LevelViewModel.TAG, "updateMistake $mistakesCount")
+        if (!isRight && mistakesCount < 3) {
+            hints = hints.filter { it != answer }
+            mistakesCount += 1
+        } else if (isRight) {
+            isFinish = true
+        }
+        Log.d(LevelViewModel.TAG, "MistakeCount: $mistakesCount")
     }
+
 
 }

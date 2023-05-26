@@ -30,12 +30,8 @@ fun MultiChoiceContent(
     levelState: PointState,
     isFinish: Boolean,
     isExit: Boolean,
-    isRight: Boolean,
     hintsCount: Int,
-    finishLevel: () -> Unit,
     handleHint: () -> Unit,
-    mistakesCount: Int,
-    handleMistakes: () -> Unit,
     checkAnswer: (String) -> Unit,
     handleExit: () -> Unit,
     buttonsColors: List<ColorState>
@@ -55,10 +51,6 @@ fun MultiChoiceContent(
             MultiChoiceAnswers(
                 questionAnswers = questionAnswers,
                 checkAnswer = checkAnswer,
-                finishLevel = { finishLevel() },
-                isRight = isRight,
-                mistakesCount = mistakesCount,
-                handleMistakes = { handleMistakes() },
                 buttonsColors = buttonsColors
             )
         }
@@ -66,7 +58,6 @@ fun MultiChoiceContent(
         if (isFinish) {
             FinishLevelPopUp(
                 onDismiss = {
-                    finishLevel()
                     navigateToMapLevelsScreenFromLevel(worldId)
                 },
                 levelNumber = levelNumber,
@@ -123,12 +114,8 @@ fun WorldsScreenPreview() {
             levelState = PointState.THREE,
             isFinish = false,
             isExit = false,
-            isRight = false,
             hintsCount = 0,
-            finishLevel = {},
             handleHint = {},
-            mistakesCount = 0,
-            handleMistakes = {},
             checkAnswer = {},
             handleExit = {},
             buttonsColors = emptyList(),

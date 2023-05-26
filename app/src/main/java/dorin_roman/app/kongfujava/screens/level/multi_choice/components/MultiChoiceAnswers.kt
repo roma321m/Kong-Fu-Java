@@ -17,10 +17,6 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 fun ColumnScope.MultiChoiceAnswers(
     questionAnswers: List<String>,
     checkAnswer: (String) -> Unit,
-    finishLevel: () -> Unit,
-    isRight: Boolean,
-    mistakesCount: Int,
-    handleMistakes: () -> Unit,
     buttonsColors: List<ColorState>
 ) {
     Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraLarge))
@@ -31,14 +27,8 @@ fun ColumnScope.MultiChoiceAnswers(
             .padding(MaterialTheme.spacing.large),
         colors = getColorMultiChoiceAnswers(buttonsColors[0]),
         onClick = {
-            checkAnswer(
-                questionAnswers[0]
-            )
-            if (!isRight) {
-                handleMistakes()
-            }
-            if (mistakesCount == 3 || isRight) {
-                finishLevel()
+            if (buttonsColors[0] == ColorState.REGULAR) {
+                checkAnswer(questionAnswers[0])
             }
         }
     ) {
@@ -55,12 +45,8 @@ fun ColumnScope.MultiChoiceAnswers(
             .padding(MaterialTheme.spacing.large),
         colors = getColorMultiChoiceAnswers(buttonsColors[1]),
         onClick = {
-            checkAnswer(questionAnswers[1])
-            if (!isRight) {
-                handleMistakes()
-            }
-            if (mistakesCount == 3 || isRight) {
-                finishLevel()
+            if (buttonsColors[1] == ColorState.REGULAR) {
+                checkAnswer(questionAnswers[1])
             }
         }
     ) {
@@ -77,12 +63,8 @@ fun ColumnScope.MultiChoiceAnswers(
             .padding(MaterialTheme.spacing.large),
         colors = getColorMultiChoiceAnswers(buttonsColors[2]),
         onClick = {
-            checkAnswer(questionAnswers[2])
-            if (!isRight) {
-                handleMistakes()
-            }
-            if (mistakesCount == 3 || isRight) {
-                finishLevel()
+            if (buttonsColors[2] == ColorState.REGULAR) {
+                checkAnswer(questionAnswers[2])
             }
         }
     ) {
@@ -99,12 +81,8 @@ fun ColumnScope.MultiChoiceAnswers(
             .padding(MaterialTheme.spacing.large),
         colors = getColorMultiChoiceAnswers(buttonsColors[3]),
         onClick = {
-            checkAnswer(questionAnswers[3])
-            if (!isRight) {
-                handleMistakes()
-            }
-            if (mistakesCount == 3 || isRight) {
-                finishLevel()
+            if (buttonsColors[3] == ColorState.REGULAR) {
+                checkAnswer(questionAnswers[3])
             }
         }
     ) {
