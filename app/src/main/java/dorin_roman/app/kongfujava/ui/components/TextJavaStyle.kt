@@ -1,6 +1,5 @@
 package dorin_roman.app.kongfujava.ui.components
 
-import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -33,23 +32,6 @@ import dorin_roman.app.kongfujava.ui.theme.textOrange
 import dorin_roman.app.kongfujava.ui.theme.textPurple
 import dorin_roman.app.kongfujava.ui.theme.textYellow
 
-const val exampleString =
-    """For Example, in the code snippet below:*
-        We have declared a variable number.*
-        Then we initialized the value of the variable.*
-        Finally, we modified the value of the variable.**
-        We will learn about this code snippet multiple times,
-         so don't worry if you don't understand everything.**
-        public! class! VariableDemo {*
-        @public! static! void! main#(String[] args) {**
-        @@// Variable declaration%*
-        @@int! number;**
-        @@// Assign a value to the variable%*
-        @@number^ =~ 10&;**" +
-        @@// Modified a variable value%*
-        @@number^ =~ number^ +~ 20&;**
-        @}**
-        }*"""
 
 @Composable
 fun TextJavaStyle(
@@ -105,7 +87,6 @@ fun TextJavaStyle(
                     val white = "~"
                     val question = ">"
                     text.split(Regex("(?<=[*@!#%^&~>])")).forEach { string ->
-                        Log.d("roman", string)
                         if (string.contains(newLine)) {
                             appendLine(string.dropLast(1))
                         } else if (string.contains(tab)) {

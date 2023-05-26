@@ -1,13 +1,22 @@
 package dorin_roman.app.kongfujava.screens.level.levels_map
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelItemView
@@ -49,11 +58,19 @@ fun LevelsMapScreen(
             )
         },
         content = { paddingValues ->
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .alpha(0.3f),
+                painter = painterResource(R.drawable.img_levels_background),
+                contentDescription = null,
+                alignment = Alignment.Center,
+                contentScale = ContentScale.FillBounds
+            )
             LevelsMapContent(
                 modifier = Modifier
-                    .background(MaterialTheme.colors.secondary)
                     .padding(paddingValues)
-                    .padding(MaterialTheme.spacing.medium)
+                    .padding(horizontal = 150.dp, vertical = MaterialTheme.spacing.large)
                     .fillMaxSize(),
                 levels = levelsMapViewModel.levelsModels,
                 navigateToTutorialLevel = navigateToTutorialLevel,
@@ -62,7 +79,7 @@ fun LevelsMapScreen(
                 itemContent = { item, nav ->
                     LevelItemView(
                         modifier = Modifier
-                            .padding(MaterialTheme.spacing.medium)
+                            .padding(MaterialTheme.spacing.large)
                             .fillMaxSize(),
                         levelItemModel = item,
                         navigateToLevel = nav,
@@ -70,6 +87,21 @@ fun LevelsMapScreen(
                     )
                 }
             )
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.BottomEnd
+            ) {
+                Image(
+                    modifier = Modifier
+                        .padding(end = 100.dp, bottom = 30.dp)
+                        .fillMaxHeight(0.1f)
+                        .clip(CircleShape),
+                    painter = painterResource(R.drawable.img_panda_done),
+                    contentDescription = null,
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.FillHeight
+                )
+            }
         }
     )
 
