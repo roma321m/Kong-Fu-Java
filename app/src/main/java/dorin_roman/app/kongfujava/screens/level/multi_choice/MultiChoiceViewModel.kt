@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.levels.Answer
-import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.ColorState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -132,14 +131,14 @@ class MultiChoiceViewModel @Inject constructor(
     }
 
     private fun updateMistakes(answer: String) {
-        Log.d(LevelViewModel.TAG, "updateMistake $mistakesCount")
+        Log.d(TAG, "updateMistake $mistakesCount")
         if (!isRight && mistakesCount < 3) {
             hints = hints.filter { it != answer }
             mistakesCount += 1
         } else if (isRight) {
             isFinish = true
         }
-        Log.d(LevelViewModel.TAG, "MistakeCount: $mistakesCount")
+        Log.d(TAG, "MistakeCount: $mistakesCount")
     }
 
 

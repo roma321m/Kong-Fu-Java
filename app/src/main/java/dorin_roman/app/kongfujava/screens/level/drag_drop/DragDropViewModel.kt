@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.levels.Answer
-import dorin_roman.app.kongfujava.screens.level.levels_map.LevelsMapViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -72,7 +71,7 @@ class DragDropViewModel @Inject constructor(
     }
 
     private fun loadAnswer() {
-        Log.d(LevelsMapViewModel.TAG, "loadAnswer")
+        Log.d(TAG, "loadAnswer")
         answer.value = RequestState.Loading
         try {
             viewModelScope.launch {

@@ -17,7 +17,7 @@ import dorin_roman.app.kongfujava.R
 fun BackButton(modifier: Modifier = Modifier, onBackPressed: () -> Unit) {
     Icon(
         imageVector = Icons.Default.ArrowBack,
-        contentDescription = stringResource(id = R.string.back_button),
+        contentDescription = stringResource(id = R.string.top_bar_back_button),
         tint = MaterialTheme.colors.onSecondary,
         modifier = modifier
             .padding(10.dp)

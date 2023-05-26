@@ -14,6 +14,8 @@ import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialBody
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialEmptyVideo
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialTitle
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarEvent
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarViewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
 import dorin_roman.app.kongfujava.ui.components.popup.AlertLevelPopUp
@@ -30,7 +32,8 @@ fun TutorialScreen(
     levelNumber: Int,
     worldId: Int,
     levelViewModel: LevelViewModel = hiltViewModel(),
-    tutorialViewModel: TutorialViewModel = hiltViewModel()
+    tutorialViewModel: TutorialViewModel = hiltViewModel(),
+    topBarViewModel: TopBarViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -44,7 +47,10 @@ fun TutorialScreen(
                 onBackPressed = {
                     tutorialViewModel.handle(TutorialEvent.UpdateNextClicked(true))
                 },
-                title = R.string.tutorial_questions
+                title = R.string.tutorial_level_title,
+                onLogOutClicked = {
+                    topBarViewModel.handle(TopBarEvent.LogOut)
+                }
             )
         },
         content = { padding ->

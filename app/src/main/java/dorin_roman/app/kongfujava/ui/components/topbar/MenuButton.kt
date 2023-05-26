@@ -17,7 +17,7 @@ import dorin_roman.app.kongfujava.R
 fun MenuButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Icon(
         imageVector = Icons.Default.MoreVert,
-        contentDescription = stringResource(id = R.string.menu_button),
+        contentDescription = stringResource(id = R.string.top_bar_menu),
         tint = MaterialTheme.colors.onSecondary,
         modifier = modifier
             .padding(10.dp)

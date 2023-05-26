@@ -13,6 +13,8 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelItemView
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsMapContent
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarEvent
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarViewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
@@ -26,7 +28,8 @@ fun LevelsMapScreen(
     navigateToDragDropLevel: (levelId: Int, levelNumber: Int, worldId: Int) -> Unit,
     worldId: Int,
     navigateToWorldMapFromMapLevelsScreen: () -> Unit,
-    levelsMapViewModel: LevelsMapViewModel = hiltViewModel()
+    levelsMapViewModel: LevelsMapViewModel = hiltViewModel(),
+    topBarViewModel: TopBarViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -39,7 +42,10 @@ fun LevelsMapScreen(
                 onBackPressed = {
                     navigateToWorldMapFromMapLevelsScreen()
                 },
-                title = R.string.levels_map,
+                title = R.string.levels_map_title,
+                onLogOutClicked = {
+                    topBarViewModel.handle(TopBarEvent.LogOut)
+                }
             )
         },
         content = { paddingValues ->

@@ -97,32 +97,31 @@
     <string name="alert_dialog_score">Your Score</string>
     <string name="alert_dialog_exit">Are you sure you want to exit?</string>
     <string name="alert_dialog_save">Note that data will not be saved for this level</string>
-
-
     <!-- Video Player -->
     <string name="video_player_pause">Pause</string>
     <string name="video_player_replay">Replay</string>
     <string name="video_player_play">Play</string>
-    <!-- TODO -->
-    <string name="worlds_map">Worlds Map</string>
-    <string name="back_button">Back Button</string>
-    <string name="lesson">Lesson</string>
-    <string name="question">Question</string>
-    <string name="question1">Which of the following answers is an int type variable ?</string>
-    <string name="help">Help</string>
-    <string name="music">Music</string>
+    <!-- Worlds map -->
+    <string name="worlds_map_title">Worlds Map</string>
+    <!-- Level's Map -->
+    <string name="levels_map_title">Levels Map</string>
+    <!-- Level -->
     <string name="next">Next</string>
-    <string name="undo">Undo</string>
     <string name="hint">Hint</string>
-    <string name="settings">Settings</string>
-    <string name="multi_choice_questions">Multi Choice Questions</string>
-    <string name="tutorial_questions">Tutorial Questions</string>
-    <string name="menu_button">Menu Button</string>
-    <string name="drag_drop_questions">Drag Drop Questions</string>
-    <string name="more_actions">More Actions</string>
-    <string name="dismiss">Dismiss</string>
-    <string name="levels_map">Levels Map</string>
-    <string name="logout">LogOut</string>
     <string name="level">level</string>
-
+    <!-- Multi Choice Level -->
+    <string name="multi_choice_level_title">Multi Choice Questions</string>
+    <!-- Tutorial Level -->
+    <string name="tutorial_level_title">Tutorial Questions</string>
+    <!-- Drag Drop Level -->
+    <string name="drag_drop_title">Drag Drop Questions</string>
+    <!-- Top Bar -->
+    <string name="top_bar_back_button">Back Button</string>
+    <string name="top_bar_menu">Menu Button</string>
+    <string name="top_bar_settings">Settings</string>
+    <string name="top_bar_help">Help</string>
+    <string name="top_bar_music">Music</string>
+    <string name="top_bar_logout">LogOut</string>
+    <!-- Database -->
+    <string name="database_kong_fu_db">database/kong_fu.db</string>
 </resources>

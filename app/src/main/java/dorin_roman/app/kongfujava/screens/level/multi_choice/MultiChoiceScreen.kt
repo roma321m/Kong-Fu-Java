@@ -13,6 +13,8 @@ import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceContent
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.MultiChoiceTitle
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarEvent
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarViewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.image.SideScreenImage
 import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
@@ -27,7 +29,8 @@ fun MultiChoiceScreen(
     levelNumber: Int,
     worldId: Int,
     levelViewModel: LevelViewModel = hiltViewModel(),
-    multiChoiceViewModel: MultiChoiceViewModel = hiltViewModel()
+    multiChoiceViewModel: MultiChoiceViewModel = hiltViewModel(),
+    topBarViewModel: TopBarViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -48,7 +51,10 @@ fun MultiChoiceScreen(
                 onBackPressed = {
                     levelViewModel.handle(LevelEvent.HandleExit)
                 },
-                title = R.string.multi_choice_questions
+                title = R.string.multi_choice_level_title,
+                onLogOutClicked = {
+                    topBarViewModel.handle(TopBarEvent.LogOut)
+                }
             )
         }
     ) { padding ->

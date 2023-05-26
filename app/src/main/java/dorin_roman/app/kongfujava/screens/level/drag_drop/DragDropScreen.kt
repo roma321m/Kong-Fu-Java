@@ -19,6 +19,8 @@ import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropCon
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropContentQuestion
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropContentTitle
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DraggableScreen
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarEvent
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarViewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout4
 import dorin_roman.app.kongfujava.ui.components.popup.AlertLevelPopUp
@@ -34,7 +36,8 @@ fun DragDropScreen(
     levelNumber: Int,
     worldId: Int,
     levelViewModel: LevelViewModel = hiltViewModel(),
-    dragDropViewModel: DragDropViewModel = hiltViewModel()
+    dragDropViewModel: DragDropViewModel = hiltViewModel(),
+    topBarViewModel: TopBarViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(true) {
@@ -56,7 +59,10 @@ fun DragDropScreen(
                     onBackPressed = {
                         levelViewModel.handle(LevelEvent.HandleExit)
                     },
-                    title = R.string.drag_drop_questions
+                    title = R.string.drag_drop_title,
+                    onLogOutClicked = {
+                        topBarViewModel.handle(TopBarEvent.LogOut)
+                    }
                 )
             }
         ) { padding ->

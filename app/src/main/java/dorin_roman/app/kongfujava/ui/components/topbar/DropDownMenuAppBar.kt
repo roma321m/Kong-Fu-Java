@@ -1,7 +1,15 @@
 package dorin_roman.app.kongfujava.ui.components.topbar
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Help
 import androidx.compose.material.icons.filled.Logout
@@ -35,12 +43,12 @@ fun DropDownMenuAppBar(
                 Icon(
                     modifier = Modifier.size(30.dp),
                     imageVector = Icons.Default.Help,
-                    contentDescription = stringResource(id = R.string.help),
+                    contentDescription = stringResource(id = R.string.top_bar_help),
                     tint = MaterialTheme.colors.onBackground,
                 )
                 Text(
                     modifier = Modifier.padding(10.dp),
-                    text = stringResource(id = R.string.help),
+                    text = stringResource(id = R.string.top_bar_help),
                     style = MaterialTheme.typography.h6
                 )
             }
@@ -55,12 +63,12 @@ fun DropDownMenuAppBar(
                 Icon(
                     modifier = Modifier.size(30.dp),
                     imageVector = Icons.Default.MusicNote,
-                    contentDescription = stringResource(id = R.string.music),
+                    contentDescription = stringResource(id = R.string.top_bar_music),
                     tint = MaterialTheme.colors.onBackground,
                 )
                 Text(
                     modifier = Modifier.padding(10.dp),
-                    text = stringResource(id = R.string.music),
+                    text = stringResource(id = R.string.top_bar_music),
                     style = MaterialTheme.typography.h6
                 )
             }
@@ -75,12 +83,12 @@ fun DropDownMenuAppBar(
                 Icon(
                     modifier = Modifier.size(30.dp),
                     imageVector = Icons.Default.Logout,
-                    contentDescription = stringResource(id = R.string.logout),
+                    contentDescription = stringResource(id = R.string.top_bar_logout),
                     tint = MaterialTheme.colors.onBackground,
                 )
                 Text(
                     modifier = Modifier.padding(10.dp),
-                    text = stringResource(id = R.string.logout),
+                    text = stringResource(id = R.string.top_bar_logout),
                     style = MaterialTheme.typography.h6
                 )
             }

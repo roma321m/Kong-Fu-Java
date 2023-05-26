@@ -11,7 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.RequestState
-import dorin_roman.app.kongfujava.screens.worlds.components.WorldsEvent
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarEvent
+import dorin_roman.app.kongfujava.screens.top_bar.TopBarViewModel
 import dorin_roman.app.kongfujava.screens.worlds.components.WorldsMapContent
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
@@ -20,7 +21,8 @@ import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 @Composable
 fun WorldsMapScreen(
     navigateToMapLevels: (id: Int) -> Unit,
-    worldsMapViewModel: WorldsMapViewModel = hiltViewModel()
+    worldsMapViewModel: WorldsMapViewModel = hiltViewModel(),
+    topBarViewModel: TopBarViewModel = hiltViewModel()
 ) {
     val worlds = worldsMapViewModel.worlds.collectAsState().value
 
@@ -28,10 +30,10 @@ fun WorldsMapScreen(
         topBar = {
             TopBar(
                 onBackPressed = {},
-                title = R.string.worlds_map,
+                title = R.string.worlds_map_title,
                 hasBackButton = false,
                 onLogOutClicked = {
-                    worldsMapViewModel.handle(WorldsEvent.LogOut)
+                    topBarViewModel.handle(TopBarEvent.LogOut)
                 }
             )
         },

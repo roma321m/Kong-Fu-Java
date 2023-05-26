@@ -6,23 +6,20 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
-import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.ChildIdRepository
-import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
-import dorin_roman.app.kongfujava.domain.models.World
 import dorin_roman.app.kongfujava.data.repository.WorldRepository
+import dorin_roman.app.kongfujava.domain.models.World
 import dorin_roman.app.kongfujava.screens.worlds.components.WorldsEvent
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class WorldsMapViewModel @Inject constructor(
     private val childIdRepository: ChildIdRepository,
-    private val userTypeRepository: UserTypeRepository,
     private val worldRepository: WorldRepository
 ) : ViewModel() {
 
@@ -44,7 +41,6 @@ class WorldsMapViewModel @Inject constructor(
 
     fun handle(event: WorldsEvent) {
         when (event) {
-            WorldsEvent.LogOut -> logout()
             is WorldsEvent.UpdateWorld -> updateWorld(event.world)
             is WorldsEvent.UpdateWorldScore -> updateWorldScore(event.score)
             is WorldsEvent.UpdateWorldState -> updateWorldState(event.state)
@@ -63,26 +59,6 @@ class WorldsMapViewModel @Inject constructor(
         } catch (exception: Exception) {
             _childId.value = RequestState.Error(exception)
         }
-    }
-
-    private fun persistChildId() {
-        Log.d(TAG, "persistChildId")
-        viewModelScope.launch(Dispatchers.IO) {
-            childIdRepository.persistChildId("")
-        }
-    }
-
-    private fun persistUserType() {
-        Log.d(TAG, "persistUserType")
-        viewModelScope.launch(Dispatchers.IO) {
-            userTypeRepository.persistUserType(UserType.None)
-        }
-    }
-
-    private fun logout() {
-        Log.d(TAG, "logout")
-        persistChildId()
-        persistUserType()
     }
 
     private fun updateWorldState(state: PointState) {

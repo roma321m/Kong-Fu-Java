@@ -7,5 +7,5 @@ import dorin_roman.app.kongfujava.ui.components.topbar.Title
 
 @Composable
 fun WorldsMapTitle(modifier: Modifier) {
-    Title(id = R.string.worlds_map, modifier = modifier)
+    Title(id = R.string.worlds_map_title, modifier = modifier)
 }

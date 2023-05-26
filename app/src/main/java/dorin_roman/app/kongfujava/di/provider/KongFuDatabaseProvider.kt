@@ -2,6 +2,7 @@ package dorin_roman.app.kongfujava.di.provider
 
 import android.content.Context
 import androidx.room.Room
+import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.domain.source.KongFuDataBase
 
 object KongFuDatabaseProvider {
@@ -14,7 +15,7 @@ object KongFuDatabaseProvider {
             KongFuDataBase::class.java,
             DATABASE_NAME
         )
-            .createFromAsset("database/kong_fu.db")
+            .createFromAsset(context.getString(R.string.database_kong_fu_db))
             .build()
     }
 }

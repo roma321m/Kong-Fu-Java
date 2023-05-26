@@ -39,7 +39,12 @@ fun NavGraphBuilder.dragDropLevelComposable(navigateToMapLevelsScreenFromLevel: 
     ) { navBackStackEntry ->
         val levelId = navBackStackEntry.arguments?.getInt(ChildScreens.LEVELS_KEY1_SCREEN) ?: -1
         val levelNumber = navBackStackEntry.arguments?.getInt(ChildScreens.LEVELS_KEY2_SCREEN) ?: -1
-        val worldId = navBackStackEntry.arguments?.getInt(ChildScreens.LEVELS_KEY2_SCREEN) ?: -1
-        DragDropScreen(navigateToMapLevelsScreenFromLevel = navigateToMapLevelsScreenFromLevel,levelId = levelId, levelNumber = levelNumber, worldId = worldId)
+        val worldId = navBackStackEntry.arguments?.getInt(ChildScreens.WORLDS_SCREEN) ?: -1
+        DragDropScreen(
+            navigateToMapLevelsScreenFromLevel = navigateToMapLevelsScreenFromLevel,
+            levelId = levelId,
+            levelNumber = levelNumber,
+            worldId = worldId
+        )
     }
 }

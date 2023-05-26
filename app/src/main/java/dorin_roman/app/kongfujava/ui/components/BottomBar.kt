@@ -3,7 +3,9 @@ package dorin_roman.app.kongfujava.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.*
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Help
 import androidx.compose.material.icons.filled.MusicNote
@@ -23,7 +25,7 @@ fun BottomBar() {
     ) {
         Icon(
             imageVector = Icons.Default.Settings,
-            contentDescription = stringResource(id = R.string.settings),
+            contentDescription = stringResource(id = R.string.top_bar_settings),
             tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .padding(10.dp)
@@ -33,7 +35,7 @@ fun BottomBar() {
 
         Icon(
             imageVector = Icons.Default.MusicNote,
-            contentDescription = stringResource(id = R.string.music),
+            contentDescription = stringResource(id = R.string.top_bar_music),
             tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .padding(10.dp)
@@ -43,7 +45,7 @@ fun BottomBar() {
 
         Icon(
             imageVector = Icons.Default.Help,
-            contentDescription = stringResource(id = R.string.help),
+            contentDescription = stringResource(id = R.string.top_bar_help),
             tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .padding(10.dp)
