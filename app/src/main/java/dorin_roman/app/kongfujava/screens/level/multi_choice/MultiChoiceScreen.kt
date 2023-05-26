@@ -68,20 +68,21 @@ fun MultiChoiceScreen(
                     questionAnswers = multiChoiceViewModel.answers,
                     worldId = worldId,
                     levelState = levelViewModel.state,
-                    isFinish = levelViewModel.isFinish,
+                    isFinish = multiChoiceViewModel.isFinish,
                     isExit = levelViewModel.isExit,
                     isRight = multiChoiceViewModel.isRight,
-                    hintsCount = levelViewModel.hintCount,
+                    hintsCount = multiChoiceViewModel.hintCount,
                     finishLevel = {
-                        levelViewModel.handle(LevelEvent.FinishLevel)
+                        levelViewModel.handle(LevelEvent.UpdateLevelScore(multiChoiceViewModel.hintCount, multiChoiceViewModel.mistakesCount))
+                        multiChoiceViewModel.handle(MultiEvent.FinishLevel)
                     },
                     handleHint = {
                         multiChoiceViewModel.handle(MultiEvent.GetHint)
-                        levelViewModel.handle(LevelEvent.UpdateLevelHint)
+                        multiChoiceViewModel.handle(MultiEvent.UpdateLevelHint)
                     },
-                    mistakesCount = levelViewModel.mistakesCount,
+                    mistakesCount = multiChoiceViewModel.mistakesCount,
                     handleMistakes = {
-                        levelViewModel.handle(LevelEvent.UpdateLevelMistakes)
+                        multiChoiceViewModel.handle(MultiEvent.UpdateLevelMistakes)
                     },
                     buttonsColors = multiChoiceViewModel.buttonColors,
                     checkAnswer = { answer ->

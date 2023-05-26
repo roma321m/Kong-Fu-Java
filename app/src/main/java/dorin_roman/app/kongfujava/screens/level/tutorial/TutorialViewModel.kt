@@ -27,6 +27,15 @@ class TutorialViewModel @Inject constructor(
     var videoUrl by mutableStateOf("")
         private set
 
+    var isVideoWatched by mutableStateOf(false)
+        private set
+
+    var isNextClicked by mutableStateOf(false)
+        private set
+
+    var isFinish by mutableStateOf(false)
+        private set
+
     private var currentLevelId: Int = -1
 
     private val tutorial = MutableStateFlow<RequestState<Tutorial>>(RequestState.Idle)
@@ -34,6 +43,15 @@ class TutorialViewModel @Inject constructor(
     fun handle(event: TutorialEvent) {
         when (event) {
             is TutorialEvent.InitTutorial -> initTutorial(event.levelId)
+
+            is TutorialEvent.UpdateNextClicked -> { isNextClicked = event.isNextClicked }
+
+            TutorialEvent.VideoWatched -> {isVideoWatched = true}
+
+            TutorialEvent.FinishLevel -> {
+               finishLevel()
+            }
+
         }
     }
 
@@ -55,6 +73,11 @@ class TutorialViewModel @Inject constructor(
             Log.e(TAG, "${e.message}")
             tutorial.value = RequestState.Error(e)
         }
+    }
+
+    private fun finishLevel() {
+        //todo add logic
+        isFinish = true
     }
 
 }

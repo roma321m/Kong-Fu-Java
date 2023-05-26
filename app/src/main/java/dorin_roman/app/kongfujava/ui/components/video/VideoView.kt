@@ -38,6 +38,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.media3.common.Player
 import androidx.media3.common.Player.STATE_ENDED
+import androidx.media3.common.VideoSize
 import androidx.media3.ui.PlayerView
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.videoIcon
@@ -48,6 +49,8 @@ import kotlinx.coroutines.delay
 fun VideoView(
     url: String,
     modifier: Modifier = Modifier,
+    stopPlay: () -> Boolean = { false },
+    handleVideoWatched: () -> Unit = { },
     viewModel: VideoViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -76,6 +79,23 @@ fun VideoView(
 
     LaunchedEffect(true) {
         viewModel.handle(VideoEvent.AddVideoUrl(url))
+    }
+
+    LaunchedEffect(viewModel.playbackState) {
+        if (viewModel.playbackState == STATE_ENDED && viewModel.player.videoSize != VideoSize.UNKNOWN) {
+            handleVideoWatched()
+        }
+    }
+
+    LaunchedEffect(stopPlay) {
+        if (viewModel.player.videoSize != VideoSize.UNKNOWN && stopPlay()) {
+            viewModel.player.pause()
+            viewModel.handle(VideoEvent.UpdateIsPlaying(false))
+
+        }else if(viewModel.player.videoSize != VideoSize.UNKNOWN && !stopPlay()){
+            viewModel.player.play()
+            viewModel.handle(VideoEvent.UpdateIsPlaying(true))
+        }
     }
 
     DisposableEffect(key1 = Unit) {

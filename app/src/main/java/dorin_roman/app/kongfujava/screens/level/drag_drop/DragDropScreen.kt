@@ -70,7 +70,9 @@ fun DragDropScreen(
                             dragAnswers = dragDropViewModel.drag,
                             isRight = dragDropViewModel.isRight,
                             shownHints = dragDropViewModel.shownHints,
-                            handleMistakes = { levelViewModel.handle(LevelEvent.UpdateLevelMistakes) },
+                            handleMistakes = {
+                                //levelViewModel.handle(LevelEvent.UpdateLevelMistakes)
+                                             },
                             //fixme make event
                             startDragging = { dragDropViewModel.startDragging() },
                             stopDragging = { dragDropViewModel.stopDragging() }
@@ -85,12 +87,16 @@ fun DragDropScreen(
                             levelState = levelViewModel.state,
                             handleHint = {
                                 dragDropViewModel.handle(DragDropEvent.GetHint)
-                                levelViewModel.handle(LevelEvent.UpdateLevelHint)
+                                //levelViewModel.handle(LevelEvent.UpdateLevelHint)
                             },
-                            hintsCount = levelViewModel.hintCount,
+                            //hintsCount = levelViewModel.hintCount,
+                            hintsCount = 0,
                             shownHints = dragDropViewModel.shownHints,
-                            finishLevel = { levelViewModel.handle(LevelEvent.FinishLevel) },
-                            isFinish = levelViewModel.isFinish,
+                            finishLevel = {
+                                //levelViewModel.handle(LevelEvent.FinishLevel)
+                                          },
+                           // isFinish = levelViewModel.isFinish,
+                            isFinish = false,
                             handleExit = { levelViewModel.handle(LevelEvent.HandleExit) },
                             isExit = levelViewModel.isExit,
                         )

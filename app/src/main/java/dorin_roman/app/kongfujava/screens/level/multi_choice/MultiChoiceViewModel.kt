@@ -10,6 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.levels.Answer
+import dorin_roman.app.kongfujava.screens.level.LevelEvent
+import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.ColorState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,12 +43,22 @@ class MultiChoiceViewModel @Inject constructor(
     var shownHints by mutableStateOf(emptyList<String>())
         private set
 
+    var hintCount by mutableStateOf(0)
+        private set
+
+    var mistakesCount by mutableStateOf(0)
+        private set
+
+    var isFinish by mutableStateOf(false)
+        private set
 
     private var hints by mutableStateOf(listOf<String>())
 
     private var right by mutableStateOf("")
 
     private var hint by mutableStateOf("")
+
+
 
 
     fun handle(event: MultiEvent) {
@@ -56,9 +68,17 @@ class MultiChoiceViewModel @Inject constructor(
             is MultiEvent.GetHint -> {
                 getHint()
             }
-
             is MultiEvent.CheckAnswer -> {
                 checkAnswer(event.answer)
+            }
+            is MultiEvent.UpdateLevelMistakes -> {
+                updateMistakes()
+            }
+            is MultiEvent.UpdateLevelHint -> {
+                updateHint()
+            }
+            MultiEvent.FinishLevel -> {
+                finishLevel()
             }
         }
     }
@@ -118,6 +138,23 @@ class MultiChoiceViewModel @Inject constructor(
         Log.d(TAG, "shownHints ${shownHints.size}")
     }
 
+    private fun updateHint() {
+        Log.d(LevelViewModel.TAG, "updateHint")
+        if (hintCount == 3)
+            return
+
+        hintCount += 1
+        Log.d(LevelViewModel.TAG, "HintCount: $hintCount")
+    }
+
+    private fun updateMistakes() {
+        Log.d(LevelViewModel.TAG, "updateMistake $mistakesCount")
+        if (mistakesCount < 3) {
+            mistakesCount += 1
+        }
+        Log.d(LevelViewModel.TAG, "MistakeCount: $mistakesCount")
+    }
+
     private fun checkAnswer(answer: String) {
         isRight = answer == right
         val qButtonColors = buttonColors.toMutableList()
@@ -131,6 +168,12 @@ class MultiChoiceViewModel @Inject constructor(
         viewModelScope.launch {
             delay(1000)
         }
+    }
+
+    private fun finishLevel() {
+        isFinish = true
+       // updateScore()
+       // updateState()
     }
 
 }

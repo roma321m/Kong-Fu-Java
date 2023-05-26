@@ -39,17 +39,8 @@ class LevelViewModel @Inject constructor(
     var state by mutableStateOf(PointState.LOCK)
         private set
 
-    var type by mutableStateOf(LevelType.TUTORIAL)
-        private set
-
-    var hintCount by mutableStateOf(0)
-        private set
-
-    var mistakesCount by mutableStateOf(0)
-        private set
-
-    var isFinish by mutableStateOf(false)
-        private set
+//    var type by mutableStateOf(LevelType.TUTORIAL)
+//        private set
 
     var isExit by mutableStateOf(false)
         private set
@@ -58,33 +49,21 @@ class LevelViewModel @Inject constructor(
 
     private var currentLevelId: Int = -1
 
-    private val currentLevel = MutableStateFlow<RequestState<Level>>(RequestState.Idle)
+    private var currentLevel = MutableStateFlow<RequestState<Level>>(RequestState.Idle)
 
-    private val question = MutableStateFlow<RequestState<Question>>(RequestState.Idle)
+    private var question = MutableStateFlow<RequestState<Question>>(RequestState.Idle)
 
 
     fun handle(event: LevelEvent) {
         when (event) {
-            LevelEvent.FinishLevel -> {
-                finishLevel()
-            }
-
             is LevelEvent.InitLevel -> initLevels(event.levelId, event.worldId)
 
             is LevelEvent.UpdateLevelScore -> {
-                updateScore()
+                updateScore(event.hintCount, event.mistakesCount)
             }
 
             is LevelEvent.UpdateLevelState -> {
                 updateState()
-            }
-
-            is LevelEvent.UpdateLevelMistakes -> {
-                updateMistakes()
-            }
-
-            is LevelEvent.UpdateLevelHint -> {
-                updateHint()
             }
 
             is LevelEvent.HandleExit -> {
@@ -96,14 +75,23 @@ class LevelViewModel @Inject constructor(
 
     private fun initLevels(levelId: Int, worldId: Int) {
         Log.d(TAG, "initLevels")
-        isFinish = false
-        isExit = false
+        resetVariables()
         currentLevelId = levelId
         currentWorldId = worldId
-        hintCount = 0
-        mistakesCount = 0
         loadQuestion()
         loadLevel()
+    }
+
+    private fun resetVariables(){
+        title = ""
+        questionTitle = ""
+        score = 0
+        state = PointState.LOCK
+        isExit = false
+        currentWorldId = -1
+        currentLevelId = -1
+        currentLevel = MutableStateFlow(RequestState.Idle)
+        question = MutableStateFlow(RequestState.Idle)
     }
 
     private fun loadQuestion() = viewModelScope.launch {
@@ -129,7 +117,7 @@ class LevelViewModel @Inject constructor(
             levelRepository.getLevel(currentLevelId).collect { level ->
                 this@LevelViewModel.currentLevel.value = RequestState.Success(level)
                 score = level.score
-                type = LevelLogic.getLevelType(level.type)
+                //type = LevelLogic.getLevelType(level.type)
                 state = LevelLogic.getLevelState(level.state)
             }
         } catch (e: Exception) {
@@ -139,14 +127,11 @@ class LevelViewModel @Inject constructor(
     }
 
 
-    private fun updateScore() = viewModelScope.launch(Dispatchers.IO) {
+    private fun updateScore(hintCount: Int, mistakesCount: Int) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateScore")
-        score = if (type != LevelType.TUTORIAL) {
-            LevelLogic.getScore(hintCount, mistakesCount)
-        } else {
-            3
-        }
+        score = LevelLogic.getScore(hintCount, mistakesCount)
         levelRepository.updateScore(currentLevelId, score)
+        updateState()
     }
 
     private fun updateState() = viewModelScope.launch(Dispatchers.IO) {
@@ -155,29 +140,6 @@ class LevelViewModel @Inject constructor(
         levelRepository.updateState(currentLevelId, state.ordinal)
         //fixme when last level need to open new world
         levelRepository.updateState(currentLevelId + 1, PointState.ZERO.ordinal)
-    }
-
-    private fun updateHint() {
-        Log.d(TAG, "updateHint")
-        if (hintCount == 3)
-            return
-
-        hintCount += 1
-        Log.d(TAG, "HintCount: $hintCount")
-    }
-
-    private fun updateMistakes() {
-        Log.d(TAG, "updateMistake $mistakesCount")
-        if (mistakesCount < 3) {
-            mistakesCount += 1
-        }
-        Log.d(TAG, "MistakeCount: $mistakesCount")
-    }
-
-    private fun finishLevel() {
-        isFinish = true
-        updateScore()
-        updateState()
     }
 
     private fun updateStatistics() {
