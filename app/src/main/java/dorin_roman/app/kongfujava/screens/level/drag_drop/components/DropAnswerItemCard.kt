@@ -1,7 +1,10 @@
 package dorin_roman.app.kongfujava.screens.level.drag_drop.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -13,7 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DropAnswerItemCard(backgroundColor: Color, answerItem: String) {
+fun DropAnswerItemCard(
+    backgroundColor: Color,
+    answerItem: String
+) {
+
     Card(
         elevation = 10.dp,
         backgroundColor = backgroundColor,
@@ -21,7 +28,7 @@ fun DropAnswerItemCard(backgroundColor: Color, answerItem: String) {
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .padding(8.dp)
-            .size(width = 300.dp, height = 150.dp)
+            .size(width = 150.dp, height = 100.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -34,6 +41,5 @@ fun DropAnswerItemCard(backgroundColor: Color, answerItem: String) {
             )
         }
     }
-
 
 }

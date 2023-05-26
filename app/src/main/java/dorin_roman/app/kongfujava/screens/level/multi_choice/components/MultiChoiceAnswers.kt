@@ -35,7 +35,8 @@ fun ColumnScope.MultiChoiceAnswers(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.medium),
-            text = questionAnswers[0]
+            text = questionAnswers[0],
+            style = MaterialTheme.typography.subtitle1
         )
     }
 
@@ -53,7 +54,8 @@ fun ColumnScope.MultiChoiceAnswers(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.medium),
-            text = questionAnswers[1]
+            text = questionAnswers[1],
+            style = MaterialTheme.typography.subtitle1
         )
     }
 
@@ -71,7 +73,8 @@ fun ColumnScope.MultiChoiceAnswers(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.medium),
-            text = questionAnswers[2]
+            text = questionAnswers[2],
+            style = MaterialTheme.typography.subtitle1
         )
     }
 
@@ -89,7 +92,8 @@ fun ColumnScope.MultiChoiceAnswers(
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.medium),
-            text = questionAnswers[3]
+            text = questionAnswers[3],
+            style = MaterialTheme.typography.subtitle1
         )
     }
 }

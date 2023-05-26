@@ -5,10 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 //Dark
-val primaryDark: Color = Color(0xff7d65f1)
-val primaryVariantDark: Color = Color(0xff6955bc)
-val secondaryDark: Color = Color(0xff9ff07a)
-val secondaryVariantDark: Color = Color(0xff6cb451)
+val primaryDark: Color = Color(0xFF7D65F1)
+val primaryVariantDark: Color = Color(0xFF6955BC)
+val secondaryDark: Color = Color(0xFF9FF07A)
+val secondaryVariantDark: Color = Color(0xFF6CB451)
 val backgroundDark: Color = Color(0xFF000000)
 val surfaceDark: Color = Color(0xFF000000)
 val onPrimaryDark: Color = Color(0xFFFFFFFF)
@@ -19,8 +19,8 @@ val onSurfaceDark: Color = Color(0xFFFFFFFF)
 //Light
 val primaryLight: Color = Color(0xFFAA9CEB)
 val primaryVariantLight: Color = Color(0xff6955bc)
-val secondaryLight: Color = Color(0xff9ff07a)
-val secondaryVariantLight: Color = Color(0xff6cb451)
+val secondaryLight: Color = Color(0xFF9FF07A)
+val secondaryVariantLight: Color = Color(0xFF6CB451)
 val backgroundLight: Color = Color(0xFFFFFFFF)
 val surfaceLight: Color = Color(0xFFFFFFFF)
 val onPrimaryLight: Color = Color(0xFF000000)
@@ -47,6 +47,10 @@ val Colors.textBlue: Color
 val Colors.textGray: Color
     @Composable
     get() = if (isLight) Color(0xFF6C7279) else Color(0xFF6C7279)
+
+val Colors.textGreen: Color
+    @Composable
+    get() = if (isLight) Color(0xFF6CB451) else Color(0xFF9FF07A)
 
 val Colors.star: Color
     @Composable

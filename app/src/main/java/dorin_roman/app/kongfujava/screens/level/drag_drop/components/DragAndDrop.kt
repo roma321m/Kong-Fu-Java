@@ -4,11 +4,16 @@ import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -42,7 +47,7 @@ fun <T> DragItem(
                         currentState.draggableComposable = content
                     },
                     onDrag = { change, dragAmount ->
-                        change.consumeAllChanges()
+                        change.consume()
                         currentState.dragOffset += Offset(dragAmount.x, dragAmount.y)
                     },
                     onDragEnd = {
@@ -77,12 +82,13 @@ fun <T> DropItem(
     Box(
         modifier = modifier
             .onGloballyPositioned {
-                it.boundsInWindow().let{ rect ->
+                it.boundsInWindow().let { rect ->
                     isCurrentDragTarget = rect.contains(dragPosition + dragOffset)
                 }
             }
     ) {
-        val data = if(isCurrentDragTarget && !dragInfo.isDragging) dragInfo.dataToDrop as T? else null
+        val data =
+            if (isCurrentDragTarget && !dragInfo.isDragging) dragInfo.dataToDrop as T? else null
         content(isCurrentDragTarget, data)
     }
 }
@@ -91,31 +97,31 @@ fun <T> DropItem(
 fun DraggableScreen(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
-){
-        val state = remember {
-            DragTargetInfo()
-        }
+) {
+    val state = remember {
+        DragTargetInfo()
+    }
 
     CompositionLocalProvider(LocalDragTargetInfo provides state) {
-        Box(modifier = modifier.fillMaxSize()){
+        Box(modifier = modifier.fillMaxSize()) {
             content()
-            if(state.isDragging){
+            if (state.isDragging) {
                 var targetSize by remember {
                     mutableStateOf(IntSize.Zero)
                 }
-                Box ( modifier = Modifier
+                Box(modifier = Modifier
                     .graphicsLayer {
-                        val offset = (state.dragPosition  + state.dragOffset)
-                        scaleX = 1f
-                        scaleY = 1f
-                        alpha = if(targetSize == IntSize.Zero) 0f else .9f
-                        translationX = offset.x.minus(targetSize.width/2)
-                        translationY = offset.y.minus(targetSize.height/2)
+                        val offset = (state.dragPosition + state.dragOffset)
+                        scaleX = 0.5f
+                        scaleY = 0.66f
+                        alpha = if (targetSize == IntSize.Zero) 0f else .9f
+                        translationX = offset.x.minus(targetSize.width / 2)
+                        translationY = offset.y.minus(targetSize.height / 2)
                     }
                     .onGloballyPositioned {
                         targetSize = it.size
                     }
-                ){
+                ) {
                     state.draggableComposable?.invoke()
                 }
             }

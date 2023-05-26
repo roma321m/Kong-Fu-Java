@@ -1,10 +1,9 @@
 package dorin_roman.app.kongfujava.screens.level.drag_drop
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -15,13 +14,18 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.LevelEvent
 import dorin_roman.app.kongfujava.screens.level.LevelViewModel
-import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropLeftScreenContent
-import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropRightScreenContent
+import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropContentDrag
+import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropContentDrop
+import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropContentQuestion
+import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DragDropContentTitle
 import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DraggableScreen
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
-import dorin_roman.app.kongfujava.ui.components.VerticalFortySixtyLayout
+import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout4
+import dorin_roman.app.kongfujava.ui.components.popup.AlertLevelPopUp
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
+import dorin_roman.app.kongfujava.ui.theme.spacing
+
 
 @Composable
 fun DragDropScreen(
@@ -33,17 +37,19 @@ fun DragDropScreen(
     dragDropViewModel: DragDropViewModel = hiltViewModel()
 ) {
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(true) {
         levelViewModel.handle(LevelEvent.InitLevel(levelId, worldId))
         dragDropViewModel.handle(DragDropEvent.InitAnswers(levelId))
     }
 
+    LaunchedEffect(levelViewModel.questionTitle) {
+        dragDropViewModel.handle(DragDropEvent.UpdateQuestion(levelViewModel.questionTitle))
+    }
+
     DraggableScreen(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
     ) {
 
-        //fixme - temp
         Scaffold(
             topBar = {
                 TopBar(
@@ -54,52 +60,77 @@ fun DragDropScreen(
                 )
             }
         ) { padding ->
-
-            Column(
+            Box(
                 modifier = Modifier
-                    .wrapContentSize()
+                    .fillMaxSize()
                     .background(MaterialTheme.colors.secondary)
-                    .padding(padding)
+                    .padding(MaterialTheme.spacing.large)
             ) {
-                VerticalFortySixtyLayout(
-                    fortyLayout = {
-                        DragDropLeftScreenContent(
+                CustomLayout4(
+                    modifier = Modifier
+                        .padding(padding)
+                        .fillMaxSize(),
+                    endTopWeight = 0.6f,
+                    endBottomWeight = 0.4f,
+                    startTopContent = {
+                        DragDropContentTitle(
                             levelNumber = levelNumber,
                             title = levelViewModel.title,
-                            questionTitle = levelViewModel.questionTitle,
-                            dragAnswers = dragDropViewModel.drag,
-                            isRight = dragDropViewModel.isRight,
-                            shownHints = dragDropViewModel.shownHints,
-                            handleMistakes = {
-                                //levelViewModel.handle(LevelEvent.UpdateLevelMistakes)
-                                             },
-                            //fixme make event
-                            startDragging = { dragDropViewModel.startDragging() },
-                            stopDragging = { dragDropViewModel.stopDragging() }
+                            questionTitle = dragDropViewModel.questionLeft
                         )
                     },
-                    sixtyLayout = {
-                        DragDropRightScreenContent(
-                            dragDropViewModel,
-                            navigateToMapLevelsScreenFromLevel = navigateToMapLevelsScreenFromLevel,
-                            worldId = worldId,
-                            levelNumber = levelNumber,
-                            levelState = levelViewModel.state,
-                            handleHint = {
-                                dragDropViewModel.handle(DragDropEvent.GetHint)
-                                //levelViewModel.handle(LevelEvent.UpdateLevelHint)
+                    startBottomContent = {
+                        DragDropContentDrag(
+                            dragAnswers = dragDropViewModel.drag,
+                            startDragging = {
+                                //fixme make event
+                                dragDropViewModel.startDragging()
                             },
-                            //hintsCount = levelViewModel.hintCount,
-                            hintsCount = 0,
-                            shownHints = dragDropViewModel.shownHints,
-                            finishLevel = {
-                                //levelViewModel.handle(LevelEvent.FinishLevel)
-                                          },
-                           // isFinish = levelViewModel.isFinish,
-                            isFinish = false,
-                            handleExit = { levelViewModel.handle(LevelEvent.HandleExit) },
-                            isExit = levelViewModel.isExit,
+                            stopDragging = {
+                                //fixme make event
+                                dragDropViewModel.stopDragging()
+                            }
                         )
+                    },
+                    endTopContent = {
+                        DragDropContentQuestion(
+                            questionText = dragDropViewModel.questionRight
+                        )
+                    },
+                    endBottomContent = {
+                        DragDropContentDrop(
+                            drop = dragDropViewModel.drop,
+                            checkAnswer = {
+                                dragDropViewModel.checkAnswer(it) // fixme handle
+                            },
+                            handleHint = { /*TODO*/ },
+                            hintsCount = 0,
+                            handleExit = {
+
+                            }
+                        )
+                    }
+                )
+            }
+
+//            if (dragDropViewModel.isFinish) {
+//                FinishLevelPopUp(
+//                    onDismiss = {
+//                        navigateToMapLevelsScreenFromLevel(worldId)
+//                    },
+//                    levelNumber = levelNumber,
+//                    levelState = levelViewModel.state
+//                )
+//            }
+
+            if (levelViewModel.isExit) {
+                AlertLevelPopUp(
+                    levelNumber = levelNumber,
+                    onDismiss = {
+                        levelViewModel.handle(LevelEvent.HandleExit)
+                    },
+                    onClick = {
+                        navigateToMapLevelsScreenFromLevel(worldId)
                     }
                 )
             }

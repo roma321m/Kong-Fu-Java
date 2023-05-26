@@ -24,10 +24,6 @@ class DragDropViewModel @Inject constructor(
         const val TAG = "DragDropViewModel"
     }
 
-    private var currentLevel: Int = -1
-
-    private val answer = MutableStateFlow<RequestState<Answer>>(RequestState.Idle)
-
     var isCurrentlyDragging by mutableStateOf(false)
         private set
 
@@ -37,22 +33,42 @@ class DragDropViewModel @Inject constructor(
     var drop by mutableStateOf(emptyList<String>())
         private set
 
+    var questionLeft by mutableStateOf("")
+        private set
+
+    var questionRight by mutableStateOf("")
+        private set
+
     var isRight by mutableStateOf(false)
         private set
 
     var shownHints by mutableStateOf(emptyList<String>())
         private set
 
+    private var currentLevel: Int = -1
+
+    private val answer = MutableStateFlow<RequestState<Answer>>(RequestState.Idle)
+
     fun handle(event: DragDropEvent) {
         when (event) {
             is DragDropEvent.InitAnswers -> initAnswers(event.levelId)
-            else -> {}
+            is DragDropEvent.UpdateQuestion -> updateQuestion(event.question)
+            is DragDropEvent.CheckAnswer -> {} // TODO
+            DragDropEvent.GetHint -> {} // TODO
         }
     }
 
     private fun initAnswers(levelId: Int) {
         currentLevel = levelId
         loadAnswer()
+    }
+
+    private fun updateQuestion(question: String) {
+        val array = question.split("<")
+        if (array.size == 2) {
+            questionLeft = array.first()
+            questionRight = array.last()
+        }
     }
 
     private fun loadAnswer() {
@@ -62,8 +78,8 @@ class DragDropViewModel @Inject constructor(
             viewModelScope.launch {
                 levelRepository.getAnswer(currentLevel).collect { answer ->
                     this@DragDropViewModel.answer.value = RequestState.Success(answer)
-                    getDrag(answer)
-                    getDrop()
+                    buildDrag(answer)
+                    buildDrop()
                 }
             }
         } catch (e: Exception) {
@@ -71,7 +87,7 @@ class DragDropViewModel @Inject constructor(
         }
     }
 
-    private fun getDrop() {
+    private fun buildDrop() {
         drop = listOf(
             "1",
             "2",
@@ -80,7 +96,7 @@ class DragDropViewModel @Inject constructor(
         )
     }
 
-    private fun getDrag(answer: Answer) {
+    private fun buildDrag(answer: Answer) {
         drag = listOf(
             answer.answer1,
             answer.answer2,

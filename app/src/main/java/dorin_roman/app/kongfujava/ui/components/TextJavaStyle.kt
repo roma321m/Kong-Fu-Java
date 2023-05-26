@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.ui.theme.spacing
 import dorin_roman.app.kongfujava.ui.theme.textBlue
 import dorin_roman.app.kongfujava.ui.theme.textGray
+import dorin_roman.app.kongfujava.ui.theme.textGreen
 import dorin_roman.app.kongfujava.ui.theme.textOrange
 import dorin_roman.app.kongfujava.ui.theme.textPurple
 import dorin_roman.app.kongfujava.ui.theme.textYellow
@@ -102,7 +103,8 @@ fun TextJavaStyle(
                     val blue = "&"
                     val comment = "%"
                     val white = "~"
-                    text.split(Regex("(?<=[*@!#%^&~])")).forEach { string ->
+                    val question = ">"
+                    text.split(Regex("(?<=[*@!#%^&~>])")).forEach { string ->
                         Log.d("roman", string)
                         if (string.contains(newLine)) {
                             appendLine(string.dropLast(1))
@@ -144,6 +146,14 @@ fun TextJavaStyle(
                             withStyle(
                                 style = SpanStyle(
                                     color = MaterialTheme.colors.textGray
+                                )
+                            ) {
+                                append(string.dropLast(1))
+                            }
+                        } else if (string.contains(question)) {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = MaterialTheme.colors.textGreen
                                 )
                             ) {
                                 append(string.dropLast(1))

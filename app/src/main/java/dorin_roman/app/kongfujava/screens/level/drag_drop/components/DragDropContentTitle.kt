@@ -1,6 +1,7 @@
-package dorin_roman.app.kongfujava.screens.level.multi_choice.components
+package dorin_roman.app.kongfujava.screens.level.drag_drop.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +19,7 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
-fun MultiChoiceTitle(
+fun DragDropContentTitle(
     levelNumber: Int,
     title: String,
     questionTitle: String
@@ -27,9 +28,10 @@ fun MultiChoiceTitle(
         modifier = Modifier
             .padding(MaterialTheme.spacing.large)
             .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
+        Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraLarge))
 
         Text(
             modifier = Modifier
@@ -44,12 +46,18 @@ fun MultiChoiceTitle(
             text = title,
             style = MaterialTheme.typography.h4
         )
+    }
 
-        Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraLarge))
-
+    Box(
+        modifier = Modifier
+            .padding(MaterialTheme.spacing.large)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
         Text(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.large)
+                .padding(top = MaterialTheme.spacing.extraLarge)
                 .fillMaxWidth(),
             text = questionTitle,
             textAlign = TextAlign.Center,

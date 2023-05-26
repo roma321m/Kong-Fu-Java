@@ -39,9 +39,6 @@ class LevelViewModel @Inject constructor(
     var state by mutableStateOf(PointState.LOCK)
         private set
 
-//    var type by mutableStateOf(LevelType.TUTORIAL)
-//        private set
-
     var isExit by mutableStateOf(false)
         private set
 
