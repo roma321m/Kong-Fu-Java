@@ -106,6 +106,12 @@
     <string name="worlds_map_title">Worlds Map</string>
     <!-- Level's Map -->
     <string name="levels_map_title">Levels Map</string>
+    <string name="world_map_variables">Variables</string>
+    <string name="world_map_conditions_if_else">Conditions - If Else</string>
+    <string name="world_map_loops">Loops</string>
+    <string name="world_map_arrays">Arrays</string>
+    <string name="world_map_strings">Strings</string>
+    <string name="world_map_unknown">Unknown</string>
     <!-- Level -->
     <string name="next">Next</string>
     <string name="hint">Hint</string>

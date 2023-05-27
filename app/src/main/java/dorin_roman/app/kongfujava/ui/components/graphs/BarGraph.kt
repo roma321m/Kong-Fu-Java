@@ -160,7 +160,9 @@ fun BarGraph(
                             )
                         )
                         LaunchedEffect(key1 = true) {
-                            animationTriggered = true
+                            if (value > 0) {
+                                animationTriggered = true
+                            }
                         }
 
                         Column(

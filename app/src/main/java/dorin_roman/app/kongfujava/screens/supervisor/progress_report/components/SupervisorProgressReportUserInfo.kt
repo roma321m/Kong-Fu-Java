@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.supervisor.StudentModel
+import dorin_roman.app.kongfujava.screens.supervisor.progress_report.getWorldName
 import dorin_roman.app.kongfujava.ui.components.image.RoundedImage
 import dorin_roman.app.kongfujava.ui.theme.elevation
 import dorin_roman.app.kongfujava.ui.theme.spacing
@@ -114,7 +115,9 @@ fun SupervisorProgressReportUserInfo(
                                     textAlign = TextAlign.Start,
                                     maxLines = 1,
                                     style = MaterialTheme.typography.h6,
-                                    text = stringResource(R.string.progress_report_current_world) + " $world"
+                                    text = stringResource(R.string.progress_report_current_world) + " " + stringResource(
+                                        getWorldName(world.toInt())
+                                    )
                                 )
                             }
                             if (level != 0) {

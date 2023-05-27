@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.supervisor.progress_report.LevelStatsModel
+import dorin_roman.app.kongfujava.screens.supervisor.progress_report.getWorldName
 import dorin_roman.app.kongfujava.ui.components.OneLevel
 import dorin_roman.app.kongfujava.ui.components.ThreeLevel
 import dorin_roman.app.kongfujava.ui.components.TwoLevel
@@ -35,6 +36,7 @@ import dorin_roman.app.kongfujava.ui.components.ZeroLevelYellow
 import dorin_roman.app.kongfujava.ui.components.graphs.BarGraph
 import dorin_roman.app.kongfujava.ui.theme.elevation
 import dorin_roman.app.kongfujava.ui.theme.spacing
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -85,7 +87,7 @@ fun SupervisorProgressReportUserLevelsInfo(
                                 .padding(MaterialTheme.spacing.large),
                             style = MaterialTheme.typography.h5,
                             text = if (currentLevel.id != -1) {
-                                "${currentLevel.world} " +
+                                stringResource(getWorldName(currentLevel.world.toInt())) + " " +
                                         stringResource(R.string.progress_report_level) +
                                         " ${currentLevel.number} "
                             } else {
@@ -115,7 +117,7 @@ fun SupervisorProgressReportUserLevelsInfo(
                                         expanded = false
                                     }
                                 ) {
-                                    Text(text = "${level.world} " + stringResource(R.string.progress_report_level) + " ${level.number}")
+                                    Text(stringResource(getWorldName(level.world.toInt())) + " " + stringResource(R.string.progress_report_level) + " ${level.number}")
                                 }
                             }
                         }

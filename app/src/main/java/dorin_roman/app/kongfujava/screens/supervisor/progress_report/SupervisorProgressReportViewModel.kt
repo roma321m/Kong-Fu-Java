@@ -177,7 +177,7 @@ class SupervisorProgressReportViewModel @Inject constructor(
             levels.add(
                 LevelStatsModel(
                     id = levelStats.id,
-                    world = levelStats.world,
+                    world = levelStats.worldId.toString(),
                     number = levelStats.number,
                     stars = levelStats.stars,
                     timeInMinutes = levelStats.timeInMinutes,

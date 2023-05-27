@@ -10,17 +10,25 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.LevelLogic
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
+import dorin_roman.app.kongfujava.data.repository.ChildIdRepository
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
+import dorin_roman.app.kongfujava.domain.models.child_stats.ActiveTime
+import dorin_roman.app.kongfujava.domain.models.child_stats.LevelStats
 import dorin_roman.app.kongfujava.domain.models.levels.Level
 import dorin_roman.app.kongfujava.domain.models.levels.Question
+import dorin_roman.app.kongfujava.domain.repository.ChildStatsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class LevelViewModel @Inject constructor(
-    private val levelRepository: LevelRepository
+    private val levelRepository: LevelRepository,
+    private val childStatsRepository: ChildStatsRepository,
+    private val childIdRepository: ChildIdRepository
 ) : ViewModel() {
 
     companion object {
@@ -48,25 +56,30 @@ class LevelViewModel @Inject constructor(
 
     private var currentLevel = MutableStateFlow<RequestState<Level>>(RequestState.Idle)
 
+    private var nextLevel = Level(-1, 0, 0, 0, 0, 0)
+
     private var question = MutableStateFlow<RequestState<Question>>(RequestState.Idle)
 
+    private var currentLevelStats = LevelStats()
+
+    private var startTime: Long = 0
+
+    private var childId = ""
+
+    private var levelNumber = 0
+
+    private val currentTime get() = System.currentTimeMillis()
+
+    init {
+        readChildId()
+    }
 
     fun handle(event: LevelEvent) {
         when (event) {
             is LevelEvent.InitLevel -> initLevels(event.levelId, event.worldId)
-
-            is LevelEvent.UpdateLevelScore -> {
-                updateScore(event.hintCount, event.mistakesCount)
-            }
-
-            is LevelEvent.UpdateLevelState -> {
-                updateState()
-            }
-
-            is LevelEvent.HandleExit -> {
-                isExit = !isExit
-            }
-
+            is LevelEvent.UpdateLevelScore -> updateScore(event.hintCount, event.mistakesCount)
+            is LevelEvent.UpdateLevelState -> updateState()
+            is LevelEvent.HandleExit -> isExit = !isExit
         }
     }
 
@@ -77,9 +90,13 @@ class LevelViewModel @Inject constructor(
         currentWorldId = worldId
         loadQuestion()
         loadLevel()
+        loadNextLevel()
+        if (childId.isNotBlank() && currentLevelId != -1) {
+            readLevelStats(childId)
+        }
     }
 
-    private fun resetVariables(){
+    private fun resetVariables() {
         title = ""
         questionTitle = ""
         score = 0
@@ -89,6 +106,9 @@ class LevelViewModel @Inject constructor(
         currentLevelId = -1
         currentLevel = MutableStateFlow(RequestState.Idle)
         question = MutableStateFlow(RequestState.Idle)
+        startTime = currentTime
+        currentLevelStats = LevelStats()
+        levelNumber = 0
     }
 
     private fun loadQuestion() = viewModelScope.launch {
@@ -113,8 +133,8 @@ class LevelViewModel @Inject constructor(
         try {
             levelRepository.getLevel(currentLevelId).collect { level ->
                 this@LevelViewModel.currentLevel.value = RequestState.Success(level)
+                levelNumber = level.number
                 score = level.score
-                //type = LevelLogic.getLevelType(level.type)
                 state = LevelLogic.getLevelState(level.state)
             }
         } catch (e: Exception) {
@@ -123,71 +143,138 @@ class LevelViewModel @Inject constructor(
         }
     }
 
+    private fun loadNextLevel() = viewModelScope.launch {
+        Log.d(TAG, "loadNextLevel")
+        try {
+            levelRepository.getLevel(currentLevelId + 1).collect { level ->
+                nextLevel = level
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "${e.message}")
+        }
+    }
 
-    private fun updateScore(hintCount: Int, mistakesCount: Int) = viewModelScope.launch(Dispatchers.IO) {
+
+    private fun updateScore(
+        hintCount: Int,
+        mistakesCount: Int
+    ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateScore")
         score = LevelLogic.getScore(hintCount, mistakesCount)
         levelRepository.updateScore(currentLevelId, score)
-        updateState()
+        updateState() // room
+        updateStatistics(
+            helps = hintCount,
+            mistakes = mistakesCount,
+            stars = score
+        ) // firebase
     }
 
     private fun updateState() = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateState")
         state = LevelLogic.getState(score)
         levelRepository.updateState(currentLevelId, state.ordinal)
-        //fixme when last level need to open new world
-        levelRepository.updateState(currentLevelId + 1, PointState.ZERO.ordinal)
+
+        if (nextLevel.id != -1) {
+            if (nextLevel.state == PointState.LOCK.ordinal) {
+                levelRepository.updateState(nextLevel.id, PointState.ZERO.ordinal)
+            }
+            // if (nextLevel.worldId != currentWorldId) // fixme - open next world
+        }
     }
 
-    private fun updateStatistics() {
-        //todo
-        // fixme - remove
-//        fun addActiveTime() = viewModelScope.launch {
-//            Log.d(TAG, "addActiveTime")
-//            childStatsRepository.addActiveTime(
-//                childId = selectedStudent.id,
-//                activeTime = ActiveTime(
-//                    fromInMilli = currentTime,
-//                    toInMilli = currentTime + 120_000,
-//                )
-//            ).also { response ->
-//                if (response is RequestState.Success) {
-//                    // added
-//                } else if (response is RequestState.Error) {
-//                    response.apply {
-//                        toastLauncher.launch(SupervisorToast.SomethingWentWrong)
-//                        Log.e(TAG, "${error.message}")
-//                    }
-//                }
-//            }
-//        }
-//
-//        // fixme - remove
-//        fun addLevelStats() = viewModelScope.launch {
-//            Log.d(TAG, "addLevelStats")
-//            childStatsRepository.addLevelStats(
-//                childId = selectedStudent.id,
-//                levelStats = LevelStats(
-//                    id = 2,
-//                    world = "Variables",
-//                    number = 1,
-//                    stars = 2,
-//                    timeInMinutes = 5,
-//                    help = 0,
-//                    attempts = 1,
-//                    mistakes = 0
-//                )
-//            ).also { response ->
-//                if (response is RequestState.Success) {
-//                    // added
-//                } else if (response is RequestState.Error) {
-//                    response.apply {
-//                        toastLauncher.launch(SupervisorToast.SomethingWentWrong)
-//                        Log.e(TAG, "${error.message}")
-//                    }
-//                }
-//            }
-//        }
+    private fun readChildId() = viewModelScope.launch {
+        Log.d(TAG, "readChildId")
+        try {
+            childIdRepository.readChildId
+                .map { it }
+                .collect {
+                    childId = it
+                    if (it.isNotBlank() && currentLevelId != -1) {
+                        readLevelStats(it)
+                    }
+                }
+        } catch (exception: Exception) {
+            Log.e(TAG, "${exception.message}")
+        }
     }
+
+    private fun readLevelStats(id: String) = viewModelScope.launch {
+        Log.d(TAG, "readLevelStats")
+        childStatsRepository.getLevelStats(
+            childId = id,
+            levelId = currentLevelId.toString()
+        ).also { response ->
+            if (response is RequestState.Success) {
+                Log.d(TAG, "readLevelStats: ${response.data}")
+                currentLevelStats = if (response.data.id == -1) {
+                    LevelStats(
+                        id = currentLevelId,
+                        worldId = currentWorldId
+                    )
+                } else {
+                    response.data
+                }
+            } else if (response is RequestState.Error) {
+                response.apply {
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
+    private fun updateStatistics(helps: Int, mistakes: Int, stars: Int) {
+        Log.d(TAG, "updateStatistics")
+        if (childId.isBlank() || currentLevelId == -1) {
+            return
+        }
+
+        val endTime = currentTime
+        addActiveTime(endTime)
+        addLevelStats(helps, mistakes, stars, endTime)
+    }
+
+    private fun addActiveTime(endTime: Long) = viewModelScope.launch {
+        Log.d(TAG, "addActiveTime")
+        childStatsRepository.addActiveTime(
+            childId = childId,
+            activeTime = ActiveTime(
+                fromInMilli = startTime,
+                toInMilli = endTime,
+            )
+        ).also { response ->
+            if (response is RequestState.Success) {
+                Log.d(TAG, "Active Time added")
+            } else if (response is RequestState.Error) {
+                response.apply {
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
+    private fun addLevelStats(helps: Int, mistakes: Int, stars: Int, endTime: Long) =
+        viewModelScope.launch {
+            Log.d(TAG, "addLevelStats")
+            currentLevelStats.number = levelNumber
+            currentLevelStats.help += helps
+            currentLevelStats.mistakes += mistakes
+            currentLevelStats.stars = stars
+            currentLevelStats.attempts++
+            currentLevelStats.timeInMinutes += 1 + ((endTime - startTime) / 120_000).toInt()
+
+            childStatsRepository.addLevelStats(
+                childId = childId,
+                levelStats = currentLevelStats
+            ).also { response ->
+                if (response is RequestState.Success) {
+                    Log.d(TAG, "Level Stats added")
+                } else if (response is RequestState.Error) {
+                    response.apply {
+                        Log.e(TAG, "${error.message}")
+                    }
+                }
+            }
+        }
 
 }

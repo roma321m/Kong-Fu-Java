@@ -107,6 +107,12 @@
     <string name="worlds_map_title">מפת עולמות</string>
     <!-- Level's Map -->
     <string name="levels_map_title">מפת שלבים</string>
+    <string name="world_map_variables">משתנים</string>
+    <string name="world_map_conditions_if_else">תנאים</string>
+    <string name="world_map_loops">לולאות</string>
+    <string name="world_map_arrays">מערכים</string>
+    <string name="world_map_strings">מחרוזות</string>
+    <string name="world_map_unknown">לא ידוע</string>
     <!-- Level -->
     <string name="next">הבא</string>
     <string name="hint">עזרה</string>

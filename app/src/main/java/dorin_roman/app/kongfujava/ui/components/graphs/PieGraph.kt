@@ -30,10 +30,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.ColorUtils
+import dorin_roman.app.kongfujava.screens.supervisor.progress_report.getWorldName
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
@@ -135,9 +137,14 @@ fun PieGraph(
             contentPadding = PaddingValues(MaterialTheme.spacing.small)
         ) {
             items(data.size) { index ->
+                val s = data.keys.elementAt(index).split("-")
+                var key = data.keys.elementAt(index)
+                if (s.size == 2) {
+                    key = stringResource(getWorldName(s.first().toInt())) + "-" + s.last()
+                }
                 DetailsPieChartItem(
                     data = Pair(
-                        data.keys.elementAt(index),
+                        key,
                         data.values.elementAt(index)
                     ),
                     color = colors[index]
