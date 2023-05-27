@@ -14,13 +14,13 @@ import dorin_roman.app.kongfujava.screens.level.LevelViewModel
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialBody
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialEmptyVideo
 import dorin_roman.app.kongfujava.screens.level.tutorial.components.TutorialTitle
-import dorin_roman.app.kongfujava.screens.top_bar.TopBarEvent
-import dorin_roman.app.kongfujava.screens.top_bar.TopBarViewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout2
 import dorin_roman.app.kongfujava.ui.components.popup.AlertLevelPopUp
 import dorin_roman.app.kongfujava.ui.components.popup.FinishLevelPopUp
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
+import dorin_roman.app.kongfujava.ui.components.topbar.TopBarEvent
+import dorin_roman.app.kongfujava.ui.components.topbar.TopBarViewModel
 import dorin_roman.app.kongfujava.ui.components.video.VideoView
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 
@@ -44,13 +44,11 @@ fun TutorialScreen(
     Scaffold(
         topBar = {
             TopBar(
+                title = R.string.tutorial_level_title,
                 onBackPressed = {
                     tutorialViewModel.handle(TutorialEvent.UpdateNextClicked(true))
                 },
-                title = R.string.tutorial_level_title,
-                onLogOutClicked = {
-                    topBarViewModel.handle(TopBarEvent.LogOut)
-                }
+                viewModel = topBarViewModel
             )
         },
         content = { padding ->
@@ -77,8 +75,18 @@ fun TutorialScreen(
                         VideoView(
                             modifier = Modifier.fillMaxSize(),
                             url = tutorialViewModel.videoUrl,
-                            stopPlay = {tutorialViewModel.isNextClicked},
-                            handleVideoWatched = { tutorialViewModel.handle(TutorialEvent.VideoWatched) }
+                            stopPlay = {
+                                tutorialViewModel.isNextClicked
+                            },
+                            pauseMusic = {
+                                topBarViewModel.handle(TopBarEvent.Pause)
+                            },
+                            resumeMusic = {
+                                topBarViewModel.handle(TopBarEvent.Resume)
+                            },
+                            handleVideoWatched = {
+                                tutorialViewModel.handle(TutorialEvent.VideoWatched)
+                            }
                         )
                     } else {
                         TutorialEmptyVideo()
@@ -86,7 +94,7 @@ fun TutorialScreen(
                 }
             )
 
-            if(tutorialViewModel.isNextClicked) {
+            if (tutorialViewModel.isNextClicked) {
                 if (tutorialViewModel.isVideoWatched) {
                     FinishLevelPopUp(
                         onDismiss = {
@@ -97,8 +105,7 @@ fun TutorialScreen(
                         levelNumber = levelNumber,
                         levelState = PointState.THREE
                     )
-                }
-                else{
+                } else {
                     AlertLevelPopUp(
                         levelNumber = levelNumber,
                         onDismiss = {

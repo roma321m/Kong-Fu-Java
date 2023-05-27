@@ -60,7 +60,7 @@ fun FinishLevelPopUp(onDismiss: () -> Unit, levelNumber: Int, levelState: PointS
                     Image(
                         modifier = Modifier
                             .clip(CircleShape),
-                        painter = painterResource(id = PopUpImage(levelState)),
+                        painter = painterResource(id = popUpImage(levelState)),
                         contentDescription = "",
                         alignment = Alignment.Center
                     )

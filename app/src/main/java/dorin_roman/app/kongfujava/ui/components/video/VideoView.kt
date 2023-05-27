@@ -50,6 +50,8 @@ fun VideoView(
     url: String,
     modifier: Modifier = Modifier,
     stopPlay: () -> Boolean = { false },
+    pauseMusic: () -> Unit = {},
+    resumeMusic: () -> Unit = {},
     handleVideoWatched: () -> Unit = { },
     viewModel: VideoViewModel = hiltViewModel()
 ) {
@@ -79,6 +81,14 @@ fun VideoView(
 
     LaunchedEffect(true) {
         viewModel.handle(VideoEvent.AddVideoUrl(url))
+    }
+
+    LaunchedEffect(viewModel.isPlaying) {
+        if (viewModel.isPlaying) {
+            pauseMusic()
+        } else {
+            resumeMusic()
+        }
     }
 
     LaunchedEffect(viewModel.playbackState) {

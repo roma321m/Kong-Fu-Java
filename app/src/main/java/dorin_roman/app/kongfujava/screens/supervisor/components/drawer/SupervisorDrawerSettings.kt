@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
-import dorin_roman.app.kongfujava.ui.components.DisplayAlertDialog
+import dorin_roman.app.kongfujava.ui.components.popup.DisplayAlertDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

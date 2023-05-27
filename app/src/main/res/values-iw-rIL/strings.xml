@@ -91,6 +91,7 @@
     <!-- Alert Dialog -->
     <string name="alert_dialog_yes">כן</string>
     <string name="alert_dialog_no">לא</string>
+    <string name="alert_dialog_ok">אוקי</string>
     <string name="alert_dialog_next">הבא</string>
     <string name="alert_dialog_level">השלב</string>
     <string name="alert_dialog_complete">הושלם</string>
@@ -120,9 +121,18 @@
     <string name="top_bar_back_button">כפתור הקודם</string>
     <string name="top_bar_menu">תפריט</string>
     <string name="top_bar_settings">הגדרות</string>
-    <string name="top_bar_help">עזרה</string>
+    <string name="top_bar_about">עזרה</string>
     <string name="top_bar_music">מוזיקה</string>
     <string name="top_bar_logout">התנתקות</string>
+    <string name="top_bar_thanks">תודה על התמיכה</string>
+    <string name="top_bar_log_out_title">התנתקות</string>
+    <string name="top_bar_log_out_body">האם אתה בטוח שברצונך להתנתק מחשבונך? תוכל להתחבר רק עם קוד מהממונה שלך</string>
+    <string name="top_bar_about_title">מידע על קונג-פו-גווה</string>
+    <string name="top_bar_about_body">יישום זה נעשה על ידי דורין דורסמן ורומן מיכאילוב כפרויקט הגמר באקדמיה אפקה</string>
+    <string name="top_bar_play_music_title">נגן מוזיקה</string>
+    <string name="top_bar_play_music_body">האם אתה רוצה לנגן מוזיקה ברקע?</string>
+    <string name="top_bar_stop_music_title">הפסק מוזיקה</string>
+    <string name="top_bar_stop_music_body">האם אתה רוצה להפסיק לנגן מוזיקת רקע?</string>
     <!-- Database -->
     <string name="database_kong_fu_db">database/kong_fu_iw.db</string>
 </resources>

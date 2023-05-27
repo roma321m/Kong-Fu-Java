@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components.topbar
+package dorin_roman.app.kongfujava.ui.components.topbar.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
@@ -6,24 +6,29 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.theme.spacing
+
 
 @Composable
-fun MenuButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun BackButton(
+    onBackPressed: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Icon(
-        imageVector = Icons.Default.MoreVert,
-        contentDescription = stringResource(id = R.string.top_bar_menu),
-        tint = MaterialTheme.colors.onSecondary,
         modifier = modifier
-            .padding(10.dp)
+            .padding(MaterialTheme.spacing.large)
             .size(40.dp)
             .clickable {
-                onClick()
-            }
+                onBackPressed()
+            },
+        imageVector = Icons.Default.ArrowBack,
+        contentDescription = stringResource(id = R.string.top_bar_back_button),
+        tint = MaterialTheme.colors.onSecondary,
     )
 }

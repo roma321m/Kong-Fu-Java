@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components.topbar
+package dorin_roman.app.kongfujava.ui.components.topbar.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -17,11 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.theme.onTopBar
+import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
 fun Title(
-    modifier: Modifier = Modifier,
-    @StringRes id: Int
+    @StringRes id: Int,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -36,7 +37,7 @@ fun Title(
         )
         Image(
             modifier = Modifier
-                .padding(5.dp)
+                .padding(MaterialTheme.spacing.small)
                 .size(80.dp, 80.dp),
             painter = painterResource(id = R.drawable.ic_panda_ninja),
             contentDescription = null

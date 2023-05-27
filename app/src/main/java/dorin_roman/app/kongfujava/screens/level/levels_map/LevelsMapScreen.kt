@@ -22,8 +22,6 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelItemView
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
 import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsMapContent
-import dorin_roman.app.kongfujava.screens.top_bar.TopBarEvent
-import dorin_roman.app.kongfujava.screens.top_bar.TopBarViewModel
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
@@ -38,7 +36,6 @@ fun LevelsMapScreen(
     worldId: Int,
     navigateToWorldMapFromMapLevelsScreen: () -> Unit,
     levelsMapViewModel: LevelsMapViewModel = hiltViewModel(),
-    topBarViewModel: TopBarViewModel = hiltViewModel()
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -48,13 +45,10 @@ fun LevelsMapScreen(
     Scaffold(
         topBar = {
             TopBar(
+                title = R.string.levels_map_title,
                 onBackPressed = {
                     navigateToWorldMapFromMapLevelsScreen()
                 },
-                title = R.string.levels_map_title,
-                onLogOutClicked = {
-                    topBarViewModel.handle(TopBarEvent.LogOut)
-                }
             )
         },
         content = { paddingValues ->
@@ -93,10 +87,10 @@ fun LevelsMapScreen(
             ) {
                 Image(
                     modifier = Modifier
-                        .padding(end = 100.dp, bottom = 30.dp)
-                        .fillMaxHeight(0.1f)
+                        .padding(end = 35.dp, bottom = 35.dp)
+                        .fillMaxHeight(0.15f)
                         .clip(CircleShape),
-                    painter = painterResource(R.drawable.img_panda_done),
+                    painter = painterResource(R.drawable.img_panda_order),
                     contentDescription = null,
                     alignment = Alignment.Center,
                     contentScale = ContentScale.FillHeight

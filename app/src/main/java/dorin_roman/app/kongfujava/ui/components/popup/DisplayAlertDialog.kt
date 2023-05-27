@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.ui.components
+package dorin_roman.app.kongfujava.ui.components.popup
 
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
@@ -16,7 +16,8 @@ fun DisplayAlertDialog(
     message: String,
     openDialog: Boolean,
     closeDialog: () -> Unit,
-    onYesClicked: () -> Unit
+    onYesClicked: () -> Unit,
+    isConfirmOnly: Boolean = false,
 ) {
     if (openDialog) {
         AlertDialog(
@@ -41,16 +42,24 @@ fun DisplayAlertDialog(
                         closeDialog()
                     }
                 ) {
-                    Text(text = stringResource(R.string.alert_dialog_yes))
+                    Text(
+                        text = if (isConfirmOnly) {
+                            stringResource(R.string.alert_dialog_ok)
+                        } else {
+                            stringResource(R.string.alert_dialog_yes)
+                        }
+                    )
                 }
             },
             dismissButton = {
-                OutlinedButton(
-                    onClick = {
-                        closeDialog()
+                if (isConfirmOnly.not()) {
+                    OutlinedButton(
+                        onClick = {
+                            closeDialog()
+                        }
+                    ) {
+                        Text(text = stringResource(R.string.alert_dialog_no))
                     }
-                ) {
-                    Text(text = stringResource(R.string.alert_dialog_no))
                 }
             },
             onDismissRequest = { closeDialog() }

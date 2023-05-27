@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.screens.worlds.components
+package dorin_roman.app.kongfujava.screens.worlds
 
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.domain.models.World

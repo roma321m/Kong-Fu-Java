@@ -56,7 +56,7 @@ fun AlertLevelPopUp(levelNumber: Int, onDismiss: () -> Unit, onClick: () -> Unit
                     Image(
                         modifier = Modifier
                             .clip(CircleShape),
-                        painter = painterResource(id = PopUpImage(PointState.LOCK)),
+                        painter = painterResource(id = popUpImage(PointState.LOCK)),
                         contentDescription = "",
                         alignment = Alignment.Center
                     )
