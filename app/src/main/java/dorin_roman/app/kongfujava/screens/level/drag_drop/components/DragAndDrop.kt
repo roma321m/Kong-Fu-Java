@@ -70,7 +70,7 @@ fun <T> DragItem(
 @Composable
 fun <T> DropItem(
     modifier: Modifier,
-    content: @Composable() (BoxScope.(isInBound: Boolean, data: T?) -> Unit)
+    content: @Composable() (BoxScope.(isInBound: Boolean, data: T?, isDragging: Boolean) -> Unit)
 ) {
     val dragInfo = LocalDragTargetInfo.current
     val dragPosition = dragInfo.dragPosition
@@ -88,8 +88,8 @@ fun <T> DropItem(
             }
     ) {
         val data =
-            if (isCurrentDragTarget && !dragInfo.isDragging) dragInfo.dataToDrop as T? else null
-        content(isCurrentDragTarget, data)
+            if (isCurrentDragTarget && !dragInfo.isDragging) dragInfo.dataToDrop as T else null
+        content(isCurrentDragTarget, data, dragInfo.isDragging)
     }
 }
 

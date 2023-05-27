@@ -11,17 +11,19 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 
 @Composable
 fun DragAnswerItemCard(
-    answer: String
+    answer: String,
+    color: Color,
 ) {
 
     Card(
         elevation = 10.dp,
-        backgroundColor = MaterialTheme.colors.primary,
+        backgroundColor = color,
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .padding(8.dp)

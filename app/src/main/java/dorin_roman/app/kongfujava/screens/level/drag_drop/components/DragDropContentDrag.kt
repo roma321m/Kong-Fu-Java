@@ -10,12 +10,15 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dorin_roman.app.kongfujava.screens.level.multi_choice.components.ColorState
+import dorin_roman.app.kongfujava.screens.level.multi_choice.components.getColorMultiChoiceAnswers
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
 @Composable
 fun DragDropContentDrag(
     dragAnswers: List<String>,
+    dragAnswersColors: List<ColorState>,
     startDragging: () -> Unit,
     stopDragging: () -> Unit
 ) {
@@ -39,15 +42,16 @@ fun DragDropContentDrag(
                     startDragging = startDragging,
                     stopDragging = stopDragging
                 ) {
-                    DragAnswerItemCard(answer = dragAnswers[0])
+                    DragAnswerItemCard(answer = dragAnswers[0], color = getColorMultiChoiceAnswers(color = dragAnswersColors[0] ))
                 }
                 DragItem(
                     dataToDrop = dragAnswers[1],
                     startDragging = startDragging,
                     stopDragging = stopDragging
                 ) {
-                    DragAnswerItemCard(answer = dragAnswers[1])
+                    DragAnswerItemCard(answer = dragAnswers[1], color = getColorMultiChoiceAnswers(color = dragAnswersColors[1]))
                 }
+
             }
             Row(
                 modifier = Modifier
@@ -61,17 +65,19 @@ fun DragDropContentDrag(
                     startDragging = startDragging,
                     stopDragging = stopDragging
                 ) {
-                    DragAnswerItemCard(answer = dragAnswers[2])
+                    DragAnswerItemCard(answer = dragAnswers[2], color = getColorMultiChoiceAnswers(color = dragAnswersColors[2]))
                 }
+
                 DragItem(
                     dataToDrop = dragAnswers[3],
                     startDragging = startDragging,
                     stopDragging = stopDragging
                 ) {
-                    DragAnswerItemCard(answer = dragAnswers[3])
+                    DragAnswerItemCard(answer = dragAnswers[3], color = getColorMultiChoiceAnswers(color = dragAnswersColors[3]))
                 }
             }
         }
     }
 }
+
 

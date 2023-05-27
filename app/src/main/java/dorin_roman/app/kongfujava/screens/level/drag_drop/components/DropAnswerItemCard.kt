@@ -1,6 +1,7 @@
 package dorin_roman.app.kongfujava.screens.level.drag_drop.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -18,7 +19,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun DropAnswerItemCard(
     backgroundColor: Color,
-    answerItem: String
+    answerItem: String,
+    index: Int,
+    deleteAnswer: (String, Int) -> Unit
 ) {
 
     Card(
@@ -29,6 +32,11 @@ fun DropAnswerItemCard(
         modifier = Modifier
             .padding(8.dp)
             .size(width = 150.dp, height = 100.dp)
+            .clickable {
+                if (answerItem != (index + 1).toString()) {
+                    deleteAnswer(answerItem, index)
+                }
+            }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

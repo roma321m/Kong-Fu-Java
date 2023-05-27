@@ -66,7 +66,7 @@ fun LevelsMapContent(
             }
             while (passedCount != showImage) {
                 showImage += 1
-                delay(2_000 / passedCount.toLong())
+                delay(500)
             }
         }
     }

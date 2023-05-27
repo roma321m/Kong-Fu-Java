@@ -22,6 +22,7 @@ import dorin_roman.app.kongfujava.screens.level.drag_drop.components.DraggableSc
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 import dorin_roman.app.kongfujava.ui.components.layout.CustomLayout4
 import dorin_roman.app.kongfujava.ui.components.popup.AlertLevelPopUp
+import dorin_roman.app.kongfujava.ui.components.popup.FinishLevelPopUp
 import dorin_roman.app.kongfujava.ui.components.topbar.TopBar
 import dorin_roman.app.kongfujava.ui.theme.KongFuJavaTheme
 import dorin_roman.app.kongfujava.ui.theme.spacing
@@ -82,15 +83,13 @@ fun DragDropScreen(
                     startBottomContent = {
                         DragDropContentDrag(
                             dragAnswers = dragDropViewModel.drag,
+                            dragAnswersColors = dragDropViewModel.dragButtonColors,
                             startDragging = {
-                                //fixme make event
-                                dragDropViewModel.startDragging()
-                            },
-                            stopDragging = {
-                                //fixme make event
-                                dragDropViewModel.stopDragging()
+                                dragDropViewModel.handle(DragDropEvent.UpdateDragging(true))
                             }
-                        )
+                        ) {
+                            dragDropViewModel.handle(DragDropEvent.UpdateDragging(false))
+                        }
                     },
                     endTopContent = {
                         DragDropContentQuestion(
@@ -100,30 +99,35 @@ fun DragDropScreen(
                     endBottomContent = {
                         DragDropContentDrop(
                             drop = dragDropViewModel.drop,
-                            checkAnswer = {
-                                dragDropViewModel.checkAnswer(it) // fixme handle
+                            dropAnswersColors = dragDropViewModel.dropButtonColors,
+                            checkAnswer = { dragDropViewModel.handle(DragDropEvent.CheckAnswer) },
+                            setAnswer = { answer, index ->
+                                dragDropViewModel.handle(DragDropEvent.SetAnswer(answer, index))
                             },
-                            handleHint = { /*TODO*/ },
+                            deleteAnswer = { answer, index ->
+                                dragDropViewModel.handle(DragDropEvent.DeleteAnswer(answer, index))
+                            },
+                            handleHint = { dragDropViewModel.handle(DragDropEvent.GetHint) },
                             hintsCount = 0,
-                            handleExit = {
-
-                            }
+                            handleExit = {levelViewModel.handle(LevelEvent.HandleExit)},
+                            isFinish = dragDropViewModel.isFinish
                         )
                     }
                 )
             }
 
-//            if (dragDropViewModel.isFinish) {
-//                FinishLevelPopUp(
-//                    onDismiss = {
-//                        navigateToMapLevelsScreenFromLevel(worldId)
-//                    },
-//                    levelNumber = levelNumber,
-//                    levelState = levelViewModel.state
-//                )
-//            }
+            if (dragDropViewModel.isFinish) {
+                levelViewModel.handle(LevelEvent.UpdateLevelScore(dragDropViewModel.hintCount, dragDropViewModel.mistakesCount))
+                FinishLevelPopUp(
+                    onDismiss = {
+                        navigateToMapLevelsScreenFromLevel(worldId)
+                    },
+                    levelNumber = levelNumber,
+                    levelState = levelViewModel.state
+                )
+            }
 
-            if (levelViewModel.isExit) {
+            if (levelViewModel.isExit && !dragDropViewModel.isFinish) {
                 AlertLevelPopUp(
                     levelNumber = levelNumber,
                     onDismiss = {

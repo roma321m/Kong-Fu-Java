@@ -1,5 +1,5 @@
 package dorin_roman.app.kongfujava.screens.level.multi_choice.components
 
 enum class ColorState {
-    RIGHT, HINT, MISTAKE, REGULAR
+    RIGHT, HINT, MISTAKE, REGULAR, TAKEN, DROP
 }

@@ -134,4 +134,5 @@
     <string name="top_bar_stop_music_body">Do you want to stop the music in the background?</string>
     <!-- Database -->
     <string name="database_kong_fu_db">database/kong_fu.db</string>
+    <string name="drag_drop_answer_exists">You have already used this answer</string>
 </resources>

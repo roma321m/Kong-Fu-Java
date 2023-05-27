@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +26,7 @@ fun ColumnScope.MultiChoiceAnswers(
         modifier = Modifier
             .fillMaxWidth(0.9f)
             .padding(MaterialTheme.spacing.large),
-        colors = getColorMultiChoiceAnswers(buttonsColors[0]),
+        colors = ButtonDefaults.buttonColors(getColorMultiChoiceAnswers(buttonsColors[0])),
         onClick = {
             if (buttonsColors[0] == ColorState.REGULAR) {
                 checkAnswer(questionAnswers[0])
@@ -44,7 +45,7 @@ fun ColumnScope.MultiChoiceAnswers(
         modifier = Modifier
             .fillMaxWidth(0.9f)
             .padding(MaterialTheme.spacing.large),
-        colors = getColorMultiChoiceAnswers(buttonsColors[1]),
+        colors = ButtonDefaults.buttonColors(getColorMultiChoiceAnswers(buttonsColors[1])),
         onClick = {
             if (buttonsColors[1] == ColorState.REGULAR) {
                 checkAnswer(questionAnswers[1])
@@ -63,7 +64,7 @@ fun ColumnScope.MultiChoiceAnswers(
         modifier = Modifier
             .fillMaxWidth(0.9f)
             .padding(MaterialTheme.spacing.large),
-        colors = getColorMultiChoiceAnswers(buttonsColors[2]),
+        colors = ButtonDefaults.buttonColors(getColorMultiChoiceAnswers(buttonsColors[2])),
         onClick = {
             if (buttonsColors[2] == ColorState.REGULAR) {
                 checkAnswer(questionAnswers[2])
@@ -82,7 +83,7 @@ fun ColumnScope.MultiChoiceAnswers(
         modifier = Modifier
             .fillMaxWidth(0.9f)
             .padding(MaterialTheme.spacing.large),
-        colors = getColorMultiChoiceAnswers(buttonsColors[3]),
+        colors = ButtonDefaults.buttonColors(getColorMultiChoiceAnswers(buttonsColors[3])),
         onClick = {
             if (buttonsColors[3] == ColorState.REGULAR) {
                 checkAnswer(questionAnswers[3])
