@@ -71,6 +71,7 @@ fun LevelButtons(
             modifier = Modifier
                 .fillMaxHeight()
                 .width((columnWidthDp - 10.dp) / 2)
+                .mirror()
                 .clickable {
                     OnClickNext()
                 },

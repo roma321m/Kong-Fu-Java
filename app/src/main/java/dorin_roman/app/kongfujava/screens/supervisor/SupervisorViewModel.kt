@@ -57,7 +57,7 @@ class SupervisorViewModel @Inject constructor(
     var selectedStudent by mutableStateOf(StudentModel())
         private set
 
-    var isrefreshing by mutableStateOf(false)
+    var isRefreshing by mutableStateOf(false)
         private set
 
     private var revokeAccessRequest by mutableStateOf<RequestState<Boolean>>(Idle)
@@ -92,14 +92,31 @@ class SupervisorViewModel @Inject constructor(
 
     private fun initData(type: UserType) {
         Log.d(TAG, "initData")
+        resetData()
         getUserData(type)
         getLinkedAccounts()
+    }
+
+    private fun resetData() {
+        Log.d(TAG, "resetData")
+        userType = None
+        isAddUsers = true
+        studentsModelList = listOf()
+        supervisorModel = SupervisorModel()
+        selectedStudent = StudentModel()
+        isRefreshing = false
+        revokeAccessRequest = Idle
+        userDataRequest = Idle
+        deleteUserRequest = Idle
+        linkedAccountsRequest = Idle
+        listOfChildren = mutableListOf()
+        currentUser = null
     }
 
     private fun getLinkedAccounts() = viewModelScope.launch {
         Log.d(TAG, "getLinkedAccounts")
         linkedAccountsRequest = Loading
-        isrefreshing = true
+        isRefreshing = true
         linkedAccountsRequest = linkedAccountsRepository.getLinkedAccounts(userId)
             .also { response ->
                 if (response is Success) {
@@ -199,7 +216,7 @@ class SupervisorViewModel @Inject constructor(
                 }
         }.also {
             studentsModelList = newList
-            isrefreshing = false
+            isRefreshing = false
         }
     }
 

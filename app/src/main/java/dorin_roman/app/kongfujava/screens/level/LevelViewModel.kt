@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 
 @HiltViewModel
@@ -261,7 +262,12 @@ class LevelViewModel @Inject constructor(
             currentLevelStats.mistakes += mistakes
             currentLevelStats.stars = stars
             currentLevelStats.attempts++
-            currentLevelStats.timeInMinutes += 1 + ((endTime - startTime) / 120_000).toInt()
+            val timeInMinutes = ((endTime - startTime).toFloat() / 60_000f).roundToInt()
+            currentLevelStats.timeInMinutes += if (timeInMinutes != 0) {
+                timeInMinutes
+            } else {
+                1
+            }
 
             childStatsRepository.addLevelStats(
                 childId = childId,

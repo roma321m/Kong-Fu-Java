@@ -27,6 +27,7 @@ import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.screens.level.LevelType
 import dorin_roman.app.kongfujava.screens.level.levels_map.LevelItemModel
+import dorin_roman.app.kongfujava.ui.components.mirror
 import kotlinx.coroutines.delay
 
 
@@ -109,7 +110,8 @@ fun LevelsMapContent(
                                         Image(
                                             modifier = Modifier
                                                 .fillMaxHeight(0.55f)
-                                                .padding(bottom = 20.dp),
+                                                .padding(bottom = 20.dp)
+                                                .mirror(),
                                             painter = painterResource(R.drawable.img_moving),
                                             contentDescription = null,
                                             alignment = Alignment.CenterStart,

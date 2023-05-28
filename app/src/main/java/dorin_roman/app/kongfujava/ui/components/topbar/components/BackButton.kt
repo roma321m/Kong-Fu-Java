@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.components.mirror
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -24,6 +25,7 @@ fun BackButton(
         modifier = modifier
             .padding(MaterialTheme.spacing.large)
             .size(40.dp)
+            .mirror()
             .clickable {
                 onBackPressed()
             },

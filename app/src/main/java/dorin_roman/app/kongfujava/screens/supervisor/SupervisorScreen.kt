@@ -45,7 +45,7 @@ fun SupervisorScreen(
                 supervisorModel = viewModel.supervisorModel,
                 studentsModelList = viewModel.studentsModelList,
                 isAddUsers = viewModel.isAddUsers,
-                refreshing = viewModel.isrefreshing,
+                refreshing = viewModel.isRefreshing,
                 onImageSelected = { uri ->
                     viewModel.handle(SupervisorEvent.ImageSelected(uri))
                 },

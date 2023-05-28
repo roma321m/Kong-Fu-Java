@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.components.TextJavaStyle
+import dorin_roman.app.kongfujava.ui.components.mirror
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -49,6 +50,7 @@ fun TutorialBody(
             modifier = Modifier
                 .padding(MaterialTheme.spacing.large)
                 .fillMaxSize(0.08f)
+                .mirror()
                 .clickable {
                     onNextClick()
                 },

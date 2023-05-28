@@ -235,7 +235,13 @@ class SupervisorProgressReportViewModel @Inject constructor(
     }
 
     private fun getMinutes(activeTime: ActiveTime): Int {
-        return ((activeTime.toInMilli - activeTime.fromInMilli).toFloat() / 60_000f).roundToInt()
+        val timeInMinutes =
+            ((activeTime.toInMilli - activeTime.fromInMilli).toFloat() / 60_000f).roundToInt()
+        return if (timeInMinutes != 0) {
+            timeInMinutes
+        } else {
+            1
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
