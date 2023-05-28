@@ -33,12 +33,12 @@ class LevelRepository @Inject constructor(
         return levelDao.getQuestion(id)
     }
 
-    fun updateScore(id: Int, score: Int) {
-        levelDao.updateScore(id, score)
+    fun updateLevelScore(id: Int, score: Int) {
+        levelDao.updateLevelScore(id, score)
     }
 
-    fun updateState(id: Int, state: Int) {
-        levelDao.updateState(id, state)
+    fun updateLevelState(id: Int, state: Int) {
+        levelDao.updateLevelState(id, state)
     }
 
 }

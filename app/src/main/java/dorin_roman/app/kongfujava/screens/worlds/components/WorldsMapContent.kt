@@ -7,7 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import dorin_roman.app.kongfujava.domain.models.World
+import dorin_roman.app.kongfujava.domain.models.world.World
+import dorin_roman.app.kongfujava.domain.models.world.WorldEn
 import dorin_roman.app.kongfujava.ui.components.DevicePreviews
 
 @Composable
@@ -41,11 +42,11 @@ fun WorldsMapContent(
 fun WorldsMapContentPreview() {
     WorldsMapContent(
         worlds = listOf(
-            World(0, "test", 0, 0),
-            World(0, "test", 0, 0),
-            World(0, "test", 0, 0),
-            World(0, "test", 0, 0),
-            World(0, "test", 0, 0)
+            WorldEn(0, "test", 0, 0),
+            WorldEn(0, "test", 0, 0),
+            WorldEn(0, "test", 0, 0),
+            WorldEn(0, "test", 0, 0),
+            WorldEn(0, "test", 0, 0)
         ),
         navigateToMapLevels = {}
     )

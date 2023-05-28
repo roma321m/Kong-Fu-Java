@@ -8,12 +8,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.LevelLogic
+import dorin_roman.app.kongfujava.WorldLogic
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
+import dorin_roman.app.kongfujava.data.repository.WorldRepository
 import dorin_roman.app.kongfujava.domain.models.levels.Level
 import dorin_roman.app.kongfujava.screens.level.LevelType
-import dorin_roman.app.kongfujava.screens.level.levels_map.components.LevelsEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LevelsMapViewModel @Inject constructor(
     private val levelRepository: LevelRepository,
+    private val worldRepository: WorldRepository
 ) : ViewModel() {
 
     companion object {
@@ -33,14 +35,13 @@ class LevelsMapViewModel @Inject constructor(
 
     private var currentWorldId: Int = -1
 
+    private var currentWorldState: PointState = PointState.ZERO
+
     private val levels = MutableStateFlow<RequestState<List<Level>>>(RequestState.Idle)
 
-    fun handle(event: LevelsEvent) {
+    fun handle(event: LevelsMapEvent) {
         when (event) {
-            is LevelsEvent.InitLevels -> initLevels(event.worldId)
-            is LevelsEvent.UpdateLevel -> updateWorld(event.level)
-            is LevelsEvent.UpdateLevelScore -> updateWorldScore(event.score)
-            is LevelsEvent.UpdateLevelState -> updateWorldState(event.state)
+            is LevelsMapEvent.InitLevels -> initLevels(event.worldId)
         }
     }
 
@@ -50,17 +51,6 @@ class LevelsMapViewModel @Inject constructor(
         loadAllLevels()
     }
 
-    private fun updateWorldState(state: PointState) {
-        //TODO
-    }
-
-    private fun updateWorldScore(score: Int) {
-        //TODO
-    }
-
-    private fun updateWorld(level: Level) {
-        //TODO
-    }
 
     private fun loadAllLevels() = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "loadAllLevels")
@@ -80,6 +70,7 @@ class LevelsMapViewModel @Inject constructor(
     private fun buildLevelsItemModels(levels: List<Level>) {
         Log.d(TAG, "buildLevelsItemModels ${levels.size}")
         val levelItemModels = mutableListOf<LevelItemModel>()
+        var currentWorldScore = 0
         levels.forEach { level ->
             levelItemModels.add(
                 LevelItemModel(
@@ -90,16 +81,26 @@ class LevelsMapViewModel @Inject constructor(
                     levelScore = level.score,
                 )
             )
+            currentWorldScore += level.score
         }
         levelsModels = levelItemModels
+        updateWorld(currentWorldScore)
     }
 
     private fun getLevelState(state: Int): PointState {
+        Log.d(TAG, "getLevelState")
         return LevelLogic.getLevelState(state)
     }
 
     private fun getLevelType(type: Int): LevelType {
+        Log.d(TAG, "getLevelType")
         return LevelLogic.getLevelType(type)
+    }
+
+    private fun updateWorld(currentWorldScore: Int) = viewModelScope.launch(Dispatchers.IO) {
+        Log.d(TAG, "updateWorld")
+        currentWorldState = WorldLogic.getWorldStateByScore(currentWorldScore)
+        worldRepository.updateWorld(currentWorldId, currentWorldState.ordinal, currentWorldScore)
     }
 
 }

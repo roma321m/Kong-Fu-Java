@@ -123,6 +123,7 @@
     <string name="tutorial_level_title">מדריך</string>
     <!-- Drag Drop Level -->
     <string name="drag_drop_title">שאלת גרירה</string>
+    <string name="drag_drop_answer_exists">כבר השתמשת בתשובה הזו</string>
     <!-- Top Bar -->
     <string name="top_bar_back_button">כפתור הקודם</string>
     <string name="top_bar_menu">תפריט</string>
@@ -139,6 +140,4 @@
     <string name="top_bar_play_music_body">האם אתה רוצה לנגן מוזיקה ברקע?</string>
     <string name="top_bar_stop_music_title">הפסק מוזיקה</string>
     <string name="top_bar_stop_music_body">האם אתה רוצה להפסיק לנגן מוזיקת רקע?</string>
-    <!-- Database -->
-    <string name="database_kong_fu_db">database/kong_fu_iw.db</string>
 </resources>

@@ -2,10 +2,48 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a47a98b54703c1526a23d1859c9630ae",
+    "identityHash": "3eb98e847259308f4d698ffbfd54aefa",
     "entities": [
       {
         "tableName": "world",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `state` INTEGER NOT NULL, `score` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "score",
+            "columnName": "score",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "world_iw",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `state` INTEGER NOT NULL, `score` INTEGER NOT NULL)",
         "fields": [
           {
@@ -182,7 +220,7 @@
       },
       {
         "tableName": "tutorial",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `levelId` INTEGER NOT NULL, `url` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL, `levelId` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -191,15 +229,15 @@
             "notNull": true
           },
           {
-            "fieldPath": "levelId",
-            "columnName": "levelId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
             "fieldPath": "url",
             "columnName": "url",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "levelId",
+            "columnName": "levelId",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -216,7 +254,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a47a98b54703c1526a23d1859c9630ae')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3eb98e847259308f4d698ffbfd54aefa')"
     ]
   }
 }

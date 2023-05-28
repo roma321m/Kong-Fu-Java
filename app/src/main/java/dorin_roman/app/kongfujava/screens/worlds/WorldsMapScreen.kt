@@ -1,13 +1,16 @@
 package dorin_roman.app.kongfujava.screens.worlds
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.RequestState
@@ -24,6 +27,10 @@ fun WorldsMapScreen(
 ) {
     val worlds = worldsMapViewModel.worlds.collectAsState().value
 
+    LaunchedEffect(key1 = LocalLayoutDirection.current) {
+        worldsMapViewModel.handle(WorldsEvent.InitWorlds)
+    }
+
     Scaffold(
         topBar = {
             TopBar(
@@ -33,6 +40,7 @@ fun WorldsMapScreen(
         },
         content = { paddingValues ->
             if (worlds is RequestState.Success) {
+                Log.d("dorin world", worlds.data.toString())
                 WorldsMapContent(
                     modifier = Modifier
                         .fillMaxSize()

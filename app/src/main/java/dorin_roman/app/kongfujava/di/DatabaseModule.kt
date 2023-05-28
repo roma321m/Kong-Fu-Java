@@ -20,6 +20,7 @@ import dorin_roman.app.kongfujava.data.repository.DeleteDBImpl
 import dorin_roman.app.kongfujava.data.repository.LinkedAccountsRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.ProfileImageRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.UsersRepositoryImpl
+import dorin_roman.app.kongfujava.data.repository.WorldRepository
 import dorin_roman.app.kongfujava.di.provider.CodeProvider
 import dorin_roman.app.kongfujava.di.provider.IdProvider
 import dorin_roman.app.kongfujava.di.provider.KongFuDatabaseProvider

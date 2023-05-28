@@ -104,7 +104,7 @@ class ChildLoginViewModel @Inject constructor(
             .also { response ->
                 if (response is RequestState.Success) {
                     if (response.data.childId.isNotBlank()) {
-                        login(response.data.childId)
+                        login(response.data.childId) //fixme add logic to get user levels data
                     } else {
                         checkPublicCode()
                     }

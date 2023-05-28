@@ -122,6 +122,7 @@
     <string name="tutorial_level_title">Tutorial Questions</string>
     <!-- Drag Drop Level -->
     <string name="drag_drop_title">Drag Drop Questions</string>
+    <string name="drag_drop_answer_exists">You have already used this answer</string>
     <!-- Top Bar -->
     <string name="top_bar_back_button">Back Button</string>
     <string name="top_bar_menu">Menu Button</string>
@@ -138,7 +139,5 @@
     <string name="top_bar_play_music_body">Do you want to start playing the background music?</string>
     <string name="top_bar_stop_music_title">Stop Music</string>
     <string name="top_bar_stop_music_body">Do you want to stop the music in the background?</string>
-    <!-- Database -->
-    <string name="database_kong_fu_db">database/kong_fu.db</string>
-    <string name="drag_drop_answer_exists">You have already used this answer</string>
+
 </resources>

@@ -28,7 +28,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.data.models.PointState
-import dorin_roman.app.kongfujava.domain.models.World
+import dorin_roman.app.kongfujava.domain.models.world.World
+import dorin_roman.app.kongfujava.domain.models.world.WorldEn
 import dorin_roman.app.kongfujava.ui.components.Stars
 import dorin_roman.app.kongfujava.ui.theme.elevation
 
@@ -134,7 +135,7 @@ private fun getImage(id: Int): Int =
 @Composable
 fun WorldsItemViewPreview() {
     WorldsItemView(
-        world = World(
+        world = WorldEn(
             id = 0,
             name = "VARIABLES WORLDS",
             score = 0,

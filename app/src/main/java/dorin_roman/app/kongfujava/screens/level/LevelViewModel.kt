@@ -161,8 +161,8 @@ class LevelViewModel @Inject constructor(
         mistakesCount: Int
     ) = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateScore")
-        score = LevelLogic.getScore(hintCount, mistakesCount)
-        levelRepository.updateScore(currentLevelId, score)
+        score = LevelLogic.getLevelScore(hintCount, mistakesCount)
+        levelRepository.updateLevelScore(currentLevelId, score)
         updateState() // room
         updateStatistics(
             helps = hintCount,
@@ -173,12 +173,12 @@ class LevelViewModel @Inject constructor(
 
     private fun updateState() = viewModelScope.launch(Dispatchers.IO) {
         Log.d(TAG, "updateState")
-        state = LevelLogic.getState(score)
-        levelRepository.updateState(currentLevelId, state.ordinal)
+        state = LevelLogic.getLevelStateByScore(score)
+        levelRepository.updateLevelState(currentLevelId, state.ordinal)
 
         if (nextLevel.id != -1) {
             if (nextLevel.state == PointState.LOCK.ordinal) {
-                levelRepository.updateState(nextLevel.id, PointState.ZERO.ordinal)
+                levelRepository.updateLevelState(nextLevel.id, PointState.ZERO.ordinal)
             }
             // if (nextLevel.worldId != currentWorldId) // fixme - open next world
         }

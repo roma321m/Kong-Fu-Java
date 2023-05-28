@@ -25,11 +25,11 @@ object LevelLogic {
         return LevelType.TUTORIAL
     }
 
-    fun getScore(hint: Int, mistake: Int): Int {
+    fun getLevelScore(hint: Int, mistake: Int): Int {
         return 3 - hint - mistake
     }
 
-    fun getState(score: Int): PointState {
+    fun getLevelStateByScore(score: Int): PointState {
         return when (score) {
             3 -> PointState.THREE
             2 -> PointState.TWO

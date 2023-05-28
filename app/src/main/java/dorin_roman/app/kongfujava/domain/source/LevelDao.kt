@@ -42,15 +42,10 @@ interface LevelDao {
         levelId: Int
     ): Flow<Tutorial>
 
-//    @Query("SELECT * FROM level WHERE id=:id")
-//    @Update
-//    fun updateLevel(
-//        level : Level
-//    )
-
     @Query("UPDATE level SET score = :score WHERE id =:id")
-    fun updateScore(id: Int, score: Int)
+    fun updateLevelScore(id: Int, score: Int)
 
     @Query("UPDATE level SET state = :state WHERE id =:id")
-    fun updateState(id: Int, state: Int)
+    fun updateLevelState(id: Int, state: Int)
+
 }
