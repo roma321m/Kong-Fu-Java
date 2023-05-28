@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.components.mirror
 import dorin_roman.app.kongfujava.ui.theme.kongFuError
 import dorin_roman.app.kongfujava.ui.theme.spacing
 import dorin_roman.app.kongfujava.ui.theme.textFieldCursor
@@ -44,6 +45,7 @@ fun ChildLoginImageStep(
         }
 
     AnimatedVisibility(
+        modifier = Modifier.mirror(),
         visible = visibility,
         exit = slideOutHorizontally(
             targetOffsetX = { it * 2 },
@@ -54,6 +56,7 @@ fun ChildLoginImageStep(
         )
     ) {
         Column(
+            modifier = Modifier.mirror(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
