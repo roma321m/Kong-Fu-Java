@@ -12,6 +12,7 @@ import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.ChildIdRepository
 import dorin_roman.app.kongfujava.data.repository.MusicRepository
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
+import dorin_roman.app.kongfujava.domain.repository.DeleteDB
 import dorin_roman.app.kongfujava.ui.toast.ToastLauncher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
@@ -25,7 +26,8 @@ class TopBarViewModel @Inject constructor(
     private val childIdRepository: ChildIdRepository,
     private val userTypeRepository: UserTypeRepository,
     private val musicRepository: MusicRepository,
-    private val toastLauncher: ToastLauncher
+    private val toastLauncher: ToastLauncher,
+    private val deleteDB: DeleteDB
 ) : ViewModel() {
 
     companion object {
@@ -69,7 +71,7 @@ class TopBarViewModel @Inject constructor(
         Log.d(TAG, "logout")
         persistChildId()
         persistUserType()
-        // fixme - reset room db
+        deleteDB.launch()
     }
 
     private fun startMusic() {

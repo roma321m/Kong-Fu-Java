@@ -16,6 +16,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dorin_roman.app.kongfujava.data.repository.AuthRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.ChildStatsRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.CodesRepositoryImpl
+import dorin_roman.app.kongfujava.data.repository.DeleteDBImpl
 import dorin_roman.app.kongfujava.data.repository.LinkedAccountsRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.ProfileImageRepositoryImpl
 import dorin_roman.app.kongfujava.data.repository.UsersRepositoryImpl
@@ -25,6 +26,7 @@ import dorin_roman.app.kongfujava.di.provider.KongFuDatabaseProvider
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository
 import dorin_roman.app.kongfujava.domain.repository.ChildStatsRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
+import dorin_roman.app.kongfujava.domain.repository.DeleteDB
 import dorin_roman.app.kongfujava.domain.repository.LinkedAccountsRepository
 import dorin_roman.app.kongfujava.domain.repository.ProfileImageRepository
 import dorin_roman.app.kongfujava.domain.repository.UsersRepository
@@ -36,6 +38,11 @@ import dorin_roman.app.kongfujava.domain.source.WorldDao
 @Module
 @InstallIn(ViewModelComponent::class)
 object DatabaseModule {
+
+    @Provides
+    fun provideDeleteDB(
+        @ApplicationContext context: Context
+    ): DeleteDB = DeleteDBImpl(context)
 
     @Provides
     fun provideAuthRepository(): AuthRepository = AuthRepositoryImpl(

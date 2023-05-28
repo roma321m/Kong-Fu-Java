@@ -7,7 +7,7 @@ import dorin_roman.app.kongfujava.domain.source.KongFuDataBase
 
 object KongFuDatabaseProvider {
 
-    private const val DATABASE_NAME = "kong_fu_db"
+    const val DATABASE_NAME = "kong_fu_db"
 
     fun provide(context: Context): KongFuDataBase {
         return Room.databaseBuilder(
