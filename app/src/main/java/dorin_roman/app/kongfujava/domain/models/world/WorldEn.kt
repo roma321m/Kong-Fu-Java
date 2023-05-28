@@ -7,8 +7,8 @@ import dorin_roman.app.kongfujava.domain.source.WorldDao.Companion.DATABASE_WORL
 @Entity(tableName = DATABASE_WORLD_TABLE)
 data class WorldEn(
     @PrimaryKey(autoGenerate = true)
-    override var id: Int = -1,
-    override var name: String = "",
-    override var state: Int = 0,
-    override var score: Int = 0
+    override var id: Int,
+    override var name: String,
+    override var state: Int,
+    override var score: Int
 ):World

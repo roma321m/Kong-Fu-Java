@@ -1,13 +1,13 @@
-package dorin_roman.app.kongfujava.domain.models.levels
+package dorin_roman.app.kongfujava.domain.models.levels.question
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import dorin_roman.app.kongfujava.domain.source.LevelDao
 
 @Entity(tableName = LevelDao.DATABASE_QUESTION_TABLE)
-data class Question(
+data class QuestionEn(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    var title: String,
-    var question: String,
-)
+    override val id: Int,
+    override var title: String,
+    override var question: String,
+) : Question

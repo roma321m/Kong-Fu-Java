@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
-import dorin_roman.app.kongfujava.domain.models.levels.Answer
+import dorin_roman.app.kongfujava.domain.models.levels.answer.Answer
 import dorin_roman.app.kongfujava.screens.level.multi_choice.components.ColorState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -84,6 +84,7 @@ class MultiChoiceViewModel @Inject constructor(
                 buildHints()
             }
         } catch (e: Exception) {
+            Log.e(TAG, "${e.message}")
             answer.value = RequestState.Error(e)
         }
     }

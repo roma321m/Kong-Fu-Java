@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava.domain.models.levels
+package dorin_roman.app.kongfujava.domain.models.levels.tutorial
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -6,9 +6,9 @@ import dorin_roman.app.kongfujava.domain.source.LevelDao
 
 
 @Entity(tableName = LevelDao.DATABASE_TUTORIAL_TABLE)
-data class Tutorial(
+data class TutorialEn(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    var url: String,
-    val levelId: Int
-)
+    override val id: Int,
+    override var url: String,
+    override val levelId: Int
+) : Tutorial

@@ -15,7 +15,7 @@ import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.domain.models.child_stats.ActiveTime
 import dorin_roman.app.kongfujava.domain.models.child_stats.LevelStats
 import dorin_roman.app.kongfujava.domain.models.levels.Level
-import dorin_roman.app.kongfujava.domain.models.levels.Question
+import dorin_roman.app.kongfujava.domain.models.levels.question.Question
 import dorin_roman.app.kongfujava.domain.repository.ChildStatsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

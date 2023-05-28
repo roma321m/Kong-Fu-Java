@@ -2,7 +2,6 @@ package dorin_roman.app.kongfujava.domain.source
 
 import androidx.room.Dao
 import androidx.room.Query
-import dorin_roman.app.kongfujava.domain.models.world.World
 import dorin_roman.app.kongfujava.domain.models.world.WorldEn
 import dorin_roman.app.kongfujava.domain.models.world.WorldIw
 import kotlinx.coroutines.flow.Flow
@@ -10,11 +9,11 @@ import kotlinx.coroutines.flow.Flow
 //Dao - Data Access Object
 @Dao
 interface WorldDao {
+
     companion object{
         const val DATABASE_WORLD_TABLE = "world"
         const val DATABASE_WORLD_IW_TABLE = "world_iw"
     }
-
 
     @Query("SELECT * FROM world")
     fun getAllWorlds(): Flow<List<WorldEn>>
