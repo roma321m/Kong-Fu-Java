@@ -22,6 +22,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.ui.theme.spacing
@@ -70,89 +71,102 @@ fun TextJavaStyle(
                 .verticalScroll(state = scrollState)
                 .fillMaxWidth(),
         ) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = MaterialTheme.spacing.extraLarge),
-                textAlign = TextAlign.Start,
-                style = style,
-                text = buildAnnotatedString {
-                    val newLine = "*"
-                    val tab = "@"
-                    val orange = "!"
-                    val yellow = "#"
-                    val purple = "^"
-                    val blue = "&"
-                    val comment = "%"
-                    val white = "~"
-                    val question = ">"
-                    text.split(Regex("(?<=[*@!#%^&~>])")).forEach { string ->
-                        if (string.contains(newLine)) {
-                            appendLine(string.dropLast(1))
-                        } else if (string.contains(tab)) {
-                            append("   ")
-                        } else if (string.contains(orange)) {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = MaterialTheme.colors.textOrange
-                                )
-                            ) {
-                                append(string.dropLast(1))
-                            }
-                        } else if (string.contains(yellow)) {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = MaterialTheme.colors.textYellow
-                                )
-                            ) {
-                                append(string.dropLast(1))
-                            }
-                        } else if (string.contains(purple)) {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = MaterialTheme.colors.textPurple
-                                )
-                            ) {
-                                append(string.dropLast(1))
-                            }
-                        } else if (string.contains(blue)) {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = MaterialTheme.colors.textBlue
-                                )
-                            ) {
-                                append(string.dropLast(1))
-                            }
-                        } else if (string.contains(comment)) {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = MaterialTheme.colors.textGray
-                                )
-                            ) {
-                                append(string.dropLast(1))
-                            }
-                        } else if (string.contains(question)) {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = MaterialTheme.colors.textGreen
-                                )
-                            ) {
-                                append(string.dropLast(1))
-                            }
-                        } else if (string.contains(white)) {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = MaterialTheme.colors.onBackground
-                                )
-                            ) {
-                                append(string.dropLast(1))
-                            }
+            val rtl = "`"
+            val ltr = "|"
+            text.split(Regex("(?<=[|`])")).forEach { string ->
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Start,
+                    style = style.copy(
+                        textDirection = if (string.contains(rtl)) {
+                            TextDirection.ContentOrRtl
                         } else {
-                            append(string)
+                            TextDirection.ContentOrLtr
+                        }
+                    ),
+                    text = buildAnnotatedString {
+                        val newLine = "*"
+                        val tab = "@"
+                        val orange = "!"
+                        val yellow = "#"
+                        val purple = "^"
+                        val blue = "&"
+                        val comment = "%"
+                        val white = "~"
+                        val question = ">"
+                        string.split(Regex("(?<=[*@!#%^&~>|`])")).forEach { string ->
+                            if (string.contains(newLine)) {
+                                appendLine(string.dropLast(1))
+                            } else if (string.contains(tab)) {
+                                append("   ")
+                            } else if (string.contains(rtl)) {
+                                append(string.dropLast(1))
+                            } else if (string.contains(ltr)) {
+                                append(string.dropLast(1))
+                            } else if (string.contains(orange)) {
+                                withStyle(
+                                    style = SpanStyle(
+                                        color = MaterialTheme.colors.textOrange
+                                    )
+                                ) {
+                                    append(string.dropLast(1))
+                                }
+                            } else if (string.contains(yellow)) {
+                                withStyle(
+                                    style = SpanStyle(
+                                        color = MaterialTheme.colors.textYellow
+                                    )
+                                ) {
+                                    append(string.dropLast(1))
+                                }
+                            } else if (string.contains(purple)) {
+                                withStyle(
+                                    style = SpanStyle(
+                                        color = MaterialTheme.colors.textPurple
+                                    )
+                                ) {
+                                    append(string.dropLast(1))
+                                }
+                            } else if (string.contains(blue)) {
+                                withStyle(
+                                    style = SpanStyle(
+                                        color = MaterialTheme.colors.textBlue
+                                    )
+                                ) {
+                                    append(string.dropLast(1))
+                                }
+                            } else if (string.contains(comment)) {
+                                withStyle(
+                                    style = SpanStyle(
+                                        color = MaterialTheme.colors.textGray
+                                    )
+                                ) {
+                                    append(string.dropLast(1))
+                                }
+                            } else if (string.contains(question)) {
+                                withStyle(
+                                    style = SpanStyle(
+                                        color = MaterialTheme.colors.textGreen
+                                    )
+                                ) {
+                                    append(string.dropLast(1))
+                                }
+                            } else if (string.contains(white)) {
+                                withStyle(
+                                    style = SpanStyle(
+                                        color = MaterialTheme.colors.onBackground
+                                    )
+                                ) {
+                                    append(string.dropLast(1))
+                                }
+                            } else {
+                                append(string)
+                            }
                         }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

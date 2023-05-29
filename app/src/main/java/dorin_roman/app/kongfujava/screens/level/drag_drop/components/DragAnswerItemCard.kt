@@ -12,7 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
 @Composable
@@ -26,16 +28,17 @@ fun DragAnswerItemCard(
         backgroundColor = color,
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
-            .padding(8.dp)
+            .padding(MaterialTheme.spacing.medium)
             .size(width = 300.dp, height = 150.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(10.dp)
         ) {
             Text(
                 text = answer,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
                 style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onPrimary)
             )
         }

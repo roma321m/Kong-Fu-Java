@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
 fun DropAnswerItemCard(
@@ -30,7 +32,7 @@ fun DropAnswerItemCard(
         border = BorderStroke(3.dp, MaterialTheme.colors.primary),
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
-            .padding(8.dp)
+            .padding(MaterialTheme.spacing.medium)
             .size(width = 150.dp, height = 100.dp)
             .clickable {
                 if (answerItem != (index + 1).toString()) {
@@ -41,10 +43,11 @@ fun DropAnswerItemCard(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(10.dp)
         ) {
             Text(
                 text = answerItem,
+                textAlign = TextAlign.Center,
+                maxLines = 1,
                 style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.onPrimary)
             )
         }
