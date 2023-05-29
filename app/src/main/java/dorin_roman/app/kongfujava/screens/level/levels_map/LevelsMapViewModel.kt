@@ -104,5 +104,3 @@ class LevelsMapViewModel @Inject constructor(
     }
 
 }
-
-

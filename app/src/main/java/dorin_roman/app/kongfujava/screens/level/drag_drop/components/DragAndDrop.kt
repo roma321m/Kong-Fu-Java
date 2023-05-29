@@ -17,7 +17,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.LayoutDirection
 
 internal val LocalDragTargetInfo = compositionLocalOf { DragTargetInfo() }
 
@@ -102,6 +105,9 @@ fun DraggableScreen(
         DragTargetInfo()
     }
 
+    val localLayoutDirection = LocalLayoutDirection.current
+    val configuration = LocalConfiguration.current
+
     CompositionLocalProvider(LocalDragTargetInfo provides state) {
         Box(modifier = modifier.fillMaxSize()) {
             content()
@@ -109,18 +115,26 @@ fun DraggableScreen(
                 var targetSize by remember {
                     mutableStateOf(IntSize.Zero)
                 }
-                Box(modifier = Modifier
-                    .graphicsLayer {
-                        val offset = (state.dragPosition + state.dragOffset)
-                        scaleX = 0.5f
-                        scaleY = 0.66f
-                        alpha = if (targetSize == IntSize.Zero) 0f else .9f
-                        translationX = offset.x.minus(targetSize.width / 2)
-                        translationY = offset.y.minus(targetSize.height / 2)
-                    }
-                    .onGloballyPositioned {
-                        targetSize = it.size
-                    }
+                Box(
+                    modifier = Modifier
+                        .graphicsLayer {
+                            val y = state.dragPosition.y + state.dragOffset.y
+                            val x =
+                                -configuration.screenWidthDp * 1.47f + state.dragPosition.x + state.dragOffset.x
+                            val offset = if (localLayoutDirection == LayoutDirection.Rtl) {
+                                Offset(x, y)
+                            } else {
+                                state.dragPosition + state.dragOffset
+                            }
+                            scaleX = 0.5f
+                            scaleY = 0.66f
+                            alpha = if (targetSize == IntSize.Zero) 0f else .9f
+                            translationX = offset.x.minus(targetSize.width / 2)
+                            translationY = offset.y.minus(targetSize.height / 2)
+                        }
+                        .onGloballyPositioned {
+                            targetSize = it.size
+                        }
                 ) {
                     state.draggableComposable?.invoke()
                 }

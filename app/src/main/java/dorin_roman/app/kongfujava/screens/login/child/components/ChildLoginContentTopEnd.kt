@@ -24,7 +24,6 @@ import dorin_roman.app.kongfujava.screens.login.child.ChildLoginStepState.IMAGE
 import dorin_roman.app.kongfujava.screens.login.child.ChildLoginStepState.NAME
 import dorin_roman.app.kongfujava.screens.login.child.components.steps.ChildLoginAgeStep
 import dorin_roman.app.kongfujava.screens.login.child.components.steps.ChildLoginCodeStep
-import dorin_roman.app.kongfujava.screens.login.child.components.steps.ChildLoginFinalStep
 import dorin_roman.app.kongfujava.screens.login.child.components.steps.ChildLoginImageStep
 import dorin_roman.app.kongfujava.screens.login.child.components.steps.ChildLoginNameStep
 import dorin_roman.app.kongfujava.ui.theme.spacing
@@ -32,7 +31,6 @@ import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
 fun ChildLoginContentTopEnd(
-    showLoading: () -> Boolean,
     codeVisibility: () -> Boolean,
     nameVisibility: () -> Boolean,
     ageVisibility: () -> Boolean,
@@ -110,10 +108,6 @@ fun ChildLoginContentTopEnd(
                 onImageChange = { image ->
                     onImageChange(image)
                 },
-            )
-
-            ChildLoginFinalStep(
-                showLoading = showLoading()
             )
         }
     }

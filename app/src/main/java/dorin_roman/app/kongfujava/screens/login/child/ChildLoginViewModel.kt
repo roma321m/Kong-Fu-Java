@@ -8,17 +8,24 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dorin_roman.app.kongfujava.LevelLogic
+import dorin_roman.app.kongfujava.WorldLogic
+import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.ChildIdRepository
+import dorin_roman.app.kongfujava.data.repository.LevelRepository
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
+import dorin_roman.app.kongfujava.data.repository.WorldRepository
 import dorin_roman.app.kongfujava.di.provider.CodeProvider
 import dorin_roman.app.kongfujava.di.provider.IdProvider
 import dorin_roman.app.kongfujava.domain.models.LinkedAccounts
+import dorin_roman.app.kongfujava.domain.models.child_stats.LevelStats
 import dorin_roman.app.kongfujava.domain.models.codes.Code
 import dorin_roman.app.kongfujava.domain.models.codes.PrivateCode
 import dorin_roman.app.kongfujava.domain.models.codes.PublicCode
 import dorin_roman.app.kongfujava.domain.models.users.Child
+import dorin_roman.app.kongfujava.domain.repository.ChildStatsRepository
 import dorin_roman.app.kongfujava.domain.repository.CodeRepository
 import dorin_roman.app.kongfujava.domain.repository.LinkedAccountsRepository
 import dorin_roman.app.kongfujava.domain.repository.ProfileImageRepository
@@ -38,6 +45,9 @@ class ChildLoginViewModel @Inject constructor(
     private val userTypeRepository: UserTypeRepository,
     private val usersRepository: UsersRepository,
     private val linkedAccountsRepository: LinkedAccountsRepository,
+    private val childStatsRepository: ChildStatsRepository,
+    private val worldRepository: WorldRepository,
+    private val levelRepository: LevelRepository,
     private val toastLauncher: ToastLauncher,
 ) : ViewModel() {
 
@@ -104,7 +114,7 @@ class ChildLoginViewModel @Inject constructor(
             .also { response ->
                 if (response is RequestState.Success) {
                     if (response.data.childId.isNotBlank()) {
-                        login(response.data.childId) //fixme add logic to get user levels data
+                        loadLevels(response.data.childId)
                     } else {
                         checkPublicCode()
                     }
@@ -132,14 +142,119 @@ class ChildLoginViewModel @Inject constructor(
             }
     }
 
-    private fun login(childId: String) {
-        Log.d(TAG, "login: $childId")
-        persistChildId(childId)
-        persistUserType()
+    private fun loadLevels(childId: String) = viewModelScope.launch {
+        Log.d(TAG, "login to: $childId")
+        Log.d(TAG, "private code login step 1: loadLevels")
+        childStatsRepository.getLevelStatsList(
+            childId
+        ).also { response ->
+            if (response is RequestState.Success) {
+                updateLocalDB(childId, response.data)
+            } else if (response is RequestState.Error) {
+                response.apply {
+                    toastLauncher.launch(ChildToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
+    private fun updateLocalDB(childId: String, data: List<LevelStats>) {
+        Log.d(TAG, "private code login step 2: updateLocalDB")
+        if (data.isEmpty()) {
+            persistChildId(childId)
+            return
+        }
+        updateLocalDBWorlds(childId, data)
+    }
+
+    private fun updateLocalDBWorlds(
+        childId: String,
+        data: List<LevelStats>
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        Log.d(TAG, "private code login step 3: updateLocalDBWorlds")
+        var worldScore = 0
+        data.forEach { levelStats ->
+            worldScore += levelStats.stars
+        }
+        val worldState = WorldLogic.getWorldStateByScore(worldScore)
+        worldRepository.updateWorld(
+            id = 0, // fixme - only for world 1
+            state = worldState.ordinal,
+            score = worldScore
+        ).also {
+            updateLocalDBLevels(childId, data)
+        }
+    }
+
+    private fun updateLocalDBLevels(
+        childId: String,
+        data: List<LevelStats>
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        Log.d(TAG, "private code login step 4: updateLocalDBLevels score and state")
+        data.forEach { levelStats ->
+            val state = LevelLogic.getLevelStateByScore(levelStats.stars)
+            levelRepository.updateLevelScore(levelStats.id, levelStats.stars)
+            levelRepository.updateLevelState(levelStats.id, state.ordinal)
+        }.also {
+            if (data.size != 30) { // fixme - only for world 1
+                openLastLevel(childId, data.size) // fixme - only for world 1
+            } else {
+                persistChildId(childId)
+            }
+        }
+    }
+
+    private fun openLastLevel(
+        childId: String,
+        id: Int
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        Log.d(TAG, "private code login step 5: openLastLevel")
+        levelRepository.updateLevelState(id, PointState.ZERO.ordinal).also {
+            persistChildId(childId)
+        }
+    }
+
+    private fun uploadImage() = viewModelScope.launch {
+        Log.d(TAG, "public code login step 1: uploadImage")
+        profileImageRepository.addImageToCouldStorage(
+            uid = childId,
+            imageUri = studentImage
+        ).also { response ->
+            if (response is RequestState.Success) {
+                imageUrl = response.data
+                createPrivateCode()
+            } else if (response is RequestState.Error) {
+                response.apply {
+                    toastLauncher.launch(ChildToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
+    }
+
+    private fun createPrivateCode() = viewModelScope.launch {
+        Log.d(TAG, "public code login step 2: createPrivateCode")
+        codeRepository.createPrivateCode(
+            PrivateCode(
+                code = privateCode,
+                supervisorId = supervisorId,
+                childId = childId,
+            )
+        ).also { response ->
+            if (response is RequestState.Success) {
+                saveUserToDatabase()
+            } else if (response is RequestState.Error) {
+                response.apply {
+                    toastLauncher.launch(ChildToast.SomethingWentWrong)
+                    Log.e(TAG, "${error.message}")
+                }
+            }
+        }
     }
 
     private fun saveUserToDatabase() = viewModelScope.launch {
-        Log.d(TAG, "saveUserToDatabase")
+        Log.d(TAG, "public code login step 3: saveUserToDatabase")
         saveUserRequest = RequestState.Loading
         saveUserRequest = usersRepository.createChild(
             Child(
@@ -164,7 +279,7 @@ class ChildLoginViewModel @Inject constructor(
     }
 
     private fun saveLinkedAccounts() = viewModelScope.launch {
-        Log.d(TAG, "saveLinkedAccounts")
+        Log.d(TAG, "public code login step 4: saveLinkedAccounts")
         saveLinkedAccountsRequest = RequestState.Loading
         saveLinkedAccountsRequest = linkedAccountsRepository.addChild(
             LinkedAccounts(
@@ -175,7 +290,6 @@ class ChildLoginViewModel @Inject constructor(
             if (response is RequestState.Success) {
                 if (response.data) {
                     persistChildId(childId)
-                    persistUserType()
                 }
             } else if (response is RequestState.Error) {
                 response.apply {
@@ -183,58 +297,22 @@ class ChildLoginViewModel @Inject constructor(
                     Log.e(TAG, "${error.message}")
                 }
             }
-        }
-    }
-
-    private fun persistUserType() {
-        Log.d(TAG, "persistUserType")
-        viewModelScope.launch(Dispatchers.IO) {
-            userTypeRepository.persistUserType(UserType.Child)
         }
     }
 
     private fun persistChildId(id: String) {
-        Log.d(TAG, "persistChildId")
+        Log.d(TAG, "login step: persistChildId")
         viewModelScope.launch(Dispatchers.IO) {
             childIdRepository.persistChildId(id)
+        }.also {
+            persistUserType()
         }
     }
 
-    private fun createImage() = viewModelScope.launch {
-        Log.d(TAG, "createImage")
-        profileImageRepository.addImageToCouldStorage(
-            uid = childId,
-            imageUri = studentImage
-        ).also { response ->
-            if (response is RequestState.Success) {
-                imageUrl = response.data
-                createPrivateCode()
-            } else if (response is RequestState.Error) {
-                response.apply {
-                    toastLauncher.launch(ChildToast.SomethingWentWrong)
-                    Log.e(TAG, "${error.message}")
-                }
-            }
-        }
-    }
-
-    private fun createPrivateCode() = viewModelScope.launch {
-        Log.d(TAG, "createPrivateCode")
-        codeRepository.createPrivateCode(
-            PrivateCode(
-                code = privateCode,
-                supervisorId = supervisorId,
-                childId = childId,
-            )
-        ).also { response ->
-            if (response is RequestState.Success) {
-                saveUserToDatabase()
-            } else if (response is RequestState.Error) {
-                response.apply {
-                    toastLauncher.launch(ChildToast.SomethingWentWrong)
-                    Log.e(TAG, "${error.message}")
-                }
-            }
+    private fun persistUserType() {
+        Log.d(TAG, "login step: persistUserType")
+        viewModelScope.launch(Dispatchers.IO) {
+            userTypeRepository.persistUserType(UserType.Child)
         }
     }
 
@@ -253,7 +331,7 @@ class ChildLoginViewModel @Inject constructor(
             toastLauncher.launch(ChildToast.AddAnImage)
         } else {
             stepState = ChildLoginStepState.FINAL
-            createImage()
+            uploadImage()
         }
     }
 

@@ -20,9 +20,6 @@ fun ChildLoginScreen(
         },
         topEndContent = {
             ChildLoginContentTopEnd(
-                showLoading = {
-                    false // fixme show loading on firebase calls
-                },
                 codeVisibility = {
                     viewModel.stepState == ChildLoginStepState.CODE
                 },
