@@ -148,7 +148,9 @@ class LevelViewModel @Inject constructor(
         Log.d(TAG, "loadNextLevel")
         try {
             levelRepository.getLevel(currentLevelId + 1).collect { level ->
-                nextLevel = level
+                if (level != null) {
+                    nextLevel = level
+                }
             }
         } catch (e: Exception) {
             Log.e(TAG, "${e.message}")

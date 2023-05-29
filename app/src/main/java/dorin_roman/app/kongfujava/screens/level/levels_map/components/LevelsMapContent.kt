@@ -67,7 +67,13 @@ fun LevelsMapContent(
             }
             while (passedCount != showImage) {
                 showImage += 1
-                delay(500)
+                if (passedCount != 0) {
+                    if (passedCount > 10) {
+                        delay(200)
+                    } else {
+                        delay(2_000 / passedCount.toLong())
+                    }
+                }
             }
         }
     }
@@ -100,7 +106,7 @@ fun LevelsMapContent(
                                 ) {
                                     itemContent(
                                         levels[row + column * numberOfRows],
-                                        when (levels[row + column].levelType) {
+                                        when (levels[row + column * numberOfRows].levelType) {
                                             LevelType.TUTORIAL -> navigateToTutorialLevel
                                             LevelType.MULTI -> navigateToMultiChoiceLevel
                                             LevelType.DRAG_DROP -> navigateToDragDropLevel

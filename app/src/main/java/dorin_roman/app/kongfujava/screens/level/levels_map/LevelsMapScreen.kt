@@ -38,7 +38,6 @@ fun LevelsMapScreen(
 ) {
 
     LaunchedEffect(key1 = true) {
-        //levelsMapViewModel.handle(LevelsEvent.UpdateWorld)
         levelsMapViewModel.handle(LevelsMapEvent.InitLevels(worldId))
     }
 

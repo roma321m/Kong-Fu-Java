@@ -1,6 +1,5 @@
 package dorin_roman.app.kongfujava.screens.worlds
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -40,7 +39,6 @@ fun WorldsMapScreen(
         },
         content = { paddingValues ->
             if (worlds is RequestState.Success) {
-                Log.d("dorin world", worlds.data.toString())
                 WorldsMapContent(
                     modifier = Modifier
                         .fillMaxSize()
