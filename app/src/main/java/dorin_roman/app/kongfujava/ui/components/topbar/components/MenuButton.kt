@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
+import dorin_roman.app.kongfujava.ui.theme.onTopBar
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 @Composable
@@ -28,6 +29,6 @@ fun MenuButton(
             },
         imageVector = Icons.Default.MoreVert,
         contentDescription = stringResource(id = R.string.top_bar_menu),
-        tint = MaterialTheme.colors.onSecondary,
+        tint = MaterialTheme.colors.onTopBar,
     )
 }

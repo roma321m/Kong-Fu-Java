@@ -1,6 +1,7 @@
 package dorin_roman.app.kongfujava.screens.level.levels_map
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -55,7 +56,13 @@ fun LevelsMapScreen(
             Image(
                 modifier = Modifier
                     .fillMaxSize()
-                    .alpha(0.3f),
+                    .then(
+                        if (isSystemInDarkTheme()) {
+                            Modifier.alpha(0.3f)
+                        } else {
+                            Modifier.alpha(0.9f)
+                        }
+                    ),
                 painter = painterResource(R.drawable.img_levels_background),
                 contentDescription = null,
                 alignment = Alignment.Center,

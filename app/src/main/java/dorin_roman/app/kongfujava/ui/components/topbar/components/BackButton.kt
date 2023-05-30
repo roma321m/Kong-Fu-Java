@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dorin_roman.app.kongfujava.R
 import dorin_roman.app.kongfujava.ui.components.mirror
+import dorin_roman.app.kongfujava.ui.theme.onTopBar
 import dorin_roman.app.kongfujava.ui.theme.spacing
 
 
@@ -31,6 +32,6 @@ fun BackButton(
             },
         imageVector = Icons.Default.ArrowBack,
         contentDescription = stringResource(id = R.string.top_bar_back_button),
-        tint = MaterialTheme.colors.onSecondary,
+        tint = MaterialTheme.colors.onTopBar,
     )
 }
