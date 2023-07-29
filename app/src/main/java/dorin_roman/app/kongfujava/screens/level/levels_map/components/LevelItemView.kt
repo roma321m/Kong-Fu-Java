@@ -85,7 +85,7 @@ fun LevelItemView(
 fun LevelItemViewLockPreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.LOCK, 1, 100, LevelType.TUTORIAL),
-        navigateToLevel = { levelId, levelNumber , worldId -> },
+        navigateToLevel = { _, _, _ -> },
         worldId = 0
     )
 }
@@ -95,7 +95,7 @@ fun LevelItemViewLockPreview() {
 fun LevelItemViewZeroPreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(1, PointState.ZERO, 1, 100, LevelType.TUTORIAL),
-        navigateToLevel = { levelId, levelNumber , worldId-> },
+        navigateToLevel = { _, _, _ -> },
         worldId = 0
     )
 }
@@ -105,7 +105,7 @@ fun LevelItemViewZeroPreview() {
 fun LevelItemViewOnePreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.ONE, 1, 100, LevelType.TUTORIAL),
-        navigateToLevel = { levelId, levelNumber , worldId -> },
+        navigateToLevel = { _, _, _ -> },
         worldId = 0
     )
 }
@@ -115,7 +115,7 @@ fun LevelItemViewOnePreview() {
 fun LevelItemViewTwoPreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.TWO, 1, 100, LevelType.TUTORIAL),
-        navigateToLevel = { levelId, levelNumber , worldId -> },
+        navigateToLevel = { _, _, _ -> },
         worldId = 0
     )
 }
@@ -125,7 +125,7 @@ fun LevelItemViewTwoPreview() {
 fun LevelItemViewThreePreview() {
     LevelItemView(
         levelItemModel = LevelItemModel(0, PointState.THREE, 1, 100, LevelType.TUTORIAL),
-        navigateToLevel = { levelId, levelNumber , worldId -> },
+        navigateToLevel = { _, _, _ -> },
         worldId = 0
     )
 }

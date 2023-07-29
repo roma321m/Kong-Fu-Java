@@ -1,4 +1,4 @@
-package dorin_roman.app.kongfujava
+package dorin_roman.app.kongfujava.data.logic
 
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.screens.level.LevelType

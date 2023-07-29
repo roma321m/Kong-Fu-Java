@@ -8,7 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dorin_roman.app.kongfujava.data.models.RequestState
-import dorin_roman.app.kongfujava.data.models.RequestState.*
+import dorin_roman.app.kongfujava.data.models.RequestState.Error
+import dorin_roman.app.kongfujava.data.models.RequestState.Idle
+import dorin_roman.app.kongfujava.data.models.RequestState.Loading
+import dorin_roman.app.kongfujava.data.models.RequestState.Success
 import dorin_roman.app.kongfujava.data.models.UserType
 import dorin_roman.app.kongfujava.data.repository.UserTypeRepository
 import dorin_roman.app.kongfujava.domain.repository.AuthRepository

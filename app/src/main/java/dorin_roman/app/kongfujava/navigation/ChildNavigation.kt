@@ -5,7 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
-import dorin_roman.app.kongfujava.navigation.child_destination.*
+import dorin_roman.app.kongfujava.navigation.child_destination.dragDropLevelComposable
+import dorin_roman.app.kongfujava.navigation.child_destination.levelsComposable
+import dorin_roman.app.kongfujava.navigation.child_destination.multiChoiceLevelComposable
+import dorin_roman.app.kongfujava.navigation.child_destination.tutorialLevelComposable
+import dorin_roman.app.kongfujava.navigation.child_destination.worldsComposable
 import dorin_roman.app.kongfujava.navigation.screens.ChildScreens
 import dorin_roman.app.kongfujava.navigation.screens.ChildScreens.Companion.WORLDS_SCREEN
 

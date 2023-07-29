@@ -7,8 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dorin_roman.app.kongfujava.LevelLogic
-import dorin_roman.app.kongfujava.WorldLogic
+import dorin_roman.app.kongfujava.data.logic.LevelLogic
+import dorin_roman.app.kongfujava.data.logic.WorldLogic
 import dorin_roman.app.kongfujava.data.models.PointState
 import dorin_roman.app.kongfujava.data.models.RequestState
 import dorin_roman.app.kongfujava.data.repository.LevelRepository
