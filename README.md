@@ -35,7 +35,7 @@
 
 ## :iphone: Screen Gifs
 - [Login and Sign Up](https://github.com/roma321m/Kong-Fu-Java#pencil2-Login-and-Sign-Up)</br>
-- [Teacher/Parent User](https://github.com/roma321m/Kong-Fu-Java#information_desk_person-Teacher/Parent-User)</br>
+- [Teacher/Parent User](https://github.com/roma321m/Kong-Fu-Java#information_desk_person-Teacher-Parent-User)</br>
 - [Child User](https://github.com/roma321m/Kong-Fu-Java#mortar_board-Child-User)</br>
 
 </br>
@@ -55,7 +55,7 @@
 
 </br>
 
-### :information_desk_person: Teacher/Parent User
+### :information_desk_person: Teacher Parent User
 
 |Supervisor Child Stats Screen|
 |--|
