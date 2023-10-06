@@ -15,10 +15,10 @@
 
 ## :link: Menu:
 
-- [Features](https://github.com/roma321m/Kong-Fu-Java/README.md#space_invader-features)</br>
-- [Screen Gifs](https://github.com/roma321m/Kong-Fu-Java/README.md#iphone-screen-gifs)</br>
-- [Future Plan](https://github.com/roma321m/Kong-Fu-Java/README.md#pencil-future-plan)</br>
-- [Credits](https://github.com/roma321m/Kong-Fu-Java/README.md#pray-credits)</br>
+- [Features](https://github.com/roma321m/Kong-Fu-Java#space_invader-features)</br>
+- [Screen Gifs](https://github.com/roma321m/Kong-Fu-Java#iphone-screen-gifs)</br>
+- [Future Plan](https://github.com/roma321m/Kong-Fu-Java#pencil-future-plan)</br>
+- [Credits](https://github.com/roma321m/Kong-Fu-Java#pray-credits)</br>
 
 
 ## :space_invader: Features
@@ -35,8 +35,8 @@
 
 ## :iphone: Screen Gifs
 - [Login and Sign Up](https://github.com/roma321m/Kong-Fu-Java#pencil2-Login-and-Sign-Up)</br>
-- [Teacher/Parent User](https://github.com/roma321m/Kong-Fu-Java/README.md#information_desk_person-Teacher/Parent-User)</br>
-- [Child User](https://github.com/roma321m/Kong-Fu-Java/README.md#mortar_board-Child-User)</br>
+- [Teacher/Parent User](https://github.com/roma321m/Kong-Fu-Java#information_desk_person-Teacher/Parent-User)</br>
+- [Child User](https://github.com/roma321m/Kong-Fu-Java#mortar_board-Child-User)</br>
 
 </br>
 
